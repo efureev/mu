@@ -1,5 +1,5 @@
 var test = require('unit.js'),
-	µ = require('../dest/µ.min.js');
+	µ = require('../dest/mu.min.js');
 
 var clone = function (obj) {
 	return JSON.parse(JSON.stringify(obj));

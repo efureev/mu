@@ -1,7 +1,7 @@
 {
   "name": "mu",
   "description": "JS Utilities Framework",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "homepage": "https://github.com/efureev/mu",
   "author": {
     "name": "Eugene Fureev"
@@ -14,7 +14,7 @@
     "url": "https://github.com/efureev/mu/issues"
   },
   "main": [
-    "dist/µ.min.js"
+    "dist/mu.min.js"
   ],
   "devDependencies": {
     "grunt": ">=0.4.5",
