@@ -1,0 +1,27 @@
+{
+  "name": "mu",
+  "description": "JS Utilities Framework",
+  "version": "0.0.1",
+  "homepage": "https://github.com/efureev/mu",
+  "author": {
+    "name": "Eugene Fureev"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/efureev/mu.git"
+  },
+  "bugs": {
+    "url": "https://github.com/efureev/mu/issues"
+  },
+  "main": [
+    "dist/µ.min.js"
+  ],
+  "devDependencies": {
+    "grunt": ">=0.4.5",
+    "grunt-contrib-uglify": "^0.11.0"
+  },
+  "keywords": [
+    "javascript",
+    "utilities"
+  ]
+}
