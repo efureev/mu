@@ -1,23 +1,22 @@
 var µ = µ || {};
 
-(function() {
+(function () {
 	var global = typeof self == 'object' && self.self === self && self ||
 		typeof global == 'object' && global.global === global && global ||
 		this;
 
 	µ.global = global;
 
-	µ.DEBUG = true;
-	µ.VERSION = '0.0.1';
+	µ.DEBUG = false;
+	µ.VERSION = '0.0.2';
 
-	µ.apply = function(object, config, defaults) {
+	µ.apply = function (object, config, defaults) {
 		if (defaults) {
 			µ.apply(object, defaults);
 		}
 
 		if (object && config && typeof config === 'object') {
-			var i;
-			for (i in config) {
+			for (var i in config) {
 				object[i] = config[i];
 			}
 		}
@@ -33,4 +32,5 @@ var µ = µ || {};
 	} else {
 		global.µ = µ;
 	}
+
 })();

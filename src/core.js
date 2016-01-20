@@ -73,7 +73,7 @@ var core = {
 	 * @param {Object} value The value to test.
 	 * @return {Boolean}
 	 */
-	isString: function(value) {
+	isString: function (value) {
 		return typeof value === 'string';
 	},
 
@@ -97,7 +97,7 @@ var core = {
 	 * @return {Boolean}
 	 */
 	isEmpty: function (value, allowEmptyString) {
-		return (value == null) || (!allowEmptyString ? value === '' : false)  || this.isEmptyObject(value) || (this.isArray(value) && value.length === 0);
+		return (value == null) || (!allowEmptyString ? value === '' : false) || this.isEmptyObject(value) || (this.isArray(value) && value.length === 0);
 	},
 
 	/**
@@ -109,7 +109,7 @@ var core = {
 		if (!this.isObject(obj))
 			return false;
 
-		for (key in obj)
+		for (var key in obj)
 			return false;
 		return true;
 	},

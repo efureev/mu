@@ -26,6 +26,32 @@ var
 	};
 
 describe('testing CORE', function () {
+
+	it('apply', function () {
+		var a = clone(variables._object),
+			obj = {key2: 'value', key3: 'value3'};
+
+		µ.apply(a, obj);
+
+		test
+			.object(a)
+			.hasLength(3)
+			.hasProperty('key2', 'value')
+			.hasProperty('key3', 'value3')
+			.hasProperty('key', 'Value')
+		;
+
+		µ.apply(a, obj, {val: 'key'});
+
+		test
+			.object(a)
+			.hasProperty('val', 'key')
+			.hasProperty('key3', 'value3')
+			.hasProperty('key', 'Value')
+		;
+	});
+
+
 	it('isUndefined', function () {
 		var a = clone(variables);
 		delete(a._undefined);
@@ -274,12 +300,12 @@ describe('testing FORMAT', function () {
 		var n = 1234567.22;
 
 		test
-		 .string(µ.format.currency(n)).isIdenticalTo('1 234 567.22 р.')
-		 .string(µ.format.currency(n, 'руб.')).isIdenticalTo('1 234 567.22 руб.')
-		 .string(µ.format.currency(n, 'руб.', 2)).isIdenticalTo('1 234 567.22 руб.')
-		 .string(µ.format.currency(n, 'руб:', 2, true)).isIdenticalTo('руб: 1 234 567.22')
-		 .string(µ.format.currency(-n, 'руб:', 2, true)).isIdenticalTo('руб: -1 234 567.22')
-		 .string(µ.format.currency(-n, 'руб.', 2, false)).isIdenticalTo('-1 234 567.22 руб.');
+			.string(µ.format.currency(n)).isIdenticalTo('1 234 567.22 р.')
+			.string(µ.format.currency(n, 'руб.')).isIdenticalTo('1 234 567.22 руб.')
+			.string(µ.format.currency(n, 'руб.', 2)).isIdenticalTo('1 234 567.22 руб.')
+			.string(µ.format.currency(n, 'руб:', 2, true)).isIdenticalTo('руб: 1 234 567.22')
+			.string(µ.format.currency(-n, 'руб:', 2, true)).isIdenticalTo('руб: -1 234 567.22')
+			.string(µ.format.currency(-n, 'руб.', 2, false)).isIdenticalTo('-1 234 567.22 руб.');
 	});
 
 
