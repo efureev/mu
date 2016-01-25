@@ -63,6 +63,24 @@
 					return string;
 				}
 				return string.replace(reTrim, '');
+			},
+
+			/**
+			 * Getting an absolute URL
+			 * @Example:
+			 * 	getAbsoluteUrl('/something');
+			 *
+			 * @returns {Function}
+			 */
+			getAbsoluteUrl: function () {
+				var a;
+
+				return function (url) {
+					if (!a) a = document.createElement('a');
+					a.href = url;
+
+					return a.href;
+				};
 			}
 
 		};

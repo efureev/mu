@@ -119,6 +119,23 @@ var core = {
 	},
 
 	/**
+	 * Нативная функция или нет (полезно для переопределения)
+	 * @param value
+	 * @returns {*}
+	 */
+	isNative: function (value) {
+		var reNative = new RegExp('^' +
+			String(toString)
+				.replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
+				.replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
+			type = typeof value;
+
+		return type == 'function'
+			? reNative.test(Function.prototype.toString.call(value))
+			: (value && type == 'object' && /^\[object .+?Constructor\]$/.test(Object.prototype.toString.call(value))) || false;
+	},
+
+	/**
 	 *
 	 * @param obj
 	 * @param key

@@ -177,6 +177,12 @@ describe('testing CORE', function () {
 		}
 	});
 
+
+	it('isNative', function () {
+		//test.value(µ.isNative(context)).isTrue();
+		test.value(µ.isNative(setTimeout)).isFalse();
+	});
+
 	it('has', function () {
 		test.value(µ.has(variables._object, 'key')).isTrue();
 		test.value(µ.has(variables._object, 'val')).isFalse();
@@ -195,7 +201,6 @@ describe('testing CORE', function () {
 	});
 
 });
-
 
 describe('testing ARRAY', function () {
 
@@ -308,5 +313,20 @@ describe('testing FORMAT', function () {
 			.string(µ.format.currency(-n, 'руб.', 2, false)).isIdenticalTo('-1 234 567.22 руб.');
 	});
 
+
+});
+
+
+describe('testing EVENTS', function () {
+
+	it('once', function () {
+		var result = µ.event.once(function () {
+				//console.log('Run!');
+			});
+
+		result();
+		result();
+		result();
+	});
 
 });

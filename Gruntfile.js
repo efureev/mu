@@ -16,6 +16,7 @@ module.exports = function (grunt) {
 						'src/array.js',
 						'src/utils.js',
 						'src/format.js',
+						'src/event.js',
 						'src/_l.js'
 					]
 				}
