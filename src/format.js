@@ -6,9 +6,9 @@
 		currencyAtEnd = true,
 		thousandSeparator = ' ',
 		decimalSeparator = '.',
-		formatCleanRe = /[^\d\.]/g,
+		formatCleanRe = /[^\d\.]/g;
 
-	m = {
+	return muFormat = {
 
 		/**
 		 * Форматирует число как Валюту
@@ -37,12 +37,12 @@
 				format += '0';
 			}
 
-			v = this.number(v, format);
+			v = muFormat.number(v, format);
 
 			if ((start || !currencyAtEnd) === true) {
-				return (currSign || currencySign) + ' ' + negativeSign  + v;
+				return (currSign || currencySign) + ' ' + negativeSign + v;
 			} else {
-				return negativeSign + v + ' '+ (currSign || currencySign);
+				return negativeSign + v + ' ' + (currSign || currencySign);
 			}
 		},
 
@@ -85,7 +85,7 @@
 			if (µ.isUndefined(formatString))
 				return v;
 
-			v = this.from(v, NaN);
+			v = muFormat.from(v, NaN);
 			if (isNaN(v))
 				return "";
 
@@ -175,6 +175,4 @@
 			return result;
 		}
 	};
-
-	return m;
 })();

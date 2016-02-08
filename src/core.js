@@ -161,6 +161,63 @@ var core = {
 	 */
 	isArray: ('isArray' in Array) ? Array.isArray : function (value) {
 		return toString.call(value) === '[object Array]';
+	},
+
+	/**
+	 * Клонирование простых переменных, включая массивы, {}-похожие объекты, DOM nodes и Даты.
+	 *
+	 * @param {Object} item The variable to clone
+	 * @return {Object} clone
+	 */
+	clone: function(item) {
+		if (item === null || item === undefined) {
+			return item;
+		}
+
+		// DOM nodes
+		// TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
+		// recursively
+		if (item.nodeType && item.cloneNode) {
+			return item.cloneNode(true);
+		}
+
+		var type = Object.prototype.toString.call(item),
+			i, j, k, clone, key;
+
+		// Date
+		if (type === '[object Date]') {
+			return new Date(item.getTime());
+		}
+
+		// Array
+		if (type === '[object Array]') {
+			i = item.length;
+
+			clone = [];
+
+			while (i--) {
+				clone[i] = µ.clone(item[i]);
+			}
+		}
+		// Object
+		else if (type === '[object Object]' && item.constructor === Object) {
+			clone = {};
+
+			for (key in item) {
+				clone[key] = µ.clone(item[key]);
+			}
+
+			if (enumerables) {
+				for (j = enumerables.length; j--;) {
+					k = enumerables[j];
+					if (item.hasOwnProperty(k)) {
+						clone[k] = item[k];
+					}
+				}
+			}
+		}
+
+		return clone || item;
 	}
 
 };

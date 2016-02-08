@@ -2,12 +2,13 @@
 
 µ.array = (function () {
 
-	var erase = function (array, index, removeCount) {
+	var utilArray,
+		erase = function (array, index, removeCount) {
 			array.splice(index, removeCount);
 			return array;
-		},
+		};
 
-		m = {
+		return utilArray = {
 
 			/**
 			 * Возвращает индекс элемента найденного элемента в массиве. Если не найден, вернет "-1"
@@ -50,13 +51,37 @@
 				for (; i < ln; i++) {
 					item = array[i];
 
-					if (this.index(clone, item) === -1) {
+					if (utilArray.index(clone, item) === -1) {
 						clone.push(item);
 					}
 				}
 
 				return clone;
 			},
+
+			/**
+			 * Объединяет несколько массивов в один с уникальностью значений
+			 *
+			 * @example
+			 * µ.array.merge();
+			 *
+			 * @param {Array} array1
+			 * @param {Array} array2
+			 * @param {Array} etc
+			 * @return {Array} merged
+			 */
+			merge: function() {
+				var args = slice.call(arguments),
+					array = [],
+					i, ln;
+
+				for (i = 0, ln = args.length; i < ln; i++) {
+					array = array.concat(args[i]);
+				}
+
+				return utilArray.unique(array);
+			},
+
 
 			/**
 			 * Делает из строки массив (аналог PHP.explode)
@@ -171,9 +196,36 @@
 				}
 
 				return array;
+			},
+
+			/**
+			 * Сравнивает содержание двух массивов используя строгое сравнение
+			 *
+			 * @param {Array} array1
+			 * @param {Array} array2
+			 * @return {Boolean} `true` if the arrays are equal.
+			 */
+			equals: function(array1, array2) {
+				var len1 = array1.length,
+					len2 = array2.length,
+					i;
+
+				// Short circuit if the same array is passed twice
+				if (array1 === array2) {
+					return true;
+				}
+
+				if (len1 !== len2) {
+					return false;
+				}
+
+				for (i = 0; i < len1; ++i) {
+					if (array1[i] !== array2[i]) {
+						return false;
+					}
+				}
+
+				return true;
 			}
-
 		};
-
-	return m;
 })();

@@ -2,9 +2,7 @@
 
 µ.event = (function () {
 
-	var
-
-		m = {
+		return muEvent = {
 			/**
 			 * Функция, которая выполняется только один раз
 			 * @param fn
@@ -59,6 +57,4 @@
 			}
 
 		};
-
-	return m;
 })();
