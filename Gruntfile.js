@@ -12,11 +12,15 @@ module.exports = function (grunt) {
 				files: {
 					'dest/mu.min.js': [
 						'src/_.js',
+
 						'src/core.js',
-						'src/array.js',
 						'src/utils.js',
+						'src/array.js',
 						'src/format.js',
 						'src/event.js',
+						'src/date.js',
+						'src/object.js',
+
 						'src/_l.js'
 					]
 				}
