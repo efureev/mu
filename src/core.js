@@ -1,4 +1,5 @@
-var core = {
+var toString = Object.prototype.toString,
+	core = {
 	/**
 	 *
 	 * @param value
@@ -24,6 +25,10 @@ var core = {
 	 */
 	isNull: function (value) {
 		return value === null;
+	},
+
+	isDate: function(value) {
+		return toString.call(value) === '[object Date]';
 	},
 
 	/**
@@ -125,14 +130,14 @@ var core = {
 	 */
 	isNative: function (value) {
 		var reNative = new RegExp('^' +
-			String(toString)
-				.replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
-				.replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
+				String(toString)
+					.replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
+					.replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
 			type = typeof value;
 
 		return type == 'function'
 			? reNative.test(Function.prototype.toString.call(value))
-			: (value && type == 'object' && /^\[object .+?Constructor\]$/.test(Object.prototype.toString.call(value))) || false;
+			: (value && type == 'object' && /^\[object .+?Constructor\]$/.test(toString.call(value))) || false;
 	},
 
 	/**
@@ -169,7 +174,7 @@ var core = {
 	 * @param {Object} item The variable to clone
 	 * @return {Object} clone
 	 */
-	clone: function(item) {
+	clone: function (item) {
 		if (item === null || item === undefined) {
 			return item;
 		}
@@ -181,7 +186,7 @@ var core = {
 			return item.cloneNode(true);
 		}
 
-		var type = Object.prototype.toString.call(item),
+		var type = toString.call(item),
 			i, j, k, clone, key;
 
 		// Date
