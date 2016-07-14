@@ -45,7 +45,7 @@
 
                     for (var key in latRus) {
                         var r = new RegExp(key, 'g');
-                        str = str.replace(r, obj[key]);
+                        str = str.replace(r, latRus[key]);
                     }
                 }
 
