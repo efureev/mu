@@ -37,11 +37,11 @@
             /**
              * Заменяет похожие с русскими латинские буквы на русские.
              * 
-             * @param string
+             * @param str
              * @returns {{trim: µ.trim, lat2Rus: str.lat2Rus}}
              */
-			lat2Rus: function (string) {
-                if (!µ.isEmpty(string)) {
+			lat2Rus: function (str) {
+                if (!µ.isEmpty(str)) {
 
                     for (var key in latRus) {
                         var r = new RegExp(key, 'g');
