@@ -4,7 +4,7 @@
   "version": "0.0.6",
   "homepage": "https://github.com/efureev/mu",
   "main": [
-    "dist/mu.min.js"
+    "dist/mu.js"
   ],
   "keywords": [
     "javascript",

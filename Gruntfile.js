@@ -26,9 +26,30 @@ module.exports = function (grunt) {
 					]
 				}
 			}
-		}
+		},
+        concat: {
+            dist: {
+                src: [
+                    'src/_.js',
+
+                    'src/core.js',
+                    'src/utils.js',
+                    'src/string.js',
+                    'src/array.js',
+                    'src/format.js',
+                    'src/event.js',
+                    'src/date.js',
+                    'src/object.js',
+
+                    'src/_l.js'
+                ],
+                dest: 'dist/mu.js'
+            }
+        }
 	});
 
 	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.registerTask('default', ['uglify']);
+	grunt.registerTask('default', ['concat']);
 };
