@@ -1,3 +1,10 @@
+# v.0.0.6
+
+## add String module:
+
+- add function: `µ.str.lat2Rus`	Заменяет похожие с русскими латинские буквы на русские
+
+
 # v.0.0.4
 
 ## add Object module:

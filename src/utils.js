@@ -2,10 +2,7 @@
 
 µ.utils = (function () {
 
-	var
-		reTrim = /^\s+|\s+$/g,
-
-		INFINITY = 1 / 0,
+	var INFINITY = 1 / 0,
 
 		m = {
 			/**
@@ -57,12 +54,7 @@
 			 *
 			 */
 			trim: function (string) {
-				string = this.toString(string);
-
-				if (!string) {
-					return string;
-				}
-				return string.replace(reTrim, '');
+				return µ.str.trim(string);
 			},
 
 			/**

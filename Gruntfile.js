@@ -15,6 +15,7 @@ module.exports = function (grunt) {
 
 						'src/core.js',
 						'src/utils.js',
+						'src/string.js',
 						'src/array.js',
 						'src/format.js',
 						'src/event.js',

@@ -8,7 +8,7 @@ var µ = µ || {};
 	µ.global = global;
 
 	µ.DEBUG = false;
-	µ.VERSION = '0.0.5';
+	µ.VERSION = '0.0.6';
 
 	µ.apply = function (object, config, defaults) {
 		if (defaults) {
