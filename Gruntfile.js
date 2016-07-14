@@ -10,7 +10,7 @@ module.exports = function (grunt) {
 			},
 			default: {
 				files: {
-					'dest/mu.min.js': [
+					'dist/mu.min.js': [
 						'src/_.js',
 
 						'src/core.js',
