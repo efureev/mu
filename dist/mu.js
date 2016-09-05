@@ -1,407 +1,410 @@
 var µ = µ || {};
 
 (function () {
-	var global = typeof self == 'object' && self.self === self && self ||
-		typeof global == 'object' && global.global === global && global ||
-		this;
+    var global = typeof self == 'object' && self.self === self && self ||
+        typeof global == 'object' && global.global === global && global ||
+        this;
 
-	µ.global = global;
+    µ.global = global;
 
-	µ.DEBUG = false;
-	µ.VERSION = '0.0.6';
+    µ.DEBUG = false;
+    µ.VERSION = '0.0.7';
 
-	µ.apply = function (object, config, defaults) {
-		if (defaults) {
-			µ.apply(object, defaults);
-		}
+    µ.apply = function (object, config, defaults) {
+        if (defaults) {
+            µ.apply(object, defaults);
+        }
 
-		if (object && config && typeof config === 'object') {
-			for (var i in config) {
-				object[i] = config[i];
-			}
-		}
+        if (object && config && typeof config === 'object') {
+            for (var i in config) {
+                object[i] = config[i];
+            }
+        }
 
-		return object;
-	};
+        return object;
+    };
 
-	if (typeof exports != 'undefined' && !exports.nodeType) {
-		if (typeof module != 'undefined' && !module.nodeType && module.exports) {
-			exports = module.exports = µ;
-		}
-		exports.µ = µ;
-	} else {
-		global.µ = µ;
-	}
+    µ.isBrowser = function () {
+        return !(typeof exports != 'undefined' && !exports.nodeType);
+    };
+
+    if (µ.isBrowser()) {
+        global.µ = µ;
+    } else {
+        if (typeof module != 'undefined' && !module.nodeType && module.exports) {
+            exports = module.exports = µ;
+        }
+        exports.µ = µ;
+    }
 
 })();
 var toString = Object.prototype.toString,
-	core = {
-	/**
-	 *
-	 * @param value
-	 * @returns {boolean}
-	 */
-	isUndefined: function (value) {
-		return value === void 0;
-	},
+    core     = {
+        /**
+         *
+         * @param value
+         * @returns {boolean}
+         */
+        isUndefined: function (value) {
+            return value === void 0;
+        },
 
-	/**
-	 * Возвращает `true` если значение определенно
-	 * @param {Object} value The value to test.
-	 * @return {Boolean}
-	 */
-	isDefined: function (value) {
-		return !this.isUndefined(value);
-	},
+        /**
+         * Возвращает `true` если значение определенно
+         * @param {Object} value The value to test.
+         * @return {Boolean}
+         */
+        isDefined: function (value) {
+            return !this.isUndefined(value);
+        },
 
-	/**
-	 * Возвращает `true` если значение NULL
-	 * @param value
-	 * @returns {boolean}
-	 */
-	isNull: function (value) {
-		return value === null;
-	},
+        /**
+         * Возвращает `true` если значение NULL
+         * @param value
+         * @returns {boolean}
+         */
+        isNull: function (value) {
+            return value === null;
+        },
 
-	isDate: function(value) {
-		return toString.call(value) === '[object Date]';
-	},
+        isDate: function (value) {
+            return toString.call(value) === '[object Date]';
+        },
 
-	/**
-	 *
-	 * @param value
-	 * @returns {boolean}
-	 */
-	isObject: (toString.call(null) === '[object Object]') ?
-		function (value) {
-			// check ownerDocument here as well to exclude DOM nodes
-			return value !== null && value !== undefined && toString.call(value) === '[object Object]' && value.ownerDocument === undefined;
-		} :
-		function (value) {
-			return toString.call(value) === '[object Object]';
-		},
+        /**
+         *
+         * @param value
+         * @returns {boolean}
+         */
+        isObject: (toString.call(null) === '[object Object]') ?
+            function (value) {
+                // check ownerDocument here as well to exclude DOM nodes
+                return value !== null && value !== undefined && toString.call(value) === '[object Object]' && value.ownerDocument === undefined;
+            } :
+            function (value) {
+                return toString.call(value) === '[object Object]';
+            },
 
-	/**
-	 *
-	 * @param obj
-	 * @returns {boolean}
-	 */
-	isBoolean: function (obj) {
-		return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
-	},
+        /**
+         *
+         * @param obj
+         * @returns {boolean}
+         */
+        isBoolean: function (obj) {
+            return obj === true || obj === false || toString.call(obj) === '[object Boolean]';
+        },
 
-	/**
-	 * Возвращает `true` если значение число
-	 * @param value
-	 * @returns {boolean}
-	 */
-	isNumber: function (value) {
-		return typeof value === 'number' && isFinite(value);
-	},
+        /**
+         * Возвращает `true` если значение число
+         * @param value
+         * @returns {boolean}
+         */
+        isNumber: function (value) {
+            return typeof value === 'number' && isFinite(value);
+        },
 
-	/**
-	 * Проверяет, что число - цифра
-	 * @param value
-	 * @returns {boolean}
-	 */
-	isNumeric: function (value) {
-		return !isNaN(parseFloat(value)) && isFinite(value);
-	},
+        /**
+         * Проверяет, что число - цифра
+         * @param value
+         * @returns {boolean}
+         */
+        isNumeric: function (value) {
+            return !isNaN(parseFloat(value)) && isFinite(value);
+        },
 
 
-	/**
-	 * Возвращает `true` если значение - строка
-	 * @param {Object} value The value to test.
-	 * @return {Boolean}
-	 */
-	isString: function (value) {
-		return typeof value === 'string';
-	},
+        /**
+         * Возвращает `true` если значение - строка
+         * @param {Object} value The value to test.
+         * @return {Boolean}
+         */
+        isString: function (value) {
+            return typeof value === 'string';
+        },
 
-	/**
-	 * Noop fn
-	 */
-	noop: function () {
-	},
+        /**
+         * Noop fn
+         */
+        noop: function () {
+        },
 
-	/**
-	 * Возвращает true  если значение пустое, false если нет. Значение будет пусто при:
-	 *
-	 * - `null`
-	 * - `undefined`
-	 * - `[]` //пустой массив (array)
-	 * - `''` //пустая строка, если не `allowEmptyString` == `true`
-	 * - `{}` //пустой Объект
-	 *
-	 * @param {Object} value Значение для проверки
-	 * @param {Boolean} [allowEmptyString=false] `true` для разрешения пустых строк
-	 * @return {Boolean}
-	 */
-	isEmpty: function (value, allowEmptyString) {
-		return (value == null) || (!allowEmptyString ? value === '' : false) || this.isEmptyObject(value) || (this.isArray(value) && value.length === 0);
-	},
+        /**
+         * Возвращает true  если значение пустое, false если нет. Значение будет пусто при:
+         *
+         * - `null`
+         * - `undefined`
+         * - `[]` //пустой массив (array)
+         * - `''` //пустая строка, если не `allowEmptyString` == `true`
+         * - `{}` //пустой Объект
+         *
+         * @param {Object} value Значение для проверки
+         * @param {Boolean} [allowEmptyString=false] `true` для разрешения пустых строк
+         * @return {Boolean}
+         */
+        isEmpty: function (value, allowEmptyString) {
+            return (value == null) || (!allowEmptyString ? value === '' : false) || this.isEmptyObject(value) || (this.isArray(value) && value.length === 0);
+        },
 
-	/**
-	 *
-	 * @param obj
-	 * @returns {boolean}
-	 */
-	isEmptyObject: function (obj) {
-		if (!this.isObject(obj))
-			return false;
+        /**
+         *
+         * @param obj
+         * @returns {boolean}
+         */
+        isEmptyObject: function (obj) {
+            if (!this.isObject(obj))
+                return false;
 
-		for (var key in obj)
-			return false;
-		return true;
-	},
+            for (var key in obj)
+                return false;
+            return true;
+        },
 
-	isFunction: function (obj) {
-		return typeof obj == 'function' || false;
-	},
+        isFunction: function (obj) {
+            return typeof obj == 'function' || false;
+        },
 
-	/**
-	 * Нативная функция или нет (полезно для переопределения)
-	 * @param value
-	 * @returns {*}
-	 */
-	isNative: function (value) {
-		var reNative = new RegExp('^' +
-				String(toString)
-					.replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
-					.replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
-			type = typeof value;
+        /**
+         * Нативная функция или нет (полезно для переопределения)
+         * @param value
+         * @returns {*}
+         */
+        isNative: function (value) {
+            var reNative = new RegExp('^' +
+                    String(toString)
+                        .replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
+                        .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
+                type     = typeof value;
 
-		return type == 'function'
-			? reNative.test(Function.prototype.toString.call(value))
-			: (value && type == 'object' && /^\[object .+?Constructor\]$/.test(toString.call(value))) || false;
-	},
+            return type == 'function'
+                ? reNative.test(Function.prototype.toString.call(value))
+                : (value && type == 'object' && /^\[object .+?Constructor\]$/.test(toString.call(value))) || false;
+        },
 
-	/**
-	 *
-	 * @param obj
-	 * @param key
-	 * @returns {boolean|*}
-	 */
-	has: function (obj, key) {
-		return obj != null && hasOwnProperty.call(obj, key);
-	},
+        /**
+         *
+         * @param obj
+         * @param key
+         * @returns {boolean|*}
+         */
+        has: function (obj, key) {
+            return obj != null && hasOwnProperty.call(obj, key);
+        },
 
-	/**
-	 * get the current timestamp as an integer
-	 */
-	now: Date.now || function () {
-		return new Date().getTime();
-	},
+        /**
+         * get the current timestamp as an integer
+         */
+        now: Date.now || function () {
+            return new Date().getTime();
+        },
 
-	/**
-	 * Возвращает `true` если значение JavaScript Array.
-	 *
-	 * @param {Object} target Цель для проверки.
-	 * @return {Boolean}
-	 * @method
-	 */
-	isArray: ('isArray' in Array) ? Array.isArray : function (value) {
-		return toString.call(value) === '[object Array]';
-	},
+        /**
+         * Возвращает `true` если значение JavaScript Array.
+         *
+         * @param {Object} target Цель для проверки.
+         * @return {Boolean}
+         * @method
+         */
+        isArray: ('isArray' in Array) ? Array.isArray : function (value) {
+            return toString.call(value) === '[object Array]';
+        },
 
-	/**
-	 * Клонирование простых переменных, включая массивы, {}-похожие объекты, DOM nodes и Даты.
-	 *
-	 * @param {Object} item The variable to clone
-	 * @return {Object} clone
-	 */
-	clone: function (item) {
-		if (item === null || item === undefined) {
-			return item;
-		}
+        /**
+         * Клонирование простых переменных, включая массивы, {}-похожие объекты, DOM nodes и Даты.
+         *
+         * @param {Object} item The variable to clone
+         * @return {Object} clone
+         */
+        clone: function (item) {
+            if (item === null || item === undefined) {
+                return item;
+            }
 
-		// DOM nodes
-		// TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
-		// recursively
-		if (item.nodeType && item.cloneNode) {
-			return item.cloneNode(true);
-		}
+            // DOM nodes
+            // TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
+            // recursively
+            if (item.nodeType && item.cloneNode) {
+                return item.cloneNode(true);
+            }
 
-		var type = toString.call(item),
-			i, j, k, clone, key;
+            var type = toString.call(item),
+                i, j, k, clone, key;
 
-		// Date
-		if (type === '[object Date]') {
-			return new Date(item.getTime());
-		}
+            // Date
+            if (type === '[object Date]') {
+                return new Date(item.getTime());
+            }
 
-		// Array
-		if (type === '[object Array]') {
-			i = item.length;
+            // Array
+            if (type === '[object Array]') {
+                i = item.length;
 
-			clone = [];
+                clone = [];
 
-			while (i--) {
-				clone[i] = µ.clone(item[i]);
-			}
-		}
-		// Object
-		else if (type === '[object Object]' && item.constructor === Object) {
-			clone = {};
+                while (i--) {
+                    clone[i] = µ.clone(item[i]);
+                }
+            }
+            // Object
+            else if (type === '[object Object]' && item.constructor === Object) {
+                clone = {};
 
-			for (key in item) {
-				clone[key] = µ.clone(item[key]);
-			}
+                for (key in item) {
+                    clone[key] = µ.clone(item[key]);
+                }
 
-			if (enumerables) {
-				for (j = enumerables.length; j--;) {
-					k = enumerables[j];
-					if (item.hasOwnProperty(k)) {
-						clone[k] = item[k];
-					}
-				}
-			}
-		}
+                if (enumerables) {
+                    for (j = enumerables.length; j--;) {
+                        k = enumerables[j];
+                        if (item.hasOwnProperty(k)) {
+                            clone[k] = item[k];
+                        }
+                    }
+                }
+            }
 
-		return clone || item;
-	}
-
-};
+            return clone || item;
+        }
+    };
 
 µ.apply(µ, core);
 µ.utils = µ.utils || {};
 
 µ.utils = (function () {
 
-	var INFINITY = 1 / 0,
+    var INFINITY = 1 / 0,
 
-		m = {
-			/**
-			 * Converts `value` to a string if it's not one. An empty string is returned
-			 * for `null` and `undefined` values. The sign of `-0` is preserved.
-			 *
-			 * @static
-			 * @memberOf µ
-			 * @category µ.utils
-			 * @param {*} value The value to process.
-			 * @returns {string} Returns the string.
-			 * @example
-			 *
-			 * µ.utils.toString(null);
-			 * // => ''
-			 *
-			 * µ.utils.toString(-0);
-			 * // => '-0'
-			 *
-			 * µ.utils.toString([1, 2, 3]);
-			 * // => '1,2,3'
-			 */
-			toString: function (value) {
-				if (µ.isString(value)) {
-					return value;
-				}
-				if (µ.isEmpty(value)) {
-					return '';
-				}
-				var result = (value + '');
-				return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
-			},
+        m        = {
+            /**
+             * Converts `value` to a string if it's not one. An empty string is returned
+             * for `null` and `undefined` values. The sign of `-0` is preserved.
+             *
+             * @static
+             * @memberOf µ
+             * @category µ.utils
+             * @param {*} value The value to process.
+             * @returns {string} Returns the string.
+             * @example
+             *
+             * µ.utils.toString(null);
+             * // => ''
+             *
+             * µ.utils.toString(-0);
+             * // => '-0'
+             *
+             * µ.utils.toString([1, 2, 3]);
+             * // => '1,2,3'
+             */
+            toString: function (value) {
+                if (µ.isString(value)) {
+                    return value;
+                }
+                if (µ.isEmpty(value)) {
+                    return '';
+                }
+                var result = (value + '');
+                return (result == '0' && (1 / value) == -INFINITY) ? '-0' : result;
+            },
 
 
-			/**
-			 * Removes leading and trailing whitespace or specified characters from `string`.
-			 *
-			 * @static
-			 * @memberOf µ
-			 * @category String
-			 *
-			 * @param {string} [string=''] The string to trim.
-			 *
-			 * @returns {string} Returns the trimmed string.
-			 * @example
-			 *
-			 * µ.utils.trim('  abc  ');
-			 * // => 'abc'
-			 *
-			 */
-			trim: function (string) {
-				return µ.str.trim(string);
-			},
+            /**
+             * Removes leading and trailing whitespace or specified characters from `string`.
+             *
+             * @static
+             * @memberOf µ
+             * @category String
+             *
+             * @param {string} [string=''] The string to trim.
+             *
+             * @returns {string} Returns the trimmed string.
+             * @example
+             *
+             * µ.utils.trim('  abc  ');
+             * // => 'abc'
+             *
+             */
+            trim: function (string) {
+                return µ.str.trim(string);
+            },
 
-			/**
-			 * Заполняет недостающие символы к определенной длинне
-			 *
-			 * @example str_pad('Kevin van Zonneveld', 30, '-=', 'STR_PAD_LEFT'); // '-=-=-=-=-=-Kevin van Zonneveld'
-			 * @example str_pad('Kevin van Zonneveld', 30, '-', 'STR_PAD_BOTH');  // '------Kevin van Zonneveld-----'
-			 *
-			 * @param {string} input
-			 * @param {number} pad_length	Длинна строки
-			 * @param {string} pad_string	Чем заолнять
-			 * @param {string} pad_type Тип заполнения: 'STR_PAD_LEFT'|'STR_PAD_RIGHT'|'STR_PAD_BOTH'
-			 * @returns {string}
-			 */
-			str_pad: function (input, pad_length, pad_string, pad_type) {
+            /**
+             * Заполняет недостающие символы к определенной длинне
+             *
+             * @example str_pad('Kevin van Zonneveld', 30, '-=', 'STR_PAD_LEFT'); // '-=-=-=-=-=-Kevin van Zonneveld'
+             * @example str_pad('Kevin van Zonneveld', 30, '-', 'STR_PAD_BOTH');  // '------Kevin van Zonneveld-----'
+             *
+             * @param {string} input
+             * @param {number} pad_length    Длинна строки
+             * @param {string} pad_string    Чем заолнять
+             * @param {string} pad_type Тип заполнения: 'STR_PAD_LEFT'|'STR_PAD_RIGHT'|'STR_PAD_BOTH'
+             * @returns {string}
+             */
+            str_pad: function (input, pad_length, pad_string, pad_type) {
 
-				var half = '',
-					pad_to_go;
+                var half = '',
+                    pad_to_go;
 
-				var str_pad_repeater = function (s, len) {
-					var collect = '';
+                var str_pad_repeater = function (s, len) {
+                    var collect = '';
 
-					while (collect.length < len) {
-						collect += s;
-					}
-					collect = collect.substr(0, len);
+                    while (collect.length < len) {
+                        collect += s;
+                    }
+                    collect = collect.substr(0, len);
 
-					return collect;
-				};
+                    return collect;
+                };
 
-				input += '';
-				pad_string = pad_string !== undefined ? pad_string : ' ';
+                input += '';
+                pad_string = pad_string !== undefined ? pad_string : ' ';
 
-				if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') {
-					pad_type = 'STR_PAD_RIGHT';
-				}
-				if ((pad_to_go = pad_length - input.length) > 0) {
-					if (pad_type === 'STR_PAD_LEFT') {
-						input = str_pad_repeater(pad_string, pad_to_go) + input;
-					} else if (pad_type === 'STR_PAD_RIGHT') {
-						input = input + str_pad_repeater(pad_string, pad_to_go);
-					} else if (pad_type === 'STR_PAD_BOTH') {
-						half = str_pad_repeater(pad_string, Math.ceil(pad_to_go / 2));
-						input = half + input + half;
-						input = input.substr(0, pad_length);
-					}
-				}
+                if (pad_type !== 'STR_PAD_LEFT' && pad_type !== 'STR_PAD_RIGHT' && pad_type !== 'STR_PAD_BOTH') {
+                    pad_type = 'STR_PAD_RIGHT';
+                }
+                if ((pad_to_go = pad_length - input.length) > 0) {
+                    if (pad_type === 'STR_PAD_LEFT') {
+                        input = str_pad_repeater(pad_string, pad_to_go) + input;
+                    } else if (pad_type === 'STR_PAD_RIGHT') {
+                        input = input + str_pad_repeater(pad_string, pad_to_go);
+                    } else if (pad_type === 'STR_PAD_BOTH') {
+                        half = str_pad_repeater(pad_string, Math.ceil(pad_to_go / 2));
+                        input = half + input + half;
+                        input = input.substr(0, pad_length);
+                    }
+                }
 
-				return input;
-			},
-			/**
-			 * Добавляет ведущий ноль
-			 *
-			 * @param n
-			 * @returns {*}
-			 */
-			pad: function (n) {
-				return n < 10 ? '0' + n.toString(10) : n.toString(10);
-			},
+                return input;
+            },
+            /**
+             * Добавляет ведущий ноль
+             *
+             * @param n
+             * @returns {*}
+             */
+            pad    : function (n) {
+                return n < 10 ? '0' + n.toString(10) : n.toString(10);
+            },
 
-			/**
-			 * Getting an absolute URL
-			 * @Example:
-			 *    getAbsoluteUrl('/something');
-			 *
-			 * @returns {Function}
-			 */
-			getAbsoluteUrl: function () {
-				var a;
+            /**
+             * Getting an absolute URL
+             * @Example:
+             *    getAbsoluteUrl('/something');
+             *
+             * @returns {Function}
+             */
+            getAbsoluteUrl: function () {
+                var a;
 
-				return function (url) {
-					if (!a) a = document.createElement('a');
-					a.href = url;
+                return function (url) {
+                    if (!a) a = document.createElement('a');
+                    a.href = url;
 
-					return a.href;
-				};
-			}
+                    return a.href;
+                };
+            }
 
-		};
+        };
 
-	return m;
+    return m;
 })();
 µ.str = µ.str || {};
 
@@ -442,11 +445,11 @@ var toString = Object.prototype.toString,
             /**
              * Заменяет похожие с русскими латинские буквы на русские.
              * 
-             * @param string
+             * @param str
              * @returns {{trim: µ.trim, lat2Rus: str.lat2Rus}}
              */
-			lat2Rus: function (string) {
-                if (!µ.isEmpty(string)) {
+			lat2Rus: function (str) {
+                if (!µ.isEmpty(str)) {
 
                     for (var key in latRus) {
                         var r = new RegExp(key, 'g');
@@ -874,61 +877,81 @@ var toString = Object.prototype.toString,
 
 µ.event = (function () {
 
-		return muEvent = {
-			/**
-			 * Функция, которая выполняется только один раз
-			 * @param fn
-			 * @param context
-			 */
-			once: function (fn, context) {
-				var result;
+    return muEvent = {
+        /**
+         * Функция, которая выполняется только один раз
+         * @param fn
+         * @param context
+         */
+        once: function (fn, context) {
+            var result;
 
-				return function () {
-					if (fn) {
-						result = fn.apply(context || this, arguments);
-						fn = null;
-					}
+            return function () {
+                if (fn) {
+                    result = fn.apply(context || this, arguments);
+                    fn = null;
+                }
 
-					return result;
-				}
-			},
+                return result;
+            }
+        },
 
-			/**
-			 * Возвращает функцию, которая не будет срабатывать, пока продолжает вызываться.
-			 * Она сработает только один раз через N миллисекунд после последнего вызова.
-			 * Если ей передан аргумент `immediate`, то она будет вызвана один раз сразу после первого запуска.
-			 *
-			 * @example:
-			 * 		var myEfficientFn = debounce(function() {
+        /**
+         * Возвращает функцию, которая не будет срабатывать, пока продолжает вызываться.
+         * Она сработает только один раз через N миллисекунд после последнего вызова.
+         * Если ей передан аргумент `immediate`, то она будет вызвана один раз сразу после первого запуска.
+         *
+         * @example:
+         *        var myEfficientFn = debounce(function() {
 			 *			//...
 			 *	 	}, 250);
-			 * 		window.addEventListener('resize', myEfficientFn);
+         *        window.addEventListener('resize', myEfficientFn);
 
-			 * @param func
-			 * @param wait
-			 * @param immediate
-			 * @returns {Function}
-			 */
-			debounce: function (func, wait, immediate) {
-				var timeout;
+         * @param func
+         * @param wait
+         * @param immediate
+         * @returns {Function}
+         */
+        debounce: function (func, wait, immediate) {
+            var timeout;
 
-				return function () {
-					var context = this,
-						args = arguments,
-						later = function () {
-							timeout = null;
-							if (!immediate) func.apply(context, args);
-						},
-						callNow = immediate && !timeout;
+            return function () {
+                var context = this,
+                    args    = arguments,
+                    later   = function () {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    },
+                    callNow = immediate && !timeout;
 
-					clearTimeout(timeout);
-					timeout = setTimeout(later, wait);
-					if (callNow)
-						func.apply(context, args);
-				};
-			}
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow)
+                    func.apply(context, args);
+            };
+        },
 
-		};
+        /**
+         * @param {function} onOfflineFn Выполняется при оффлайне
+         * @param {function} onOnlineFn Выполняется при онлайне
+         * @returns {boolean}
+         */
+        offLine: function (onOfflineFn, onOnlineFn) {
+            if (!µ.isBrowser())
+                return false;
+
+            window.addEventListener('load', function () {
+                if (µ.isFunction(onOfflineFn)) {
+                    window.addEventListener('online', onOnlineFn);
+                }
+                if (µ.isFunction(onOfflineFn)) {
+                    window.addEventListener('offline', onOfflineFn);
+                }
+            });
+
+        }
+
+    };
 })();
 µ.date = µ.date || {};
 
