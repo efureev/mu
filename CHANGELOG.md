@@ -1,3 +1,11 @@
+# v.0.0.7
+
+## add Core module:
+
+- add function: `µ.isBrowser`	Определяет контекст выполнения
+- add function: `µ.event.offLine`	Определяет функции для работы в оффлайне и онлайне
+
+
 # v.0.0.6
 
 ## add String module:
