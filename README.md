@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/efureev/mu.svg?branch=master)](https://travis-ci.org/efureev/mu)
+
 # µ
 JS Utilities Framework
 
