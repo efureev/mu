@@ -5,10 +5,10 @@ JS Utilities Framework
 
 ##For Node.JS: 
 ```
-µ = require('../dest/µ.min.js');
+µ = require('../dist/µ.min.js');
 ```
 
 ##For browser
 ```
-<script src="../dest/µ.min.js"></script>
+<script src="../dist/µ.min.js"></script>
 ```
