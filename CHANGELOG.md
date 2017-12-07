@@ -1,3 +1,6 @@
+# v.0.0.9
+- add function `µ.array.removeIdx`  Удаляет элемент массива по индексу элемента
+
 # v.0.0.8
 - fix `enumerables`
 
