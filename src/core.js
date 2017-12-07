@@ -1,5 +1,7 @@
-var toString = Object.prototype.toString,
-    core     = {
+var toString    = Object.prototype.toString,
+    enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'],
+
+    core        = {
         /**
          *
          * @param value
@@ -130,9 +132,9 @@ var toString = Object.prototype.toString,
          */
         isNative: function (value) {
             var reNative = new RegExp('^' +
-                    String(toString)
-                        .replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
-                        .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
+                String(toString)
+                    .replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
+                    .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
                 type     = typeof value;
 
             return type == 'function'

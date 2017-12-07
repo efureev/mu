@@ -1,3 +1,6 @@
+# v.0.0.8
+- fix `enumerables`
+
 # v.0.0.7
 
 ## add Core module:

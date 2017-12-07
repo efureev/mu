@@ -2,13 +2,13 @@ var µ = µ || {};
 
 (function () {
     var global = typeof self == 'object' && self.self === self && self ||
-        typeof global == 'object' && global.global === global && global ||
+        typeof global === 'object' && global.global === global && global ||
         this;
 
     µ.global = global;
 
     µ.DEBUG = false;
-    µ.VERSION = '0.0.7';
+    µ.VERSION = '0.0.8';
 
     µ.apply = function (object, config, defaults) {
         if (defaults) {
@@ -25,21 +25,23 @@ var µ = µ || {};
     };
 
     µ.isBrowser = function () {
-        return !(typeof exports != 'undefined' && !exports.nodeType);
+        return !(typeof exports !== 'undefined' && !exports.nodeType);
     };
 
     if (µ.isBrowser()) {
         global.µ = µ;
     } else {
-        if (typeof module != 'undefined' && !module.nodeType && module.exports) {
+        if (typeof module !== 'undefined' && !module.nodeType && module.exports) {
             exports = module.exports = µ;
         }
         exports.µ = µ;
     }
 
 })();
-var toString = Object.prototype.toString,
-    core     = {
+var toString    = Object.prototype.toString,
+    enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'],
+
+    core        = {
         /**
          *
          * @param value
@@ -170,9 +172,9 @@ var toString = Object.prototype.toString,
          */
         isNative: function (value) {
             var reNative = new RegExp('^' +
-                    String(toString)
-                        .replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
-                        .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
+                String(toString)
+                    .replace(/[.*+?^${}()|[\]\/\\]/g, '\\$&')
+                    .replace(/toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?') + '$'),
                 type     = typeof value;
 
             return type == 'function'
@@ -2096,5 +2098,4 @@ var toString = Object.prototype.toString,
 		}
 	};
 })();
-if (µ.DEBUG)
-	console.log('µ loaded');
+if (µ.DEBUG) console.log('µ loaded');

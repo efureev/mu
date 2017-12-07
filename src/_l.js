@@ -1,2 +1,1 @@
-if (µ.DEBUG)
-	console.log('µ loaded');
+if (µ.DEBUG) console.log('µ loaded');
