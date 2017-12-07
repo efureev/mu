@@ -18,8 +18,10 @@
   ],
   "devDependencies": {
     "grunt": "*",
+    "grunt-contrib-concat": "*",
     "grunt-contrib-uglify": "*",
-    "grunt-contrib-concat": "*"
+    "grunt-mocha": "*",
+    "unit.js": "*"
   },
   "keywords": [
     "javascript",

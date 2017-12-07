@@ -34,11 +34,21 @@ module.exports = function (grunt) {
                 src : files,
                 dest: 'dist/mu.js'
             }
+        },
+        mocha : {
+            test: {
+                options: {
+                    reporter: 'XUnit'
+                },
+                src    : ['tests/**/*.html'],
+                dest   : './test/output/xunit.out',
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.registerTask('default', ['concat']);
-    grunt.registerTask('install', ['concat','uglify']);
+    grunt.registerTask('install', ['concat', 'uglify']);
+    grunt.registerTask('test', ['concat', 'uglify']);
 };
