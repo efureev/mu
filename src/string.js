@@ -69,9 +69,55 @@
                 }
 
                 return str;
+            },
+
+            /**
+             * Конвертирует строку из camelCase
+             *
+             * @param {string} str
+             * @param {string} separator
+             * @returns {string}
+             */
+            fromCamelCase: function (str, separator) {
+                if (separator === undefined) {
+                    separator = '_';
+                }
+
+                return str
+                    .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+                    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+                    .toLowerCase();
+            },
+
+            /**
+             *
+             * @param str
+             * @returns {string | void}
+             */
+            toCamelCase: function (str) {
+                return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
+                    return p2 ? p2.toUpperCase() : p1.toLowerCase()
+                });
+            },
+
+            /**
+             * Обрезение строки по количеству символов
+             * @param {string} str
+             * @param {number} num
+             * @param {string} more
+             * @returns {string}
+             */
+            truncate: function (str, num, more) {
+                if (!more) {
+                    more = '...'
+                }
+                var ml = more.length;
+                return str.length > num ? str.slice(0, num > ml ? num - ml : num) + more : str;
             }
 
         };
 
     return str;
 })();
+
+µ.string = µ.str;

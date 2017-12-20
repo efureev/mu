@@ -1,7 +1,7 @@
 {
   "name": "mu",
   "description": "JS Utilities Framework",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "homepage": "https://github.com/efureev/mu",
   "main": [
     "dist/mu.js"

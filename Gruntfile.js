@@ -41,7 +41,7 @@ module.exports = function (grunt) {
                     reporter: 'XUnit'
                 },
                 src    : ['tests/**/*.html'],
-                dest   : './test/output/xunit.out',
+                dest   : './test/output/xunit.out'
             }
         }
     });

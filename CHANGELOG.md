@@ -1,5 +1,15 @@
+# v.0.1.0
+- add function `µ.array.max`  Возвращает наибольшее число из массива
+- add function `µ.array.min`  Возвращает наименьшее число из массива
+- add function `µ.array.from`  Создаёт новый экземпляр Array из массивоподобного или итерируемого объекта.
+- add function `µ.utils.isEven`  Создаёт новый экземпляр Array из массивоподобного или итерируемого объекта.
+- add function `µ.object.select`  Возвращает значение по ключю, который находит по `select` (путь с точками).
+- add function `µ.str.fromCamelCase`  Конвертирует строку из camelCase
+- add function `µ.str.toCamelCase`  Конвертирует строку в camelCase
+- add function `µ.str.truncate`  Обрезение строки по количеству символов
+
 # v.0.0.9
-- add function `µ.array.removeIdx`  Удаляет элемент массива по индексу элемента
+- add function `µ.array.removeIdx`  Каждый второй
 
 # v.0.0.8
 - fix `enumerables`

@@ -65,13 +65,11 @@
          * @example
          * µ.array.merge();
          *
-         * @param {Array} array1
-         * @param {Array} array2
-         * @param {Array} etc
+         * @param {Array}, {Array2}, ...
          * @return {Array} merged
          */
         merge: function () {
-            var args  = slice.call(arguments),
+            var args  = Array.prototype.slice.call(arguments),
                 array = [],
                 i, ln;
 
@@ -166,6 +164,7 @@
         },
 
         /**
+         * Возвращает последний элемент массива
          *
          * @param array
          */
@@ -174,6 +173,7 @@
         },
 
         /**
+         * Возвращает первый элемент массива
          *
          * @param array
          */
@@ -236,6 +236,99 @@
             }
 
             return true;
-        }
+        },
+
+        /**
+         * Возвращает наибольшее число из массива
+         *
+         * @param {array} a
+         * @returns {number}
+         */
+        max: function (a) {
+            return Math.max.apply(null, a);
+        },
+
+        /**
+         * Возвращает наименьшее число из массива
+         *
+         * @param {array} a
+         * @returns {number}
+         */
+        min: function (a) {
+            return Math.min.apply(null, a);
+        },
+
+        /**
+         * Создаёт новый экземпляр Array из массивоподобного или итерируемого объекта.
+         *
+         * @returns {from}
+         */
+        from: (function () {
+            var toStr = Object.prototype.toString;
+            var isCallable = function (fn) {
+                return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+            };
+
+            var toInteger = function (value) {
+                var number = Number(value);
+                if (isNaN(number)) {
+                    return 0;
+                }
+                if (number === 0 || !isFinite(number)) {
+                    return number;
+                }
+                return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+            };
+
+            var maxSafeInteger = Math.pow(2, 53) - 1;
+            var toLength = function (value) {
+                var len = toInteger(value);
+                return Math.min(Math.max(len, 0), maxSafeInteger);
+            };
+
+            return function from(arrayLike/*, mapFn, thisArg */) {
+                var C = this;
+                var items = Object(arrayLike);
+
+                if (arrayLike == null) {
+                    throw new TypeError('Array.from requires an array-like object - not null or undefined');
+                }
+
+                var mapFn = arguments[1];
+                if (typeof mapFn !== 'undefined') {
+                    mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+                    // 5. иначе
+                    // 5. a. Если вызов IsCallable(mapfn) равен false, выкидываем исключение TypeError.
+                    if (!isCallable(mapFn)) {
+                        throw new TypeError('Array.from: when provided, the second argument must be a function');
+                    }
+
+                    // 5. b. Если thisArg присутствует, положим T равным thisArg; иначе положим T равным undefined.
+                    if (arguments.length > 2) {
+                        T = arguments[2];
+                    }
+                }
+
+                var len = toLength(items.length);
+                var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+                var k = 0;
+                var kValue;
+
+                while (k < len) {
+                    kValue = items[k];
+                    if (mapFn) {
+                        A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+                    } else {
+                        A[k] = kValue;
+                    }
+                    k += 1;
+                }
+
+                A.length = len;
+
+                return A;
+            };
+        }())
+
     };
 })();

@@ -131,6 +131,16 @@
 
                     return a.href;
                 };
+            },
+
+            /**
+             * Каждый второй
+             *
+             * @param {number} num
+             * @returns {boolean}
+             */
+            isEven: function (num) {
+                return num % 2 === 0;
             }
 
         };

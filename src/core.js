@@ -116,8 +116,8 @@ var toString    = Object.prototype.toString,
             if (!this.isObject(obj))
                 return false;
 
-            for (var key in obj)
-                return false;
+            for (var key in obj) return false;
+
             return true;
         },
 
@@ -181,9 +181,6 @@ var toString    = Object.prototype.toString,
                 return item;
             }
 
-            // DOM nodes
-            // TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
-            // recursively
             if (item.nodeType && item.cloneNode) {
                 return item.cloneNode(true);
             }

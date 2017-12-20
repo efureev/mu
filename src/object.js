@@ -49,6 +49,12 @@
             return true;
         },
 
+        select: function (from, selector) {
+            return selector.split('.').reduce(function (prev, cur) {
+                return prev && prev[cur];
+            }, from);
+        },
+
         /**
          * Возвращает `hasOwnProperty` ключи объекта как массив
          *

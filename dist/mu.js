@@ -8,7 +8,7 @@ var µ = µ || {};
     µ.global = global;
 
     µ.DEBUG = false;
-    µ.VERSION = '0.0.8';
+    µ.VERSION = '0.1.0';
 
     µ.apply = function (object, config, defaults) {
         if (defaults) {
@@ -156,8 +156,8 @@ var toString    = Object.prototype.toString,
             if (!this.isObject(obj))
                 return false;
 
-            for (var key in obj)
-                return false;
+            for (var key in obj) return false;
+
             return true;
         },
 
@@ -221,9 +221,6 @@ var toString    = Object.prototype.toString,
                 return item;
             }
 
-            // DOM nodes
-            // TODO proxy this to Ext.Element.clone to handle automatic id attribute changing
-            // recursively
             if (item.nodeType && item.cloneNode) {
                 return item.cloneNode(true);
             }
@@ -402,6 +399,16 @@ var toString    = Object.prototype.toString,
 
                     return a.href;
                 };
+            },
+
+            /**
+             * Каждый второй
+             *
+             * @param {number} num
+             * @returns {boolean}
+             */
+            isEven: function (num) {
+                return num % 2 === 0;
             }
 
         };
@@ -412,45 +419,64 @@ var toString    = Object.prototype.toString,
 
 µ.str = (function () {
 
-	var
-		reTrim = /^\s+|\s+$/g,
+    var
+        reTrim = /^\s+|\s+$/g,
 
-        latRus = { "A": "А", "a": "а", "E": "Е", "e": "е", "T": "Т", "y": "у", "O": "О", "o": "о", "P": "Р", "p": "р", "H": "Н", "K": "К", "X": "Х", "x": "х", "C": "С", "c": "с", "B": "В", "M": "М" },
+        latRus = {
+            "A": "А",
+            "a": "а",
+            "E": "Е",
+            "e": "е",
+            "T": "Т",
+            "y": "у",
+            "O": "О",
+            "o": "о",
+            "P": "Р",
+            "p": "р",
+            "H": "Н",
+            "K": "К",
+            "X": "Х",
+            "x": "х",
+            "C": "С",
+            "c": "с",
+            "B": "В",
+            "M": "М"
+        },
 
-		str = {
+        str    = {
 
-			/**
-			 * Removes leading and trailing whitespace or specified characters from `string`.
-			 *
-			 * @static
-			 * @memberOf µ
-			 * @category String
-			 *
-			 * @param {string} [string=''] The string to trim.
-			 *
-			 * @returns {string} Returns the trimmed string.
-			 * @example
-			 *
-			 * µ.utils.trim('  abc  ');
-			 * // => 'abc'
-			 *
-			 */
-			trim: function (string) {
-				string = µ.utils.toString(string);
+            /**
+             * Removes leading and trailing whitespace or specified characters from `string`.
+             *
+             * @static
+             * @memberOf µ
+             * @category String
+             *
+             * @param {string} [string=''] The string to trim.
+             *
+             * @returns {string} Returns the trimmed string.
+             * @example
+             *
+             * µ.utils.trim('  abc  ');
+             * // => 'abc'
+             *
+             */
+            trim: function (string) {
+                string = µ.utils.toString(string);
 
-				if (!string) {
-					return string;
-				}
-				return string.replace(reTrim, '');
-			},
+                if (!string) {
+                    return string;
+                }
+                return string.replace(reTrim, '');
+            },
 
             /**
              * Заменяет похожие с русскими латинские буквы на русские.
-             * 
+             *
              * @param str
              * @returns {{trim: µ.trim, lat2Rus: str.lat2Rus}}
              */
-			lat2Rus: function (str) {
+            lat2Rus: function (str) {
                 if (!µ.isEmpty(str)) {
 
                     for (var key in latRus) {
@@ -460,12 +486,58 @@ var toString    = Object.prototype.toString,
                 }
 
                 return str;
-			}
+            },
 
-		};
+            /**
+             * Конвертирует строку из camelCase
+             *
+             * @param {string} str
+             * @param {string} separator
+             * @returns {string}
+             */
+            fromCamelCase: function (str, separator) {
+                if (separator === undefined) {
+                    separator = '_';
+                }
 
-	return str;
+                return str
+                    .replace(/([a-z\d])([A-Z])/g, '$1' + separator + '$2')
+                    .replace(/([A-Z]+)([A-Z][a-z\d]+)/g, '$1' + separator + '$2')
+                    .toLowerCase();
+            },
+
+            /**
+             *
+             * @param str
+             * @returns {string | void}
+             */
+            toCamelCase: function (str) {
+                return str.replace(/^([A-Z])|[\s-_]+(\w)/g, function (match, p1, p2, offset) {
+                    return p2 ? p2.toUpperCase() : p1.toLowerCase()
+                });
+            },
+
+            /**
+             * Обрезение строки по количеству символов
+             * @param {string} str
+             * @param {number} num
+             * @param {string} more
+             * @returns {string}
+             */
+            truncate: function (str, num, more) {
+                if (!more) {
+                    more = '...'
+                }
+                var ml = more.length;
+                return str.length > num ? str.slice(0, num > ml ? num - ml : num) + more : str;
+            }
+
+        };
+
+    return str;
 })();
+
+µ.string = µ.str;
 µ.array = µ.array || {};
 
 µ.array = (function () {
@@ -533,13 +605,11 @@ var toString    = Object.prototype.toString,
          * @example
          * µ.array.merge();
          *
-         * @param {Array} array1
-         * @param {Array} array2
-         * @param {Array} etc
+         * @param {Array}, {Array2}, ...
          * @return {Array} merged
          */
         merge: function () {
-            var args  = slice.call(arguments),
+            var args  = Array.prototype.slice.call(arguments),
                 array = [],
                 i, ln;
 
@@ -634,6 +704,7 @@ var toString    = Object.prototype.toString,
         },
 
         /**
+         * Возвращает последний элемент массива
          *
          * @param array
          */
@@ -642,6 +713,7 @@ var toString    = Object.prototype.toString,
         },
 
         /**
+         * Возвращает первый элемент массива
          *
          * @param array
          */
@@ -663,7 +735,7 @@ var toString    = Object.prototype.toString,
         },
 
         /**
-         * Удаляет элемент по индексу из массива
+         * Удаляет элемент массива по индексу элемента
          * @param array
          * @param index
          * @returns {*}
@@ -704,186 +776,279 @@ var toString    = Object.prototype.toString,
             }
 
             return true;
-        }
+        },
+
+        /**
+         * Возвращает наибольшее число из массива
+         *
+         * @param {array} a
+         * @returns {number}
+         */
+        max: function (a) {
+            return Math.max.apply(null, a);
+        },
+
+        /**
+         * Возвращает наименьшее число из массива
+         *
+         * @param {array} a
+         * @returns {number}
+         */
+        min: function (a) {
+            return Math.min.apply(null, a);
+        },
+
+        /**
+         * Создаёт новый экземпляр Array из массивоподобного или итерируемого объекта.
+         *
+         * @returns {from}
+         */
+        from: (function () {
+            var toStr = Object.prototype.toString;
+            var isCallable = function (fn) {
+                return typeof fn === 'function' || toStr.call(fn) === '[object Function]';
+            };
+
+            var toInteger = function (value) {
+                var number = Number(value);
+                if (isNaN(number)) {
+                    return 0;
+                }
+                if (number === 0 || !isFinite(number)) {
+                    return number;
+                }
+                return (number > 0 ? 1 : -1) * Math.floor(Math.abs(number));
+            };
+
+            var maxSafeInteger = Math.pow(2, 53) - 1;
+            var toLength = function (value) {
+                var len = toInteger(value);
+                return Math.min(Math.max(len, 0), maxSafeInteger);
+            };
+
+            return function from(arrayLike/*, mapFn, thisArg */) {
+                var C = this;
+                var items = Object(arrayLike);
+
+                if (arrayLike == null) {
+                    throw new TypeError('Array.from requires an array-like object - not null or undefined');
+                }
+
+                var mapFn = arguments[1];
+                if (typeof mapFn !== 'undefined') {
+                    mapFn = arguments.length > 1 ? arguments[1] : void undefined;
+                    // 5. иначе
+                    // 5. a. Если вызов IsCallable(mapfn) равен false, выкидываем исключение TypeError.
+                    if (!isCallable(mapFn)) {
+                        throw new TypeError('Array.from: when provided, the second argument must be a function');
+                    }
+
+                    // 5. b. Если thisArg присутствует, положим T равным thisArg; иначе положим T равным undefined.
+                    if (arguments.length > 2) {
+                        T = arguments[2];
+                    }
+                }
+
+                var len = toLength(items.length);
+                var A = isCallable(C) ? Object(new C(len)) : new Array(len);
+                var k = 0;
+                var kValue;
+
+                while (k < len) {
+                    kValue = items[k];
+                    if (mapFn) {
+                        A[k] = typeof T === 'undefined' ? mapFn(kValue, k) : mapFn.call(T, kValue, k);
+                    } else {
+                        A[k] = kValue;
+                    }
+                    k += 1;
+                }
+
+                A.length = len;
+
+                return A;
+            };
+        }())
+
     };
 })();
 µ.format = µ.format || {};
 
 µ.format = (function () {
-	var currencySign = 'р.',
-		currencyPrecision = 2,
-		currencyAtEnd = true,
-		thousandSeparator = ' ',
-		decimalSeparator = '.',
-		formatCleanRe = /[^\d\.]/g;
+    var currencySign      = 'р.',
+        currencyPrecision = 2,
+        currencyAtEnd     = true,
+        thousandSeparator = ' ',
+        decimalSeparator  = '.',
+        formatCleanRe     = /[^\d\.]/g;
 
-	return muFormat = {
+    return muFormat = {
 
-		/**
-		 * Форматирует число как Валюту
-		 * @param {Number/String} v Число для конвертирования
-		 * @param {String} [currSign] Денежный знак для использования (по-умолчанию, {@link #currencySign})
-		 * @param {Number} [decimals] Количество знаков после запятой (по-умолчанию, {@link #currencyPrecision})
-		 * @param {Boolean} [start] True если {@link #currencySign} должен стоять в начале строки (по-умолчанию, {@link #currencyAtEnd})
-		 * @return {String} Валюта
-		 */
-		currency: function (v, currSign, decimals, start) {
-			var negativeSign = '',
-				format = ",0",
-				i = 0;
-			v = +v;
+        /**
+         * Форматирует число как Валюту
+         * @param {Number/String} v Число для конвертирования
+         * @param {String} [currSign] Денежный знак для использования (по-умолчанию, {@link #currencySign})
+         * @param {Number} [decimals] Количество знаков после запятой (по-умолчанию, {@link #currencyPrecision})
+         * @param {Boolean} [start] True если {@link #currencySign} должен стоять в начале строки (по-умолчанию, {@link #currencyAtEnd})
+         * @return {String} Валюта
+         */
+        currency: function (v, currSign, decimals, start) {
+            var negativeSign = '',
+                format       = ",0",
+                i            = 0;
+            v = +v;
 
-			if (v < 0) {
-				v = -v;
-				negativeSign = '-';
-			}
+            if (v < 0) {
+                v = -v;
+                negativeSign = '-';
+            }
 
-			decimals = µ.isDefined(decimals) ? decimals : currencyPrecision;
+            decimals = µ.isDefined(decimals) ? decimals : currencyPrecision;
 
-			format += (decimals > 0 ? '.' : '');
+            format += (decimals > 0 ? '.' : '');
 
-			for (; i < decimals; i++) {
-				format += '0';
-			}
+            for (; i < decimals; i++) {
+                format += '0';
+            }
 
-			v = muFormat.number(v, format);
+            v = muFormat.number(v, format);
 
-			if ((start || !currencyAtEnd) === true) {
-				return (currSign || currencySign) + ' ' + negativeSign + v;
-			} else {
-				return negativeSign + v + ' ' + (currSign || currencySign);
-			}
-		},
+            if ((start || !currencyAtEnd) === true) {
+                return (currSign || currencySign) + ' ' + negativeSign + v;
+            } else {
+                return negativeSign + v + ' ' + (currSign || currencySign);
+            }
+        },
 
-		/**
-		 *  # <p>Formats the passed number according to the passed format string.</p>
-		 # <p>The number of digits after the decimal separator character specifies the number of
-		 # decimal places in the resulting string. The <u>local-specific</u> decimal character is used in the result.</p>
-		 # <p>The <i>presence</i> of a thousand separator character in the format string specifies that
-		 # the <u>locale-specific</u> thousand separator (if any) is inserted separating thousand groups.</p>
-		 # <p>By default, "," is expected as the thousand separator, and "." is expected as the decimal separator.</p>
-		 # <p><b>New to Ext4</b></p>
-		 # <p>Locale-specific characters are always used in the formatted output when inserting
-		 # thousand and decimal separators.</p>
-		 # <p>The format string must specify separator characters according to US/UK conventions ("," as the
-		 # thousand separator, and "." as the decimal separator)</p>
-		 # <p>To allow specification of format strings according to local conventions for separator characters, add
-		 # the string <code>/i</code> to the end of the format string.</p>
-		 # <div style="margin-left:40px">examples (123456.789):
-		 # <div style="margin-left:10px">
-		 # 0 - (123456) show only digits, no precision<br>
-		 # 0.00 - (123456.78) show only digits, 2 precision<br>
-		 # 0.0000 - (123456.7890) show only digits, 4 precision<br>
-		 # 0,000 - (123,456) show comma and digits, no precision<br>
-		 # 0,000.00 - (123,456.78) show comma and digits, 2 precision<br>
-		 # 0,0.00 - (123,456.78) shortcut method, show comma and digits, 2 precision<br>
-		 # To allow specification of the formatting string using UK/US grouping characters (,) and decimal (.) for international numbers, add /i to the end.
-		 # For example: 0.000,00/i
-		 # </div></div>
-		 # @param {Number} v The number to format.
-		 # @param {String} format The way you would like to format this text.
-		 # @return {String} The formatted number.
+        /**
+         *  # <p>Formats the passed number according to the passed format string.</p>
+         # <p>The number of digits after the decimal separator character specifies the number of
+         # decimal places in the resulting string. The <u>local-specific</u> decimal character is used in the result.</p>
+         # <p>The <i>presence</i> of a thousand separator character in the format string specifies that
+         # the <u>locale-specific</u> thousand separator (if any) is inserted separating thousand groups.</p>
+         # <p>By default, "," is expected as the thousand separator, and "." is expected as the decimal separator.</p>
+         # <p><b>New to Ext4</b></p>
+         # <p>Locale-specific characters are always used in the formatted output when inserting
+         # thousand and decimal separators.</p>
+         # <p>The format string must specify separator characters according to US/UK conventions ("," as the
+         # thousand separator, and "." as the decimal separator)</p>
+         # <p>To allow specification of format strings according to local conventions for separator characters, add
+         # the string <code>/i</code> to the end of the format string.</p>
+         # <div style="margin-left:40px">examples (123456.789):
+         # <div style="margin-left:10px">
+         # 0 - (123456) show only digits, no precision<br>
+         # 0.00 - (123456.78) show only digits, 2 precision<br>
+         # 0.0000 - (123456.7890) show only digits, 4 precision<br>
+         # 0,000 - (123,456) show comma and digits, no precision<br>
+         # 0,000.00 - (123,456.78) show comma and digits, 2 precision<br>
+         # 0,0.00 - (123,456.78) shortcut method, show comma and digits, 2 precision<br>
+         # To allow specification of the formatting string using UK/US grouping characters (,) and decimal (.) for international numbers, add /i to the end.
+         # For example: 0.000,00/i
+         # </div></div>
+         # @param {Number} v The number to format.
+         # @param {String} format The way you would like to format this text.
+         # @return {String} The formatted number.
 
-		 * @param v
-		 * @param formatString
-		 * @returns {*}
-		 */
-		number: function (v, formatString, afterFix) {
-			var cnum, comma, dec, fnum, hasComma, i, i18n, j, m, n, neg, parr, psplit;
+         * @param v
+         * @param formatString
+         * @returns {*}
+         */
+        number: function (v, formatString, afterFix) {
+            var cnum, comma, dec, fnum, hasComma, i, i18n, j, m, n, neg, parr, psplit;
 
-			if (µ.isUndefined(formatString))
-				return v;
+            if (µ.isUndefined(formatString))
+                return v;
 
-			v = muFormat.from(v, NaN);
-			if (isNaN(v))
-				return "";
+            v = muFormat.from(v, NaN);
+            if (isNaN(v))
+                return "";
 
-			comma = thousandSeparator;
-			dec = decimalSeparator;
-			i18n = false;
-			neg = v < 0;
-			v = Math.abs(v);
+            comma = thousandSeparator;
+            dec = decimalSeparator;
+            i18n = false;
+            neg = v < 0;
+            v = Math.abs(v);
 
-			hasComma = formatString.indexOf(",") !== -1;
-			psplit = formatString.replace(formatCleanRe, "").split(".");
+            hasComma = formatString.indexOf(",") !== -1;
+            psplit = formatString.replace(formatCleanRe, "").split(".");
 
-			if (1 < psplit.length) {
-				v = v.toFixed(psplit[1].length);
-			} else if (2 < psplit.length) {
-				console.error("Invalid number format, should have no more than 1 decimal");
-			} else {
-				v = v.toFixed(0);
-			}
+            if (1 < psplit.length) {
+                v = v.toFixed(psplit[1].length);
+            } else if (2 < psplit.length) {
+                console.error("Invalid number format, should have no more than 1 decimal");
+            } else {
+                v = v.toFixed(0);
+            }
 
-			fnum = v.toString();
-			psplit = fnum.split(".");
+            fnum = v.toString();
+            psplit = fnum.split(".");
 
-			if (hasComma) {
-				cnum = psplit[0];
-				parr = [];
-				j = cnum.length;
-				m = Math.floor(j / 3);
-				n = cnum.length % 3 || 3;
-				i = 0;
+            if (hasComma) {
+                cnum = psplit[0];
+                parr = [];
+                j = cnum.length;
+                m = Math.floor(j / 3);
+                n = cnum.length % 3 || 3;
+                i = 0;
 
-				while (i < j) {
-					if (i !== 0) n = 3;
-					parr[parr.length] = cnum.substr(i, n);
-					m -= 1;
-					i += n;
-				}
+                while (i < j) {
+                    if (i !== 0) n = 3;
+                    parr[parr.length] = cnum.substr(i, n);
+                    m -= 1;
+                    i += n;
+                }
 
-				fnum = parr.join(comma);
-				if (psplit[1]) fnum += dec + psplit[1];
-			} else {
-				if (psplit[1]) fnum = psplit[0] + dec + psplit[1];
-			}
+                fnum = parr.join(comma);
+                if (psplit[1]) fnum += dec + psplit[1];
+            } else {
+                if (psplit[1]) fnum = psplit[0] + dec + psplit[1];
+            }
 
-			if (neg) neg = fnum.replace(/[^1-9]/g, "") !== "";
+            if (neg) neg = fnum.replace(/[^1-9]/g, "") !== "";
 
-			return (neg ? "-" : "") + formatString.replace(/[\d,?\.?]+/, fnum) + (µ.isUndefined(afterFix) ? '' : afterFix);
-		},
+            return (neg ? "-" : "") + formatString.replace(/[\d,?\.?]+/, fnum) + (µ.isUndefined(afterFix) ? '' : afterFix);
+        },
 
-		/**
-		 * Validate that a value is numeric and convert it to a number if necessary. Returns the specified default value if
-		 * it is not.
+        /**
+         * Validate that a value is numeric and convert it to a number if necessary. Returns the specified default value if
+         * it is not.
 
-		 µ.format.number.from('1.23', 1); // returns 1.23
-		 µ.format.number.from('abc', 1); // returns 1
-		 µ.format.number.from(NaN, 1); // returns 1
+         µ.format.number.from('1.23', 1); // returns 1.23
+         µ.format.number.from('abc', 1); // returns 1
+         µ.format.number.from(NaN, 1); // returns 1
 
-		 * @param {Object} value
-		 * @param {Number} defaultValue The value to return if the original value is non-numeric
-		 * @return {Number} value, if numeric, defaultValue otherwise
-		 */
-		from: function (value, defaultValue) {
-			if (isFinite(value)) {
-				value = parseFloat(value);
-			}
+         * @param {Object} value
+         * @param {Number} defaultValue The value to return if the original value is non-numeric
+         * @return {Number} value, if numeric, defaultValue otherwise
+         */
+        from: function (value, defaultValue) {
+            if (isFinite(value)) {
+                value = parseFloat(value);
+            }
 
-			return !isNaN(value) ? value : defaultValue;
-		},
+            return !isNaN(value) ? value : defaultValue;
+        },
 
-		/**
-		 * Округление цисла с требуемым десятичным числом в большую сторону
-		 *
-		 * @param {Number/String} value The numeric value to round.
-		 * @param {Number} [precision] The number of decimal places to which to round the
-		 * first parameter's value. If `undefined` the `value` is passed to `Math.round`
-		 * otherwise the value is returned unmodified.
-		 * @return {Number} The rounded value.
-		 */
-		round: function (value, precision) {
-			var result = Number(value);
-			if (µ.isNumber(precision)) {
-				precision = Math.pow(10, precision);
-				result = Math.round(value * precision) / precision;
-			} else if (µ.isUndefined(precision)) {
-				result = Math.round(result);
-			}
-			return result;
-		}
-	};
+        /**
+         * Округление цисла с требуемым десятичным числом в большую сторону
+         *
+         * @param {Number/String} value The numeric value to round.
+         * @param {Number} [precision] The number of decimal places to which to round the
+         * first parameter's value. If `undefined` the `value` is passed to `Math.round`
+         * otherwise the value is returned unmodified.
+         * @return {Number} The rounded value.
+         */
+        round: function (value, precision) {
+            var result = Number(value);
+            if (µ.isNumber(precision)) {
+                precision = Math.pow(10, precision);
+                result = Math.round(value * precision) / precision;
+            } else if (µ.isUndefined(precision)) {
+                result = Math.round(result);
+            }
+            return result;
+        }
+    };
 })();
 µ.event = µ.event || {};
 
@@ -969,814 +1134,820 @@ var toString    = Object.prototype.toString,
 
 µ.date = (function () {
 
-	var
-		utilDate,
-		now = (function () {
-			if (!Date.now) {
-				Date.now = function now() {
-					return new Date().getTime();
-				};
-			}
-		}());
+    var
+        utilDate,
+        now = (function () {
+            if (!Date.now) {
+                Date.now = function now() {
+                    return new Date().getTime();
+                };
+            }
+        }());
 
-	return utilDate = {
-		now: Date.now,
+    return utilDate = {
+        now: Date.now,
 
-		/**
-		 * @private
-		 */
-		toString: function (date) {
-			if (!date) {
-				date = new Date();
-			}
+        /**
+         * @private
+         */
+        toString: function (date) {
+            if (!date) {
+                date = new Date();
+            }
 
-			return date.getFullYear() + "-"
-				+ µ.utils.pad(date.getMonth() + 1, 2, '0') + "-"
-				+ µ.utils.pad(date.getDate(), 2, '0') + "T"
-				+ µ.utils.pad(date.getHours(), 2, '0') + ":"
-				+ µ.utils.pad(date.getMinutes(), 2, '0') + ":"
-				+ µ.utils.pad(date.getSeconds(), 2, '0');
-		},
+            return date.getFullYear() + "-"
+                + µ.utils.pad(date.getMonth() + 1, 2, '0') + "-"
+                + µ.utils.pad(date.getDate(), 2, '0') + "T"
+                + µ.utils.pad(date.getHours(), 2, '0') + ":"
+                + µ.utils.pad(date.getMinutes(), 2, '0') + ":"
+                + µ.utils.pad(date.getSeconds(), 2, '0');
+        },
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		MILLI: "ms",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        MILLI: "ms",
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		SECOND: "s",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        SECOND: "s",
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		MINUTE: "mi",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        MINUTE: "mi",
 
-		/** Date interval constant.
-		 * @type String
-		 */
-		HOUR: "h",
+        /** Date interval constant.
+         * @type String
+         */
+        HOUR: "h",
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		DAY: "d",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        DAY: "d",
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		MONTH: "mo",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        MONTH: "mo",
 
-		/**
-		 * Date interval constant.
-		 * @type String
-		 */
-		YEAR: "y",
+        /**
+         * Date interval constant.
+         * @type String
+         */
+        YEAR: "y",
 
 
-		/**
-		 * @property {String[]} dayNames
-		 * An array of textual day names.
-		 * Override these values for international dates.
-		 *
-		 * @Example:
-		 *
-		 *     µ.date.dayNames = [
-		 *         'SundayInYourLang',
-		 *         'MondayInYourLang'
-		 *         // ...
-		 *     ];
-		 */
-		dayNames: [
-			"Воскресенье",
-			"Понедельник",
-			"Вторник",
-			"Среда",
-			"Четверг",
-			"Пятница",
-			"Суббота"
-		],
+        /**
+         * @property {String[]} dayNames
+         * An array of textual day names.
+         * Override these values for international dates.
+         *
+         * @Example:
+         *
+         *     µ.date.dayNames = [
+         *         'SundayInYourLang',
+         *         'MondayInYourLang'
+         *         // ...
+         *     ];
+         */
+        dayNames: [
+            "Воскресенье",
+            "Понедельник",
+            "Вторник",
+            "Среда",
+            "Четверг",
+            "Пятница",
+            "Суббота"
+        ],
 
-		/**
-		 * @property {String[]} monthNames
-		 * An array of textual month names.
-		 * Override these values for international dates.
-		 *
-		 * @Example:
-		 *
-		 *     µ.date.monthNames = [
-		 *         'JanInYourLang',
-		 *         'FebInYourLang'
-		 *         // ...
-		 *     ];
-		 */
-		monthNames: [
-			"Январь",
-			"Февраль",
-			"Март",
-			"Апрель",
-			"Май",
-			"Июнь",
-			"Июль",
-			"Август",
-			"Сентябрь",
-			"Октябрь",
-			"Ноябрь",
-			"Декабрь"
-		],
+        /**
+         * @property {String[]} monthNames
+         * An array of textual month names.
+         * Override these values for international dates.
+         *
+         * @Example:
+         *
+         *     µ.date.monthNames = [
+         *         'JanInYourLang',
+         *         'FebInYourLang'
+         *         // ...
+         *     ];
+         */
+        monthNames: [
+            "Январь",
+            "Февраль",
+            "Март",
+            "Апрель",
+            "Май",
+            "Июнь",
+            "Июль",
+            "Август",
+            "Сентябрь",
+            "Октябрь",
+            "Ноябрь",
+            "Декабрь"
+        ],
 
-		/**
-		 * @property {Object} monthNumbers
-		 * An object hash of zero-based JavaScript month numbers (with short month names as keys).
-		 *
-		 * __Note:__ keys are case-sensitive.
-		 *
-		 * Override these values for international dates.
-		 *
-		 * @Example:
-		 *
-		 *     µ.date.monthNumbers = {
+        /**
+         * @property {Object} monthNumbers
+         * An object hash of zero-based JavaScript month numbers (with short month names as keys).
+         *
+         * __Note:__ keys are case-sensitive.
+         *
+         * Override these values for international dates.
+         *
+         * @Example:
+         *
+         *     µ.date.monthNumbers = {
 		 *         'LongJanNameInYourLang': 0,
 		 *         'ShortJanNameInYourLang':0,
 		 *         'LongFebNameInYourLang':1,
 		 *         'ShortFebNameInYourLang':1
 		 *         // ...
 		 *     };
-		 */
-		monthNumbers: {
-			'Январь': 0,
-			'Янв': 0,
-			'Февраль': 1,
-			'Фев': 1,
-			'Март': 2,
-			'Мар': 2,
-			'Апрель': 3,
-			'Апр': 3,
-			'Май': 4,
-			'Июнь': 5,
-			'Июн': 5,
-			'Июль': 6,
-			'Июл': 6,
-			'Август': 7,
-			'Авг': 7,
-			'Сентябрь': 8,
-			'Сент': 8,
-			'Октябрь': 9,
-			'Окт': 9,
-			'Ноябрь': 10,
-			'Ноя': 10,
-			'Декабрь': 11,
-			'Дек': 11
-		},
+         */
+        monthNumbers: {
+            'Январь'  : 0,
+            'Янв'     : 0,
+            'Февраль' : 1,
+            'Фев'     : 1,
+            'Март'    : 2,
+            'Мар'     : 2,
+            'Апрель'  : 3,
+            'Апр'     : 3,
+            'Май'     : 4,
+            'Июнь'    : 5,
+            'Июн'     : 5,
+            'Июль'    : 6,
+            'Июл'     : 6,
+            'Август'  : 7,
+            'Авг'     : 7,
+            'Сентябрь': 8,
+            'Сент'    : 8,
+            'Октябрь' : 9,
+            'Окт'     : 9,
+            'Ноябрь'  : 10,
+            'Ноя'     : 10,
+            'Декабрь' : 11,
+            'Дек'     : 11
+        },
 
-		/**
-		 * Возвращает количество миллисекунд между двумя датами
-		 *
-		 * @param {Date} dateA The first date.
-		 * @param {Date} [dateB=new Date()] (optional) The second date.
-		 * @return {Number} The difference in milliseconds
-		 */
-		getElapsed: function (dateA, dateB) {
-			return Math.abs(dateA - (dateB || utilDate.now));
-		},
+        /**
+         * Возвращает количество миллисекунд между двумя датами
+         *
+         * @param {Date} dateA The first date.
+         * @param {Date} [dateB=new Date()] (optional) The second date.
+         * @return {Number} The difference in milliseconds
+         */
+        getElapsed: function (dateA, dateB) {
+            return Math.abs(dateA - (dateB || utilDate.now));
+        },
 
-		/**
-		 * Возвращает короткое наименование месяца
-		 *
-		 * @param {Number} month A zero-based JavaScript month number.
-		 * @return {String} The short month name.
-		 */
-		getShortMonthName: function (month) {
-			return utilDate.monthNames[month].substring(0, 3);
-		},
+        /**
+         * Возвращает короткое наименование месяца
+         *
+         * @param {Number} month A zero-based JavaScript month number.
+         * @return {String} The short month name.
+         */
+        getShortMonthName: function (month) {
+            return utilDate.monthNames[month].substring(0, 3);
+        },
 
-		/**
-		 * Возвращает короткое наименование дня недели
-		 *
-		 * @param {Number} day A zero-based JavaScript day number.
-		 * @return {String} The short day name.
-		 */
-		getShortDayName: function (day) {
-			return utilDate.dayNames[day].substring(0, 3);
-		},
+        /**
+         * Возвращает короткое наименование дня недели
+         *
+         * @param {Number} day A zero-based JavaScript day number.
+         * @return {String} The short day name.
+         */
+        getShortDayName: function (day) {
+            return utilDate.dayNames[day].substring(0, 3);
+        },
 
-		/**
-		 * Возвращает номер месяца (0 - это январь)
-		 *
-		 * @param {String} name The short/full month name.
-		 * @return {Number} The zero-based JavaScript month number.
-		 */
-		getMonthNumber: function (name) {
-			return utilDate.monthNumbers[name.substring(0, 1).toUpperCase() + name.substring(1, 3).toLowerCase()];
-		},
+        /**
+         * Возвращает номер месяца (0 - это январь)
+         *
+         * @param {String} name The short/full month name.
+         * @return {Number} The zero-based JavaScript month number.
+         */
+        getMonthNumber: function (name) {
+            return utilDate.monthNumbers[name.substring(0, 1).toUpperCase() + name.substring(1, 3).toLowerCase()];
+        },
 
-		/**
-		 * Сравнивает две даты на полную эквивалентность
-		 *
-		 * @param {Date} date1
-		 * @param {Date} date2
-		 * @return {Boolean} `true` if the date values are equal
-		 */
-		isEqual: function (date1, date2) {
-			if (date1 && date2) {
-				return (date1.getTime() === date2.getTime());
-			}
-			return !(date1 || date2);
-		},
+        /**
+         * Сравнивает две даты на полную эквивалентность
+         *
+         * @param {Date} date1
+         * @param {Date} date2
+         * @return {Boolean} `true` if the date values are equal
+         */
+        isEqual: function (date1, date2) {
+            if (date1 && date2) {
+                return (date1.getTime() === date2.getTime());
+            }
+            return !(date1 || date2);
+        },
 
-		/**
-		 * Создает копию даты
-		 *
-		 * Dates are copied and passed by reference, so if a copied date variable is modified later, the original
-		 * variable will also be changed.  When the intention is to create a new variable that will not
-		 * modify the original instance, you should create a clone.
-		 *
-		 * Example of correctly cloning a date:
-		 *
-		 *     //wrong way:
-		 *     var orig = new Date('10/1/2006');
-		 *     var copy = orig;
-		 *     copy.setDate(5);
-		 *     console.log(orig);  // returns 'Thu Oct 05 2006'!
-		 *
-		 *     //correct way:
-		 *     var orig = new Date('10/1/2006'),
-		 *         copy = µ.date.clone(orig);
-		 *     copy.setDate(5);
-		 *     console.log(orig);  // returns 'Thu Oct 01 2006'
-		 *
-		 * @param {Date} date The date.
-		 * @return {Date} The new Date instance.
-		 */
-		clone: function (date) {
-			return new Date(date.getTime());
-		},
+        /**
+         * Создает копию даты
+         *
+         * Dates are copied and passed by reference, so if a copied date variable is modified later, the original
+         * variable will also be changed.  When the intention is to create a new variable that will not
+         * modify the original instance, you should create a clone.
+         *
+         * Example of correctly cloning a date:
+         *
+         *     //wrong way:
+         *     var orig = new Date('10/1/2006');
+         *     var copy = orig;
+         *     copy.setDate(5);
+         *     console.log(orig);  // returns 'Thu Oct 05 2006'!
+         *
+         *     //correct way:
+         *     var orig = new Date('10/1/2006'),
+         *         copy = µ.date.clone(orig);
+         *     copy.setDate(5);
+         *     console.log(orig);  // returns 'Thu Oct 01 2006'
+         *
+         * @param {Date} date The date.
+         * @return {Date} The new Date instance.
+         */
+        clone: function (date) {
+            return new Date(date.getTime());
+        },
 
-		/**
-		 * Возвращает номер дня в году
-		 *
-		 *     @example
-		 *     var dt = new Date('9/17/2011');
-		 *     console.log(µ.date.getDayOfYear(dt)); // 259
-		 *
-		 * @param {Date} date The date
-		 * @return {Number} 0 to 364 (365 in leap years).
-		 */
-		getDayOfYear: function (date) {
-			var num = 0,
-				d = utilDate.clone(date),
-				m = date.getMonth(),
-				i;
+        /**
+         * Возвращает номер дня в году
+         *
+         *     @example
+         *     var dt = new Date('9/17/2011');
+         *     console.log(µ.date.getDayOfYear(dt)); // 259
+         *
+         * @param {Date} date The date
+         * @return {Number} 0 to 364 (365 in leap years).
+         */
+        getDayOfYear: function (date) {
+            var num = 0,
+                d   = utilDate.clone(date),
+                m   = date.getMonth(),
+                i;
 
-			for (i = 0, d.setDate(1), d.setMonth(0); i < m; d.setMonth(++i)) {
-				num += utilDate.getDaysInMonth(d);
-			}
-			return num + date.getDate() - 1;
-		},
+            for (i = 0, d.setDate(1), d.setMonth(0); i < m; d.setMonth(++i)) {
+                num += utilDate.getDaysInMonth(d);
+            }
+            return num + date.getDate() - 1;
+        },
 
-		/**
-		 * Возвращает номер недели в году
-		 *
-		 *     @example
-		 *     var dt = new Date('9/17/2011');
-		 *     console.log(µ.date.getWeekOfYear(dt)); // 37
-		 *
-		 * @param {Date} date The date.
-		 * @return {Number} 1 to 53.
-		 * @method
-		 */
-		getWeekOfYear: (function () {
-			var ms1d = 864e5, // milliseconds in a day
-				ms7d = 7 * ms1d; // milliseconds in a week
+        /**
+         * Возвращает номер недели в году
+         *
+         *     @example
+         *     var dt = new Date('9/17/2011');
+         *     console.log(µ.date.getWeekOfYear(dt)); // 37
+         *
+         * @param {Date} date The date.
+         * @return {Number} 1 to 53.
+         * @method
+         */
+        getWeekOfYear: (function () {
+            var ms1d = 864e5, // milliseconds in a day
+                ms7d = 7 * ms1d; // milliseconds in a week
 
-			return function (date) { // return a closure so constants get calculated only once
-				var DC3 = nativeDate.UTC(date.getFullYear(), date.getMonth(), date.getDate() + 3) / ms1d, // an Absolute Day Number
-					AWN = Math.floor(DC3 / 7), // an Absolute Week Number
-					Wyr = new Date(AWN * ms7d).getUTCFullYear();
+            return function (date) { // return a closure so constants get calculated only once
+                var DC3 = nativeDate.UTC(date.getFullYear(), date.getMonth(), date.getDate() + 3) / ms1d, // an Absolute Day Number
+                    AWN = Math.floor(DC3 / 7), // an Absolute Week Number
+                    Wyr = new Date(AWN * ms7d).getUTCFullYear();
 
-				return AWN - Math.floor(Date.UTC(Wyr, 0, 7) / ms7d) + 1;
-			};
-		}()),
+                return AWN - Math.floor(Date.UTC(Wyr, 0, 7) / ms7d) + 1;
+            };
+        }()),
 
-		/**
-		 * Возвращает первый день месяца даты
-		 *
-		 * The returned value is the numeric day index within the week (0-6) which can be used in conjunction with
-		 * the {@link #monthNames} array to retrieve the textual day name.
-		 *
-		 *      @example
-		 *      var dt = new Date('1/10/2007'),
-		 *          firstDay = µ.date.getFirstDayOfMonth(dt);
-		 *      console.log(µ.date.dayNames[firstDay]); // output: 'Monday'
-		 *
-		 * @param {Date} date The date
-		 * @return {Number} The day number (0-6).
-		 */
-		getFirstDayOfMonth: function (date) {
-			var day = (date.getDay() - (date.getDate() - 1)) % 7;
-			return (day < 0) ? (day + 7) : day;
-		},
+        /**
+         * Возвращает первый день месяца даты
+         *
+         * The returned value is the numeric day index within the week (0-6) which can be used in conjunction with
+         * the {@link #monthNames} array to retrieve the textual day name.
+         *
+         *      @example
+         *      var dt = new Date('1/10/2007'),
+         *          firstDay = µ.date.getFirstDayOfMonth(dt);
+         *      console.log(µ.date.dayNames[firstDay]); // output: 'Monday'
+         *
+         * @param {Date} date The date
+         * @return {Number} The day number (0-6).
+         */
+        getFirstDayOfMonth: function (date) {
+            var day = (date.getDay() - (date.getDate() - 1)) % 7;
+            return (day < 0) ? (day + 7) : day;
+        },
 
-		/**
-		 * Возвращает последний день месяца даты.  The returned value
-		 * is the numeric day index within the week (0-6) which can be used in conjunction with
-		 * the {@link #monthNames} array to retrieve the textual day name.
-		 *
-		 *      @example
-		 *      var dt = new Date('1/10/2007'),
-		 *          lastDay = µ.date.getLastDayOfMonth(dt);
-		 *
-		 *      console.log(µ.date.dayNames[lastDay]); // output: 'Wednesday'
-		 *
-		 * @param {Date} date The date
-		 * @return {Number} The day number (0-6).
-		 */
-		getLastDayOfMonth: function (date) {
-			return utilDate.getLastDateOfMonth(date).getDay();
-		},
+        /**
+         * Возвращает последний день месяца даты.  The returned value
+         * is the numeric day index within the week (0-6) which can be used in conjunction with
+         * the {@link #monthNames} array to retrieve the textual day name.
+         *
+         *      @example
+         *      var dt = new Date('1/10/2007'),
+         *          lastDay = µ.date.getLastDayOfMonth(dt);
+         *
+         *      console.log(µ.date.dayNames[lastDay]); // output: 'Wednesday'
+         *
+         * @param {Date} date The date
+         * @return {Number} The day number (0-6).
+         */
+        getLastDayOfMonth: function (date) {
+            return utilDate.getLastDateOfMonth(date).getDay();
+        },
 
-		/**
-		 * Возвращает количество дней в месяце
-		 *
-		 * @param {Date} date The date
-		 * @return {Number} The number of days in the month.
-		 * @method
-		 */
-		getDaysInMonth: (function () {
-			var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+        /**
+         * Возвращает количество дней в месяце
+         *
+         * @param {Date} date The date
+         * @return {Number} The number of days in the month.
+         * @method
+         */
+        getDaysInMonth: (function () {
+            var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 
-			return function (date) {
-				var m = date.getMonth();
-				return m === 1 && utilDate.isLeapYear(date) ? 29 : daysInMonth[m];
-			};
-		}()),
+            return function (date) {
+                var m = date.getMonth();
+                return m === 1 && utilDate.isLeapYear(date) ? 29 : daysInMonth[m];
+            };
+        }()),
 
-		/**
-		 * Возвращает дату с первым днем месяца даты
-		 *
-		 * @param {Date} date The date
-		 * @return {Date}
-		 */
-		getFirstDateOfMonth: function (date) {
-			return new Date(date.getFullYear(), date.getMonth(), 1);
-		},
+        /**
+         * Возвращает дату с первым днем месяца даты
+         *
+         * @param {Date} date The date
+         * @return {Date}
+         */
+        getFirstDateOfMonth: function (date) {
+            return new Date(date.getFullYear(), date.getMonth(), 1);
+        },
 
-		/**
-		 * Возвращает дату с последним днем месяца даты
-		 *
-		 * @param {Date} date The date
-		 * @return {Date}
-		 */
-		getLastDateOfMonth: function (date) {
-			return new Date(date.getFullYear(), date.getMonth(), utilDate.getDaysInMonth(date));
-		},
+        /**
+         * Возвращает дату с последним днем месяца даты
+         *
+         * @param {Date} date The date
+         * @return {Date}
+         */
+        getLastDateOfMonth: function (date) {
+            return new Date(date.getFullYear(), date.getMonth(), utilDate.getDaysInMonth(date));
+        },
 
 
-		/**
-		 * Проверка на високосный год
-		 *
-		 *     @example
-		 *     var dt = new Date('1/10/2011');
-		 *     console.log(µ.date.isLeapYear(dt)); // false
-		 *
-		 * @param {Date} date The date
-		 * @return {Boolean} `true` if the current date falls within a leap year, `false` otherwise.
-		 */
-		isLeapYear: function (date) {
-			var year = date.getFullYear();
-			return !!((year & 3) === 0 && (year % 100 || (year % 400 === 0 && year)));
-		},
+        /**
+         * Проверка на високосный год
+         *
+         *     @example
+         *     var dt = new Date('1/10/2011');
+         *     console.log(µ.date.isLeapYear(dt)); // false
+         *
+         * @param {Date} date The date
+         * @return {Boolean} `true` if the current date falls within a leap year, `false` otherwise.
+         */
+        isLeapYear: function (date) {
+            var year = date.getFullYear();
+            return !!((year & 3) === 0 && (year % 100 || (year % 400 === 0 && year)));
+        },
 
-		/**
-		 * Очистка времени у даты
-		 *
-		 * __Note:__ DST timezone information for the browser's host operating system is assumed to be up-to-date.
-		 * @param {Date} date The date
-		 * @param {Boolean} [clone=false] `true` to create a clone of this date, clear the time and return it.
-		 * @return {Date} this or the clone.
-		 */
-		clearTime: function (date, clone) {
-			if (isNaN(date.getTime())) {
-				return date;
-			}
+        /**
+         * Очистка времени у даты
+         *
+         * __Note:__ DST timezone information for the browser's host operating system is assumed to be up-to-date.
+         * @param {Date} date The date
+         * @param {Boolean} [clone=false] `true` to create a clone of this date, clear the time and return it.
+         * @return {Date} this or the clone.
+         */
+        clearTime: function (date, clone) {
+            if (isNaN(date.getTime())) {
+                return date;
+            }
 
-			if (clone) {
-				return utilDate.clearTime(utilDate.clone(date));
-			}
+            if (clone) {
+                return utilDate.clearTime(utilDate.clone(date));
+            }
 
-			var d = date.getDate(),
-				hr,
-				c;
+            var d = date.getDate(),
+                hr,
+                c;
 
-			// clear time
-			date.setHours(0);
-			date.setMinutes(0);
-			date.setSeconds(0);
-			date.setMilliseconds(0);
+            // clear time
+            date.setHours(0);
+            date.setMinutes(0);
+            date.setSeconds(0);
+            date.setMilliseconds(0);
 
-			if (date.getDate() !== d) { // account for DST (i.e. day of month changed when setting hour = 0)
-				// note: DST adjustments are assumed to occur in multiples of 1 hour (this is almost always the case)
-				// refer to http://www.timeanddate.com/time/aboutdst.html for the (rare) exceptions to this rule
+            if (date.getDate() !== d) { // account for DST (i.e. day of month changed when setting hour = 0)
+                // note: DST adjustments are assumed to occur in multiples of 1 hour (this is almost always the case)
+                // refer to http://www.timeanddate.com/time/aboutdst.html for the (rare) exceptions to this rule
 
-				// increment hour until cloned date == current date
-				for (hr = 1, c = utilDate.add(date, utilDate.HOUR, hr); c.getDate() !== d; hr++, c = utilDate.add(date, utilDate.HOUR, hr));
+                // increment hour until cloned date == current date
+                for (hr = 1, c = utilDate.add(date, utilDate.HOUR, hr); c.getDate() !== d; hr++, c = utilDate.add(date, utilDate.HOUR, hr)) ;
 
-				date.setDate(d);
-				date.setHours(c.getHours());
-			}
+                date.setDate(d);
+                date.setHours(c.getHours());
+            }
 
-			return date;
-		},
+            return date;
+        },
 
-		/**
-		 * Provides a convenient method for performing basic date arithmetic. This method
-		 * does not modify the Date instance being called - it creates and returns
-		 * a new Date instance containing the resulting date value.
-		 *
-		 * @Examples:
-		 *
-		 *     // Basic usage:
-		 *     var dt = µ.date.add(new Date('10/29/2006'), µ.date.DAY, 5);
-		 *     console.log(dt); // returns 'Fri Nov 03 2006 00:00:00'
-		 *
-		 *     // Negative values will be subtracted:
-		 *     var dt2 = µ.date.add(new Date('10/1/2006'), µ.date.DAY, -5);
-		 *     console.log(dt2); // returns 'Tue Sep 26 2006 00:00:00'
-		 *
-		 *      // Decimal values can be used:
-		 *     var dt3 = µ.date.add(new Date('10/1/2006'), µ.date.DAY, 1.25);
-		 *     console.log(dt3); // returns 'Mon Oct 02 2006 06:00:00'
-		 *
-		 * @param {Date} date The date to modify
-		 * @param {String} interval A valid date interval enum value.
-		 * @param {Number} value The amount to add to the current date.
-		 * @return {Date} The new Date instance.
-		 */
-		add: function (date, interval, value) {
-			var d = utilDate.clone(date),
-				day, decimalValue, base = 0;
-			if (!interval || value === 0) {
-				return d;
-			}
+        /**
+         * Provides a convenient method for performing basic date arithmetic. This method
+         * does not modify the Date instance being called - it creates and returns
+         * a new Date instance containing the resulting date value.
+         *
+         * @Examples:
+         *
+         *     // Basic usage:
+         *     var dt = µ.date.add(new Date('10/29/2006'), µ.date.DAY, 5);
+         *     console.log(dt); // returns 'Fri Nov 03 2006 00:00:00'
+         *
+         *     // Negative values will be subtracted:
+         *     var dt2 = µ.date.add(new Date('10/1/2006'), µ.date.DAY, -5);
+         *     console.log(dt2); // returns 'Tue Sep 26 2006 00:00:00'
+         *
+         *      // Decimal values can be used:
+         *     var dt3 = µ.date.add(new Date('10/1/2006'), µ.date.DAY, 1.25);
+         *     console.log(dt3); // returns 'Mon Oct 02 2006 06:00:00'
+         *
+         * @param {Date} date The date to modify
+         * @param {String} interval A valid date interval enum value.
+         * @param {Number} value The amount to add to the current date.
+         * @return {Date} The new Date instance.
+         */
+        add: function (date, interval, value) {
+            var d                       = utilDate.clone(date),
+                day, decimalValue, base = 0;
+            if (!interval || value === 0) {
+                return d;
+            }
 
-			decimalValue = value - parseInt(value, 10);
-			value = parseInt(value, 10);
+            decimalValue = value - parseInt(value, 10);
+            value = parseInt(value, 10);
 
-			if (value) {
-				switch (interval.toLowerCase()) {
-					case utilDate.MILLI:
-						d.setTime(d.getTime() + value);
-						break;
-					case utilDate.SECOND:
-						d.setTime(d.getTime() + value * 1000);
-						break;
-					case utilDate.MINUTE:
-						d.setTime(d.getTime() + value * 60 * 1000);
-						break;
-					case utilDate.HOUR:
-						d.setTime(d.getTime() + value * 60 * 60 * 1000);
-						break;
-					case utilDate.DAY:
-						d.setDate(d.getDate() + value);
-						break;
-					case utilDate.MONTH:
-						day = date.getDate();
-						if (day > 28) {
-							day = Math.min(day, utilDate.getLastDateOfMonth(utilDate.add(utilDate.getFirstDateOfMonth(date), utilDate.MONTH, value)).getDate());
-						}
-						d.setDate(day);
-						d.setMonth(date.getMonth() + value);
-						break;
-					case utilDate.YEAR:
-						day = date.getDate();
-						if (day > 28) {
-							day = Math.min(day, utilDate.getLastDateOfMonth(utilDate.add(utilDate.getFirstDateOfMonth(date), utilDate.YEAR, value)).getDate());
-						}
-						d.setDate(day);
-						d.setFullYear(date.getFullYear() + value);
-						break;
-				}
-			}
+            if (value) {
+                switch (interval.toLowerCase()) {
+                    case utilDate.MILLI:
+                        d.setTime(d.getTime() + value);
+                        break;
+                    case utilDate.SECOND:
+                        d.setTime(d.getTime() + value * 1000);
+                        break;
+                    case utilDate.MINUTE:
+                        d.setTime(d.getTime() + value * 60 * 1000);
+                        break;
+                    case utilDate.HOUR:
+                        d.setTime(d.getTime() + value * 60 * 60 * 1000);
+                        break;
+                    case utilDate.DAY:
+                        d.setDate(d.getDate() + value);
+                        break;
+                    case utilDate.MONTH:
+                        day = date.getDate();
+                        if (day > 28) {
+                            day = Math.min(day, utilDate.getLastDateOfMonth(utilDate.add(utilDate.getFirstDateOfMonth(date), utilDate.MONTH, value)).getDate());
+                        }
+                        d.setDate(day);
+                        d.setMonth(date.getMonth() + value);
+                        break;
+                    case utilDate.YEAR:
+                        day = date.getDate();
+                        if (day > 28) {
+                            day = Math.min(day, utilDate.getLastDateOfMonth(utilDate.add(utilDate.getFirstDateOfMonth(date), utilDate.YEAR, value)).getDate());
+                        }
+                        d.setDate(day);
+                        d.setFullYear(date.getFullYear() + value);
+                        break;
+                }
+            }
 
-			if (decimalValue) {
-				switch (interval.toLowerCase()) {
-					case utilDate.MILLI:
-						base = 1;
-						break;
-					case utilDate.SECOND:
-						base = 1000;
-						break;
-					case utilDate.MINUTE:
-						base = 1000 * 60;
-						break;
-					case utilDate.HOUR:
-						base = 1000 * 60 * 60;
-						break;
-					case utilDate.DAY:
-						base = 1000 * 60 * 60 * 24;
-						break;
+            if (decimalValue) {
+                switch (interval.toLowerCase()) {
+                    case utilDate.MILLI:
+                        base = 1;
+                        break;
+                    case utilDate.SECOND:
+                        base = 1000;
+                        break;
+                    case utilDate.MINUTE:
+                        base = 1000 * 60;
+                        break;
+                    case utilDate.HOUR:
+                        base = 1000 * 60 * 60;
+                        break;
+                    case utilDate.DAY:
+                        base = 1000 * 60 * 60 * 24;
+                        break;
 
-					case utilDate.MONTH:
-						day = utilDate.getDaysInMonth(d);
-						base = 1000 * 60 * 60 * 24 * day;
-						break;
+                    case utilDate.MONTH:
+                        day = utilDate.getDaysInMonth(d);
+                        base = 1000 * 60 * 60 * 24 * day;
+                        break;
 
-					case utilDate.YEAR:
-						day = (utilDate.isLeapYear(d) ? 366 : 365);
-						base = 1000 * 60 * 60 * 24 * day;
-						break;
-				}
-				if (base) {
-					d.setTime(d.getTime() + base * decimalValue);
-				}
-			}
+                    case utilDate.YEAR:
+                        day = (utilDate.isLeapYear(d) ? 366 : 365);
+                        base = 1000 * 60 * 60 * 24 * day;
+                        break;
+                }
+                if (base) {
+                    d.setTime(d.getTime() + base * decimalValue);
+                }
+            }
 
-			return d;
-		},
+            return d;
+        },
 
-		/**
-		 * Provides a convenient method for performing basic date arithmetic. This method
-		 * does not modify the Date instance being called - it creates and returns
-		 * a new Date instance containing the resulting date value.
-		 *
-		 * @Examples:
-		 *
-		 *     // Basic usage:
-		 *     var dt = µ.date.subtract(new Date('10/29/2006'), µ.date.DAY, 5);
-		 *     console.log(dt); // returns 'Tue Oct 24 2006 00:00:00'
-		 *
-		 *     // Negative values will be added:
-		 *     var dt2 = µ.date.subtract(new Date('10/1/2006'), µ.date.DAY, -5);
-		 *     console.log(dt2); // returns 'Fri Oct 6 2006 00:00:00'
-		 *
-		 *      // Decimal values can be used:
-		 *     var dt3 = µ.date.subtract(new Date('10/1/2006'), µ.date.DAY, 1.25);
-		 *     console.log(dt3); // returns 'Fri Sep 29 2006 06:00:00'
-		 *
-		 * @param {Date} date The date to modify
-		 * @param {String} interval A valid date interval enum value.
-		 * @param {Number} value The amount to subtract from the current date.
-		 * @return {Date} The new Date instance.
-		 */
-		subtract: function(date, interval, value){
-			return utilDate.add(date, interval, -value);
-		},
+        /**
+         * Provides a convenient method for performing basic date arithmetic. This method
+         * does not modify the Date instance being called - it creates and returns
+         * a new Date instance containing the resulting date value.
+         *
+         * @Examples:
+         *
+         *     // Basic usage:
+         *     var dt = µ.date.subtract(new Date('10/29/2006'), µ.date.DAY, 5);
+         *     console.log(dt); // returns 'Tue Oct 24 2006 00:00:00'
+         *
+         *     // Negative values will be added:
+         *     var dt2 = µ.date.subtract(new Date('10/1/2006'), µ.date.DAY, -5);
+         *     console.log(dt2); // returns 'Fri Oct 6 2006 00:00:00'
+         *
+         *      // Decimal values can be used:
+         *     var dt3 = µ.date.subtract(new Date('10/1/2006'), µ.date.DAY, 1.25);
+         *     console.log(dt3); // returns 'Fri Sep 29 2006 06:00:00'
+         *
+         * @param {Date} date The date to modify
+         * @param {String} interval A valid date interval enum value.
+         * @param {Number} value The amount to subtract from the current date.
+         * @return {Date} The new Date instance.
+         */
+        subtract: function (date, interval, value) {
+            return utilDate.add(date, interval, -value);
+        },
 
-		/**
-		 * Проверка на вхождение даты между двумя датами
-		 *
-		 * @param {Date} date The date to check
-		 * @param {Date} start Start date
-		 * @param {Date} end End date
-		 * @return {Boolean} `true` if this date falls on or between the given start and end dates.
-		 */
-		between : function(date, start, end) {
-			var t = date.getTime();
-			return start.getTime() <= t && t <= end.getTime();
-		},
+        /**
+         * Проверка на вхождение даты между двумя датами
+         *
+         * @param {Date} date The date to check
+         * @param {Date} start Start date
+         * @param {Date} end End date
+         * @return {Boolean} `true` if this date falls on or between the given start and end dates.
+         */
+        between: function (date, start, end) {
+            var t = date.getTime();
+            return start.getTime() <= t && t <= end.getTime();
+        },
 
-		/**
-		 * Расчитывает сколько ВЕЛИЧИН входит в промежуток между датами
-		 *
-		 * @Examples:
-		 *
-		 *     // Basic usage:
-		 *     var dt = µ.date.diff(new Date('10/29/2006'), new Date('12/19/2007'), µ.date.DAY);
-		 *
-		 * @param {Date} min The first time.
-		 * @param {Date} max The second time.
-		 * @param {String} unit The unit. This unit is compatible with the date interval constants.
-		 * @return {Number} The maximum number n of units that min + n * unit <= max.
-		 */
-		diff: function (min, max, unit) {
-			var est, diff = +max - min;
-			switch (unit) {
-				case utilDate.MILLI:
-					return diff;
-				case utilDate.SECOND:
-					return Math.floor(diff / 1000);
-				case utilDate.MINUTE:
-					return Math.floor(diff / 60000);
-				case utilDate.HOUR:
-					return Math.floor(diff / 3600000);
-				case utilDate.DAY:
-					return Math.floor(diff / 86400000);
-				case 'w':
-					return Math.floor(diff / 604800000);
-				case utilDate.MONTH:
-					est = (max.getFullYear() * 12 + max.getMonth()) - (min.getFullYear() * 12 + min.getMonth());
-					if (utilDate.add(min, unit, est) > max) {
-						return est - 1;
-					}
-					return est;
-				case utilDate.YEAR:
-					est = max.getFullYear() - min.getFullYear();
-					if (utilDate.add(min, unit, est) > max) {
-						return est - 1;
-					} else {
-						return est;
-					}
-			}
-		},
+        /**
+         * Расчитывает сколько ВЕЛИЧИН входит в промежуток между датами
+         *
+         * @Examples:
+         *
+         *     // Basic usage:
+         *     var dt = µ.date.diff(new Date('10/29/2006'), new Date('12/19/2007'), µ.date.DAY);
+         *
+         * @param {Date} min The first time.
+         * @param {Date} max The second time.
+         * @param {String} unit The unit. This unit is compatible with the date interval constants.
+         * @return {Number} The maximum number n of units that min + n * unit <= max.
+         */
+        diff: function (min, max, unit) {
+            var est, diff = +max - min;
+            switch (unit) {
+                case utilDate.MILLI:
+                    return diff;
+                case utilDate.SECOND:
+                    return Math.floor(diff / 1000);
+                case utilDate.MINUTE:
+                    return Math.floor(diff / 60000);
+                case utilDate.HOUR:
+                    return Math.floor(diff / 3600000);
+                case utilDate.DAY:
+                    return Math.floor(diff / 86400000);
+                case 'w':
+                    return Math.floor(diff / 604800000);
+                case utilDate.MONTH:
+                    est = (max.getFullYear() * 12 + max.getMonth()) - (min.getFullYear() * 12 + min.getMonth());
+                    if (utilDate.add(min, unit, est) > max) {
+                        return est - 1;
+                    }
+                    return est;
+                case utilDate.YEAR:
+                    est = max.getFullYear() - min.getFullYear();
+                    if (utilDate.add(min, unit, est) > max) {
+                        return est - 1;
+                    } else {
+                        return est;
+                    }
+            }
+        },
 
-		/**
-		 * Выравнивает дату по ВЕЛИЧИНЕ
-		 *
-		 * @Examples:
-		 *
-		 *     // Basic usage:
-		 *     var dt = µ.date.align(new Date('10/29/2006'), µ.date.DAY);
-		 *
-		 *
-		 * @param {Date} date The date to be aligned.
-		 * @param {String} unit The unit. This unit is compatible with the date interval constants.
-		 * @param {Number} step
-		 * @return {Date} The aligned date.
-		 */
-		align: function (date, unit, step) {
-			var num = new Date(+date);
+        /**
+         * Выравнивает дату по ВЕЛИЧИНЕ
+         *
+         * @Examples:
+         *
+         *     // Basic usage:
+         *     var dt = µ.date.align(new Date('10/29/2006'), µ.date.DAY);
+         *
+         *
+         * @param {Date} date The date to be aligned.
+         * @param {String} unit The unit. This unit is compatible with the date interval constants.
+         * @param {Number} step
+         * @return {Date} The aligned date.
+         */
+        align: function (date, unit, step) {
+            var num = new Date(+date);
 
-			switch (unit.toLowerCase()) {
-				case utilDate.MILLI:
-					return num;
-				case utilDate.SECOND:
-					num.setUTCSeconds(num.getUTCSeconds() - num.getUTCSeconds() % step);
-					num.setUTCMilliseconds(0);
-					return num;
-				case utilDate.MINUTE:
-					num.setUTCMinutes(num.getUTCMinutes() - num.getUTCMinutes() % step);
-					num.setUTCSeconds(0);
-					num.setUTCMilliseconds(0);
-					return num;
-				case utilDate.HOUR:
-					num.setUTCHours(num.getUTCHours() - num.getUTCHours() % step);
-					num.setUTCMinutes(0);
-					num.setUTCSeconds(0);
-					num.setUTCMilliseconds(0);
-					return num;
-				case utilDate.DAY:
-					if (step === 7 || step === 14){
-						num.setUTCDate(num.getUTCDate() - num.getUTCDay() + 1);
-					}
-					num.setUTCHours(0);
-					num.setUTCMinutes(0);
-					num.setUTCSeconds(0);
-					num.setUTCMilliseconds(0);
-					return num;
-				case utilDate.MONTH:
-					num.setUTCMonth(num.getUTCMonth() - (num.getUTCMonth() - 1) % step,1);
-					num.setUTCHours(0);
-					num.setUTCMinutes(0);
-					num.setUTCSeconds(0);
-					num.setUTCMilliseconds(0);
-					return num;
-				case utilDate.YEAR:
-					num.setUTCFullYear(num.getUTCFullYear() - num.getUTCFullYear() % step, 1, 1);
-					num.setUTCHours(0);
-					num.setUTCMinutes(0);
-					num.setUTCSeconds(0);
-					num.setUTCMilliseconds(0);
-					return date;
-			}
-		}
-	};
+            switch (unit.toLowerCase()) {
+                case utilDate.MILLI:
+                    return num;
+                case utilDate.SECOND:
+                    num.setUTCSeconds(num.getUTCSeconds() - num.getUTCSeconds() % step);
+                    num.setUTCMilliseconds(0);
+                    return num;
+                case utilDate.MINUTE:
+                    num.setUTCMinutes(num.getUTCMinutes() - num.getUTCMinutes() % step);
+                    num.setUTCSeconds(0);
+                    num.setUTCMilliseconds(0);
+                    return num;
+                case utilDate.HOUR:
+                    num.setUTCHours(num.getUTCHours() - num.getUTCHours() % step);
+                    num.setUTCMinutes(0);
+                    num.setUTCSeconds(0);
+                    num.setUTCMilliseconds(0);
+                    return num;
+                case utilDate.DAY:
+                    if (step === 7 || step === 14) {
+                        num.setUTCDate(num.getUTCDate() - num.getUTCDay() + 1);
+                    }
+                    num.setUTCHours(0);
+                    num.setUTCMinutes(0);
+                    num.setUTCSeconds(0);
+                    num.setUTCMilliseconds(0);
+                    return num;
+                case utilDate.MONTH:
+                    num.setUTCMonth(num.getUTCMonth() - (num.getUTCMonth() - 1) % step, 1);
+                    num.setUTCHours(0);
+                    num.setUTCMinutes(0);
+                    num.setUTCSeconds(0);
+                    num.setUTCMilliseconds(0);
+                    return num;
+                case utilDate.YEAR:
+                    num.setUTCFullYear(num.getUTCFullYear() - num.getUTCFullYear() % step, 1, 1);
+                    num.setUTCHours(0);
+                    num.setUTCMinutes(0);
+                    num.setUTCSeconds(0);
+                    num.setUTCMilliseconds(0);
+                    return date;
+            }
+        }
+    };
 })();
 µ.object = µ.object || {};
 
 µ.object = (function () {
 
-	var muObject;
+    var muObject;
 
-	return muObject = {
+    return muObject = {
 
-		/**
-		 * Возвращает количество свойств объекта
-		 *
-		 * @example
-		 * var size = µ.obj.getSize({
+        /**
+         * Возвращает количество свойств объекта
+         *
+         * @example
+         * var size = µ.obj.getSize({
 		 *         name: 'Jacky',
 		 *         loves: 'food'
 		 *     }); // size equals 2
-		 *
-		 * @param {Object} object
-		 * @return {Number} size
-		 *
-		 * @param object
-		 * @returns {number}
-		 */
-		getSize: function (object) {
-			var size = 0,
-				property;
+         *
+         * @param {Object} object
+         * @return {Number} size
+         *
+         * @param object
+         * @returns {number}
+         */
+        getSize: function (object) {
+            var size = 0,
+                property;
 
-			for (property in object) {
-				if (object.hasOwnProperty(property)) {
-					size++;
-				}
-			}
+            for (property in object) {
+                if (object.hasOwnProperty(property)) {
+                    size++;
+                }
+            }
 
-			return size;
-		},
+            return size;
+        },
 
-		/**
-		 * Проверяет на присутствие свойств в объекте
-		 *
-		 * @param {Object} object
-		 * @return {Boolean} `true` if there no properties on the object.
-		 */
-		isEmpty: function (object) {
-			for (var key in object) {
-				if (object.hasOwnProperty(key)) {
-					return false;
-				}
-			}
-			return true;
-		},
+        /**
+         * Проверяет на присутствие свойств в объекте
+         *
+         * @param {Object} object
+         * @return {Boolean} `true` if there no properties on the object.
+         */
+        isEmpty: function (object) {
+            for (var key in object) {
+                if (object.hasOwnProperty(key)) {
+                    return false;
+                }
+            }
+            return true;
+        },
 
-		/**
-		 * Возвращает `hasOwnProperty` ключи объекта как массив
-		 *
-		 *     var values = µ.obj.getKeys({
+        select: function (from, selector) {
+            return selector.split('.').reduce(function (prev, cur) {
+                return prev && prev[cur];
+            }, from);
+        },
+
+        /**
+         * Возвращает `hasOwnProperty` ключи объекта как массив
+         *
+         *     var values = µ.obj.getKeys({
   	     *         name: 'Jacky',
      	 *         loves: 'food'
      	 *     }); // ['name', 'loves']
-		 *
-		 * @param {Object} object
-		 * @return {String[]} An array of keys from the object
-		 * @method
-		 */
-		getKeys: (typeof Object.keys == 'function')
-			? function (object) {
-			if (!object) {
-				return [];
-			}
-			return Object.keys(object);
-		}
-			: function (object) {
-			var keys = [],
-				property;
+         *
+         * @param {Object} object
+         * @return {String[]} An array of keys from the object
+         * @method
+         */
+        getKeys: (typeof Object.keys == 'function')
+            ? function (object) {
+                if (!object) {
+                    return [];
+                }
+                return Object.keys(object);
+            }
+            : function (object) {
+                var keys = [],
+                    property;
 
-			for (property in object) {
-				if (object.hasOwnProperty(property)) {
-					keys.push(property);
-				}
-			}
+                for (property in object) {
+                    if (object.hasOwnProperty(property)) {
+                        keys.push(property);
+                    }
+                }
 
-			return keys;
-		},
+                return keys;
+            },
 
-		/**
-		 * Возвращает все ключи объекта как массив
-		 *
-		 * @param {Object} object
-		 * @return {String[]} An array of keys from the object or any of its prototypes.
-		 * @method
-		 */
-		getAllKeys: function (object) {
-			var keys = [],
-				property;
+        /**
+         * Возвращает все ключи объекта как массив
+         *
+         * @param {Object} object
+         * @return {String[]} An array of keys from the object or any of its prototypes.
+         * @method
+         */
+        getAllKeys: function (object) {
+            var keys = [],
+                property;
 
-			for (property in object) {
-				keys.push(property);
-			}
+            for (property in object) {
+                keys.push(property);
+            }
 
-			return keys;
-		},
+            return keys;
+        },
 
-		/**
-		 * Возвращает ключ по первому совпавшему значению
-		 *
-		 * If no matching value is found, null is returned.
-		 *
-		 *     var person = {
+        /**
+         * Возвращает ключ по первому совпавшему значению
+         *
+         * If no matching value is found, null is returned.
+         *
+         *     var person = {
      	 *         name: 'Jacky',
      	 *         loves: 'food'
      	 *     };
-		 *
-		 *     alert(µ.obj.getKey(person, 'food')); // alerts 'loves'
-		 *
-		 * @param {Object} object
-		 * @param {Object} value The value to find
-		 */
-		getKey: function (object, value) {
-			for (var property in object) {
-				if (object.hasOwnProperty(property) && object[property] === value) {
-					return property;
-				}
-			}
+         *
+         *     alert(µ.obj.getKey(person, 'food')); // alerts 'loves'
+         *
+         * @param {Object} object
+         * @param {Object} value The value to find
+         */
+        getKey: function (object, value) {
+            for (var property in object) {
+                if (object.hasOwnProperty(property) && object[property] === value) {
+                    return property;
+                }
+            }
 
-			return null;
-		},
+            return null;
+        },
 
-		/**
-		 * Объединение объектов рекурсивно
-		 *
-		 *     var extjs = {
+        /**
+         * Объединение объектов рекурсивно
+         *
+         *     var extjs = {
 		 *         companyName: 'Ext JS',
 		 *         products: ['Ext JS', 'Ext GWT', 'Ext Designer'],
 		 *         isSuperCool: true,
@@ -1786,8 +1957,8 @@ var toString    = Object.prototype.toString,
 		 *             isFun: true
 		 *         }
 		 *     };
-		 *
-		 *     var newStuff = {
+         *
+         *     var newStuff = {
 		 *         companyName: 'Sencha Inc.',
 		 *         products: ['Ext JS', 'Ext GWT', 'Ext Designer', 'Sencha Touch', 'Sencha Animator'],
 		 *         office: {
@@ -1795,11 +1966,11 @@ var toString    = Object.prototype.toString,
 		 *             location: 'Redwood City'
 		 *         }
 		 *     };
-		 *
-		 *     var sencha = µ.obj.merge(extjs, newStuff);
-		 *
-		 *     // extjs and sencha then equals to
-		 *     {
+         *
+         *     var sencha = µ.obj.merge(extjs, newStuff);
+         *
+         *     // extjs and sencha then equals to
+         *     {
 		 *         companyName: 'Sencha Inc.',
 		 *         products: ['Ext JS', 'Ext GWT', 'Ext Designer', 'Sencha Touch', 'Sencha Animator'],
 		 *         isSuperCool: true,
@@ -1809,54 +1980,54 @@ var toString    = Object.prototype.toString,
 		 *             isFun: true
 		 *         }
 		 *     }
-		 *
-		 * @param {Object} destination The object into which all subsequent objects are merged.
-		 * @param {Object...} object Any number of objects to merge into the destination.
-		 * @return {Object} merged The destination object with all passed objects merged in.
-		 */
-		merge: function (destination) {
-			var i = 1,
-				ln = arguments.length,
-				mergeFn = muObject.merge,
-				cloneFn = µ.clone,
-				object, key, value, sourceKey;
+         *
+         * @param {Object} destination The object into which all subsequent objects are merged.
+         * @param {Object...} object Any number of objects to merge into the destination.
+         * @return {Object} merged The destination object with all passed objects merged in.
+         */
+        merge: function (destination) {
+            var i       = 1,
+                ln      = arguments.length,
+                mergeFn = muObject.merge,
+                cloneFn = µ.clone,
+                object, key, value, sourceKey;
 
-			for (; i < ln; i++) {
-				object = arguments[i];
+            for (; i < ln; i++) {
+                object = arguments[i];
 
-				for (key in object) {
-					value = object[key];
-					if (value && value.constructor === Object) {
-						sourceKey = destination[key];
-						if (sourceKey && sourceKey.constructor === Object) {
-							mergeFn(sourceKey, value);
-						} else {
-							destination[key] = cloneFn(value);
-						}
-					} else {
-						destination[key] = value;
-					}
-				}
-			}
+                for (key in object) {
+                    value = object[key];
+                    if (value && value.constructor === Object) {
+                        sourceKey = destination[key];
+                        if (sourceKey && sourceKey.constructor === Object) {
+                            mergeFn(sourceKey, value);
+                        } else {
+                            destination[key] = cloneFn(value);
+                        }
+                    } else {
+                        destination[key] = value;
+                    }
+                }
+            }
 
-			return destination;
-		},
+            return destination;
+        },
 
-		/**
-		 * Конвертирует пары `name` - `value` в массив объектов с поддержкой вложенных структур.
-		 *
-		 * @example:
-		 *
-		 *     var objects = µ.obj.toQueryObjects('hobbies', ['reading', 'cooking', 'swimming']);
-		 *
-		 *     // objects then equals:
-		 *     [
-		 *         { name: 'hobbies', value: 'reading' },
-		 *         { name: 'hobbies', value: 'cooking' },
-		 *         { name: 'hobbies', value: 'swimming' },
-		 *     ];
-		 *
-		 *     var objects = µ.obj.toQueryObjects('dateOfBirth', {
+        /**
+         * Конвертирует пары `name` - `value` в массив объектов с поддержкой вложенных структур.
+         *
+         * @example:
+         *
+         *     var objects = µ.obj.toQueryObjects('hobbies', ['reading', 'cooking', 'swimming']);
+         *
+         *     // objects then equals:
+         *     [
+         *         { name: 'hobbies', value: 'reading' },
+         *         { name: 'hobbies', value: 'cooking' },
+         *         { name: 'hobbies', value: 'swimming' },
+         *     ];
+         *
+         *     var objects = µ.obj.toQueryObjects('dateOfBirth', {
 		 *         day: 3,
 		 *         month: 8,
 		 *         year: 1987,
@@ -1865,78 +2036,78 @@ var toString    = Object.prototype.toString,
 		 *             minute: 30
 		 *         }
 		 *     }, true); // Recursive
-		 *
-		 *     // objects then equals:
-		 *     [
-		 *         { name: 'dateOfBirth[day]', value: 3 },
-		 *         { name: 'dateOfBirth[month]', value: 8 },
-		 *         { name: 'dateOfBirth[year]', value: 1987 },
-		 *         { name: 'dateOfBirth[extra][hour]', value: 4 },
-		 *         { name: 'dateOfBirth[extra][minute]', value: 30 },
-		 *     ];
-		 *
-		 * @param {String} name
-		 * @param {Object/Array} value
-		 * @param {Boolean} [recursive=false] True to traverse object recursively
-		 * @return {Object[]}
-		 */
-		toQueryObjects: function (name, value, recursive) {
-			var self = muObject.toQueryObjects,
-				objects = [],
-				i, ln;
+         *
+         *     // objects then equals:
+         *     [
+         *         { name: 'dateOfBirth[day]', value: 3 },
+         *         { name: 'dateOfBirth[month]', value: 8 },
+         *         { name: 'dateOfBirth[year]', value: 1987 },
+         *         { name: 'dateOfBirth[extra][hour]', value: 4 },
+         *         { name: 'dateOfBirth[extra][minute]', value: 30 },
+         *     ];
+         *
+         * @param {String} name
+         * @param {Object/Array} value
+         * @param {Boolean} [recursive=false] True to traverse object recursively
+         * @return {Object[]}
+         */
+        toQueryObjects: function (name, value, recursive) {
+            var self    = muObject.toQueryObjects,
+                objects = [],
+                i, ln;
 
-			if (µ.isArray(value)) {
-				for (i = 0, ln = value.length; i < ln; i++) {
-					if (recursive) {
-						objects = objects.concat(self(name + '[' + i + ']', value[i], true));
-					}
-					else {
-						objects.push({
-							name: name,
-							value: value[i]
-						});
-					}
-				}
-			}
-			else if (µ.isObject(value)) {
-				for (i in value) {
-					if (value.hasOwnProperty(i)) {
-						if (recursive) {
-							objects = objects.concat(self(name + '[' + i + ']', value[i], true));
-						}
-						else {
-							objects.push({
-								name: name,
-								value: value[i]
-							});
-						}
-					}
-				}
-			}
-			else {
-				objects.push({
-					name: name,
-					value: value
-				});
-			}
+            if (µ.isArray(value)) {
+                for (i = 0, ln = value.length; i < ln; i++) {
+                    if (recursive) {
+                        objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                    }
+                    else {
+                        objects.push({
+                            name : name,
+                            value: value[i]
+                        });
+                    }
+                }
+            }
+            else if (µ.isObject(value)) {
+                for (i in value) {
+                    if (value.hasOwnProperty(i)) {
+                        if (recursive) {
+                            objects = objects.concat(self(name + '[' + i + ']', value[i], true));
+                        }
+                        else {
+                            objects.push({
+                                name : name,
+                                value: value[i]
+                            });
+                        }
+                    }
+                }
+            }
+            else {
+                objects.push({
+                    name : name,
+                    value: value
+                });
+            }
 
-			return objects;
-		},
+            return objects;
+        },
 
-		/**
-		 * Берет объект и конвертирует его в строку запроса
-		 *
-		 * Non-recursive:
-		 *
-		 *     µ.obj.toQueryString({foo: 1, bar: 2}); // returns "foo=1&bar=2"
-		 *     µ.obj.toQueryString({foo: null, bar: 2}); // returns "foo=&bar=2"
-		 *     µ.obj.toQueryString({'some price': '$300'}); // returns "some%20price=%24300"
-		 *     µ.obj.toQueryString({date: new Date(2011, 0, 1)}); // returns "date=%222011-01-01T00%3A00%3A00%22"
-		 *     µ.obj.toQueryString({colors: ['red', 'green', 'blue']}); // returns "colors=red&colors=green&colors=blue"
-		 *
-		 * Recursive:
-		 *
-		 *     µ.obj.toQueryString({
+        /**
+         * Берет объект и конвертирует его в строку запроса
+         *
+         * Non-recursive:
+         *
+         *     µ.obj.toQueryString({foo: 1, bar: 2}); // returns "foo=1&bar=2"
+         *     µ.obj.toQueryString({foo: null, bar: 2}); // returns "foo=&bar=2"
+         *     µ.obj.toQueryString({'some price': '$300'}); // returns "some%20price=%24300"
+         *     µ.obj.toQueryString({date: new Date(2011, 0, 1)}); // returns "date=%222011-01-01T00%3A00%3A00%22"
+         *     µ.obj.toQueryString({colors: ['red', 'green', 'blue']}); // returns "colors=red&colors=green&colors=blue"
+         *
+         * Recursive:
+         *
+         *     µ.obj.toQueryString({
      *         username: 'Jacky',
      *         dateOfBirth: {
      *             day: 1,
@@ -1945,62 +2116,62 @@ var toString    = Object.prototype.toString,
      *         },
      *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
      *     }, true); // returns the following string (broken down and url-decoded for ease of reading purpose):
-		 *     // username=Jacky
-		 *     //    &dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911
-		 *     //    &hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&hobbies[3][0]=nested&hobbies[3][1]=stuff
-		 *
-		 * @param {Object} object The object to encode
-		 * @param {Boolean} [recursive=false] Whether or not to interpret the object in recursive format.
-		 * (PHP / Ruby on Rails servers and similar).
-		 * @return {String} queryString
-		 */
-		toQueryString: function (object, recursive) {
-			var paramObjects = [],
-				params = [],
-				i, j, ln, paramObject, value;
+         *     // username=Jacky
+         *     //    &dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911
+         *     //    &hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&hobbies[3][0]=nested&hobbies[3][1]=stuff
+         *
+         * @param {Object} object The object to encode
+         * @param {Boolean} [recursive=false] Whether or not to interpret the object in recursive format.
+         * (PHP / Ruby on Rails servers and similar).
+         * @return {String} queryString
+         */
+        toQueryString: function (object, recursive) {
+            var paramObjects = [],
+                params       = [],
+                i, j, ln, paramObject, value;
 
-			for (i in object) {
-				if (object.hasOwnProperty(i)) {
-					paramObjects = paramObjects.concat(muObject.toQueryObjects(i, object[i], recursive));
-				}
-			}
+            for (i in object) {
+                if (object.hasOwnProperty(i)) {
+                    paramObjects = paramObjects.concat(muObject.toQueryObjects(i, object[i], recursive));
+                }
+            }
 
-			for (j = 0, ln = paramObjects.length; j < ln; j++) {
-				paramObject = paramObjects[j];
-				value = paramObject.value;
+            for (j = 0, ln = paramObjects.length; j < ln; j++) {
+                paramObject = paramObjects[j];
+                value = paramObject.value;
 
-				if (µ.isEmpty(value)) {
-					value = '';
-				} else if (µ.isDate(value)) {
-					value = µ.date.toString(value);
-				}
+                if (µ.isEmpty(value)) {
+                    value = '';
+                } else if (µ.isDate(value)) {
+                    value = µ.date.toString(value);
+                }
 
-				params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)));
-			}
+                params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)));
+            }
 
-			return params.join('&');
-		},
+            return params.join('&');
+        },
 
-		/**
-		 * Конвертирует строку запроса в объект
-		 *
-		 * Non-recursive:
-		 *
-		 *     µ.obj.fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
-		 *     µ.obj.fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
-		 *     µ.obj.fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
-		 *     µ.obj.fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
-		 *
-		 * Recursive:
-		 *
-		 *     µ.obj.fromQueryString(
-		 *         "username=Jacky&"+
-		 *         "dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911&"+
-		 *         "hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&"+
-		 *         "hobbies[3][0]=nested&hobbies[3][1]=stuff", true);
-		 *
-		 *     // returns
-		 *     {
+        /**
+         * Конвертирует строку запроса в объект
+         *
+         * Non-recursive:
+         *
+         *     µ.obj.fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
+         *     µ.obj.fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
+         *     µ.obj.fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
+         *     µ.obj.fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
+         *
+         * Recursive:
+         *
+         *     µ.obj.fromQueryString(
+         *         "username=Jacky&"+
+         *         "dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911&"+
+         *         "hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&"+
+         *         "hobbies[3][0]=nested&hobbies[3][1]=stuff", true);
+         *
+         *     // returns
+         *     {
 		 *         username: 'Jacky',
 		 *         dateOfBirth: {
 		 *             day: '1',
@@ -2009,103 +2180,103 @@ var toString    = Object.prototype.toString,
 		 *         },
 		 *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
 		 *     }
-		 *
-		 * @param {String} queryString The query string to decode
-		 * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
-		 * PHP / Ruby on Rails servers and similar.
-		 * @return {Object}
-		 */
-		fromQueryString: function (queryString, recursive) {
-			var parts = queryString.replace(queryRe, '').split('&'),
-				object = {},
-				temp, components, name, value, i, ln,
-				part, j, subLn, matchedKeys, matchedName,
-				keys, key, nextKey;
+         *
+         * @param {String} queryString The query string to decode
+         * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
+         * PHP / Ruby on Rails servers and similar.
+         * @return {Object}
+         */
+        fromQueryString: function (queryString, recursive) {
+            var parts  = queryString.replace(queryRe, '').split('&'),
+                object = {},
+                temp, components, name, value, i, ln,
+                part, j, subLn, matchedKeys, matchedName,
+                keys, key, nextKey;
 
-			for (i = 0, ln = parts.length; i < ln; i++) {
-				part = parts[i];
+            for (i = 0, ln = parts.length; i < ln; i++) {
+                part = parts[i];
 
-				if (part.length > 0) {
-					components = part.split('=');
-					name = components[0];
-					name = name.replace(plusRe, '%20');
-					name = decodeURIComponent(name);
+                if (part.length > 0) {
+                    components = part.split('=');
+                    name = components[0];
+                    name = name.replace(plusRe, '%20');
+                    name = decodeURIComponent(name);
 
-					value = components[1];
-					if (value !== undefined) {
-						value = value.replace(plusRe, '%20');
-						value = decodeURIComponent(value);
-					} else {
-						value = '';
-					}
+                    value = components[1];
+                    if (value !== undefined) {
+                        value = value.replace(plusRe, '%20');
+                        value = decodeURIComponent(value);
+                    } else {
+                        value = '';
+                    }
 
-					if (!recursive) {
-						if (object.hasOwnProperty(name)) {
-							if (!µ.isArray(object[name])) {
-								object[name] = [object[name]];
-							}
+                    if (!recursive) {
+                        if (object.hasOwnProperty(name)) {
+                            if (!µ.isArray(object[name])) {
+                                object[name] = [object[name]];
+                            }
 
-							object[name].push(value);
-						}
-						else {
-							object[name] = value;
-						}
-					}
-					else {
-						matchedKeys = name.match(keyRe);
-						matchedName = name.match(nameRe);
+                            object[name].push(value);
+                        }
+                        else {
+                            object[name] = value;
+                        }
+                    }
+                    else {
+                        matchedKeys = name.match(keyRe);
+                        matchedName = name.match(nameRe);
 
-						//<debug>
-						if (!matchedName) {
-							throw new Error('[µ.obj.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"');
-						}
-						//</debug>
+                        //<debug>
+                        if (!matchedName) {
+                            throw new Error('[µ.obj.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"');
+                        }
+                        //</debug>
 
-						name = matchedName[0];
-						keys = [];
+                        name = matchedName[0];
+                        keys = [];
 
-						if (matchedKeys === null) {
-							object[name] = value;
-							continue;
-						}
+                        if (matchedKeys === null) {
+                            object[name] = value;
+                            continue;
+                        }
 
-						for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
-							key = matchedKeys[j];
-							key = (key.length === 2) ? '' : key.substring(1, key.length - 1);
-							keys.push(key);
-						}
+                        for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
+                            key = matchedKeys[j];
+                            key = (key.length === 2) ? '' : key.substring(1, key.length - 1);
+                            keys.push(key);
+                        }
 
-						keys.unshift(name);
+                        keys.unshift(name);
 
-						temp = object;
+                        temp = object;
 
-						for (j = 0, subLn = keys.length; j < subLn; j++) {
-							key = keys[j];
+                        for (j = 0, subLn = keys.length; j < subLn; j++) {
+                            key = keys[j];
 
-							if (j === subLn - 1) {
-								if (µ.isArray(temp) && key === '') {
-									temp.push(value);
-								}
-								else {
-									temp[key] = value;
-								}
-							}
-							else {
-								if (temp[key] === undefined || typeof temp[key] === 'string') {
-									nextKey = keys[j + 1];
+                            if (j === subLn - 1) {
+                                if (µ.isArray(temp) && key === '') {
+                                    temp.push(value);
+                                }
+                                else {
+                                    temp[key] = value;
+                                }
+                            }
+                            else {
+                                if (temp[key] === undefined || typeof temp[key] === 'string') {
+                                    nextKey = keys[j + 1];
 
-									temp[key] = (µ.isNumeric(nextKey) || nextKey === '') ? [] : {};
-								}
+                                    temp[key] = (µ.isNumeric(nextKey) || nextKey === '') ? [] : {};
+                                }
 
-								temp = temp[key];
-							}
-						}
-					}
-				}
-			}
+                                temp = temp[key];
+                            }
+                        }
+                    }
+                }
+            }
 
-			return object;
-		}
-	};
+            return object;
+        }
+    };
 })();
 if (µ.DEBUG) console.log('µ loaded');

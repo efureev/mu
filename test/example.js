@@ -18,6 +18,12 @@ var
         _emptyObject: {},
         _emptyArray : [],
         _object     : {key: 'Value'},
+        _deepObject : {
+            o     : null,
+            u     : undefined,
+            child : {key: 'Value', identify: {name: 'Child'}},
+            parent: {middle: 'John'}
+        },
         _array      : [1, 2, 3],
         _string     : 'string',
         _emptyString: '',
@@ -86,9 +92,11 @@ describe('testing CORE', function () {
         var a = clone(variables);
         delete(a._object);
         delete(a._emptyObject);
+        delete(a._deepObject);
 
         test.value(µ.isObject(variables._object)).isTrue();
         test.value(µ.isObject(variables._emptyObject)).isTrue();
+        test.value(µ.isObject(variables._deepObject)).isTrue();
 
         for (var item in a) {
             test.value(µ.isObject(variables[item])).isFalse();
@@ -200,6 +208,11 @@ describe('testing CORE', function () {
             .bool(d2 >= d).isTrue();
     });
 
+
+    it('clone', function () {
+        test.value(µ.clone).isFunction();
+    });
+
 });
 
 describe('testing ARRAY', function () {
@@ -217,6 +230,13 @@ describe('testing ARRAY', function () {
 
         test
             .array(a).is([1, 2, 4, 6, 0, 12]);
+    });
+
+    it('merge', function () {
+        var a = µ.array.merge([1, 2, 4], [1, 6, 0], [0, 1, 10]);
+
+        test
+            .array(a).is([1, 2, 4, 6, 0, 10]);
     });
 
     it('explode', function () {
@@ -244,8 +264,9 @@ describe('testing ARRAY', function () {
     });
 
     it('remove', function () {
-        test
-            .array(µ.array.remove([1, 2, 3, '', null, 6], 3)).is([1, 2, '', null, 6]);
+        test.array(µ.array.remove([1, 2, 3, '', null, 6], 3)).is([1, 2, '', null, 6]);
+        test.array(µ.array.remove([1, 2, 3, '', null, 6], null)).is([1, 2, 3, '', 6]);
+        test.array(µ.array.remove([1, 2, 3, '', null, 6], undefined)).is([1, 2, 3, '', null, 6]);
     });
 
     it('removeIdx', function () {
@@ -256,9 +277,42 @@ describe('testing ARRAY', function () {
         test.array(µ.array.removeIdx([1, 2, 3, '', null, 6])).is([1, 2, 3, '', null, 6]);
     });
 
+    it('max', function () {
+        test.value(µ.array.max([1, 2, 3])).is(3);
+        test.value(µ.array.max([1, 10, 101, 2, 3])).is(101);
+        test.value(µ.array.max([1, 10, -101, 2, 3])).is(10);
+    });
+
+    it('min', function () {
+        test.value(µ.array.min([1, 2, 3])).is(1);
+        test.value(µ.array.min([1, 10, 101, 2, 3])).is(1);
+        test.value(µ.array.min([1, 10, -101, 2, 3])).is(-101);
+    });
+
+    it('from', function () {
+        test.value(µ.array.from('foo')).is(['f', 'o', 'o']);
+
+        var f = function () {
+            return µ.array.from(arguments);
+        };
+
+        test.array(f(1, 2, 3)).is([1, 2, 3]);
+    });
+
 
 });
 
+
+describe('testing OBJECTS', function () {
+
+    it('select', function () {
+
+        test
+            .value(µ.object.select(variables._deepObject, 'child.identify.name')).isIdenticalTo('Child')
+            .value(µ.object.select(variables._deepObject, 'parent.middle')).isIdenticalTo('John');
+    });
+
+});
 
 describe('testing UTILS', function () {
 
@@ -275,6 +329,13 @@ describe('testing UTILS', function () {
     it('trim', function () {
         test
             .string(µ.utils.trim('  abc  ')).isIdenticalTo('abc');
+    });
+
+    it('isEven', function () {
+        test.value(µ.utils.isEven(1)).isFalse();
+        test.value(µ.utils.isEven(31)).isFalse();
+        test.value(µ.utils.isEven(30)).isTrue();
+        test.value(µ.utils.isEven(2)).isTrue();
     });
 
 });
@@ -319,6 +380,33 @@ describe('testing FORMAT', function () {
             .string(µ.format.currency(n, 'руб:', 2, true)).isIdenticalTo('руб: 1 234 567.22')
             .string(µ.format.currency(-n, 'руб:', 2, true)).isIdenticalTo('руб: -1 234 567.22')
             .string(µ.format.currency(-n, 'руб.', 2, false)).isIdenticalTo('-1 234 567.22 руб.');
+    });
+
+
+});
+
+
+describe('testing STRING', function () {
+
+    it('fromCamelCase', function () {
+        test
+            .string(µ.str.fromCamelCase('someDatabaseFieldName', ' ')).isIdenticalTo('some database field name')
+            .string(µ.str.fromCamelCase('someLabelThatNeedsToBeCamelized', '-')).isIdenticalTo('some-label-that-needs-to-be-camelized')
+            .string(µ.str.fromCamelCase('someJavascriptProperty')).isIdenticalTo('some_javascript_property');
+    });
+
+    it('toCamelCase', function () {
+        test
+            .string(µ.str.toCamelCase('some_database_field_name')).isIdenticalTo('someDatabaseFieldName')
+            .string(µ.str.toCamelCase('Some label that needs to be camelized')).isIdenticalTo('someLabelThatNeedsToBeCamelized')
+            .string(µ.str.toCamelCase('some-javascript-property')).isIdenticalTo('someJavascriptProperty')
+            .string(µ.str.toCamelCase('some-mixed_string with spaces_underscores-and-hyphens')).isIdenticalTo('someMixedStringWithSpacesUnderscoresAndHyphens');
+    });
+
+    it('truncateString', function () {
+        test
+            .string(µ.str.truncate('some database field name', 5)).isIdenticalTo('so...')
+            .string(µ.str.truncate('some_database_field_name', 12,'..')).isIdenticalTo('some_datab..');
     });
 
 
