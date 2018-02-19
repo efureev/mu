@@ -10,6 +10,7 @@ module.exports = function (grunt) {
         'src/event.js',
         'src/date.js',
         'src/object.js',
+        'src/humanize.js',
 
         'src/_l.js'
     ];

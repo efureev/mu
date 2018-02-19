@@ -406,7 +406,7 @@ describe('testing STRING', function () {
     it('truncateString', function () {
         test
             .string(µ.str.truncate('some database field name', 5)).isIdenticalTo('so...')
-            .string(µ.str.truncate('some_database_field_name', 12,'..')).isIdenticalTo('some_datab..');
+            .string(µ.str.truncate('some_database_field_name', 12, '..')).isIdenticalTo('some_datab..');
     });
 
 
@@ -424,5 +424,28 @@ describe('testing EVENTS', function () {
         result();
         result();
     });
+
+});
+
+
+describe('testing HUMANIZE', function () {
+
+    it('fileSize', function () {
+        test
+            .string(µ.humanize.fileSize(3123123)).isIdenticalTo('2.98 Mb')
+            .string(µ.humanize.fileSize(123)).isIdenticalTo('123 bytes')
+            .string(µ.humanize.fileSize(21323)).isIdenticalTo('20.82 Kb')
+            .string(µ.humanize.fileSize(7900221323)).isIdenticalTo('7.36 Gb')
+    });
+
+
+    it('intWord', function () {
+        test
+            .string(µ.humanize.intWord(3123123)).isIdenticalTo('3.12M')
+            .string(µ.humanize.intWord(123)).isIdenticalTo('123.00')
+            .string(µ.humanize.intWord(21323)).isIdenticalTo('21.32K')
+            .string(µ.humanize.intWord(7900221323)).isIdenticalTo('7.90B')
+    });
+
 
 });

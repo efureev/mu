@@ -43,6 +43,10 @@ JS Utilities Framework
 * [`fromCamelCase`](#string.fromcamelcase)
 * [`toCamelCase`](#string.tocamelcase)
 
+### Humanize
+* [`fileSize`](#humanize.fileSize)
+* [`intWord`](#humanize.intWord)
+
 
 ## Core
 
@@ -291,6 +295,28 @@ f(1, 2, 3); // [1, 2, 3]
 ```js
 µ.str.truncate('some database field name', 5); // 'so...'
 µ.str.truncate('some database field name', 12, '..'); // 'some datab..'
+```
+
+[⬆ back to top](#table-of-contents)
+
+### humanize.fileSize
+
+Форматирует значения байт в "человеко-читаемый" вид (i.e. '13 Kb', '4.1 Mb', '102 bytes', etc)
+
+```js
+µ.humanize.fileSize(3123123)); // '2.98 Mb'
+µ.humanize.fileSize(7900221323)); // '7.36 Gb'
+```
+
+[⬆ back to top](#table-of-contents)
+
+### humanize.intWord
+
+Форматирует значения в "человеко-читаемый" вид (i.e. '13 K', '4.1 M', '102', etc)
+
+```js
+µ.humanize.intWord(3123123)); // '2.98 Mb'
+µ.humanize.intWord(7900221323)); // '7.36 Gb'
 ```
 
 [⬆ back to top](#table-of-contents)

@@ -1,3 +1,8 @@
+# v.0.1.1
+- add function `µ.humanize.fileSize`  Форматирует значения байт в "человеко-читаемый" вид (i.e. '13 Kb', '4.1 Mb', '102 bytes', etc) 
+- add function `µ.humanize.intWord`  Форматирует значения в "человеко-читаемый" вид (i.e. '13 K', '4.1 M', '102', etc)
+- add function `µ.format.num`  Форматирование числа с разделителями по тясячам
+
 # v.0.1.0
 - add function `µ.array.max`  Возвращает наибольшее число из массива
 - add function `µ.array.min`  Возвращает наименьшее число из массива
