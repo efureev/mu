@@ -315,8 +315,8 @@ f(1, 2, 3); // [1, 2, 3]
 Форматирует значения в "человеко-читаемый" вид (i.e. '13 K', '4.1 M', '102', etc)
 
 ```js
-µ.humanize.intWord(3123123)); // '2.98 Mb'
-µ.humanize.intWord(7900221323)); // '7.36 Gb'
+µ.humanize.intWord(3123123)); // '3.12M'
+µ.humanize.intWord(7900221323)); // '7.90B'
 ```
 
 [⬆ back to top](#table-of-contents)
