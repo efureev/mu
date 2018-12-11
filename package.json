@@ -1,7 +1,7 @@
 {
   "name": "mu",
-  "description": "JS Utilities Framework",
-  "version": "0.1.1",
+  "description": "JS Utilities",
+  "version": "2.0.0",
   "homepage": "https://github.com/efureev/mu",
   "author": {
     "name": "Eugene Fureev"
@@ -13,18 +13,28 @@
   "bugs": {
     "url": "https://github.com/efureev/mu/issues"
   },
-  "main": [
-    "dist/mu.min.js"
-  ],
+  "main": "dist/mu.min.js",
   "devDependencies": {
-    "grunt": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-mocha": "*",
-    "unit.js": "*"
+    "@babel/core": "^7.2.0",
+    "@babel/preset-env": "^7.2.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-jest": "^23.6.0",
+    "eslint": "^5.10.0",
+    "jest": "^23.6.0"
   },
   "keywords": [
     "javascript",
     "utilities"
-  ]
+  ],
+  "scripts": {
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.js?$": "babel-jest"
+    }
+  },
+  "dependencies": {
+    "@types/jest": "^23.3.10"
+  }
 }

@@ -1,3 +1,6 @@
+# v2.0.1
+- Reformat lib
+
 # v.0.1.1
 - add function `µ.humanize.fileSize`  Форматирует значения байт в "человеко-читаемый" вид (i.e. '13 Kb', '4.1 Mb', '102 bytes', etc) 
 - add function `µ.humanize.intWord`  Форматирует значения в "человеко-читаемый" вид (i.e. '13 K', '4.1 M', '102', etc)
