@@ -2,22 +2,24 @@ language: node_js
 node_js:
   - 8
 
+cache:
+  directories:
+    - node_modules
+    -
 before_install:
   - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 
 install:
-#  - export DISPLAY=:99.0
-#  - sh -e /etc/init.d/xvfb start
   - yarn
-#  - ./node_modules/.bin/grunt build
 
 script:
   - ./node_modules/.bin/jest --coverage
 
 after_script:
-  - ./cc-test-reporter after-build --coverage-input-type clover --exit-code $TRAVIS_TEST_RESULT
+  - ./cc-test-reporter format-coverage -t lcov ./coverage/lcov.info  # Format frontend coverage
+  - ./cc-test-reporter upload-coverage --exit-code $TRAVIS_TEST_RESULT
 
 after_success:
   - bash <(curl -s https://codecov.io/bash)
