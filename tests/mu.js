@@ -31,9 +31,9 @@ describe('toString', () => {
         expect(toString([1, 2, 3, 4, 5])).toBe('[1,2,3,4,5]')
     })
     it('should return string if parameter provided are mixed', () => {
-        expect(toString()).toBe('undefined')
-        expect(toString(null)).toBe('null')
-        expect(toString(undefined)).toBe('undefined')
+        expect(toString()).toBe('')
+        expect(toString(null)).toBe('')
+        expect(toString(undefined)).toBe('')
         expect(toString(true)).toBe('true')
         expect(toString(false)).toBe('false')
     })

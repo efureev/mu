@@ -1,6 +1,5 @@
 'use strict'
 
-import {INFINITY} from './config'
 import {reTrim} from './string'
 
 /**
@@ -21,12 +20,14 @@ export function toString(value) {
     case 'number':
         return value.toString()
     case 'object':
-        return JSON.stringify(value)
+        return value === null ? '' : JSON.stringify(value)
     case 'boolean':
         return value ? 'true' : 'false'
     }
 
-    const result = (value + '')
+    if (!value) {
+        return ''
+    }
 
-    return (result === '0' && (1 / value) === -INFINITY) ? '-0' : result
+    return value + ''
 }
