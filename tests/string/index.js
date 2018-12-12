@@ -1,23 +1,37 @@
 'use strict'
 
-import {pad} from './../../src/number/pad'
+import {trim} from './../../src/string'
 
-describe('pad', () => {
-    it('should throw an error if no parameters are provided', () => {
-        expect(() => pad()).toThrow()
-        expect(() => pad('')).toThrow()
-        expect(() => pad('test')).toThrow()
-    })
+describe('trim', () => {
 
     it('should return val if parameter provided are numbers', () => {
-        expect(pad('1')).toBe('01')
-        expect(pad(1)).toBe('01')
-        expect(pad(9)).toBe('09')
-        expect(pad('01')).toBe('01')
-        expect(pad(+'01')).toBe('01')
-        expect(pad('9')).toBe('09')
-        expect(pad('09')).toBe('09')
-        expect(pad('109')).toBe('109')
-        expect(pad('10')).toBe('10')
+        expect(trim('1')).toBe('1')
+        expect(trim(1)).toBe('1')
+        expect(trim(' 1')).toBe('1')
+        expect(trim(' 1   ')).toBe('1')
+        expect(trim('    1   ')).toBe('1')
+        expect(trim('    1   ')).toBe('1')
+    })
+
+    it('should return val if parameter provided are string', () => {
+        expect(trim('test')).toBe('test')
+        expect(trim('test    ')).toBe('test')
+        expect(trim('   test')).toBe('test')
+        expect(trim('   test    ')).toBe('test')
+        expect(trim('   test\t  ')).toBe('test')
+        expect(trim('\ttest\t  ')).toBe('test')
+        expect(trim('\ntest\n  ')).toBe('test')
+        expect(trim('\n\t\t\n\ntest\n  ')).toBe('test')
+        expect(trim(' \n\t\rtest\r\n  ')).toBe('test')
+    })
+
+    it('should return val if parameter provided are mixed', () => {
+        expect(trim('')).toBe('')
+        expect(trim('    ')).toBe('')
+        expect(trim('\t\t\n ')).toBe('')
+        expect(trim(null)).toBe('')
+        expect(trim(undefined)).toBe('')
+        expect(trim(0)).toBe('')
+        expect(trim(-0)).toBe('')
     })
 })

@@ -1,8 +1,7 @@
 'use strict'
 
-import {isString} from './is'
-import {isEmpty} from './is/isEmpty'
 import {INFINITY} from './config'
+import {reTrim} from './string'
 
 /**
  * Converts `value` to a string if it's not one. An empty string is returned
@@ -16,12 +15,17 @@ import {INFINITY} from './config'
  */
 export function toString(value) {
 
-    if (isString(value)) {
-        return value
+    switch (typeof value) {
+    case 'string':
+        return value.replace(reTrim, '')
+    case 'number':
+        return value.toString()
+    case 'object':
+        return JSON.stringify(value)
+    case 'boolean':
+        return value ? 'true' : 'false'
     }
-    if (isEmpty(value)) {
-        return ''
-    }
+
     const result = (value + '')
 
     return (result === '0' && (1 / value) === -INFINITY) ? '-0' : result

@@ -1,6 +1,6 @@
 'use strict'
 
-import {isEmpty} from './../src/is/isEmpty'
+import {isEmpty} from './../../src/is/isEmpty'
 
 describe('IsEmpty', () => {
     it('should return true when you pass an empty string', () => {

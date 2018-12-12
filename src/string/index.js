@@ -2,7 +2,7 @@
 
 import {toString} from './../'
 
-const reTrim = /^\s+|\s+$/g
+export const reTrim = /^\s+|\s+$/g
 
 /**
  * This function trim string
@@ -20,5 +20,6 @@ export function trim(str) {
     if (!str) {
         return str
     }
+
     return str.replace(reTrim, '')
 }

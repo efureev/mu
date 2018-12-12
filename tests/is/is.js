@@ -1,6 +1,6 @@
 'use strict'
 
-import {isNumeric, isString, isBoolean} from './../src/is'
+import {isBoolean, isNumeric, isString} from './../../src/is'
 
 describe('isString', () => {
     it('should return true if any parameters provided are string', () => {
@@ -54,6 +54,6 @@ describe('isBoolean', () => {
         expect(isBoolean('1212')).toBe(false)
         expect(isBoolean([])).toBe(false)
         expect(isBoolean({})).toBe(false)
-        expect(isBoolean(true,'true')).toBe(false)
+        expect(isBoolean(true, 'true')).toBe(false)
     })
 })
