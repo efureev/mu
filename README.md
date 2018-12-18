@@ -7,4 +7,8 @@
 JS Utilities Framework
 
 
+##Test
+```bash
+jest
+```
 ## Table of Contents
