@@ -13,7 +13,6 @@
   "bugs": {
     "url": "https://github.com/efureev/mu/issues"
   },
-  "main": "dist/mu.min.js",
   "devDependencies": {
     "@babel/core": "^7.2.0",
     "@babel/preset-env": "^7.2.0",
