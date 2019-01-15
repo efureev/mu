@@ -6,6 +6,14 @@
 # µ
 JS Utilities Framework
 
+## Install
+
+```json
+"dependencies": {
+  ...
+  "@feugene/mu": "^2.0.0",
+}
+```
 
 ##Test
 ```bash
