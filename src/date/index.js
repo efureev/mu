@@ -2,7 +2,6 @@
 
 import {pad} from './../number/pad'
 
-
 const nowFn = Date.now || function () {
     return new Date().getTime()
 }
