@@ -1,3 +1,6 @@
+# v2.1.2
+- Add auto-deploy to NPM
+
 # v2.1.1
 - Add Objects fn:
     - merge
