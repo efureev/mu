@@ -4,48 +4,43 @@ import {isEmpty} from './../../src/is/isEmpty'
 
 describe('IsEmpty', () => {
     it('should return true when you pass an empty string', () => {
-        const result = isEmpty('')
-        expect(result).toBe(true)
-    })
+        expect(isEmpty('')).toBeTruthy()
+        expect(isEmpty('  ')).toBeTruthy()
 
-
-    it('should return false when pass a non empty string', () => {
-        const result = isEmpty('test')
-        expect(result).toBe(false)
+        expect(isEmpty('test')).toBeFalsy()
+        expect(isEmpty('  test  ')).toBeFalsy()
     })
 
     it('should return true when you pass 0', () => {
-        const result = isEmpty(0)
-        expect(result).toBe(true)
-    })
-
-    it('should return false when pass a number that is not 0', () => {
-        const result = isEmpty(12)
-        expect(result).toBe(false)
+        expect(isEmpty(0)).toBeTruthy()
+        expect(isEmpty(-0)).toBeTruthy()
+        expect(isEmpty(10)).toBeFalsy()
+        expect(isEmpty(-10)).toBeFalsy()
     })
 
     it('should return true when you pass an empty object', () => {
-        const result = isEmpty({})
-        expect(result).toBe(true)
+        expect(isEmpty({})).toBeTruthy()
+        expect(isEmpty({sa: 1})).toBeFalsy()
+        expect(isEmpty({null: null})).toBeFalsy()
     })
 
     it('should return true when you pass an empty array', () => {
-        const result = isEmpty([])
-        expect(result).toBe(true)
-    })
-
-    it('should return false when pass a non empty object', () => {
-        const result = isEmpty({test: 1})
-        expect(result).toBe(false)
+        expect(isEmpty([])).toBeTruthy()
+        expect(isEmpty([2])).toBeFalsy()
+        expect(isEmpty([null])).toBeFalsy()
+        expect(isEmpty([undefined])).toBeFalsy()
+        expect(isEmpty([[]])).toBeFalsy()
+        expect(isEmpty([{}])).toBeFalsy()
     })
 
     it('should return true when you pass false', () => {
-        const result = isEmpty(false)
-        expect(result).toBe(true)
+        expect(isEmpty(true)).toBeTruthy()
+        expect(isEmpty(false)).toBeFalsy()
     })
 
-    it('should return false when you pass true', () => {
-        const result = isEmpty(true)
-        expect(result).toBe(false)
+    it('should return true when you pass date', () => {
+        expect(isEmpty(new Date())).toBeFalsy()
+        expect(isEmpty(new Date(Date.parse('1970-01-01T00:00:00')))).toBeFalsy()
+        expect(isEmpty(new Date(0))).toBeFalsy()
     })
 })

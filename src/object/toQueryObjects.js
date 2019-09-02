@@ -21,9 +21,9 @@ import {isArray} from '../is/isArray'
  *         month: 8,
  *         year: 1987,
  *         extra: {
- *             hour: 4
- *             minute: 30
- *         }
+ *             hour: 4,
+ *             minute: 30,
+ *         },
  *     }, true); // Recursive
  *
  *     // objects then equals:

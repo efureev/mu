@@ -23,7 +23,7 @@ import {toString} from '../date'
  *         dateOfBirth: {
  *             day: 1,
  *             month: 2,
- *             year: 1911
+ *             year: 1911,
  *         },
  *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
  *     }, true); // returns the following string (broken down and url-decoded for ease of reading purpose):
