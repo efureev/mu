@@ -5,6 +5,7 @@ import fromQueryString from './fromQueryString'
 import toQueryString from './toQueryString'
 import toQueryObjects from './toQueryObjects'
 import equals from './equals'
+import merge from './merge'
 
 export {
     getSize,
@@ -12,4 +13,5 @@ export {
     toQueryString,
     toQueryObjects,
     equals,
+    merge,
 }

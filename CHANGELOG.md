@@ -1,3 +1,7 @@
+# v2.1.1
+- Add Objects fn:
+    - merge
+    
 # v2.1.0
 - Add Objects fns:
     - equals
