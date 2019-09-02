@@ -1,7 +1,5 @@
 'use strict'
 
-import {isObject} from './isObject'
-
 /**
  * This function evaluates whether all parameters are function
  * @memberof µ.is
@@ -12,11 +10,8 @@ export function isFunction(...params) {
     if (params.length === 0) throw Error('Please provide at least one number to evaluate isInteger.')
 
     const invalid = params.some((param) => {
-        if (!isObject(param)) {
-            return false
-        }
         const tag = baseGetTag(param)
-        return tag === funcTag || tag === genTag || tag === asyncTag || tag === proxyTag
+        return !(tag === funcTag || tag === genTag || tag === asyncTag || tag === proxyTag)
     })
 
     return !invalid

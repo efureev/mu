@@ -46,4 +46,19 @@ export function isBoolean(...params) {
     return !invalid
 }
 
+/**
+ * This function evaluates if all the parameters are dates
+ *
+ * @memberof mu
+ * @author efureev
+ * @param {...*} params - One or more parameters.
+ */
+export function isDate(...params) {
+    const invalid = params.some((param) => {
+        return Object.prototype.toString.call(param) !== '[object Date]'
+    })
+
+    return !invalid
+}
+
 
