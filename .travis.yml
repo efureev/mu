@@ -34,6 +34,6 @@ jobs:
       deploy:
         provider: npm
         api_key: $NPM_TOKEN
-        email: "fureev@gmail.com"
+        email: $USER_EMAIL
         on:
           tags: true
