@@ -6,7 +6,7 @@
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isFunction(...params) {
+export default function isFunction(...params) {
     if (params.length === 0) throw Error('Please provide at least one number to evaluate isInteger.')
 
     const invalid = params.some((param) => {

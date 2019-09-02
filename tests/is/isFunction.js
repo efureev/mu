@@ -1,6 +1,6 @@
 'use strict'
 
-import {isFunction} from './../../src/is/isFunction'
+import {isFunction} from './../../src/is'
 
 describe('isFunction', () => {
     it('should throw an error if no parameters are provided', () => {
@@ -19,7 +19,7 @@ describe('isFunction', () => {
         expect(isFunction(new Number(2))).toBe(false)
         expect(isFunction(Symbol())).toBe(false)
         expect(isFunction(Symbol('dfo'))).toBe(false)
-        expect(isFunction(new Set([1,2]))).toBe(false)
+        expect(isFunction(new Set([1, 2]))).toBe(false)
         expect(isFunction(new Set([]))).toBe(false)
         expect(isFunction(new String('sas'))).toBe(false)
         expect(isFunction({})).toBe(false)
@@ -31,8 +31,10 @@ describe('isFunction', () => {
 
     it('should return true if all parameters are function', () => {
         expect(isFunction(new Function())).toBe(true)
-        expect(isFunction(function () {})).toBe(true)
-        expect(isFunction(()=>{})).toBe(true)
+        expect(isFunction(function () {
+        })).toBe(true)
+        expect(isFunction(() => {
+        })).toBe(true)
     })
 
 })

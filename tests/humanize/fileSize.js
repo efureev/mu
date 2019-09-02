@@ -1,6 +1,6 @@
 'use strict'
 
-import {fileSize} from './../../src/humanize/fileSize'
+import {fileSize} from './../../src/humanize'
 
 describe('intWord', () => {
     it('should return val if parameter provided are numbers', () => {

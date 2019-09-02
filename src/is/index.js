@@ -1,5 +1,12 @@
 'use strict'
 
+import isObject, {isEmptyObject} from './isObject'
+import isArray from './isArray'
+import isEmpty from './isEmpty'
+import isEven from './isEven'
+import isFunction from './isFunction'
+import isInteger from './isInteger'
+
 /**
  * This function evaluates if all the parameters are strings
  *
@@ -62,3 +69,12 @@ export function isDate(...params) {
 }
 
 
+export {
+    isObject,
+    isArray,
+    isEmpty,
+    isEven,
+    isFunction,
+    isInteger,
+    isEmptyObject,
+}

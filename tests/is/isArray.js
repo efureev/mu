@@ -1,6 +1,6 @@
 'use strict'
 
-import {isArray} from './../../src/is/isArray'
+import isArray from './../../src/is/isArray'
 
 describe('isArray', () => {
     it('should throw an error if no parameters are provided', () => {

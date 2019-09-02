@@ -9,7 +9,7 @@ import {isEmptyObject} from './isObject'
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isEmpty(...params) {
+export default function isEmpty(...params) {
     const invalid = params.some((param) => {
         switch (Object.prototype.toString.call(param)) {
         case '[object String]':

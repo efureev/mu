@@ -1,6 +1,6 @@
 'use strict'
 
-import {isInteger} from '../is/isInteger'
+import {isInteger} from '../is'
 
 /**
  *
@@ -11,7 +11,7 @@ import {isInteger} from '../is/isInteger'
  * @param {Boolean} clearDecimals
  * @returns {string}
  */
-export function num(number, decimals = 2, decPoint = '.', thousandsSep = ',', clearDecimals = false) {
+export default function num(number, decimals = 2, decPoint = '.', thousandsSep = ',', clearDecimals = false) {
 
     decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
 
@@ -24,11 +24,13 @@ export function num(number, decimals = 2, decPoint = '.', thousandsSep = ',', cl
     return sign +
         (j ? intPart.substr(0, j) + thousandsSep : '') +
         intPart.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSep) +
-        (decimals
-            ? clearDecimals && isInteger(number)
-                ? ''
-                : decPoint + Math.abs(number - intPart).toFixed(decimals).slice(2)
-            : ''
+        (
+            decimals
+                ?
+                (clearDecimals && isInteger(number)
+                    ? ''
+                    : decPoint + Math.abs(number - intPart).toFixed(decimals).slice(2))
+                : ''
         )
 }
 

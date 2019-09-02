@@ -1,6 +1,6 @@
 'use strict'
 
-import {pad} from './../../src/number/pad'
+import {pad} from './../../src/number'
 
 describe('pad', () => {
     it('should throw an error if no parameters are provided', () => {

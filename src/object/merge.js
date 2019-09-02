@@ -1,7 +1,7 @@
 'use strict'
 
 import {clone} from '../index'
-import {isObject} from '../is/isObject'
+import {isObject} from '../is'
 
 /**
  * Объединение объектов рекурсивно

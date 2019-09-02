@@ -1,9 +1,7 @@
 'use strict'
 
 import {toString, clone} from './../src'
-import {isFunction} from '../src/is/isFunction'
-import {isArray} from '../src/is/isArray'
-import {isEmpty} from '../src/is/isEmpty'
+import {isFunction, isArray, isEmpty} from '../src/is'
 
 describe('toString', () => {
 

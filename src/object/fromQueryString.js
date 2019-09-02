@@ -1,7 +1,6 @@
 'use strict'
 
-import {isArray} from '../is/isArray'
-import {isNumeric} from '../is'
+import {isNumeric, isArray} from '../is'
 
 const queryRe = /^\?/
 const plusRe = /\+/g

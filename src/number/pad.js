@@ -9,7 +9,7 @@
  * @param {number|string} num
  * @returns {string}
  */
-export function pad(num) {
+export default function pad(num) {
     const n = Number.parseFloat(num)
     if (isNaN(n))
         throw Error('Please provide at least one number.')

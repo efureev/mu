@@ -1,6 +1,6 @@
 'use strict'
 
-import {num, numRus} from './../../src/format/num'
+import {num, numRus} from './../../src/format'
 
 describe('num', () => {
     it('should return string if parameter provided are integer', () => {
@@ -31,11 +31,11 @@ describe('num', () => {
     })
 
     it('should return string if parameter provided are mixed', () => {
-        expect(num(10000,3)).toBe('10,000.000')
-        expect(num(1.234,3,'-')).toBe('1-234')
-        expect(num(10000.234,3,':','|')).toBe('10|000:234')
-        expect(num(10000.234,3,':','|',true)).toBe('10|000:234')
-        expect(num(10000,3,':','|',true)).toBe('10|000')
+        expect(num(10000, 3)).toBe('10,000.000')
+        expect(num(1.234, 3, '-')).toBe('1-234')
+        expect(num(10000.234, 3, ':', '|')).toBe('10|000:234')
+        expect(num(10000.234, 3, ':', '|', true)).toBe('10|000:234')
+        expect(num(10000, 3, ':', '|', true)).toBe('10|000')
     })
 })
 
@@ -52,8 +52,8 @@ describe('numRus', () => {
         expect(numRus(1001.20)).toBe('1 001.20')
         expect(numRus(1001.00)).toBe('1 001')
         expect(numRus('1001.00')).toBe('1 001')
-        expect(numRus('1001.00',3)).toBe('1 001')
-        expect(numRus('1001.01',3)).toBe('1 001.010')
+        expect(numRus('1001.00', 3)).toBe('1 001')
+        expect(numRus('1001.01', 3)).toBe('1 001.010')
     })
 
 })

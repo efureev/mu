@@ -1,6 +1,6 @@
 'use strict'
 
-import {isObject} from './../is/isObject'
+import {isObject} from './../is'
 
 /**
  * Возвращает количество свойств объекта

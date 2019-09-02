@@ -1,6 +1,6 @@
 'use strict'
 
-import {isObject, isEmptyObject} from './../../src/is/isObject'
+import {isObject, isEmptyObject} from './../../src/is'
 
 describe('isObject', () => {
     it('should throw an error if no parameters are provided', () => {

@@ -14,7 +14,7 @@ const isO = (toString.call(null) === '[object Object]')
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isObject(...params) {
+export default function isObject(...params) {
     if (params.length === 0) throw Error('Please provide at least one number to evaluate isObject.')
 
     const invalid = params.some((param) => !isO(param))

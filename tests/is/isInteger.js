@@ -1,6 +1,6 @@
 'use strict'
 
-import {isInteger} from './../../src/is/isInteger'
+import {isInteger} from './../../src/is'
 
 describe('isInteger', () => {
     it('should throw an error if no parameters are provided', () => {

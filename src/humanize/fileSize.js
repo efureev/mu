@@ -1,6 +1,6 @@
 'use strict'
 
-import {intWord} from './intWord'
+import intWord from './intWord'
 
 /**
  *
@@ -12,7 +12,7 @@ import {intWord} from './intWord'
  * @param {String} suffixSep
  * @returns {string}
  */
-export function fileSize(size, kilo = 1024, decimals = 2, decPoint = '.', thousandsSep = ',', suffixSep = ' ') {
+export default function fileSize(size, kilo = 1024, decimals = 2, decPoint = '.', thousandsSep = ',', suffixSep = ' ') {
     if (size <= 0) {
         return '0 bytes'
     }

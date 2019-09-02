@@ -1,6 +1,6 @@
 'use strict'
 
-import {num} from '../format/num'
+import {num} from '../format'
 
 /**
  *
@@ -13,7 +13,7 @@ import {num} from '../format/num'
  * @param {String} suffixSep
  * @returns {string}
  */
-export function intWord(number, units = ['', 'K', 'M', 'B', 'T'], kilo = 1000, decimals = 2, decPoint = '.', thousandsSep = ',', suffixSep = '') {
+export default function intWord(number, units = ['', 'K', 'M', 'B', 'T'], kilo = 1000, decimals = 2, decPoint = '.', thousandsSep = ',', suffixSep = '') {
 
     let unit = units.length - 1
     decimals = isNaN(decimals) ? 2 : Math.abs(decimals)

@@ -1,6 +1,6 @@
 'use strict'
 
-import {pad} from './../number/pad'
+import {pad} from './../number'
 
 const nowFn = Date.now || function () {
     return new Date().getTime()
