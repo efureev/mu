@@ -11,7 +11,7 @@ JS Utilities Framework
 ```json
 "dependencies": {
   ...
-  "@feugene/mu": "^2.1.3",
+  "@feugene/mu": "^2.2.0",
 }
 ```
 

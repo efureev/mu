@@ -1,3 +1,8 @@
+# v2.2.0
+- Change function `equals` from Object: Now, it's DEEP and allows to compare 2 and more entries
+- Add function `equals` to Array
+- Add function `equals` Core
+
 # v2.1.3
 - Add function `select` to Object 
 
