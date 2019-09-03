@@ -1,6 +1,6 @@
 'use strict'
 
-import {toString} from './../'
+import {toString} from '../'
 
 export const reTrim = /^\s+|\s+$/g
 
@@ -14,7 +14,6 @@ export const reTrim = /^\s+|\s+$/g
  * @returns {string}
  */
 export function trim(str) {
-
     str = toString(str)
 
     if (!str) {

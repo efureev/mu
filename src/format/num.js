@@ -3,7 +3,7 @@
 import {isInteger} from '../is'
 
 /**
- *
+ * Formatting number
  * @param {String|Number} number
  * @param {Number} decimals
  * @param {String} decPoint

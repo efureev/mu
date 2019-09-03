@@ -3,7 +3,7 @@
 import intWord from './intWord'
 
 /**
- *
+ * Display
  * @param {Number|String} size
  * @param {Number} kilo
  * @param {Number} decimals

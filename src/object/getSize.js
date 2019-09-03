@@ -3,7 +3,7 @@
 import {isObject} from './../is'
 
 /**
- * Возвращает количество свойств объекта
+ * Returns count of properties of the object
  *
  * @memberof µ.object
  *

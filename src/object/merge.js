@@ -4,7 +4,7 @@ import {clone} from '../index'
 import {isObject} from '../is'
 
 /**
- * Объединение объектов рекурсивно
+ * Merge objects recursively
  *
  *     var js = {
  *         companyName: 'JS',

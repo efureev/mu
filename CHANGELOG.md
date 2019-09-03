@@ -1,3 +1,7 @@
+# v2.2.1
+- Merge `humanize` section into `format`
+- Add glossary into `README.md`
+
 # v2.2.0
 - Change function `equals` from Object: Now, it's DEEP and allows to compare 2 and more entries
 - Add function `equals` to Array

@@ -11,6 +11,7 @@ describe('equals', () => {
         expect(equals([undefined], [undefined])).toBeTruthy()
 
         expect(equals([1, 2, 3, []], [1, 2, 3, []])).toBeTruthy()
+        expect(equals([1, '2', {}, []], [1, '2', {}, []])).toBeTruthy()
         expect(equals([1, 2, 3, [5, 6]], [1, 2, 3, [5, 6]])).toBeTruthy()
         expect(equals([1, 2, 3, [5, 6], [5, 6]], [1, 2, 3, [5, 6], [5, 6]])).toBeTruthy()
         expect(equals([1, 2, 3, [5, 6], [5, [5, 6]]], [1, 2, 3, [5, 6], [5, [5, 6]]])).toBeTruthy()

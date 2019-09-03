@@ -1,9 +1,9 @@
 'use strict'
 
-import {num} from '../format'
+import {num} from './index'
 
 /**
- *
+ * Format
  * @param {Number|String} number
  * @param {Array} units
  * @param {Number} kilo

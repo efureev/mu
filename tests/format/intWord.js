@@ -1,6 +1,6 @@
 'use strict'
 
-import {intWord} from './../../src/humanize'
+import {intWord} from './../../src/format'
 
 describe('intWord', () => {
     it('should return val if parameter provided are numbers', () => {

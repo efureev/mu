@@ -2,6 +2,8 @@
 
 
 /**
+ * Get value by deep key in object(array)
+ *
  * @example
  * const obj = {
         key  : 0,

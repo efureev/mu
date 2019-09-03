@@ -4,7 +4,7 @@ import {isArray, isObject} from '../is'
 import {equals as equalsObject} from '../object'
 
 /**
- * Shallow compares the contents of 2 arrays using strict equality.
+ * Deep comparing the contents of 2 arrays using strict equality
  *
  * @param {Array} array1
  * @param {Array} array2
