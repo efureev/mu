@@ -1,3 +1,6 @@
+# v2.2.2
+- Add function `remove` to Object
+
 # v2.2.1
 - Merge `humanize` section into `format`
 - Add glossary into `README.md`

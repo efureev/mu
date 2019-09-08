@@ -7,6 +7,7 @@ import toQueryObjects from './toQueryObjects'
 import equals from './equals'
 import merge from './merge'
 import select from './select'
+import remove from './remove'
 
 export {
     getSize,
@@ -16,4 +17,5 @@ export {
     equals,
     merge,
     select,
+    remove,
 }

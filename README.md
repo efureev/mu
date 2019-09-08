@@ -66,6 +66,7 @@ getSize | int | Returns count of properties of the object | `getSize({k: 1, v: [
 fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')`
 merge | object | Merge 2 or more objects recursively |  | `merge({k: 1}, {v: 'test'}, {k: 2})`
 select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')`
+remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')`
 toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}`
 toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
       
