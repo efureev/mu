@@ -1,6 +1,8 @@
 'use strict'
 
 import {toString} from '../'
+import endsWith from './endsWith'
+import startsWith from './startsWith'
 
 export const reTrim = /^\s+|\s+$/g
 
@@ -52,4 +54,9 @@ export function titleCase(str) {
  */
 export function clearSpaces(str) {
     return str.toString().replace(/\s+/g, ' ').trim()
+}
+
+export {
+    endsWith,
+    startsWith,
 }

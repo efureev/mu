@@ -82,6 +82,8 @@ trim | string |
 clearSpaces | string | Remove extra spaces from string
 titleCase | string | Converts the first character of every word into string to upper case
 upperFirst | string | Converts the first character of string to upper case
+startsWith | string | Checks if string starts with the given target string
+endsWith | string | Checks if string ends with the given target string
 
 ## Date
 Function | Return | Description | Example

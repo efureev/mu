@@ -1,4 +1,6 @@
 # v2.2.3
+- Add function `startsWith` to String
+- Add function `endsWith` to String
 - Add function `clearSpaces` to String
 - Add function `titleCase` to String
 - Add function `upperFirst` to String
