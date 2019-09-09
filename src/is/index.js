@@ -1,11 +1,12 @@
 'use strict'
 
-import isObject, {isEmptyObject} from './isObject'
+import isObject, {isEmptyObject, isObjectLike} from './isObject'
 import isArray from './isArray'
 import isEmpty from './isEmpty'
 import isEven from './isEven'
 import isFunction from './isFunction'
 import isInteger from './isInteger'
+import isSymbol from './isSymbol'
 
 /**
  * This function evaluates if all the parameters are strings
@@ -71,10 +72,12 @@ export function isDate(...params) {
 
 export {
     isObject,
+    isObjectLike,
     isArray,
     isEmpty,
     isEven,
     isFunction,
     isInteger,
+    isSymbol,
     isEmptyObject,
 }

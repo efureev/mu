@@ -1,3 +1,8 @@
+# v2.2.4
+- Add function `toNumber` to Number
+- Add function `isObjectLike` to Is
+- Add function `isSymbol` to Is
+
 # v2.2.3
 - Add function `startsWith` to String
 - Add function `endsWith` to String

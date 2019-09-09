@@ -10,7 +10,7 @@ JS Utilities Framework
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.2.3"
+      "@feugene/mu": "^2.2.4"
     }
 }
 ```
@@ -50,8 +50,10 @@ isEven | bool
 isFunction | bool
 isInteger | bool
 isObject | bool
+isObjectLike | bool
 isNumeric | bool
 isString | bool
+isSymbol | bool
 
 ## Array
 Function | Return | Description | Example
@@ -74,6 +76,7 @@ toQueryObjects | object | Converts a `name` - `value` pair to an array of object
 Function | Return | Description | Example
 :--- | :--- | :---| :---
 pad | string | Add leading zero | `pad(9) // 09`
+toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
 
 ## String
 Function | Return | Description

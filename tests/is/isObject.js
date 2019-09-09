@@ -1,6 +1,6 @@
 'use strict'
 
-import {isObject, isEmptyObject} from './../../src/is'
+import {isEmptyObject, isObject, isObjectLike} from './../../src/is'
 
 describe('isObject', () => {
     it('should throw an error if no parameters are provided', () => {
@@ -71,5 +71,35 @@ describe('isEmptyObject', () => {
         expect(isEmptyObject({'re': 1, 'test': 2})).toBe(false)
         expect(isEmptyObject({}, {'re': 1, 'test': null})).toBe(false)
         expect(isEmptyObject({'re': 1, 'test': {'re': 1, 'test': {'re': 1, 'test': 2}}})).toBe(false)
+    })
+})
+
+describe('isObjectLike', () => {
+    it('should return `true`', () => {
+        expect(isObjectLike([])).toBeTruthy()
+        expect(isObjectLike([1, 2, 3, 4])).toBeTruthy()
+        expect(isObjectLike([null])).toBeTruthy()
+        expect(isObjectLike({})).toBeTruthy()
+        expect(isObjectLike({k: 1})).toBeTruthy()
+        expect(isObjectLike({k: 1, v: null})).toBeTruthy()
+        expect(isObjectLike(Object(false))).toBeTruthy()
+        expect(isObjectLike(new Date)).toBeTruthy()
+        expect(isObjectLike(new Error)).toBeTruthy()
+        expect(isObjectLike(Object(0))).toBeTruthy()
+        expect(isObjectLike(Object('a'))).toBeTruthy()
+        expect(isObjectLike(/x/)).toBeTruthy()
+
+    })
+
+    it('should return `false`', () => {
+        expect(isObjectLike(true)).toBeFalsy()
+        expect(isObjectLike(false)).toBeFalsy()
+        expect(isObjectLike(null)).toBeFalsy()
+        expect(isObjectLike(undefined)).toBeFalsy()
+        expect(isObjectLike()).toBeFalsy()
+        expect(isObjectLike(1)).toBeFalsy()
+        expect(isObjectLike('3')).toBeFalsy()
+        expect(isObjectLike(Symbol.iterator)).toBeFalsy()
+        expect(isObjectLike(new Function())).toBeFalsy()
     })
 })

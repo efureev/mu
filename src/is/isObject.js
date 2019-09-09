@@ -34,3 +34,24 @@ export function isEmptyObject(...params) {
 
     return !invalid
 }
+
+/**
+ * Checks if `value` is object-like. A value is object-like if it's not `null`
+ * and has a `typeof` result of "object".
+ *
+ * @returns {boolean} Returns `true` if `value` is object-like, else `false`.
+ * @example
+ *
+ * isObjectLike({}); // => true
+ *
+ * isObjectLike([]); // => true
+ *
+ * isObjectLike([1, 2, 3]); // => true
+ *
+ * isObjectLike(new Function()); // => false
+ *
+ * isObjectLike(null); // => false
+ */
+export function isObjectLike(value) {
+    return value !== null && typeof value === 'object'
+}
