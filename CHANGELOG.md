@@ -1,3 +1,8 @@
+# v2.2.3
+- Add function `clearSpaces` to String
+- Add function `titleCase` to String
+- Add function `upperFirst` to String
+
 # v2.2.2
 - Add function `remove` to Object
 

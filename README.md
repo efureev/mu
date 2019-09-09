@@ -10,7 +10,7 @@ JS Utilities Framework
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.2.1"
+      "@feugene/mu": "^2.2.3"
     }
 }
 ```
@@ -79,6 +79,9 @@ pad | string | Add leading zero | `pad(9) // 09`
 Function | Return | Description
 :--- | :---  | :--- 
 trim | string |
+clearSpaces | string | Remove extra spaces from string
+titleCase | string | Converts the first character of every word into string to upper case
+upperFirst | string | Converts the first character of string to upper case
 
 ## Date
 Function | Return | Description | Example
