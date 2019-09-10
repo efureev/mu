@@ -10,7 +10,7 @@ JS Utilities Framework
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.2.5"
+      "@feugene/mu": "^2.3.0"
     }
 }
 ```
@@ -79,7 +79,7 @@ toQueryObjects | object | Converts a `name` - `value` pair to an array of object
 ## Number
 Function | Return | Description | Example
 :--- | :--- | :---| :---
-pad | string | Add leading zero | `pad(9) // 09`
+padStart | string | Add leading zero | `padStart(9,3,'0') // 009`
 toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
 
 ## String
@@ -102,7 +102,9 @@ toString | string | Date as string
 ## Format
 Function | Return | Description | Example
 :--- | :--- | :--- | :---
-num | string | Formatting number | `num('10000') // 10,000.00`
-numRus | string | Formatting number for Russian | `numRus(1001.20) // 1 001.20`
-fileSize | string | Display number as file size | `fileSize(7900221323) // 7.36 Gb`
-intWord | string | | `intWord(21323) // 21.32K`
+num | string | Formatting number | `num('10000') // '10,000.00'`
+numRus | string | Formatting number for Russian | `numRus(1001.20) // '1 001.20'`
+fileSize | string | Display number as file size | `fileSize(7900221323) // '7.36 Gb'`
+intWord | string | | `intWord(21323) // '21.32K'`
+padNumber | string | | `padNumber(2,3) // '002'`
+padDateTime | string | | `padDateTime(1) // '01'`
