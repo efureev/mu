@@ -1,6 +1,6 @@
 'use strict'
 
-import {pad} from './../number'
+import {padDateTime} from '../format'
 
 const nowFn = Date.now || function () {
     return new Date().getTime()
@@ -28,9 +28,9 @@ export function toString(date) {
     }
 
     return date.getFullYear() + '-'
-        + pad(date.getMonth() + 1) + '-'
-        + pad(date.getDate()) + 'T'
-        + pad(date.getHours()) + ':'
-        + pad(date.getMinutes()) + ':'
-        + pad(date.getSeconds())
+        + padDateTime(date.getMonth() + 1) + '-'
+        + padDateTime(date.getDate()) + 'T'
+        + padDateTime(date.getHours()) + ':'
+        + padDateTime(date.getMinutes()) + ':'
+        + padDateTime(date.getSeconds())
 }

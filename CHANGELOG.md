@@ -1,3 +1,10 @@
+# v2.3.0
+- Fix function `equals` from Core
+- Remove function `pad` from Number
+- Add function `padNumber` to Format
+- Add function `padDateTime` to Format
+- Add function `padStart` to String
+
 # v2.2.5
 - Add function `isNil` to Is
 - Add function `isNils` to Is

@@ -3,6 +3,7 @@
 import {toString} from '../'
 import endsWith from './endsWith'
 import startsWith from './startsWith'
+import padStart from '../string/padStart'
 
 export const reTrim = /^\s+|\s+$/g
 
@@ -68,4 +69,5 @@ export function clearSpaces(str) {
 export {
     endsWith,
     startsWith,
+    padStart,
 }
