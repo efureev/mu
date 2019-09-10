@@ -15,7 +15,7 @@ JS Utilities Framework
 }
 ```
 
-##Test
+## Test
 ```bash
 jest
 ```
@@ -39,25 +39,25 @@ equals | bool |Deep comparing the contents of 2 elements using strict equality
 toString | string
 
 ## Is
-Function | Return
-:--- | :---
-isArray | bool
-isBoolean | bool
-isDate | bool
-isEmpty | bool
-isEmptyObject | bool
-isEven | bool
-isFunction | bool
-isInteger | bool
-isObject | bool
-isObjectLike | bool
-isNumeric | bool
-isString | bool
-isSymbol | bool
-isNil | bool
-isNils | bool
-isNull | bool
-isNulls | bool
+Function | Return | Example
+:--- | :--- | :---
+isArray | bool | `isArray([1,2]]); // true`
+isBoolean | bool | `isBoolean(true, true); // true`
+isDate | bool | `isDate(new Date); // true`
+isEmpty | bool  | `isEmpty(null, undefined, ''); // true`
+isEmptyObject | bool | `isEmptyObject({}}); // true`
+isEven | bool | `isEven(2, 4, '8'); // true`
+isFunction | bool | `isFunction(()=>{})); // true`
+isInteger | bool | `isInteger(12,-21); // true`
+isObject | bool | `isObject([], '12', 4, new Function()); // false`
+isObjectLike | bool | `isObjectLike([]); // true`
+isNumeric | bool | `isNumeric(12,-2.3); // true`
+isString | bool | `isString('test'); // true`
+isSymbol | bool | `isSymbol(Symbol('a')); // true`
+isNil | bool | `isNil(undefined); // true`
+isNils | bool | `isNulls(null, undefined, void 0); // true`
+isNull | bool | `isNull(null); // true`
+isNulls | bool | `isNulls(null, undefined); // false`
 
 ## Array
 Function | Return | Description | Example
