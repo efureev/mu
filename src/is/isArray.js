@@ -2,8 +2,7 @@
 
 /**
  * This function evaluates whether all parameters are array
- * @memberof µ.is
- * @author efureev
+ *
  * @param {...*} params - One or more parameters.
  */
 export default function isArray(...params) {

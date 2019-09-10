@@ -10,7 +10,7 @@ JS Utilities Framework
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.2.4"
+      "@feugene/mu": "^2.2.5"
     }
 }
 ```
@@ -54,6 +54,10 @@ isObjectLike | bool
 isNumeric | bool
 isString | bool
 isSymbol | bool
+isNil | bool
+isNils | bool
+isNull | bool
+isNulls | bool
 
 ## Array
 Function | Return | Description | Example

@@ -1,3 +1,9 @@
+# v2.2.5
+- Add function `isNil` to Is
+- Add function `isNils` to Is
+- Add function `isNull` to Is
+- Add function `isNulls` to Is
+
 # v2.2.4
 - Add function `toNumber` to Number
 - Add function `isObjectLike` to Is

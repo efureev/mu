@@ -7,6 +7,7 @@ import isEven from './isEven'
 import isFunction from './isFunction'
 import isInteger from './isInteger'
 import isSymbol from './isSymbol'
+import isNil, {isNils, isNull, isNulls} from './isNil'
 
 /**
  * This function evaluates if all the parameters are strings
@@ -79,5 +80,9 @@ export {
     isFunction,
     isInteger,
     isSymbol,
+    isNil,
+    isNull,
+    isNulls,
+    isNils,
     isEmptyObject,
 }
