@@ -9,7 +9,7 @@ JS Utilities Framework
 
 <p align="center">
   <a href="https://efureev.github.io/mu">
-    <img alt="mu" src="./docs/media/mu.png">
+    <img alt="mu" src="./docs/media/mu.png" width="640">
   </a>
 </p>
 
