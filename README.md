@@ -3,8 +3,15 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0279a1deefdae66f9e66/test_coverage)](https://codeclimate.com/github/efureev/mu/test_coverage)
 [![codecov](https://codecov.io/gh/efureev/mu/branch/master/graph/badge.svg)](https://codecov.io/gh/efureev/mu)
 
+
 # µ
 JS Utilities Framework
+
+<p align="center">
+  <a href="https://efureev.github.io/mu">
+    <img alt="mu" src="./docs/media/mu.png">
+  </a>
+</p>
 
 ## Links
 
