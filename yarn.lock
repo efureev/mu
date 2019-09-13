@@ -1784,7 +1784,7 @@ diff-sequences@^25.0.0:
   resolved "https://registry.yarnpkg.com/diff-sequences/-/diff-sequences-25.0.0.tgz#12e39d89da8c559b4eceef169260d9175683509c"
   integrity sha512-6KdBSVCp69YOkwCFmAhmJ23A05e4VSrDpnx0gRHkkLGHotSw/r7gSZH9sqP41Z5iAgeXE8UEZNFGO5sH90vXkg==
 
-docsify-cli@~4.3:
+docsify-cli@*:
   version "4.3.0"
   resolved "https://registry.yarnpkg.com/docsify-cli/-/docsify-cli-4.3.0.tgz#12b9cca29840d71653fe19bdc2ce8265a753b392"
   integrity sha512-88O1sMeoZv4lb5GPSJzDtOAv2KzBjpQaSqVlVqY+6hGJfb2wpz9PvlUhvlgPq54zu4kPDeCCyUYgqa/llhKg3w==
