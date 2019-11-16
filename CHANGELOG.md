@@ -1,3 +1,11 @@
+# v2.4.0
+- Add function `clear` to Array
+- Add function `intersect` to Array
+- Add function `random` to Array
+- Add function `intersectAll` to Array
+- Add function `difference` to Array
+- Add function `symmetricalDifference` to Array
+
 # v2.3.0
 - Fix function `equals` from Core
 - Remove function `pad` from Number
