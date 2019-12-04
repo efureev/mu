@@ -1,16 +1,8 @@
-[![Build Status](https://travis-ci.org/efureev/mu.svg?branch=master)](https://travis-ci.org/efureev/mu)
-[![Maintainability](https://api.codeclimate.com/v1/badges/0279a1deefdae66f9e66/maintainability)](https://codeclimate.com/github/efureev/mu/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/0279a1deefdae66f9e66/test_coverage)](https://codeclimate.com/github/efureev/mu/test_coverage)
-[![codecov](https://codecov.io/gh/efureev/mu/branch/master/graph/badge.svg)](https://codecov.io/gh/efureev/mu)
-
-# µ
-JS Utilities Framework
-
 ## Install
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.3.0"
+      "@feugene/mu": "^2.5.0"
     }
 }
 ```
@@ -26,23 +18,27 @@ jest
 - [Is](#is)
 - [Array](#array)
 - [Object](#object)
-- [Number](#number)
 - [String](#string)
 - [Date](#date)
 - [Format](#format)
+- [To](#to)
 
 ## Core
 Function | Return | Description
 :--- | :--- | :---
 clone | mixed | Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference
-equals | bool |Deep comparing the contents of 2 elements using strict equality
-toString | string
+equals | bool | Deep comparing the contents of 2 elements using strict equality
+forEach | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element
+key | array | Creates an array of the own enumerable property names of `object`
 
 ## Is
 Function | Return | Example
 :--- | :--- | :---
+isArguments | bool | `isArguments([1,2]]); // false`
 isArray | bool | `isArray([1,2]]); // true`
+isArrayLike | bool | `isArrayLike('abc'); // true`
 isBoolean | bool | `isBoolean(true, true); // true`
+isBuffer | bool | `isBuffer(new Buffer(2)); // true`
 isDate | bool | `isDate(new Date); // true`
 isEmpty | bool  | `isEmpty(null, undefined, ''); // true`
 isEmptyObject | bool | `isEmptyObject({}}); // true`
@@ -51,6 +47,7 @@ isFunction | bool | `isFunction(()=>{})); // true`
 isInteger | bool | `isInteger(12,-21); // true`
 isObject | bool | `isObject([], '12', 4, new Function()); // false`
 isObjectLike | bool | `isObjectLike([]); // true`
+isLength | bool | `isLength(3); // true`
 isNumeric | bool | `isNumeric(12,-2.3); // true`
 isString | bool | `isString('test'); // true`
 isSymbol | bool | `isSymbol(Symbol('a')); // true`
@@ -58,11 +55,20 @@ isNil | bool | `isNil(undefined); // true`
 isNils | bool | `isNulls(null, undefined, void 0); // true`
 isNull | bool | `isNull(null); // true`
 isNulls | bool | `isNulls(null, undefined); // false`
+isTypedArray | bool | `isTypedArray(new Uint8Array); // true`
 
 ## Array
 Function | Return | Description | Example
 :--- | :---| :---| :---
 equals | bool | Deep comparing the contents of 2 arrays using strict equality| `equals([1, '2', {}, []], [1, '2', {}, []])`
+arrayEach | array |  A specialized version of `forEach` for arrays| `arrayEach([1, '2', {}, []], (el)=>{...})`
+clear | void |  Clear array | 
+difference | array |  The difference will output the elements from array A that are not in the array B | `difference([2], [1, 4, 8])); // [2]` 
+intersect | array |  Return common items for two arrays | `intersect([1, 2, 3, 4, 5], [1, 4, 8]); // [1,4]`
+intersectAll | array |  Return common items for all arrays | `intersectAll([1, 2, 3, 4, 5], [1, 4, 8],[1])); // [1]`
+symmetricalDifference | array |  will output anti-intersection | `symmetricalDifference([1, 2, 3, 4, 5], [1, 4, 8]); // [2, 3, 5, 8]`
+random | array |  Random function returns random item from array | `random([1,2,3,4,5]]);`
+
 
 ## Object
 Function | Return | Description | Example
@@ -76,11 +82,13 @@ remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.
 toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}`
 toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
       
-## Number
+## To
 Function | Return | Description | Example
 :--- | :--- | :---| :---
-padStart | string | Add leading zero | `padStart(9,3,'0') // 009`
 toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
+toFinite | int | Converts `value` to a finite integer | `toFinite('-3.2') // 3`
+toInteger | int | Converts `value` to a integer | `toInteger('3.2') // 3`
+toString | string | Converts `value` to a string | `toString(1234) // '1234'`
 
 ## String
 Function | Return | Description
