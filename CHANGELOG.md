@@ -4,7 +4,7 @@
 - Add function `isLength` to `Is`
 - Add function `isBuffer` to `Is`
 - Add function `every` to `Array`
-- Add function `every` to `Array`
+- Add function `forEach` to `Core`
 - Add function `toFinite` to `To`
 - Add function `toInteger` to `To`
 - Add section `to` and move into function `toNumber`
