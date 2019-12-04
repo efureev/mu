@@ -31,7 +31,7 @@ after_success:
 jobs:
   include:
     - stage: npm release
-      node_js: "12"
+      node_js: "13"
       script: echo "Deploying to npm ..."
       deploy:
         provider: npm
