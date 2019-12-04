@@ -1,9 +1,8 @@
-'use strict'
-import {isFunction, isObject, isSymbol} from '../is'
-import {reIsBadHex, reIsBinary, reIsOctal, reTrim} from '../string'
+import {isObject, isSymbol} from '../is'
+import {reIsBadHex, reIsBinary, reIsOctal, reTrim} from '../core/vars'
 
 /**
- * Converts `value` to a number
+ * Converts `value` to a number.
  *
  * @param {*} value The value to process.
  * @returns {number} Returns the number.
@@ -21,16 +20,17 @@ import {reIsBadHex, reIsBinary, reIsOctal, reTrim} from '../string'
  * toNumber('3.2');
  * // => 3.2
  */
-export default function (value) {
+export default function toNumber(value) {
     if (typeof value === 'number') {
         return value
     }
+
     if (isSymbol(value)) {
         return NaN
     }
 
-    if (isFunction(value)) {
-        let other = value.valueOf()
+    if (isObject(value)) {
+        const other = typeof value.valueOf === 'function' ? value.valueOf() : value
         value = isObject(other) ? (other + '') : other
     }
 
@@ -39,6 +39,7 @@ export default function (value) {
     }
 
     value = value.replace(reTrim, '')
+
     const isBinary = reIsBinary.test(value)
 
     return (isBinary || reIsOctal.test(value))

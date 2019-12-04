@@ -7,6 +7,10 @@ import isEven from './isEven'
 import isFunction from './isFunction'
 import isInteger from './isInteger'
 import isSymbol from './isSymbol'
+import isLength from './isLength'
+import isArrayLike from './isArrayLike'
+import isBuffer from './isBuffer'
+import isArguments from './isArguments'
 import isNil, {isNils, isNull, isNulls} from './isNil'
 
 /**
@@ -70,7 +74,6 @@ export function isDate(...params) {
     return !invalid
 }
 
-
 export {
     isObject,
     isObjectLike,
@@ -85,4 +88,8 @@ export {
     isNulls,
     isNils,
     isEmptyObject,
+    isLength,
+    isArrayLike,
+    isBuffer,
+    isArguments,
 }

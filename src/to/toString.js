@@ -1,7 +1,11 @@
 'use strict'
 
-import {reTrim} from './../string'
+import {isArray, isSymbol} from '../is'
+import {reTrim} from '../core/vars'
 
+const
+    symbolProto    = Symbol ? Symbol.prototype : undefined,
+    symbolToString = symbolProto ? symbolProto.toString : undefined
 /**
  * Converts `value` to a string if it's not one. An empty string is returned
  * for `null` and `undefined` values. The sign of `-0` is preserved.
@@ -13,6 +17,13 @@ import {reTrim} from './../string'
  * @returns {string}
  */
 export default function toString(value) {
+    if (isArray(value)) {
+        return value.toString()
+    }
+
+    if (isSymbol(value)) {
+        return symbolToString ? symbolToString.call(value) : ''
+    }
 
     switch (typeof value) {
     case 'string':
@@ -22,12 +33,17 @@ export default function toString(value) {
     case 'object':
         return value === null ? '' : JSON.stringify(value)
     case 'boolean':
-        return value ? 'true' : 'false'
+        return value.toString()
     }
 
     if (!value) {
         return ''
     }
 
-    return value + ''
+    const result = (value + '')
+
+    return (result === '0' && (1 / value) === -Infinity)
+        ? '-0'
+        : result
+
 }

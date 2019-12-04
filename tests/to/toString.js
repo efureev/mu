@@ -1,7 +1,7 @@
 'use strict'
 
-import {toString} from './../src'
 
+import {toString} from '../../src/to'
 
 describe('toString', () => {
 
@@ -28,8 +28,8 @@ describe('toString', () => {
     })
 
     it('should return string if parameter provided are array', () => {
-        expect(toString([])).toBe('[]')
-        expect(toString([1, 2, 3, 4, 5])).toBe('[1,2,3,4,5]')
+        expect(toString([])).toBe('')
+        expect(toString([1, 2, 3, 4, 5])).toBe('1,2,3,4,5')
     })
     it('should return string if parameter provided are mixed', () => {
         expect(toString()).toBe('')

@@ -1,20 +1,10 @@
 'use strict'
 
-import {toString} from '../'
+import {toString} from '../to'
 import endsWith from './endsWith'
 import startsWith from './startsWith'
 import padStart from '../string/padStart'
-
-export const reTrim = /^\s+|\s+$/g
-
-/** Used to detect binary string values. */
-export const reIsBinary = /^0b[01]+$/i
-
-/** Used to detect octal string values. */
-export const reIsOctal = /^0o[0-7]+$/i
-
-/** Used to detect bad signed hexadecimal string values. */
-export const reIsBadHex = /^[-+]0x[0-9a-f]+$/i
+import {reTrim} from '../core/vars'
 
 /**
  * This function trim string

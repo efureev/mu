@@ -6,6 +6,7 @@ import intersect, {intersectAll} from './intersect'
 import difference from './difference'
 import symmetricalDifference from './symmetricalDifference'
 import random from './random'
+import arrayEach from './arrayEach'
 
 export {
     equals,
@@ -15,4 +16,5 @@ export {
     difference,
     symmetricalDifference,
     random,
+    arrayEach,
 }

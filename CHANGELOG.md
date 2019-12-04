@@ -1,3 +1,15 @@
+# v2.5.0
+- Add function `isArrayLike` to `Is`
+- Add function `isArguments` to `Is`
+- Add function `isLength` to `Is`
+- Add function `isBuffer` to `Is`
+- Add function `every` to `Array`
+- Add function `every` to `Array`
+- Add function `toFinite` to `To`
+- Add function `toInteger` to `To`
+- Add section `to` and move into function `toNumber`
+- Remove section `number`
+
 # v2.4.0
 - Add function `clear` to Array
 - Add function `intersect` to Array

@@ -1,7 +1,7 @@
 'use strict'
 
 import clone from './core/clone'
-import toString from './core/toString'
+import toString from './to/toString'
 import equals from './core/equals'
 
 export {
