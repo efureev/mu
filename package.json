@@ -15,15 +15,15 @@
     "url": "https://github.com/efureev/mu/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.5.5",
-    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
-    "@babel/preset-env": "^7.5.5",
-    "@types/jest": "^24.0.18",
+    "@babel/core": "^7.7.4",
+    "@babel/plugin-syntax-dynamic-import": "^7.7.4",
+    "@babel/preset-env": "^7.7.4",
+    "@types/jest": "^24.0.23",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^25.0.0",
-    "eslint": "^6.3.0",
+    "eslint": "^6.7.2",
     "jest": "^25.0.0",
-    "docsify-cli": "*"
+    "docsify-cli": "^4.4"
   },
   "keywords": [
     "javascript",
