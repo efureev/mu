@@ -7,7 +7,7 @@
 - Add function `forEach` to `Core`
 - Add function `toFinite` to `To`
 - Add function `toInteger` to `To`
-- Add section `to` and move into function `toNumber`
+- Add section `To` and move into function `toNumber`
 - Remove section `number`
 
 # v2.4.0
