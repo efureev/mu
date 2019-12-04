@@ -5,7 +5,7 @@
 
 
 # µ
-JS Utilities Framework
+JS Utilities Framework without dependencies.
 
 ## Links
 
