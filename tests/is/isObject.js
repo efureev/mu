@@ -1,6 +1,7 @@
 'use strict'
 
 import {isEmptyObject, isObject, isObjectLike} from './../../src/is'
+import {args, realm, slice, strictArgs, symbol} from './../utils'
 
 describe('isObject', () => {
     it('should throw an error if no parameters are provided', () => {
@@ -88,7 +89,13 @@ describe('isObjectLike', () => {
         expect(isObjectLike(Object(0))).toBeTruthy()
         expect(isObjectLike(Object('a'))).toBeTruthy()
         expect(isObjectLike(/x/)).toBeTruthy()
-
+        expect(isObjectLike(realm)).toBe(true)
+        expect(isObjectLike(args)).toBe(true)
+        expect(isObjectLike(args)).toBe(true)
+        expect(isObjectLike(strictArgs)).toBe(true)
+        expect(isObjectLike(function () {
+            return arguments
+        }())).toBe(true)
     })
 
     it('should return `false`', () => {
@@ -101,5 +108,9 @@ describe('isObjectLike', () => {
         expect(isObjectLike('3')).toBeFalsy()
         expect(isObjectLike(Symbol.iterator)).toBeFalsy()
         expect(isObjectLike(new Function())).toBeFalsy()
+
+
+        expect(isObjectLike(slice)).toBeFalsy()
+        expect(isObjectLike(symbol)).toBeFalsy()
     })
 })
