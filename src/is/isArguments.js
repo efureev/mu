@@ -22,7 +22,7 @@ const argsTag = '[object Arguments]'
  * @returns {boolean} Returns `true` if `value` is an `arguments` object,
  */
 const baseIsArguments = (value) => {
-    return isObjectLike(value) && baseGetTag(value) === argsTag
+    return value !== null && typeof value === 'object' && baseGetTag(value) === argsTag
 }
 
 
@@ -45,6 +45,6 @@ export default baseIsArguments(function () {
 }())
     ? baseIsArguments
     : function (value) {
-        return isObjectLike(value) && hasOwnProperty.call(value, 'callee') &&
+        return value !== null && typeof value === 'object' && hasOwnProperty.call(value, 'callee') &&
             !propertyIsEnumerable.call(value, 'callee')
     }
