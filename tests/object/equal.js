@@ -1,6 +1,7 @@
 'use strict'
 
 import {equals} from '../../src/object'
+import isArray from '../../src/is/isArray'
 
 describe('equal', () => {
 
@@ -56,6 +57,11 @@ describe('equal', () => {
         },
     }
 
+    it('should throw an error if no parameters are provided', () => {
+        expect(() => equals()).toThrow()
+    })
+
+
     it('should return true', () => {
         expect(equals({}, {})).toBeTruthy()
         expect(equals({k: 1}, {k: 1})).toBeTruthy()
@@ -69,6 +75,9 @@ describe('equal', () => {
         expect(equals({k: 1, v: {k: 2, v: {k: 3, v: {k: 4}}}}, {k: 1, v: {k: 2, v: {k: 3, v: {k: 4}}}})).toBeTruthy()
 
         expect(equals(first, second)).toBeTruthy()
+        expect(equals(NaN, NaN)).toBeTruthy()
+        expect(equals(1, 1)).toBeTruthy()
+        expect(equals(new Object(), new Object())).toBeTruthy()
     })
 
 
@@ -81,5 +90,7 @@ describe('equal', () => {
         expect(equals({k: 1, v: {k: 2, v: {k: 3, v: {k: 4}}}}, {k: 1, v: {k: 2, v: {k: 3, v: {k: 4}}}})).toBeTruthy()
 
         expect(equals(first, second)).toBeTruthy()
+
+        expect(equals(new Object(), new Object(2))).toBeFalsy()
     })
 })

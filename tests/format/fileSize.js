@@ -8,5 +8,6 @@ describe('intWord', () => {
         expect(fileSize(123)).toBe('123 bytes')
         expect(fileSize(21323)).toBe('20.82 Kb')
         expect(fileSize(7900221323)).toBe('7.36 Gb')
+        expect(fileSize(0)).toBe('0 bytes')
     })
 })

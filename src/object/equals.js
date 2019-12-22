@@ -17,7 +17,7 @@ export default function equal() {
 
         // remember that NaN === NaN returns false
         // and isNaN(undefined) returns true
-        isNumeric()
+        // isNumeric(x,y)
         if (isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number') {
             return true
         }

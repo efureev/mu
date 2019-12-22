@@ -1,6 +1,7 @@
 'use strict'
 
 import {toNumber} from './../../src/to'
+import {symbol} from '../utils'
 
 describe('toNumber', () => {
     it('should be true', () => {
@@ -18,5 +19,11 @@ describe('toNumber', () => {
         expect(toNumber(Number.MAX_SAFE_INTEGER)).toBe(9007199254740991)
         expect(toNumber(new Function())).toBe(NaN)
         expect(toNumber('test')).toBe(NaN)
+        expect(toNumber(NaN)).toBe(NaN)
+        expect(toNumber(symbol)).toBe(NaN)
+        expect(toNumber({})).toBe(NaN)
+        expect(toNumber(()=>{})).toBe(NaN)
+        const d =new Date
+        expect(toNumber(d)).toBe(+d)
     })
 })

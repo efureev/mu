@@ -2,6 +2,7 @@
 
 
 import {toString} from '../../src/to'
+import {emojiVar, realm, symbol} from '../utils'
 
 describe('toString', () => {
 
@@ -37,5 +38,14 @@ describe('toString', () => {
         expect(toString(undefined)).toBe('')
         expect(toString(true)).toBe('true')
         expect(toString(false)).toBe('false')
+    })
+
+    it('other', () => {
+        expect(toString(symbol)).toBe('Symbol(a)')
+        expect(toString(NaN)).toBe('NaN')
+        expect(toString(realm)).toBe('{}')
+        expect(toString(emojiVar)).toBe(emojiVar)
+        expect(toString()).toBe('')
+        expect(toString('😈')).toBe('😈')
     })
 })

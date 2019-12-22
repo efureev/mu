@@ -80,6 +80,10 @@ describe('merge', () => {
         expect(merge(first, second)).toEqual(result)
     })
 
+    it('should return first', () => {
+        expect(merge(first, 1, NaN, {}, [])).toEqual(first)
+    })
+
 
     const js = {
         companyName: 'JS',

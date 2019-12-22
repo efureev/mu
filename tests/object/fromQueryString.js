@@ -7,6 +7,8 @@ describe('fromQueryString', () => {
     it('should return object from string', () => {
         expect(fromQueryString('foo=1&bar=2')).toMatchObject({foo: '1', bar: '2'})
         expect(fromQueryString('foo=&bar=2')).toMatchObject({foo: '', bar: '2'})
+        expect(fromQueryString('foo=&bar=&bar2=')).toMatchObject({foo: '', bar: '', bar2: ''})
+        expect(fromQueryString('foo=&bar=&=sa')).toMatchObject({foo: ''})
         expect(fromQueryString('some%20price=%24300')).toMatchObject({'some price': '$300'})
         expect(fromQueryString('colors=red&colors=green&colors=blue')).toMatchObject({colors: ['red', 'green', 'blue']})
     })

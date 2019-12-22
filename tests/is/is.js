@@ -28,6 +28,11 @@ describe('isNumeric', () => {
     })
 
     it('should return false if any parameters are not an Numeric', () => {
+        expect(isNumeric(NaN)).toBe(false)
+        expect(isNumeric(NaN, NaN, -NaN)).toBe(false)
+        expect(isNumeric(Infinity)).toBe(false)
+        expect(isNumeric(-Infinity)).toBe(false)
+
         expect(isNumeric('dasdas')).toBe(false)
         expect(isNumeric('')).toBe(false)
         expect(isNumeric(null)).toBe(false)

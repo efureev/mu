@@ -1,6 +1,6 @@
 'use strict'
 
-import {isNumeric, isArray} from '../is'
+import {isArray, isNumeric} from '../is'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
@@ -83,7 +83,7 @@ export default function fromQueryString(queryString, recursive = false) {
 
                 //<debug>
                 if (!matchedName) {
-                    throw new Error('[Ext.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"')
+                    throw new Error('[µ.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"')
                 }
                 //</debug>
 
