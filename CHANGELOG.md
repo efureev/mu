@@ -1,3 +1,7 @@
+# v2.6.0
+- Add function `camelCase` to `String`
+- Add function `pascalCase` to `String`
+
 # v2.5.0
 - Add function `isArrayLike` to `Is`
 - Add function `isArguments` to `Is`

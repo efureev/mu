@@ -4,6 +4,7 @@ import {toString} from '../to'
 import endsWith from './endsWith'
 import startsWith from './startsWith'
 import padStart from '../string/padStart'
+import camelCase, {pascalCase} from '../string/camelCase'
 import {reTrim} from '../core/vars'
 
 /**
@@ -60,4 +61,6 @@ export {
     endsWith,
     startsWith,
     padStart,
+    camelCase,
+    pascalCase,
 }

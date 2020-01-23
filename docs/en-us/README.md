@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.5.0"
+      "@feugene/mu": "^2.6"
     }
 }
 ```
@@ -99,6 +99,8 @@ titleCase | string | Converts the first character of every word into string to u
 upperFirst | string | Converts the first character of string to upper case
 startsWith | string | Checks if string starts with the given target string
 endsWith | string | Checks if string ends with the given target string
+camelCase | string | Convert a dash/dot/underscore/space separated string to camelCase
+pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
 
 ## Date
 Function | Return | Description | Example
