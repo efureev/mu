@@ -1,4 +1,4 @@
-name: 'CI: µ'
+name: 'Deploy: µ'
 
 on:
   release:

@@ -1,4 +1,5 @@
-name: Create Release
+name: 'Create Release: µ'
+
 on:
   push:
     tags:

@@ -1,4 +1,4 @@
-name: µ CI
+name: 'CI: µ'
 
 on: [push]
 
