@@ -12,7 +12,7 @@ jobs:
       - name: Lint changelog file
         uses: efureev/markdown-lint@v1
         with:
-          rules: '/lint/rules/changelog.js'
+          rules: './.github/workflows/lint/rules/changelog.js'
           config: '/lint/config/changelog.yml'
           args: './CHANGELOG.md'
 
