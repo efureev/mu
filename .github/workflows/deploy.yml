@@ -18,9 +18,9 @@ jobs:
         with:
           node-version: '13.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: yarn install
+      - run: npm install
       # Publish to npm
-      - run: yarn publish --access public
+      - run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       # Setup .npmrc file to publish to GitHub Packages
@@ -29,6 +29,6 @@ jobs:
           node-version: '13.x'
           registry-url: 'https://npm.pkg.github.com'
       # Publish to GitHub Packages
-      - run: yarn publish
+      - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
