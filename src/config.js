@@ -1,3 +1,3 @@
 'use strict'
 
-export const VERSION = '2.5.4'
+export const VERSION = '2.7.0'
