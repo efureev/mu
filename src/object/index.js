@@ -7,6 +7,7 @@ import toQueryObjects from './toQueryObjects'
 import equals from './equals'
 import merge from './merge'
 import select from './select'
+import pick from './pick'
 import remove from './remove'
 
 export {
@@ -18,4 +19,5 @@ export {
     merge,
     select,
     remove,
+    pick,
 }

@@ -1,18 +1,18 @@
-## Install
+## Установка
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.6"
+      "@feugene/mu": "^2.7"
     }
 }
 ```
 
-## Test
+## Тесты
 ```bash
 jest
 ```
 
-## Table of Contents
+## Содержание
 
 - [Core](#core)
 - [Is](#is)
@@ -26,10 +26,10 @@ jest
 ## Core
 Function | Return | Description
 :--- | :--- | :---
-clone | mixed | Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference
-equals | bool | Deep comparing the contents of 2 elements using strict equality
-forEach | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element
-key | array | Creates an array of the own enumerable property names of `object`
+clone | mixed | Клонирует простые переменные, включая массивы, {}-похожие объекты, DOM-ноды и даты без сохранения старых ссылок
+equals | bool | Глубокое сравнивание содержания двух элементов (используется строгое сравнение)
+forEach | array, object | Перебирает элементы `collection` и выполняет `iteratee` для каждого элемента
+keys | array | Создает массив собственных имен свойтв объекта
 
 ## Is
 Function | Return | Example
@@ -60,41 +60,42 @@ isTypedArray | bool | `isTypedArray(new Uint8Array); // true`
 ## Array
 Function | Return | Description | Example
 :--- | :---| :---| :---
-equals | bool | Deep comparing the contents of 2 arrays using strict equality| `equals([1, '2', {}, []], [1, '2', {}, []])`
-arrayEach | array |  A specialized version of `forEach` for arrays| `arrayEach([1, '2', {}, []], (el)=>{...})`
-clear | void |  Clear array | 
-difference | array |  The difference will output the elements from array A that are not in the array B | `difference([2], [1, 4, 8])); // [2]` 
-intersect | array |  Return common items for two arrays | `intersect([1, 2, 3, 4, 5], [1, 4, 8]); // [1,4]`
-intersectAll | array |  Return common items for all arrays | `intersectAll([1, 2, 3, 4, 5], [1, 4, 8],[1])); // [1]`
-symmetricalDifference | array |  will output anti-intersection | `symmetricalDifference([1, 2, 3, 4, 5], [1, 4, 8]); // [2, 3, 5, 8]`
-random | array |  Random function returns random item from array | `random([1,2,3,4,5]]);`
+equals | bool | Глубокое сравнивание 2 массивов (используется строгое сравнение) | `equals([1, '2', {}, []], [1, '2', {}, []])`
+arrayEach | array |  Спец версия `forEach` для массивов | `arrayEach([1, '2', {}, []], (el)=>{...})`
+clear | void |  Очищает массив | 
+difference | array |  Возвращает различающиеся элементы для всех массивов | `difference([2], [1, 4, 8])); // [2]` 
+intersect | array |  Возвращает общие элементы для двух массивов | `intersect([1, 2, 3, 4, 5], [1, 4, 8]); // [1,4]`
+intersectAll | array |  Возвращает общие элементы для всех массивов | `intersectAll([1, 2, 3, 4, 5], [1, 4, 8],[1])); // [1]`
+symmetricalDifference | array |  Вернет анти-intersection | `symmetricalDifference([1, 2, 3, 4, 5], [1, 4, 8]); // [2, 3, 5, 8]`
+random | array |  Возвращает случайный элемент из массива | `random([1,2,3,4,5]]);`
 
 
 ## Object
 Function | Return | Description | Example
 :--- | :--- | :--- | :--- 
-equals | bool | Deep comparing the contents of 2 or more object using strict equality | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})`
-getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})`
-fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')`
-merge | object | Merge 2 or more objects recursively |  | `merge({k: 1}, {v: 'test'}, {k: 2})`
-select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')`
-remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')`
-toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}`
-toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
+equals | bool | Глубокое сравнивание содержания 2 и более объектов, используя строгое сравнивание | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})`
+getSize | int | Возвращает количество свойств объекта | `getSize({k: 1, v: []})`
+fromQueryString | object | Преобразует строку запроса в объект | `fromQueryString('foo=1&bar=2')`
+merge | object | Объединяет рекурсивно 2 и более объектов |  | `merge({k: 1}, {v: 'test'}, {k: 2})`
+select | mixed | Выбирает значения по ключу (даже вложенные) в объекте(массиве) | `select(obj, 'key.sub.items.1')`
+pick | object | Создает новый объект из "выдернутых" ключей объекта-цели. | `pick({a:1, b:2, c:3}, ['a', 'b'])`
+remove | object | Удаляет значения по ключу (даже вложенные) в объекте или массиве | `remove(obj, 'key.sub.items.1')`
+toQueryString | string | Преобразует объект в закодированную строку запроса | `toQueryString({colors: ['red', 'green', 'blue']}`
+toQueryObjects | object | Преобразует `name` - `value` пары в массив объектов с поддержкой вложенных структур | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
       
 ## To
 Function | Return | Description | Example
 :--- | :--- | :---| :---
-toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
-toFinite | int | Converts `value` to a finite integer | `toFinite('-3.2') // 3`
-toInteger | int | Converts `value` to a integer | `toInteger('3.2') // 3`
-toString | string | Converts `value` to a string | `toString(1234) // '1234'`
+toNumber | int|float | Конвертирует `value` в число | `toNumber('3.2') // 3.2`
+toFinite | int | Конвертирует `value` в конечное целое число | `toFinite('-3.2') // 3`
+toInteger | int | Конвертирует `value` в integer | `toInteger('3.2') // 3`
+toString | string | Конвертирует `value` в строку | `toString(1234) // '1234'`
 
 ## String
 Function | Return | Description
 :--- | :---  | :--- 
 trim | string |
-clearSpaces | string | Remove extra spaces from string
+clearSpaces | string | Удаляет лишние пробельные символы из строки
 titleCase | string | Converts the first character of every word into string to upper case
 upperFirst | string | Converts the first character of string to upper case
 startsWith | string | Checks if string starts with the given target string
@@ -105,16 +106,16 @@ pascalCase | string | Convert a dash/dot/underscore/space separated string to Pa
 ## Date
 Function | Return | Description | Example
 :--- | :--- | :--- | :---
-elapsed | int | Returns difference in milliseconds between dates
-now | date | Now date
-toString | string | Date as string
+elapsed | int | Вернет дельту в милисекундах между дататми
+now | date | Текущая дата
+toString | string | Преобразование даты в строку
 
 ## Format
 Function | Return | Description | Example
 :--- | :--- | :--- | :---
-num | string | Formatting number | `num('10000') // '10,000.00'`
-numRus | string | Formatting number for Russian | `numRus(1001.20) // '1 001.20'`
-fileSize | string | Display number as file size | `fileSize(7900221323) // '7.36 Gb'`
+num | string | Форматирование числа | `num('10000') // '10,000.00'`
+numRus | string | Форматирование числа для России | `numRus(1001.20) // '1 001.20'`
+fileSize | string | Форматирование числа как размер файла | `fileSize(7900221323) // '7.36 Gb'`
 intWord | string | | `intWord(21323) // '21.32K'`
 padNumber | string | | `padNumber(2,3) // '002'`
 padDateTime | string | | `padDateTime(1) // '01'`
