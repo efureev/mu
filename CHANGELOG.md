@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `toFinite` to `To`
 - A function `toInteger` to `To`
 - a section `To` and move into function `toNumber`
-- Written tests.
+- Written tests
 
 ### Removed
 
