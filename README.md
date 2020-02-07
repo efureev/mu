@@ -1,4 +1,4 @@
-![µ CI](https://github.com/efureev/mu/workflows/%C2%B5%20CI/badge.svg?branch=master)
+![CI: µ](https://github.com/efureev/mu/workflows/CI:%20%C2%B5/badge.svg)
 [![Build Status](https://travis-ci.org/efureev/mu.svg?branch=master)](https://travis-ci.org/efureev/mu)
 [![Maintainability](https://api.codeclimate.com/v1/badges/0279a1deefdae66f9e66/maintainability)](https://codeclimate.com/github/efureev/mu/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0279a1deefdae66f9e66/test_coverage)](https://codeclimate.com/github/efureev/mu/test_coverage)
