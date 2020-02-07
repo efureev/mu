@@ -15,10 +15,10 @@
     "url": "https://github.com/efureev/mu/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.8.3",
+    "@babel/core": "^7.8.4",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
-    "@types/jest": "^24.9.0",
+    "@types/jest": "^25.1.2",
     "babel-core": "^7.0.0-bridge.0",
     "babel-jest": "^25.1",
     "docsify-cli": "^4.4",
