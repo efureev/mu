@@ -42,42 +42,44 @@ import isArray from '../is/isArray'
  * @todo write tests
  */
 export default function toQueryObjects(name, value, recursive = false) {
-    const self = toQueryObjects
-    let objects = [], i, ln
+  const self = toQueryObjects
+  let objects = [],
+    i,
+    ln
 
-    if (isArray(value)) {
-        for (i = 0, ln = value.length; i < ln; i++) {
-            if (recursive) {
-                objects = objects.concat(self(name + '[' + i + ']', value[i], true))
-            } else {
-                objects.push({
-                    name : name,
-                    value: value[i],
-                })
-            }
-        }
-        return objects
+  if (isArray(value)) {
+    for (i = 0, ln = value.length; i < ln; i++) {
+      if (recursive) {
+        objects = objects.concat(self(name + '[' + i + ']', value[i], true))
+      } else {
+        objects.push({
+          name: name,
+          value: value[i],
+        })
+      }
     }
-    if (isObject(value)) {
-        for (i in value) {
-            if (Object.prototype.hasOwnProperty.call(value, i)) {
-                if (recursive) {
-                    objects = objects.concat(self(name + '[' + i + ']', value[i], true))
-                } else {
-                    objects.push({
-                        name : name,
-                        value: value[i],
-                    })
-                }
-            }
-        }
-        return objects
-    }
-
-    objects.push({
-        name : name,
-        value: value,
-    })
-
     return objects
+  }
+  if (isObject(value)) {
+    for (i in value) {
+      if (Object.prototype.hasOwnProperty.call(value, i)) {
+        if (recursive) {
+          objects = objects.concat(self(name + '[' + i + ']', value[i], true))
+        } else {
+          objects.push({
+            name: name,
+            value: value[i],
+          })
+        }
+      }
+    }
+    return objects
+  }
+
+  objects.push({
+    name: name,
+    value: value,
+  })
+
+  return objects
 }

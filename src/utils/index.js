@@ -2,6 +2,4 @@
 
 import times from './times'
 
-export {
-    times,
-}
+export { times }

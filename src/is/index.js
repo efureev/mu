@@ -1,6 +1,6 @@
 'use strict'
 
-import isObject, {isEmptyObject, isObjectLike} from './isObject'
+import isObject, { isEmptyObject, isObjectLike } from './isObject'
 import isArray from './isArray'
 import isEmpty from './isEmpty'
 import isEven from './isEven'
@@ -11,7 +11,7 @@ import isLength from './isLength'
 import isArrayLike from './isArrayLike'
 import isBuffer from './isBuffer'
 import isArguments from './isArguments'
-import isNil, {isNils, isNull, isNulls} from './isNil'
+import isNil, { isNils, isNull, isNulls } from './isNil'
 
 /**
  * This function evaluates if all the parameters are strings
@@ -20,13 +20,12 @@ import isNil, {isNils, isNull, isNulls} from './isNil'
  * @author efureev
  * {...*} params - One or more parameters.
  */
-export function isString(...params) {
-    const invalid = params.some((param) => {
-        return typeof param !== 'string'
-    })
+export function isString(...parameters) {
+  const invalid = parameters.some((parameter) => {
+    return typeof parameter !== 'string'
+  })
 
-    return !invalid
-
+  return !invalid
 }
 
 /**
@@ -36,12 +35,12 @@ export function isString(...params) {
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isNumeric(...params) {
-    const invalid = params.some((param) => {
-        return isNaN(parseFloat(param)) || !isFinite(param)
-    })
+export function isNumeric(...parameters) {
+  const invalid = parameters.some((parameter) => {
+    return isNaN(parseFloat(parameter)) || !isFinite(parameter)
+  })
 
-    return !invalid
+  return !invalid
 }
 
 /**
@@ -51,12 +50,16 @@ export function isNumeric(...params) {
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isBoolean(...params) {
-    const invalid = params.some((param) => {
-        return !(param === true || param === false || Object.prototype.toString.call(param) === '[object Boolean]')
-    })
+export function isBoolean(...parameters) {
+  const invalid = parameters.some((parameter) => {
+    return !(
+      parameter === true ||
+      parameter === false ||
+      Object.prototype.toString.call(parameter) === '[object Boolean]'
+    )
+  })
 
-    return !invalid
+  return !invalid
 }
 
 /**
@@ -66,30 +69,30 @@ export function isBoolean(...params) {
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export function isDate(...params) {
-    const invalid = params.some((param) => {
-        return Object.prototype.toString.call(param) !== '[object Date]'
-    })
+export function isDate(...parameters) {
+  const invalid = parameters.some((parameter) => {
+    return Object.prototype.toString.call(parameter) !== '[object Date]'
+  })
 
-    return !invalid
+  return !invalid
 }
 
 export {
-    isObject,
-    isObjectLike,
-    isArray,
-    isEmpty,
-    isEven,
-    isFunction,
-    isInteger,
-    isSymbol,
-    isNil,
-    isNull,
-    isNulls,
-    isNils,
-    isEmptyObject,
-    isLength,
-    isArrayLike,
-    isBuffer,
-    isArguments,
+  isObject,
+  isObjectLike,
+  isArray,
+  isEmpty,
+  isEven,
+  isFunction,
+  isInteger,
+  isSymbol,
+  isNil,
+  isNull,
+  isNulls,
+  isNils,
+  isEmptyObject,
+  isLength,
+  isArrayLike,
+  isBuffer,
+  isArguments,
 }

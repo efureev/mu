@@ -1,6 +1,6 @@
 'use strict'
 
-import {isEmptyObject} from './isObject'
+import { isEmptyObject } from './isObject'
 
 /**
  * This function evaluates if all the parameters are empty
@@ -9,31 +9,30 @@ import {isEmptyObject} from './isObject'
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export default function isEmpty(...params) {
-    const invalid = params.some((param) => {
-        switch (Object.prototype.toString.call(param)) {
-        case '[object String]':
-            if (param.trim().length) return true
-            break
-        case '[object Number]':
-            if (param !== 0) return true
-            break
-        case '[object Date]':
-            return true
-        case '[object Array]':
-            return param.length !== 0
-        case '[object Boolean]':
-            return param === false
-        case '[object Object]':
-            return !isEmptyObject(param)
-            // case '[object Function]':
-            // case '[object AsyncFunction]':
-            // case '[object Undefined]':
-            // case '[object Null]':
+export default function isEmpty(...parameters) {
+  const invalid = parameters.some((parameter) => {
+    switch (Object.prototype.toString.call(parameter)) {
+      case '[object String]':
+        if (parameter.trim().length) return true
+        break
+      case '[object Number]':
+        if (parameter !== 0) return true
+        break
+      case '[object Date]':
+        return true
+      case '[object Array]':
+        return parameter.length !== 0
+      case '[object Boolean]':
+        return parameter === false
+      case '[object Object]':
+        return !isEmptyObject(parameter)
+      // case '[object Function]':
+      // case '[object AsyncFunction]':
+      // case '[object Undefined]':
+      // case '[object Null]':
+    }
+    return false
+  })
 
-        }
-        return false
-    })
-
-    return !invalid
+  return !invalid
 }

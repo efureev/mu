@@ -5,8 +5,8 @@
  *
  * @param {...*} params - One or more parameters.
  */
-export default function isArray(...params) {
-    if (params.length === 0) throw Error('Please provide at least one param to evaluate isArray.')
+export default function isArray(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one param to evaluate isArray.')
 
-    return !(params.some(param => !Array.isArray(param)))
+  return !parameters.some((parameter) => !Array.isArray(parameter))
 }

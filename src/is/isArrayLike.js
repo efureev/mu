@@ -1,5 +1,5 @@
 'use strict'
-import {isFunction, isLength} from '../is'
+import { isFunction, isLength } from '../is'
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -23,5 +23,5 @@ import {isFunction, isLength} from '../is'
  * // => false
  */
 export default function isArrayLike(value) {
-    return value != null && isLength(value.length) && !isFunction(value)
+  return value != null && isLength(value.length) && !isFunction(value)
 }

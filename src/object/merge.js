@@ -1,7 +1,7 @@
 'use strict'
 
-import {clone} from '../index'
-import {isObject} from '../is'
+import { clone } from '..'
+import { isObject } from '../is'
 
 /**
  * Merge objects recursively
@@ -45,28 +45,32 @@ import {isObject} from '../is'
  * @return {Object} merged The destination object with all passed objects merged in.
  */
 export default function merge(destination) {
-    const ln = arguments.length
-    let i = 1, object, key, value, sourceKey
+  const ln = arguments.length
+  let i = 1,
+    object,
+    key,
+    value,
+    sourceKey
 
-    for (; i < ln; i++) {
-        object = arguments[i]
-        if (!isObject(object)) {
-            continue
-        }
-        for (key in object) {
-            value = object[key]
-            if (value && value.constructor === Object) {
-                sourceKey = destination[key]
-                if (sourceKey && sourceKey.constructor === Object) {
-                    merge(sourceKey, value)
-                } else {
-                    destination[key] = clone(value)
-                }
-            } else {
-                destination[key] = value
-            }
-        }
+  for (; i < ln; i++) {
+    object = arguments[i]
+    if (!isObject(object)) {
+      continue
     }
+    for (key in object) {
+      value = object[key]
+      if (value && value.constructor === Object) {
+        sourceKey = destination[key]
+        if (sourceKey && sourceKey.constructor === Object) {
+          merge(sourceKey, value)
+        } else {
+          destination[key] = clone(value)
+        }
+      } else {
+        destination[key] = value
+      }
+    }
+  }
 
-    return destination
+  return destination
 }

@@ -17,6 +17,4 @@ const nodeIsTypedArray = node && node.isTypedArray
  * isTypedArray([]);
  * // => false
  */
-export default nodeIsTypedArray
-    ? (val) => nodeIsTypedArray(val)
-    : baseIsTypedArray
+export default nodeIsTypedArray ? (value) => nodeIsTypedArray(value) : baseIsTypedArray

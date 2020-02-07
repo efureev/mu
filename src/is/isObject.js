@@ -1,12 +1,12 @@
-const isO = (toString.call(null) === '[object Object]')
-    ? function (value) {
+const isO =
+  toString.call(null) === '[object Object]'
+    ? function(value) {
         // check ownerDocument here as well to exclude DOM nodes
-        return value != null && toString.call(value) === '[object Object]' &&
-            value.ownerDocument === undefined
-    }
-    : function (value) {
+        return value != null && toString.call(value) === '[object Object]' && value.ownerDocument === undefined
+      }
+    : function(value) {
         return toString.call(value) === '[object Object]'
-    }
+      }
 
 /**
  * This function evaluates whether all parameters are objects
@@ -14,25 +14,24 @@ const isO = (toString.call(null) === '[object Object]')
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export default function isObject(...params) {
-    if (params.length === 0) throw Error('Please provide at least one number to evaluate isObject.')
+export default function isObject(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isObject.')
 
-    const invalid = params.some((param) => !isO(param))
+  const invalid = parameters.some((parameter) => !isO(parameter))
 
-    return !invalid
+  return !invalid
 }
 
-export function isEmptyObject(...params) {
-    if (params.length === 0) throw Error('Please provide at least one number to evaluate isObject.')
+export function isEmptyObject(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isObject.')
 
-    const invalid = params.some((param) => {
-        if (!isObject(param))
-            return true
+  const invalid = parameters.some((parameter) => {
+    if (!isObject(parameter)) return true
 
-        for (const key in param) return true
-    })
+    for (const key in parameter) return true
+  })
 
-    return !invalid
+  return !invalid
 }
 
 /**
@@ -53,5 +52,5 @@ export function isEmptyObject(...params) {
  * isObjectLike(null); // => false
  */
 export function isObjectLike(value) {
-    return value !== null && typeof value === 'object'
+  return value !== null && typeof value === 'object'
 }

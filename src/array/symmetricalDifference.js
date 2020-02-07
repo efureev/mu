@@ -8,7 +8,5 @@
  * @returns {any[]}
  */
 export default function symmetricalDifference(array, array2) {
-    return [...new Set(array)]
-        .filter(x => !array2.includes(x))
-        .concat(array2.filter(x => !array.includes(x)))
+  return [...new Set(array)].filter((x) => !array2.includes(x)).concat(array2.filter((x) => !array.includes(x)))
 }

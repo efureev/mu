@@ -9,9 +9,8 @@ const objectProto = Object.prototype
  * @returns {boolean} Returns `true` if `value` is a prototype, else `false`.
  */
 export default function isPrototype(value) {
-    const
-        Ctor  = value && value.constructor,
-        proto = (typeof Ctor === 'function' && Ctor.prototype) || objectProto
+  const Ctor = value && value.constructor,
+    proto = (typeof Ctor === 'function' && Ctor.prototype) || objectProto
 
-    return value === proto
+  return value === proto
 }

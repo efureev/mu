@@ -1,6 +1,6 @@
 'use strict'
 
-import {isObjectLike} from './'
+import { isObjectLike } from '.'
 
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.
@@ -17,12 +17,11 @@ import {isObjectLike} from './'
  *
  * isSymbol(Symbol.iterator, Symbol.iterator); // => true
  */
-export default function (...params) {
-    if (params.length === 0) throw Error('Please provide at least one number to evaluate isInteger.')
+export default function(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isInteger.')
 
-    return (params.some(value => typeof value === 'symbol' ||
-        (
-            isObjectLike(value) && Object.prototype.toString.call(value) === '[object Symbol]'
-        ),
-    ))
+  return parameters.some(
+    (value) =>
+      typeof value === 'symbol' || (isObjectLike(value) && Object.prototype.toString.call(value) === '[object Symbol]')
+  )
 }

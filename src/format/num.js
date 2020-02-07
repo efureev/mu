@@ -1,6 +1,6 @@
 'use strict'
 
-import {isInteger} from '../is'
+import { isInteger } from '../is'
 
 /**
  * Formatting number
@@ -11,29 +11,30 @@ import {isInteger} from '../is'
  * @param {Boolean} clearDecimals
  * @returns {string}
  */
-export default function num(number, decimals = 2, decPoint = '.', thousandsSep = ',', clearDecimals = false) {
+export default function number_(number, decimals = 2, decPoint = '.', thousandsSeparator = ',', clearDecimals = false) {
+  decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
 
-    decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
+  const sign = number < 0 ? '-' : ''
+  number = Math.abs(+number || 0)
 
-    const sign = number < 0 ? '-' : ''
-    number = Math.abs(+number || 0)
+  const intPart = parseInt(number.toFixed(decimals), 10) + ''
+  const j = intPart.length > 3 ? intPart.length % 3 : 0
 
-    const intPart = parseInt(number.toFixed(decimals), 10) + ''
-    const j = intPart.length > 3 ? intPart.length % 3 : 0
-
-    return sign +
-        (j ? intPart.substr(0, j) + thousandsSep : '') +
-        intPart.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSep) +
-        (
-            decimals
-                ?
-                (clearDecimals && isInteger(number)
-                    ? ''
-                    : decPoint + Math.abs(number - intPart).toFixed(decimals).slice(2))
-                : ''
-        )
+  return (
+    sign +
+    (j ? intPart.substr(0, j) + thousandsSeparator : '') +
+    intPart.substr(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSeparator) +
+    (decimals
+      ? clearDecimals && isInteger(number)
+        ? ''
+        : decPoint +
+          Math.abs(number - intPart)
+            .toFixed(decimals)
+            .slice(2)
+      : '')
+  )
 }
 
 export function numRus(number, decimals = 2) {
-    return num(number, decimals, '.', ' ', true)
+  return number_(number, decimals, '.', ' ', true)
 }

@@ -8,5 +8,5 @@
  * @returns {any[]}
  */
 export default function difference(array, array2) {
-    return [...new Set(array.filter(x => !array2.includes(x)))]
+  return [...new Set(array.filter((x) => !array2.includes(x)))]
 }

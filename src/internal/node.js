@@ -12,17 +12,16 @@ const moduleExports = freeModule && freeModule.exports === freeExports
 const freeProcess = moduleExports && freeGlobal.process
 
 /** Used to access faster Node.js helpers. */
-export default (function () {
-    try {
-        // Use `util.types` for Node.js 10+.
-        const types = freeModule && freeModule.require && freeModule.require('util').types
+export default (function() {
+  try {
+    // Use `util.types` for Node.js 10+.
+    const types = freeModule && freeModule.require && freeModule.require('util').types
 
-        if (types) {
-            return types
-        }
-
-        // Legacy `process.binding('util')` for Node.js < 10.
-        return freeProcess && freeProcess.binding && freeProcess.binding('util')
-    } catch (e) {
+    if (types) {
+      return types
     }
-}())
+
+    // Legacy `process.binding('util')` for Node.js < 10.
+    return freeProcess && freeProcess.binding && freeProcess.binding('util')
+  } catch (error) {}
+})()

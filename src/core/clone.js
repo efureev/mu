@@ -12,50 +12,49 @@ const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
  * @return {Object} clone
  */
 export default function clone(item, cloneDom = true) {
-    if (item === null || item === undefined) {
-        return item
+  if (item === null || item === undefined) {
+    return item
+  }
+
+  if (cloneDom !== false && item.nodeType && item.cloneNode) {
+    return item.cloneNode(true)
+  }
+
+  const type = Object.prototype.toString.call(item)
+  let i, j, k, newClone, key
+
+  // Date
+  if (type === '[object Date]') {
+    return new Date(item.getTime())
+  }
+
+  // Array
+  if (type === '[object Array]') {
+    i = item.length
+
+    newClone = []
+
+    while (i--) {
+      newClone[i] = clone(item[i], cloneDom)
+    }
+  }
+  // Object
+  else if (type === '[object Object]' && item.constructor === Object) {
+    newClone = {}
+
+    for (key in item) {
+      newClone[key] = clone(item[key], cloneDom)
     }
 
-    if (cloneDom !== false && item.nodeType && item.cloneNode) {
-        return item.cloneNode(true)
-    }
-
-    const type = Object.prototype.toString.call(item)
-    let i, j, k, newClone, key
-
-    // Date
-    if (type === '[object Date]') {
-        return new Date(item.getTime())
-    }
-
-    // Array
-    if (type === '[object Array]') {
-        i = item.length
-
-        newClone = []
-
-        while (i--) {
-            newClone[i] = clone(item[i], cloneDom)
+    if (enumerables) {
+      for (j = enumerables.length; j--; ) {
+        k = enumerables[j]
+        if (Object.prototype.hasOwnProperty.call(item, k)) {
+          newClone[k] = item[k]
         }
+      }
     }
-    // Object
-    else if (type === '[object Object]' && item.constructor === Object) {
-        newClone = {}
+  }
 
-        for (key in item) {
-            newClone[key] = clone(item[key], cloneDom)
-        }
-
-        if (enumerables) {
-            for (j = enumerables.length; j--;) {
-                k = enumerables[j]
-                if (Object.prototype.hasOwnProperty.call(item, k)) {
-                    newClone[k] = item[k]
-                }
-            }
-        }
-    }
-
-    return newClone || item
+  return newClone || item
 }
-

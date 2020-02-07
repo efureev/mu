@@ -10,14 +10,4 @@ import select from './select'
 import pick from './pick'
 import remove from './remove'
 
-export {
-    getSize,
-    fromQueryString,
-    toQueryString,
-    toQueryObjects,
-    equals,
-    merge,
-    select,
-    remove,
-    pick,
-}
+export { getSize, fromQueryString, toQueryString, toQueryObjects, equals, merge, select, remove, pick }

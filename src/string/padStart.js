@@ -1,6 +1,6 @@
 'use strict'
 
-import {isNil} from '../is'
+import { isNil } from '../is'
 
 /**
  * This function add leading zero
@@ -10,24 +10,24 @@ import {isNil} from '../is'
  * @param {string} padString
  * @returns {string}
  */
-export default function padStart(str, targetLength, padString = ' ') {
-    targetLength = targetLength >> 0 //floor if number or convert non-number to 0;
-    if (isNil(str)) {
-        return ''
+export default function padStart(string, targetLength, padString = ' ') {
+  targetLength = targetLength >> 0 //floor if number or convert non-number to 0;
+  if (isNil(string)) {
+    return ''
+  }
+  string = String(string)
+  padString = String(padString)
+  if (string.length > targetLength) {
+    return String(string)
+  } else {
+    targetLength = targetLength - string.length
+    if (targetLength > padString.length) {
+      padString += padString.repeat(targetLength / padString.length) //append to original to ensure we are longer than needed
     }
-    str = String(str)
-    padString = String(padString)
-    if (str.length > targetLength) {
-        return String(str)
-    } else {
-        targetLength = targetLength - str.length
-        if (targetLength > padString.length) {
-            padString += padString.repeat(targetLength / padString.length) //append to original to ensure we are longer than needed
-        }
-        return padString.slice(0, targetLength) + String(str)
-    }
+    return padString.slice(0, targetLength) + String(string)
+  }
 }
 
 if (!String.prototype.padStart) {
-    String.prototype.padStart = padStart.call(this)
+  String.prototype.padStart = padStart.call(this)
 }

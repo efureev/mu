@@ -1,11 +1,11 @@
 'use strict'
 
-import {toString} from '../to'
+import { toString } from '../to'
 import endsWith from './endsWith'
 import startsWith from './startsWith'
 import padStart from '../string/padStart'
-import camelCase, {pascalCase} from '../string/camelCase'
-import {reTrim} from '../core/vars'
+import camelCase, { pascalCase } from '../string/camelCase'
+import { reTrim } from '../core/vars'
 
 /**
  * This function trim string
@@ -13,14 +13,14 @@ import {reTrim} from '../core/vars'
  * @param {string} str
  * @returns {string}
  */
-export function trim(str) {
-    str = toString(str)
+export function trim(string) {
+  string = toString(string)
 
-    if (!str) {
-        return str
-    }
+  if (!string) {
+    return string
+  }
 
-    return str.replace(reTrim, '')
+  return string.replace(reTrim, '')
 }
 
 /**
@@ -29,9 +29,9 @@ export function trim(str) {
  * @param {string} str
  * @returns {string}
  */
-export function upperFirst(str) {
-    const strTrim = str.trim()
-    return strTrim.charAt(0).toUpperCase() + strTrim.substr(1).toLowerCase()
+export function upperFirst(string) {
+  const stringTrim = string.trim()
+  return stringTrim.charAt(0).toUpperCase() + stringTrim.substr(1).toLowerCase()
 }
 
 /**
@@ -40,11 +40,8 @@ export function upperFirst(str) {
  * @param {string} str
  * @returns {string}
  */
-export function titleCase(str) {
-    return clearSpaces(str).replace(
-        /\w\S*/g,
-        (txt) => upperFirst(txt),
-    )
+export function titleCase(string) {
+  return clearSpaces(string).replace(/\w\S*/g, (txt) => upperFirst(txt))
 }
 
 /**
@@ -53,14 +50,11 @@ export function titleCase(str) {
  * @param {string} str
  * @returns {string}
  */
-export function clearSpaces(str) {
-    return str.toString().replace(/\s+/g, ' ').trim()
+export function clearSpaces(string) {
+  return string
+    .toString()
+    .replace(/\s+/g, ' ')
+    .trim()
 }
 
-export {
-    endsWith,
-    startsWith,
-    padStart,
-    camelCase,
-    pascalCase,
-}
+export { endsWith, startsWith, padStart, camelCase, pascalCase }

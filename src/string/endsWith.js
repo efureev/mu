@@ -1,6 +1,6 @@
 'use strict'
 
-import {toString} from '../index'
+import { toString } from '..'
 
 /**
  * Checks if string ends with the given target string
@@ -9,14 +9,14 @@ import {toString} from '../index'
  * @param {string} target
  * @returns {boolean}
  */
-export default function (str, target) {
-    str = toString(str)
-    target = toString(target)
+export default function(string, target) {
+  string = toString(string)
+  target = toString(target)
 
-    let position = str.length
-    const end = position
+  let position = string.length
+  const end = position
 
-    position -= target.length
+  position -= target.length
 
-    return position >= 0 && str.slice(position, end) === target
+  return position >= 0 && string.slice(position, end) === target
 }

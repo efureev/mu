@@ -1,5 +1,5 @@
 /** Used as references for various `Number` constants. */
-import {reIsUint} from '../core/vars'
+import { reIsUint } from '../core/vars'
 
 /**
  * Checks if `value` is a valid array-like index.
@@ -10,11 +10,14 @@ import {reIsUint} from '../core/vars'
  * @returns {boolean} Returns `true` if `value` is a valid index, else `false`.
  */
 export default function isIndex(value, length) {
-    const type = typeof value
-    length = length == null ? Number.MAX_SAFE_INTEGER : length
+  const type = typeof value
+  length = length == null ? Number.MAX_SAFE_INTEGER : length
 
-    return !!length &&
-        (type === 'number' ||
-            (type !== 'symbol' && reIsUint.test(value))) &&
-        (value > -1 && value % 1 === 0 && value < length)
+  return (
+    !!length &&
+    (type === 'number' || (type !== 'symbol' && reIsUint.test(value))) &&
+    value > -1 &&
+    value % 1 === 0 &&
+    value < length
+  )
 }

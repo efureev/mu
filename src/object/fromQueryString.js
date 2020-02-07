@@ -1,6 +1,6 @@
 'use strict'
 
-import {isArray, isNumeric} from '../is'
+import { isArray, isNumeric } from '../is'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
@@ -43,90 +43,103 @@ const nameRe = /^([^\[]+)/ // eslint-disable-line no-useless-escape
  * @todo write tests
  */
 export default function fromQueryString(queryString, recursive = false) {
-    let parts  = queryString.replace(queryRe, '').split('&'),
-        object = {},
-        temp, components, name, value, i, ln,
-        part, j, subLn, matchedKeys, matchedName,
-        keys, key, nextKey
+  let parts = queryString.replace(queryRe, '').split('&'),
+    object = {},
+    temporary,
+    components,
+    name,
+    value,
+    i,
+    ln,
+    part,
+    j,
+    subLn,
+    matchedKeys,
+    matchedName,
+    keys,
+    key,
+    nextKey
 
-    for (i = 0, ln = parts.length; i < ln; i++) {
-        part = parts[i]
+  for (i = 0, ln = parts.length; i < ln; i++) {
+    part = parts[i]
 
-        if (part.length > 0) {
-            components = part.split('=')
-            name = components[0]
-            name = name.replace(plusRe, '%20')
-            name = decodeURIComponent(name)
+    if (part.length > 0) {
+      components = part.split('=')
+      name = components[0]
+      name = name.replace(plusRe, '%20')
+      name = decodeURIComponent(name)
 
-            value = components[1]
+      value = components[1]
 
-            if (value !== undefined) {
-                value = value.replace(plusRe, '%20')
-                value = decodeURIComponent(value)
-            } else {
-                value = ''
-            }
+      if (value !== undefined) {
+        value = value.replace(plusRe, '%20')
+        value = decodeURIComponent(value)
+      } else {
+        value = ''
+      }
 
-            if (!recursive) {
-                if (Object.prototype.hasOwnProperty.call(object, name)) {
-                    if (!isArray(object[name])) {
-                        object[name] = [object[name]]
-                    }
+      if (!recursive) {
+        if (Object.prototype.hasOwnProperty.call(object, name)) {
+          if (!isArray(object[name])) {
+            object[name] = [object[name]]
+          }
 
-                    object[name].push(value)
-                } else {
-                    object[name] = value
-                }
-            } else {
-                matchedKeys = name.match(keyRe)
-                matchedName = name.match(nameRe)
-
-                //<debug>
-                if (!matchedName) {
-                    throw new Error('[µ.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"')
-                }
-                //</debug>
-
-                name = matchedName[0]
-                keys = []
-
-                if (matchedKeys === null) {
-                    object[name] = value
-                    continue
-                }
-
-                for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
-                    key = matchedKeys[j]
-                    key = (key.length === 2) ? '' : key.substring(1, key.length - 1)
-                    keys.push(key)
-                }
-
-                keys.unshift(name)
-
-                temp = object
-
-                for (j = 0, subLn = keys.length; j < subLn; j++) {
-                    key = keys[j]
-
-                    if (j === subLn - 1) {
-                        if (isArray(temp) && key === '') {
-                            temp.push(value)
-                        } else {
-                            temp[key] = value
-                        }
-                    } else {
-                        if (temp[key] === undefined || typeof temp[key] === 'string') {
-                            nextKey = keys[j + 1]
-
-                            temp[key] = (isNumeric(nextKey) || nextKey === '') ? [] : {}
-                        }
-
-                        temp = temp[key]
-                    }
-                }
-            }
+          object[name].push(value)
+        } else {
+          object[name] = value
         }
-    }
+      } else {
+        matchedKeys = name.match(keyRe)
+        matchedName = name.match(nameRe)
 
-    return object
+        //<debug>
+        if (!matchedName) {
+          throw new Error(
+            '[µ.Object.fromQueryString] Malformed query string given, failed parsing name from "' + part + '"'
+          )
+        }
+        //</debug>
+
+        name = matchedName[0]
+        keys = []
+
+        if (matchedKeys === null) {
+          object[name] = value
+          continue
+        }
+
+        for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
+          key = matchedKeys[j]
+          key = key.length === 2 ? '' : key.substring(1, key.length - 1)
+          keys.push(key)
+        }
+
+        keys.unshift(name)
+
+        temporary = object
+
+        for (j = 0, subLn = keys.length; j < subLn; j++) {
+          key = keys[j]
+
+          if (j === subLn - 1) {
+            if (isArray(temporary) && key === '') {
+              temporary.push(value)
+            } else {
+              temporary[key] = value
+            }
+          } else {
+            if (temporary[key] === undefined || typeof temporary[key] === 'string') {
+              nextKey = keys[j + 1]
+
+              temporary[key] = isNumeric(nextKey) || nextKey === '' ? [] : {}
+            }
+
+            temporary = temporary[key]
+          }
+        }
+      }
+    }
+  }
+
+  return object
 }

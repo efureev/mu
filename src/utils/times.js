@@ -13,12 +13,12 @@
  * // => ['0', '1', '2']
  */
 export default function times(n = 1, iteratee = (v) => v) {
-    let index  = -1,
-        result = Array(n)
+  let index = -1,
+    result = new Array(n)
 
-    while (++index < n) {
-        result[index] = iteratee(index)
-    }
+  while (++index < n) {
+    result[index] = iteratee(index)
+  }
 
-    return result
+  return result
 }

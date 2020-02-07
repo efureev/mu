@@ -26,14 +26,14 @@ import select from './select'
  * pick(object, ['d.1.id', b]); // => { 'd.1.id': 2, b: 2 }
  */
 export default function pick(object, paths) {
-    if (isEmpty(object)) {
-        return {}
-    }
+  if (isEmpty(object)) {
+    return {}
+  }
 
-    const res = {}
-    forEach(paths, (v) => {
-        res[v] = select(object, v)
-    })
+  const res = {}
+  forEach(paths, (v) => {
+    res[v] = select(object, v)
+  })
 
-    return res
+  return res
 }

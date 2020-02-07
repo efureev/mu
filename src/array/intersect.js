@@ -8,8 +8,8 @@
  * @returns {any[]}
  */
 export default function intersect(array, array2) {
-    const set = new Set(array)
-    return [...new Set(array2.filter(item => set.has(item)))]
+  const set = new Set(array)
+  return [...new Set(array2.filter((item) => set.has(item)))]
 }
 
 /**
@@ -20,7 +20,7 @@ export default function intersect(array, array2) {
  * @returns {*|any[]}
  */
 export function intersectAll(array, ...arrays) {
-    return arrays.reduce((prev, next) => {
-        return intersect(prev, next)
-    }, array)
+  return arrays.reduce((previous, next) => {
+    return intersect(previous, next)
+  }, array)
 }

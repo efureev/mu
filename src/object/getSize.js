@@ -1,6 +1,6 @@
 'use strict'
 
-import {isObject} from './../is'
+import { isObject } from './../is'
 
 /**
  * Returns count of properties of the object
@@ -11,18 +11,18 @@ import {isObject} from './../is'
  * @returns {int}
  */
 export default function getSize(object) {
-    if (!isObject(object)) {
-        throw Error('Param is not object')
+  if (!isObject(object)) {
+    throw new Error('Param is not object')
+  }
+
+  let size = 0
+  let property
+
+  for (property in object) {
+    if (Object.prototype.hasOwnProperty.call(object, property)) {
+      size++
     }
+  }
 
-    let size = 0
-    let property
-
-    for (property in object) {
-        if (Object.prototype.hasOwnProperty.call(object, property)) {
-            size++
-        }
-    }
-
-    return size
+  return size
 }

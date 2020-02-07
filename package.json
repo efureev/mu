@@ -23,15 +23,22 @@
     "babel-jest": "^25.1",
     "docsify-cli": "^4.4",
     "eslint": "^6.8",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "eslint-plugin-unicorn": "^12.1.0",
     "jest": "^25.1",
-    "prettier": "^1.19.1"
+    "prettier": "^1.19.1",
+    "prettier-eslint": "^9.0.0"
   },
   "keywords": [
     "javascript",
     "utilities"
   ],
   "scripts": {
-    "prettier": "prettier --write src/* test/*",
+    "lint": "eslint src/**/*",
+    "prettier": "prettier --write src/**/* test/**/*",
     "test": "jest",
     "docsify": "docsify serve ./docs"
   }

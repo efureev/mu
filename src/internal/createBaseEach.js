@@ -1,6 +1,6 @@
 'use strict'
 
-import {isArrayLike} from '../is'
+import { isArrayLike } from '../is'
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.
@@ -11,22 +11,22 @@ import {isArrayLike} from '../is'
  * @returns {Function} Returns the new base function.
  */
 export default function createBaseEach(eachFunc, fromRight) {
-    return function (collection, iteratee) {
-        if (collection == null) {
-            return collection
-        }
-        if (!isArrayLike(collection)) {
-            return eachFunc(collection, iteratee)
-        }
-        var length   = collection.length,
-            index    = fromRight ? length : -1,
-            iterable = Object(collection)
-
-        while ((fromRight ? index-- : ++index < length)) {
-            if (iteratee(iterable[index], index, iterable) === false) {
-                break
-            }
-        }
-        return collection
+  return function(collection, iteratee) {
+    if (collection == null) {
+      return collection
     }
+    if (!isArrayLike(collection)) {
+      return eachFunc(collection, iteratee)
+    }
+    var length = collection.length,
+      index = fromRight ? length : -1,
+      iterable = new Object(collection)
+
+    while (fromRight ? index-- : ++index < length) {
+      if (iteratee(iterable[index], index, iterable) === false) {
+        break
+      }
+    }
+    return collection
+  }
 }

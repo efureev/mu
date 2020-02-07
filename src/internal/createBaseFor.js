@@ -8,19 +8,19 @@
  * @returns {function({Object}, {Function}, {Function}): *}
  */
 export default function createBaseFor(fromRight = false) {
-    return function (object, iteratee, keysFunc) {
-        let index    = -1,
-            iterable = Object(object),
-            props    = keysFunc(object),
-            length   = props.length,
-            key
+  return function(object, iteratee, keysFunc) {
+    let index = -1,
+      iterable = new Object(object),
+      properties = keysFunc(object),
+      length = properties.length,
+      key
 
-        while (length--) {
-            key = props[fromRight ? length : ++index]
-            if (iteratee(iterable[key], key, iterable) === false) {
-                break
-            }
-        }
-        return object
+    while (length--) {
+      key = properties[fromRight ? length : ++index]
+      if (iteratee(iterable[key], key, iterable) === false) {
+        break
+      }
     }
+    return object
+  }
 }

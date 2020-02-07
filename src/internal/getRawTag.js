@@ -16,7 +16,6 @@ const hasOwnProperty = objectProto.hasOwnProperty
  */
 const nativeObjectToString = objectProto.toString
 
-
 /**
  * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
  *
@@ -25,25 +24,23 @@ const nativeObjectToString = objectProto.toString
  * @returns {string} Returns the raw `toStringTag`.
  */
 export default function getRawTag(value) {
-    const
-        isOwn = hasOwnProperty.call(value, symToStringTag),
-        tag   = value[symToStringTag]
+  const isOwn = hasOwnProperty.call(value, symToStringTag),
+    tag = value[symToStringTag]
 
-    let unmasked = false
+  let unmasked = false
 
-    try {
-        value[symToStringTag] = undefined
-        unmasked = true
-    } catch (e) {
+  try {
+    value[symToStringTag] = undefined
+    unmasked = true
+  } catch (error) {}
+
+  const result = nativeObjectToString.call(value)
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag] = tag
+    } else {
+      delete value[symToStringTag]
     }
-
-    const result = nativeObjectToString.call(value)
-    if (unmasked) {
-        if (isOwn) {
-            value[symToStringTag] = tag
-        } else {
-            delete value[symToStringTag]
-        }
-    }
-    return result
+  }
+  return result
 }

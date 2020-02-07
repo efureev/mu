@@ -1,7 +1,6 @@
 'use strict'
 
-
-import {isArrayLike} from '../is'
+import { isArrayLike } from '../is'
 import arrayLikeKeys from '../internal/arrayLikeKeys'
 import baseKeys from '../internal/base/baseKeys'
 
@@ -31,5 +30,5 @@ import baseKeys from '../internal/base/baseKeys'
  * // => ['0', '1']
  */
 export default function keys(object) {
-    return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object)
+  return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object)
 }

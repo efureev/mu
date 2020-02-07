@@ -1,6 +1,6 @@
 'use strict'
 
-import {toString} from '../index'
+import { toString } from '..'
 
 /**
  * Checks if string starts with the given target string
@@ -9,8 +9,8 @@ import {toString} from '../index'
  * @param {string} target
  * @returns {boolean}
  */
-export default function (str, target) {
-    target = toString(target)
+export default function(string, target) {
+  target = toString(target)
 
-    return toString(str).slice(0, target.length) === target
+  return toString(string).slice(0, target.length) === target
 }

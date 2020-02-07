@@ -20,14 +20,14 @@ import toNumber from './toNumber'
  * // => 3.2
  */
 export default function toFinite(value) {
-    if (!value) {
-        return value === 0 ? value : 0
-    }
-    value = toNumber(value)
+  if (!value) {
+    return value === 0 ? value : 0
+  }
+  value = toNumber(value)
 
-    if (value === Infinity || value === -Infinity) {
-        return value < 0 ? -Number.MAX_VALUE : Number.MAX_VALUE
-    }
+  if (value === Infinity || value === -Infinity) {
+    return value < 0 ? -Number.MAX_VALUE : Number.MAX_VALUE
+  }
 
-    return value === value ? value : 0
+  return value === value ? value : 0
 }

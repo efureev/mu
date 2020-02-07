@@ -10,14 +10,14 @@
  */
 
 export default function arrayEach(array, callback) {
-    const length = array == null ? 0 : array.length
-    let index = -1
+  const length = array == null ? 0 : array.length
+  let index = -1
 
-    while (++index < length) {
-        if (callback(array[index], index, array) === false) {
-            break
-        }
+  while (++index < length) {
+    if (callback(array[index], index, array) === false) {
+      break
     }
+  }
 
-    return array
+  return array
 }

@@ -6,9 +6,10 @@
  * @author efureev
  * @param {...*} params - One or more parameters.
  */
-export default function isInteger(...params) {
-    if (params.length === 0) throw Error('Please provide at least one number to evaluate isInteger.')
-    if (params.some(param => Number.isNaN(Number.parseFloat(param)))) throw Error('Please provide all numbers to evaluate isInteger.')
+export default function isInteger(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isInteger.')
+  if (parameters.some((parameter) => Number.isNaN(Number.parseFloat(parameter))))
+    throw new Error('Please provide all numbers to evaluate isInteger.')
 
-    return !(params.some(param => !Number.isInteger(Number.parseFloat(param))))
+  return !parameters.some((parameter) => !Number.isInteger(Number.parseFloat(parameter)))
 }

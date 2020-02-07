@@ -6,5 +6,5 @@
  * @param {Array} array
  */
 export default function clear(array) {
-    array.length = 0
+  array.length = 0
 }

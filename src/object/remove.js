@@ -1,7 +1,6 @@
 'use strict'
 
-
-import {isArray, isObject, isString} from '../is'
+import { isArray, isObject, isString } from '../is'
 
 /**
  * Get value by deep key in object(array)
@@ -48,32 +47,31 @@ import {isArray, isObject, isString} from '../is'
  * @returns {object}
  */
 export default function remove(object, selector, divider = '.') {
+  if (isString(selector)) {
+    selector = [selector]
+  }
 
-    if (isString(selector)) {
-        selector = [selector]
-    }
-
-    const removeFromObject = function (from, keys) {
-        if (keys.length > 1) {
-            if (from[keys[0]] !== undefined) {
-                if (isArray(from[keys[0]]) || isObject(from[keys[0]])) {
-                    removeFromObject(from[keys[0]], keys.slice(1))
-                }
-            }
-        } else {
-            if (isArray(from)) {
-                from.splice(keys[0], 1)
-            } else if (isObject(from)) {
-                delete (from[keys[0]])
-            }
+  const removeFromObject = function(from, keys) {
+    if (keys.length > 1) {
+      if (from[keys[0]] !== undefined) {
+        if (isArray(from[keys[0]]) || isObject(from[keys[0]])) {
+          removeFromObject(from[keys[0]], keys.slice(1))
         }
+      }
+    } else {
+      if (isArray(from)) {
+        from.splice(keys[0], 1)
+      } else if (isObject(from)) {
+        delete from[keys[0]]
+      }
     }
+  }
 
-    if (isArray(selector)) {
-        selector.forEach((v) => {
-            removeFromObject(object, v.split(divider))
-        })
-    }
+  if (isArray(selector)) {
+    selector.forEach((v) => {
+      removeFromObject(object, v.split(divider))
+    })
+  }
 
-    return object
+  return object
 }

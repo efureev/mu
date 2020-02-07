@@ -1,6 +1,6 @@
 'use strict'
 
-import {now} from './'
+import { now } from '.'
 
 /**
  * Returns difference in milliseconds between dates
@@ -13,5 +13,5 @@ import {now} from './'
  * @author efureev
  */
 export function elapsed(dateA, dateB) {
-    return Math.abs(dateA - (dateB || now()))
+  return Math.abs(dateA - (dateB || now()))
 }

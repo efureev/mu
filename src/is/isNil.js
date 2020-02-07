@@ -5,23 +5,22 @@
  *
  * @param {...*} params - One or more parameters.
  */
-export function isNulls(...params) {
-    if (params.length === 0) throw Error('Please provide at least one param to evaluate isNull.')
+export function isNulls(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one param to evaluate isNull.')
 
-    return !(params.some(param => !isNull(param)))
+  return !parameters.some((parameter) => !isNull(parameter))
 }
 
+export function isNils(...parameters) {
+  if (parameters.length === 0) throw new Error('Please provide at least one param to evaluate isNull.')
 
-export function isNils(...params) {
-    if (params.length === 0) throw Error('Please provide at least one param to evaluate isNull.')
-
-    return !(params.some(param => !isNil(param)))
+  return !parameters.some((parameter) => !isNil(parameter))
 }
 
-export default function isNil(val) {
-    return val == null
+export default function isNil(value) {
+  return value == null
 }
 
-export function isNull(val) {
-    return val === null
+export function isNull(value) {
+  return value === null
 }

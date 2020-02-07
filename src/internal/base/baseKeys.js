@@ -6,7 +6,7 @@ const objectProto = Object.prototype
 /** Used to check objects for own properties. */
 const hasOwnProperty = objectProto.hasOwnProperty
 
-const nativeKeys = (arg) => Object.keys(Object(arg))
+const nativeKeys = (argument) => Object.keys(new Object(argument))
 
 /**
  * The base implementation of `keys` which doesn't treat sparse arrays as dense.
@@ -22,7 +22,7 @@ export default function baseKeys(object) {
     const result = []
     let key
 
-    for (key in Object(object)) {
+    for (key in new Object(object)) {
         if (hasOwnProperty.call(object, key) && key !== 'constructor') {
             result.push(key)
         }

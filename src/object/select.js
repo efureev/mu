@@ -1,6 +1,5 @@
 'use strict'
 
-
 /**
  * Get value by deep key in object(array)
  *
@@ -45,8 +44,8 @@
  * @param {string} divider [divider='.']
  * @returns {*}
  */
-export default function select(from, selector, defaultVal = undefined, divider = '.') {
-    return selector.split(divider).reduce(function (prev, cur) {
-        return prev && prev[cur] || defaultVal
-    }, from)
+export default function select(from, selector, defaultValue = undefined, divider = '.') {
+  return selector.split(divider).reduce(function(previous, current) {
+    return (previous && previous[current]) || defaultValue
+  }, from)
 }

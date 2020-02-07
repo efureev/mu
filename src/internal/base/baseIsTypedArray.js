@@ -3,7 +3,7 @@ import {isLength, isObjectLike} from '../../is'
 import baseGetTag from './baseGetTag'
 
 const
-    argsTag    = '[object Arguments]',
+    argumentsTag    = '[object Arguments]',
     arrayTag   = '[object Array]',
     boolTag    = '[object Boolean]',
     dateTag    = '[object Date]',
@@ -39,7 +39,7 @@ typedArrayTags[float32Tag] = typedArrayTags[float64Tag] =
             typedArrayTags[uint8ClampedTag] = typedArrayTags[uint16Tag] =
                 typedArrayTags[uint32Tag] = true
 
-typedArrayTags[argsTag] = typedArrayTags[arrayTag] =
+typedArrayTags[argumentsTag] = typedArrayTags[arrayTag] =
     typedArrayTags[arrayBufferTag] = typedArrayTags[boolTag] =
         typedArrayTags[dataViewTag] = typedArrayTags[dateTag] =
             typedArrayTags[errorTag] = typedArrayTags[funcTag] =

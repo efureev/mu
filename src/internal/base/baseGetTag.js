@@ -18,7 +18,7 @@ export default function baseGetTag(value) {
     if (value == null) {
         return value === undefined ? undefinedTag : nullTag
     }
-    return (symToStringTag && symToStringTag in Object(value))
+    return (symToStringTag && symToStringTag in new Object(value))
         ? getRawTag(value)
         : Object.prototype.toString.call(value)
 }

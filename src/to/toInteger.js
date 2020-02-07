@@ -1,4 +1,4 @@
-import {toFinite} from './index'
+import { toFinite } from '.'
 
 /**
  * Converts `value` to an integer.
@@ -23,8 +23,8 @@ import {toFinite} from './index'
  * // => 3
  */
 export default function toInteger(value) {
-    const result = toFinite(value)
-    let remainder = result % 1
+  const result = toFinite(value)
+  let remainder = result % 1
 
-    return result === result ? (remainder ? result - remainder : result) : 0
+  return result === result ? (remainder ? result - remainder : result) : 0
 }

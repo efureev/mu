@@ -1,8 +1,8 @@
 'use strict'
 
-import {isEmpty, isDate} from '../is'
+import { isEmpty, isDate } from '../is'
 import toQueryObjects from './toQueryObjects'
-import {toString} from '../date'
+import { toString } from '../date'
 
 /**
  * Takes an object and converts it to an encoded query string.
@@ -37,28 +37,32 @@ import {toString} from '../date'
  * @todo write tests
  */
 export default function toQueryString(object, recursive = false) {
-    let paramObjects = [],
-        params       = [],
-        i, j, ln, paramObject, value
+  let parameterObjects = [],
+    parameters = [],
+    i,
+    j,
+    ln,
+    parameterObject,
+    value
 
-    for (i in object) {
-        if (Object.prototype.hasOwnProperty.call(object, i)) {
-            paramObjects = paramObjects.concat(toQueryObjects(i, object[i], recursive))
-        }
+  for (i in object) {
+    if (Object.prototype.hasOwnProperty.call(object, i)) {
+      parameterObjects = parameterObjects.concat(toQueryObjects(i, object[i], recursive))
+    }
+  }
+
+  for (j = 0, ln = parameterObjects.length; j < ln; j++) {
+    parameterObject = parameterObjects[j]
+    value = parameterObject.value
+
+    if (isEmpty(value)) {
+      value = ''
+    } else if (isDate(value)) {
+      value = toString(value)
     }
 
-    for (j = 0, ln = paramObjects.length; j < ln; j++) {
-        paramObject = paramObjects[j]
-        value = paramObject.value
+    parameters.push(encodeURIComponent(parameterObject.name) + '=' + encodeURIComponent(String(value)))
+  }
 
-        if (isEmpty(value)) {
-            value = ''
-        } else if (isDate(value)) {
-            value = toString(value)
-        }
-
-        params.push(encodeURIComponent(paramObject.name) + '=' + encodeURIComponent(String(value)))
-    }
-
-    return params.join('&')
+  return parameters.join('&')
 }
