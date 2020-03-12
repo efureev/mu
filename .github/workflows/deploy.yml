@@ -25,7 +25,3 @@ jobs:
         with:
           node-version: '13.x'
           registry-url: 'https://npm.pkg.github.com'
-      # Publish to GitHub Packages
-      - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
