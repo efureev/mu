@@ -33,13 +33,6 @@ module.exports = {
       'error',
       { vars: 'all', args: 'none', ignoreRestSiblings: false },
     ],
-    'no-param-reassign': [
-      'error',
-      {
-        props: true,
-        ignorePropertyModificationsFor: ['state'],
-      },
-    ],
     'no-underscore-dangle': 'warn',
     'sonarjs/no-identical-expressions': 'error',
     'sonarjs/no-identical-functions': 'warn',

@@ -9,5 +9,6 @@ import merge from './merge'
 import select from './select'
 import pick from './pick'
 import remove from './remove'
+import pathToObject from './pathToObject'
 
-export { getSize, fromQueryString, toQueryString, toQueryObjects, equals, merge, select, remove, pick }
+export { getSize, fromQueryString, toQueryString, toQueryObjects, equals, merge, select, remove, pick, pathToObject }
