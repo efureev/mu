@@ -57,4 +57,12 @@ describe('pathToObject', () => {
 
     expect(object).toEqual({key: 'test', sub: {fn: 'func'}})
   })
+
+  it('existed object with existed keys [replace] 3', () => {
+    const object = {app: {}}
+    pathToObject('app.menu.main', 'main', object)
+    pathToObject('app.menu.sub', 'sub', object)
+
+    expect(object).toEqual({app: {menu: {main: 'main', sub: 'sub'}}})
+  })
 })
