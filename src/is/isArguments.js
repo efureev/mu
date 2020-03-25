@@ -39,12 +39,12 @@ const baseIsArguments = (value) => {
  * // => false
  */
 export default baseIsArguments(
-  (function() {
+  (function () {
     return arguments
   })()
 )
   ? baseIsArguments
-  : function(value) {
+  : function (value) {
       return (
         value !== null &&
         typeof value === 'object' &&

@@ -16,16 +16,16 @@ const nativeKeys = (argument) => Object.keys(new Object(argument))
  * @returns {Array} Returns the array of property names.
  */
 export default function baseKeys(object) {
-    if (!isPrototype(object)) {
-        return nativeKeys(object)
-    }
-    const result = []
-    let key
+  if (!isPrototype(object)) {
+    return nativeKeys(object)
+  }
+  const result = []
+  let key
 
-    for (key in new Object(object)) {
-        if (hasOwnProperty.call(object, key) && key !== 'constructor') {
-            result.push(key)
-        }
+  for (key in new Object(object)) {
+    if (hasOwnProperty.call(object, key) && key !== 'constructor') {
+      result.push(key)
     }
-    return result
+  }
+  return result
 }

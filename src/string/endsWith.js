@@ -9,7 +9,7 @@ import { toString } from '..'
  * @param {string} target
  * @returns {boolean}
  */
-export default function(string, target) {
+export default function (string, target) {
   string = toString(string)
   target = toString(target)
 

@@ -9,7 +9,7 @@ import { toString } from '..'
  * @param {string} target
  * @returns {boolean}
  */
-export default function(string, target) {
+export default function (string, target) {
   target = toString(target)
 
   return toString(string).slice(0, target.length) === target

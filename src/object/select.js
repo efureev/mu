@@ -45,7 +45,7 @@
  * @returns {*}
  */
 export default function select(from, selector, defaultValue = undefined, divider = '.') {
-  return selector.split(divider).reduce(function(previous, current) {
+  return selector.split(divider).reduce(function (previous, current) {
     return (previous && previous[current]) || defaultValue
   }, from)
 }

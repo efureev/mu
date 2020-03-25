@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.10.0] - 2020-03-25
+
+### Added
+
+- A function `defaults` to `Object`
+
 ## [2.9.0] - 2020-03-12
 
 ### Added
@@ -56,7 +62,8 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `difference` to Array
 - A function `symmetricalDifference` to Array
 
-[unreleased]: https://github.com/efureev/mu/compare/v2.9.0...HEAD
+[unreleased]: https://github.com/efureev/mu/compare/v2.10.0...HEAD
+[2.10.0]: https://github.com/efureev/mu/compare/v2.9.0...v2.10.0
 [2.9.0]: https://github.com/efureev/mu/compare/v2.7.0...v2.9.0
 [2.7.0]: https://github.com/efureev/mu/compare/v2.6.0...v2.7.0
 [2.6.0]: https://github.com/efureev/mu/compare/v2.5.0...v2.6.0

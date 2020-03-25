@@ -1,6 +1,6 @@
 'use strict'
 
-import {isEmpty, isObject} from '../is'
+import { isEmpty, isObject } from '../is'
 
 export default function pathToObject(paths = '', value = null, object = {}, divider = '.', replaceOnExist = true) {
   if (isEmpty(paths)) {
@@ -8,7 +8,7 @@ export default function pathToObject(paths = '', value = null, object = {}, divi
   }
 
   const pathsArray = paths.split(divider),
-        pathsCount = pathsArray.length
+    pathsCount = pathsArray.length
 
   let current = object
 

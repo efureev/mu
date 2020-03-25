@@ -11,7 +11,7 @@ import { isArrayLike } from '../is'
  * @returns {Function} Returns the new base function.
  */
 export default function createBaseEach(eachFunc, fromRight) {
-  return function(collection, iteratee) {
+  return function (collection, iteratee) {
     if (collection == null) {
       return collection
     }

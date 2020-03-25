@@ -76,6 +76,7 @@ Function | Return | Description | Example | Result
 equals | bool | Deep comparing the contents of 2 or more object using strict equality | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})`
 getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})`
 fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')`
+defaults | object | Add to source object missing properties from other sources |  `defaults({ a: { b:2 }}, { a: { b:1, c:3 }})` | `{a:{ b:2, c:3 }}`
 merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test'}, {k: 2})`
 select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')`
 pathToObject | object | Return Object from sting path | `pathToObject('key.sub', 1)` | {key:{sub:1}}

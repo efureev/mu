@@ -51,10 +51,7 @@ export function titleCase(string) {
  * @returns {string}
  */
 export function clearSpaces(string) {
-  return string
-    .toString()
-    .replace(/\s+/g, ' ')
-    .trim()
+  return string.toString().replace(/\s+/g, ' ').trim()
 }
 
 export { endsWith, startsWith, padStart, camelCase, pascalCase }

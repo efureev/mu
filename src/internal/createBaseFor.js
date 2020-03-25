@@ -8,7 +8,7 @@
  * @returns {function({Object}, {Function}, {Function}): *}
  */
 export default function createBaseFor(fromRight = false) {
-  return function(object, iteratee, keysFunc) {
+  return function (object, iteratee, keysFunc) {
     let index = -1,
       iterable = new Object(object),
       properties = keysFunc(object),

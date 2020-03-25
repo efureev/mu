@@ -4,7 +4,7 @@ import { padDateTime } from '../format'
 
 const nowFn =
   Date.now ||
-  function() {
+  function () {
     return new Date().getTime()
   }
 

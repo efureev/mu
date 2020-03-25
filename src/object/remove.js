@@ -51,7 +51,7 @@ export default function remove(object, selector, divider = '.') {
     selector = [selector]
   }
 
-  const removeFromObject = function(from, keys) {
+  const removeFromObject = function (from, keys) {
     if (keys.length > 1) {
       if (from[keys[0]] !== undefined) {
         if (isArray(from[keys[0]]) || isObject(from[keys[0]])) {

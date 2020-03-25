@@ -76,6 +76,7 @@ Function | Return | Description | Example | Result
 equals | bool | Глубокое сравнивание содержания 2 и более объектов, используя строгое сравнивание | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})`
 getSize | int | Возвращает количество свойств объекта | `getSize({k: 1, v: []})`
 fromQueryString | object | Преобразует строку запроса в объект | `fromQueryString('foo=1&bar=2')`
+defaults | object | Добавляет в исходный объект отсутствующие свойства из других объектов |  `defaults({ a: { b:2 }}, { a: { b:1, c:3 }})` | `{a:{ b:2, c:3 }}`
 merge | object | Объединяет рекурсивно 2 и более объектов |  `merge({k: 1}, {v: 'test'}, {k: 2})`
 select | mixed | Выбирает значения по ключу (даже вложенные) в объекте(массиве) | `select(obj, 'key.sub.items.1')`
 pathToObject | object | Возвращает объект из строчного пути (ключа) | `pathToObject('key.sub', 1)` | {key:{sub:1}}

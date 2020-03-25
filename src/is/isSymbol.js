@@ -17,7 +17,7 @@ import { isObjectLike } from '.'
  *
  * isSymbol(Symbol.iterator, Symbol.iterator); // => true
  */
-export default function(...parameters) {
+export default function (...parameters) {
   if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isInteger.')
 
   return parameters.some(
