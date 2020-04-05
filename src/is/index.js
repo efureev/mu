@@ -1,4 +1,4 @@
-import isObject, { isEmptyObject, isObjectLike } from './isObject'
+import isObject, {isEmptyObject, isObjectLike} from './isObject'
 import isArray from './isArray'
 import isEmpty from './isEmpty'
 import isEven from './isEven'
@@ -7,9 +7,10 @@ import isInteger from './isInteger'
 import isSymbol from './isSymbol'
 import isLength from './isLength'
 import isArrayLike from './isArrayLike'
+import isBasicType from './isBasicType'
 import isBuffer from './isBuffer'
 import isArguments from './isArguments'
-import isNil, { isNils, isNull, isNulls } from './isNil'
+import isNil, {isNils, isNull, isNulls} from './isNil'
 
 /**
  * This function evaluates if all the parameters are strings
@@ -35,7 +36,7 @@ export function isString(...parameters) {
  */
 export function isNumeric(...parameters) {
   const invalid = parameters.some((parameter) => {
-    return isNaN(parseFloat(parameter)) || !isFinite(parameter)
+    return isArray(parameter) || isNaN(parseFloat(parameter)) || !isFinite(parameter)
   })
 
   return !invalid
@@ -91,6 +92,7 @@ export {
   isEmptyObject,
   isLength,
   isArrayLike,
+  isBasicType,
   isBuffer,
   isArguments,
 }

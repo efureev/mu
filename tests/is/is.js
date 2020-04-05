@@ -35,8 +35,11 @@ describe('isNumeric', () => {
     expect(isNumeric('')).toBe(false)
     expect(isNumeric(null)).toBe(false)
     expect(isNumeric([])).toBe(false)
+    expect(isNumeric([12])).toBe(false)
     expect(isNumeric({})).toBe(false)
+    expect(isNumeric({a: 2})).toBe(false)
     expect(isNumeric(true)).toBe(false)
+    expect(isNumeric(new Date())).toBe(false)
   })
 })
 

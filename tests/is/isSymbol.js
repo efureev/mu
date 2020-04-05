@@ -3,8 +3,9 @@ import {isSymbol} from './../../src/is'
 describe('isSymbol', () => {
   it('should return `true` for symbols', () => {
     if (Symbol) {
+      expect(isSymbol(Symbol())).toBeTruthy()
       expect(isSymbol(Symbol('a'))).toBeTruthy()
-      expect(isSymbol(Object(Symbol('a')))).toBeTruthy()
+      expect(isSymbol(new Object(Symbol('a')))).toBeTruthy()
     }
   })
 
