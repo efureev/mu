@@ -1,6 +1,4 @@
-'use strict'
-
-import { isEmpty, isDate } from '../is'
+import { isDate, isEmpty } from '../is'
 import toQueryObjects from './toQueryObjects'
 import { toString } from '../date'
 

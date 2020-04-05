@@ -1,4 +1,3 @@
-'use strict'
 import { isFunction, isLength } from '../is'
 
 /**

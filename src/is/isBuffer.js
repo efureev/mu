@@ -1,8 +1,7 @@
-'use strict'
 import root from '../internal/root'
 
 /** Detect free variable `exports`. */
-const freeExports = typeof exports == 'object' && exports && !exports.nodeType && exports
+const freeExports = typeof exports === 'object' && exports && !exports.nodeType && exports
 
 /** Detect free variable `module`. */
 const freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module

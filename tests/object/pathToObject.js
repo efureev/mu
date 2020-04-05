@@ -1,5 +1,3 @@
-'use strict'
-
 import {pathToObject} from '../../src/object'
 
 describe('pathToObject', () => {

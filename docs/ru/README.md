@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.9"
+      "@feugene/mu": "^2.11"
     }
 }
 ```
@@ -82,6 +82,7 @@ select | mixed | Выбирает значения по ключу (даже в�
 pathToObject | object | Возвращает объект из строчного пути (ключа) | `pathToObject('key.sub', 1)` | {key:{sub:1}}
 pick | object | Создает новый объект из "выдернутых" ключей объекта-цели. | `pick({a:1, b:2, c:3}, ['a', 'b'])`
 remove | object | Удаляет значения по ключу (даже вложенные) в объекте или массиве | `remove(obj, 'key.sub.items.1')`
+values | array | Создает массив из значений перечисляемых свойств `object` | `values('hi')` | `['h','i']`
 toQueryString | string | Преобразует объект в закодированную строку запроса | `toQueryString({colors: ['red', 'green', 'blue']}`
 toQueryObjects | object | Преобразует `name` - `value` пары в массив объектов с поддержкой вложенных структур | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
       
@@ -89,6 +90,7 @@ toQueryObjects | object | Преобразует `name` - `value` пары в м
 Function | Return | Description | Example
 :--- | :--- | :---| :---
 toNumber | int|float | Конвертирует `value` в число | `toNumber('3.2') // 3.2`
+toArray | array | Конвертирует `value` в массив | `toArray('test') // ['t','e','s','t']`
 toFinite | int | Конвертирует `value` в конечное целое число | `toFinite('-3.2') // 3`
 toInteger | int | Конвертирует `value` в integer | `toInteger('3.2') // 3`
 toString | string | Конвертирует `value` в строку | `toString(1234) // '1234'`
@@ -98,12 +100,13 @@ Function | Return | Description
 :--- | :---  | :--- 
 trim | string |
 clearSpaces | string | Удаляет лишние пробельные символы из строки
-titleCase | string | Converts the first character of every word into string to upper case
-upperFirst | string | Converts the first character of string to upper case
-startsWith | string | Checks if string starts with the given target string
-endsWith | string | Checks if string ends with the given target string
-camelCase | string | Convert a dash/dot/underscore/space separated string to camelCase
-pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
+titleCase | string | Конвертирует первый символ каждого слова в верхний регистр
+upperFirst | string | Конвертирует первый символ строки в верхний регистр
+startsWith | string | Проверяет, если строка начинается со `string`
+endsWith | string | Проверяет, если строка заканчивается на `string`
+camelCase | string | Конвертирует {dash/dot/underscore/space}-разделенную строку в camelCase
+pascalCase | string | Конвертирует {dash/dot/underscore/space}разделенную строку в PascalCase
+hasUnicode | bool | Проверяет, содержится ли в `string` Unicode символы
 
 ## Date
 Function | Return | Description | Example

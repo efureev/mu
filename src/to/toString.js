@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArray, isSymbol } from '../is'
 import { reTrim } from '../core/vars'
 

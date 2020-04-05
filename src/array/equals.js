@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArray, isObject } from '../is'
 import { equals as equalsObject } from '../object'
 

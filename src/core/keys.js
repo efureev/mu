@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArrayLike } from '../is'
 import arrayLikeKeys from '../internal/arrayLikeKeys'
 import baseKeys from '../internal/base/baseKeys'

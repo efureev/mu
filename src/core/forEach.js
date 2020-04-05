@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArray } from '../is'
 import { arrayEach } from '../array'
 import createBaseEach from '../internal/createBaseEach'

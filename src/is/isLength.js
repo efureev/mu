@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Checks if `value` is a valid array-like length.
  *

@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.10"
+      "@feugene/mu": "^2.11"
     }
 }
 ```
@@ -82,6 +82,7 @@ select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.
 pathToObject | object | Return Object from sting path | `pathToObject('key.sub', 1)` | {key:{sub:1}}
 pick | object | Creates an object composed of the picked object properties. | `pick({a:1, b:2, c:3}, ['a', 'b'])` |
 remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')` |
+values | array | Creates an array of the own enumerable string keyed property values of `object` | `values('hi')` | `['h','i']` 
 toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}` |
 toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])` |
       
@@ -89,6 +90,7 @@ toQueryObjects | object | Converts a `name` - `value` pair to an array of object
 Function | Return | Description | Example
 :--- | :--- | :---| :---
 toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
+toArray | array | Converts `value` to a array | `toArray('test') // ['t','e','s','t']`
 toFinite | int | Converts `value` to a finite integer | `toFinite('-3.2') // 3`
 toInteger | int | Converts `value` to a integer | `toInteger('3.2') // 3`
 toString | string | Converts `value` to a string | `toString(1234) // '1234'`
@@ -104,6 +106,7 @@ startsWith | string | Checks if string starts with the given target string
 endsWith | string | Checks if string ends with the given target string
 camelCase | string | Convert a dash/dot/underscore/space separated string to camelCase
 pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
+hasUnicode | bool | Checks if `string` contains Unicode symbols
 
 ## Date
 Function | Return | Description | Example

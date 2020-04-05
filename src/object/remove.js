@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArray, isObject, isString } from '../is'
 
 /**

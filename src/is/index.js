@@ -1,5 +1,3 @@
-'use strict'
-
 import isObject, { isEmptyObject, isObjectLike } from './isObject'
 import isArray from './isArray'
 import isEmpty from './isEmpty'
@@ -33,7 +31,7 @@ export function isString(...parameters) {
  *
  * @memberof mu
  * @author efureev
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export function isNumeric(...parameters) {
   const invalid = parameters.some((parameter) => {
@@ -48,7 +46,7 @@ export function isNumeric(...parameters) {
  *
  * @memberof mu
  * @author efureev
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export function isBoolean(...parameters) {
   const invalid = parameters.some((parameter) => {
@@ -67,7 +65,7 @@ export function isBoolean(...parameters) {
  *
  * @memberof mu
  * @author efureev
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export function isDate(...parameters) {
   const invalid = parameters.some((parameter) => {

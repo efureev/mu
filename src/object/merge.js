@@ -1,5 +1,3 @@
-'use strict'
-
 import { clone } from '..'
 import { isObject } from '../is'
 
@@ -41,7 +39,7 @@ import { isObject } from '../is'
  *     }
  *
  * @param {Object} destination The object into which all subsequent objects are merged.
- * @param {Object...} object Any number of objects to merge into the destination.
+ * @param {Object...} [object...] Any number of objects to merge into the destination.
  * @return {Object} merged The destination object with all passed objects merged in.
  */
 export default function merge(destination) {

@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Get value by deep key in object(array)
  *
@@ -40,7 +38,7 @@
  *
  * @param {object} from
  * @param {string} selector
- * @param {string} defaultVal [divider=undefined]
+ * @param {string} defaultValue [divider=undefined]
  * @param {string} divider [divider='.']
  * @returns {*}
  */

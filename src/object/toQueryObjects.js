@@ -1,5 +1,3 @@
-'use strict'
-
 import isObject from './../is/isObject'
 import isArray from '../is/isArray'
 

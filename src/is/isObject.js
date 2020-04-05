@@ -12,7 +12,7 @@ const isO =
  * This function evaluates whether all parameters are objects
  * @memberof µ.is
  * @author efureev
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export default function isObject(...parameters) {
   if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isObject.')

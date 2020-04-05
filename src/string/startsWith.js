@@ -1,11 +1,9 @@
-'use strict'
-
 import { toString } from '..'
 
 /**
  * Checks if string starts with the given target string
  *
- * @param {string} str
+ * @param {string} string
  * @param {string} target
  * @returns {boolean}
  */

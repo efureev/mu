@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArrayLike } from '../is'
 
 /**

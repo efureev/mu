@@ -1,10 +1,8 @@
-'use strict'
-
 import { padStart } from '../string'
 import { isNil } from '../is'
 
 /**
- * @param {String|Number} str
+ * @param {String|Number} string
  * @param {Number} targetLength
  * @returns {string}
  */
@@ -16,7 +14,7 @@ export function padNumber(string, targetLength) {
 }
 
 /**
- * @param {String|Number} str
+ * @param {String|Number} string
  * @returns {string}
  */
 export function padDateTime(string) {

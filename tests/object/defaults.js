@@ -1,5 +1,3 @@
-'use strict'
-
 import defaults from '../../src/object/defaults'
 
 describe('defaults', () => {

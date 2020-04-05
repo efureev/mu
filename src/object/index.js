@@ -1,5 +1,3 @@
-'use strict'
-
 import getSize from './getSize'
 import fromQueryString from './fromQueryString'
 import toQueryString from './toQueryString'
@@ -10,6 +8,7 @@ import merge from './merge'
 import select from './select'
 import pick from './pick'
 import remove from './remove'
+import values from './values'
 import pathToObject from './pathToObject'
 
 export {
@@ -24,4 +23,5 @@ export {
   pick,
   pathToObject,
   defaults,
+  values,
 }

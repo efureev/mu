@@ -1,5 +1,3 @@
-'use strict'
-
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
 
 /**

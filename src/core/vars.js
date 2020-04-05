@@ -7,7 +7,7 @@ export const reIsBinary = /^0b[01]+$/i
 export const reIsOctal = /^0o[0-7]+$/i
 
 /** Used to detect bad signed hexadecimal string values. */
-export const reIsBadHex = /^[-+]0x[0-9a-f]+$/i
+export const reIsBadHex = /^[+-]0x[\da-f]+$/i
 
 /** Used to detect unsigned integer values. */
 export const reIsUint = /^(?:0|[1-9]\d*)$/

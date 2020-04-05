@@ -1,5 +1,3 @@
-'use strict'
-
 import intWord from './intWord'
 
 /**

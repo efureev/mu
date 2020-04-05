@@ -1,11 +1,9 @@
-'use strict'
-
 import { isArray, isNumeric } from '../is'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
 const keyRe = /(\[):?([^\]]*)\]/g
-const nameRe = /^([^\[]+)/ // eslint-disable-line no-useless-escape
+const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
 
 /**
  * Converts a query string back into an object.

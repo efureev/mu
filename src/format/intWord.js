@@ -1,20 +1,18 @@
-'use strict'
-
-import { num } from '.'
+import { number } from '.'
 
 /**
  * Format
- * @param {Number|String} number
+ * @param {Number|String} value
  * @param {Array} units
  * @param {Number} kilo
  * @param {Number} decimals
  * @param {String} decPoint
- * @param {String} thousandsSep
- * @param {String} suffixSep
+ * @param {String} thousandsSeparator
+ * @param {String} suffixSeparator
  * @returns {string}
  */
 export default function intWord(
-  number,
+  value,
   units = ['', 'K', 'M', 'B', 'T'],
   kilo = 1000,
   decimals = 2,
@@ -26,13 +24,13 @@ export default function intWord(
   decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
 
   for (let i = 0; i < units.length; i++) {
-    if (number < kilo ** (i + 1)) {
+    if (value < kilo ** (i + 1)) {
       unit = i
       break
     }
   }
-  const humanized = number / kilo ** unit
+  const humanized = value / kilo ** unit
 
   const suffix = units[unit] ? suffixSeparator + units[unit] : ''
-  return num(humanized, decimals, decPoint, thousandsSeparator) + suffix
+  return number(humanized, decimals, decPoint, thousandsSeparator) + suffix
 }

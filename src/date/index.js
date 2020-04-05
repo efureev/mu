@@ -1,5 +1,3 @@
-'use strict'
-
 import { padDateTime } from '../format'
 
 const nowFn =

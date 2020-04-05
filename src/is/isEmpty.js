@@ -1,5 +1,3 @@
-'use strict'
-
 import { isEmptyObject } from './isObject'
 
 /**
@@ -7,7 +5,7 @@ import { isEmptyObject } from './isObject'
  *
  * @memberof µ.is
  * @author efureev
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export default function isEmpty(...parameters) {
   const invalid = parameters.some((parameter) => {

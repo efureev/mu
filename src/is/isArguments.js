@@ -1,5 +1,4 @@
 /** Used for built-in method references. */
-import { isObjectLike } from '.'
 import baseGetTag from '../internal/base/baseGetTag'
 
 const objectProto = Object.prototype

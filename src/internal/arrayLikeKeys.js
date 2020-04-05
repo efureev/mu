@@ -1,5 +1,3 @@
-'use strict'
-
 import { isArguments, isArray, isBuffer } from '../is'
 import { times } from '../utils'
 import isIndex from './isIndex'

@@ -1,11 +1,9 @@
-'use strict'
-
 import { isNil } from '../is'
 
 /**
  * This function add leading zero
  *
- * @param {string|int} str
+ * @param {string|int} string
  * @param {int} targetLength
  * @param {string} padString
  * @returns {string}

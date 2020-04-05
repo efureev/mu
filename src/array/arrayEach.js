@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * A specialized version of `forEach` for arrays.
  *

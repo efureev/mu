@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * The difference will output the elements from array A that are not in the array B.
  *

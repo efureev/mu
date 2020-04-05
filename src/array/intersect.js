@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Return common items for two arrays
  *

@@ -1,30 +1,28 @@
-'use strict'
-
 import {arrayEach} from '../../src/array'
 
 describe('arrayEach', () => {
-    it('Basic', () => {
-        const array = [1, 2, 3]
+  it('Basic', () => {
+    const array = [1, 2, 3]
 
-        const result = []
+    const result = []
 
-        arrayEach(array, (item) => {
-            result.push(item.toString())
-        })
-
-        expect(result).toEqual(['1', '2', '3'])
+    arrayEach(array, (item) => {
+      result.push(item.toString())
     })
 
-    it('Break', () => {
-        const array = [1, 2, 3]
+    expect(result).toEqual(['1', '2', '3'])
+  })
 
-        const result = []
+  it('Break', () => {
+    const array = [1, 2, 3]
 
-        arrayEach(array, (item) => {
-            if (item === 3) return false
-            result.push(item.toString())
-        })
+    const result = []
 
-        expect(result).toEqual(['1', '2'])
+    arrayEach(array, (item) => {
+      if (item === 3) return false
+      result.push(item.toString())
     })
+
+    expect(result).toEqual(['1', '2'])
+  })
 })

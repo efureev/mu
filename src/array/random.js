@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * Random function returns random item from array
  *

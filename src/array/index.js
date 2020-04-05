@@ -1,5 +1,3 @@
-'use strict'
-
 import equals from './equals'
 import clear from './clear'
 import intersect, { intersectAll } from './intersect'

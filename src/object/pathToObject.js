@@ -1,5 +1,3 @@
-'use strict'
-
 import { isEmpty, isObject } from '../is'
 
 export default function pathToObject(paths = '', value = null, object = {}, divider = '.', replaceOnExist = true) {

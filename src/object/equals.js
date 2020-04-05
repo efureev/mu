@@ -1,7 +1,3 @@
-'use strict'
-
-import { isNumeric } from '../is'
-
 /**
  * Compares the contents of 2 or more objects using strict equality.
  *

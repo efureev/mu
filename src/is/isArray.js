@@ -1,9 +1,7 @@
-'use strict'
-
 /**
  * This function evaluates whether all parameters are array
  *
- * @param {...*} params - One or more parameters.
+ * @param {...*} parameters - One or more parameters.
  */
 export default function isArray(...parameters) {
   if (parameters.length === 0) throw new Error('Please provide at least one param to evaluate isArray.')

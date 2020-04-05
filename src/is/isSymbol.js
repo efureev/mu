@@ -1,11 +1,9 @@
-'use strict'
-
 import { isObjectLike } from '.'
 
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.
  *
- * @param {*} params The value to check.
+ * @param {*} parameters The value to check.
  * @returns {boolean} Returns `true` if `value` is a symbol, else `false`.
  * @example
  *

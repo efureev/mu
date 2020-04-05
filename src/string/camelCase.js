@@ -1,5 +1,3 @@
-'use strict'
-
 const preserveCamelCase = (string) => {
   let isLastCharLower = false
   let isLastCharUpper = false
@@ -8,7 +6,7 @@ const preserveCamelCase = (string) => {
   for (let i = 0; i < string.length; i++) {
     const character = string[i]
 
-    if (isLastCharLower && /[a-zA-Z]/.test(character) && character.toUpperCase() === character) {
+    if (isLastCharLower && /[A-Za-z]/.test(character) && character.toUpperCase() === character) {
       string = string.slice(0, i) + '-' + string.slice(i)
       isLastCharLower = false
       isLastLastCharUpper = isLastCharUpper
@@ -17,7 +15,7 @@ const preserveCamelCase = (string) => {
     } else if (
       isLastCharUpper &&
       isLastLastCharUpper &&
-      /[a-zA-Z]/.test(character) &&
+      /[A-Za-z]/.test(character) &&
       character.toLowerCase() === character
     ) {
       string = string.slice(0, i - 1) + '-' + string.slice(i - 1)
@@ -72,9 +70,9 @@ const camelCase = (input, options) => {
   }
 
   input = input
-    .replace(/^[_.\- ]+/, '')
+    .replace(/^[ ._\-]+/, '')
     .toLowerCase()
-    .replace(/[_.\- ]+(\w|$)/g, (_, p1) => p1.toUpperCase())
+    .replace(/[ ._\-]+(\w|$)/g, (_, p1) => p1.toUpperCase())
     .replace(/\d+(\w|$)/g, (m) => m.toUpperCase())
 
   return postProcess(input)

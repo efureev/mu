@@ -1,5 +1,3 @@
-'use strict'
-
 /**
  * The symmetricalDifference will output anti-intersection.
  *
