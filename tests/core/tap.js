@@ -14,7 +14,7 @@ describe('tap', () => {
   })
 
   it('function', () => {
-    const fn = v => 100
+    const fn = () => 100
 
     expect(tap(fn)).toEqual(100)
     expect(tap(fn, (value) => value / 2)).toEqual(50)
