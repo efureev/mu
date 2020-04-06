@@ -1,3 +1,4 @@
+import FormData from 'formdata-node'
 import tap from '../../src/core/tap'
 
 describe('tap', () => {
@@ -18,5 +19,19 @@ describe('tap', () => {
 
     expect(tap(fn)).toEqual(100)
     expect(tap(fn, (value) => value / 2)).toEqual(50)
+  })
+
+  it('FormData', () => {
+    const fd = tap(new FormData(), (formData) => {
+      formData.append('test', 'foo')
+      formData.set('n', 1)
+    })
+
+    const iter = fd.keys()
+    const expectedData = {}
+    for (let key of iter) {
+      expectedData[key] = fd.get(key)
+    }
+    expect(expectedData).toEqual({test: 'foo', n: '1'})
   })
 })
