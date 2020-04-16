@@ -90,6 +90,7 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `symmetricalDifference` to Array
 
 [unreleased]: https://github.com/efureev/mu/compare/v2.13.0...HEAD
+[2.13.0]: https://github.com/efureev/mu/compare/v2.13.0...HEAD
 [2.12.0]: https://github.com/efureev/mu/compare/v2.12.0...v2.13.0
 [2.11.0]: https://github.com/efureev/mu/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/efureev/mu/compare/v2.10.0...v2.11.0
