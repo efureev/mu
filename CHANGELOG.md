@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.13.0] - 2020-04-16
+
+### Added
+
+- A function `bind` to `Core`
+- A new group: `Structures`
+- A struct `Stack` to `Structures`
+- A struct `Queue` to `Structures`
+
 ## [2.12.0] - 2020-04-05
 
 ### Added
@@ -80,7 +89,8 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `difference` to Array
 - A function `symmetricalDifference` to Array
 
-[unreleased]: https://github.com/efureev/mu/compare/v2.12.0...HEAD
+[unreleased]: https://github.com/efureev/mu/compare/v2.13.0...HEAD
+[2.12.0]: https://github.com/efureev/mu/compare/v2.12.0...v2.13.0
 [2.11.0]: https://github.com/efureev/mu/compare/v2.11.0...v2.12.0
 [2.11.0]: https://github.com/efureev/mu/compare/v2.10.0...v2.11.0
 [2.10.0]: https://github.com/efureev/mu/compare/v2.9.0...v2.10.0

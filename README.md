@@ -14,7 +14,6 @@
 ![](https://badgen.net/npm/dt/@feugene/mu)
 
 
-
 # µ
 JS Utilities Framework without dependencies.
 
@@ -36,3 +35,4 @@ JS Utilities Framework without dependencies.
 - String helpers
 - Date helpers
 - Format helpers
+- Structures

@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.12"
+      "@feugene/mu": "^2.13"
     }
 }
 ```
@@ -22,6 +22,7 @@ jest
 - [Date](#date)
 - [Format](#format)
 - [To](#to)
+- [Structures](#structures)
 
 ## Core
 Function | Return | Description
@@ -124,3 +125,8 @@ fileSize | string | Display number as file size | `fileSize(7900221323) // '7.36
 intWord | string | | `intWord(21323) // '21.32K'`
 padNumber | string | | `padNumber(2,3) // '002'`
 padDateTime | string | | `padDateTime(1) // '01'`
+
+## Structures
+
+- Stack
+- Queue

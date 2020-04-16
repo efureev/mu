@@ -1,4 +1,4 @@
-import {isBoolean, isNil, isNumeric, isString, isSymbol} from '.'
+import { isBoolean, isNil, isNumeric, isString, isSymbol } from '.'
 
 /**
  * Возвращает TRUE, если тип `value` передается копированием по значению
@@ -12,9 +12,5 @@ export default function isBasicType(value) {
 }
 
 export function isAdvancedType(value) {
-  return !isNil(value) && (
-    isSymbol(value) || (
-      !isString(value) && !isNumeric(value) && !isBoolean(value)
-    )
-  )
+  return !isNil(value) && (isSymbol(value) || (!isString(value) && !isNumeric(value) && !isBoolean(value)))
 }
