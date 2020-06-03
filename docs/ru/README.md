@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.13"
+      "@feugene/mu": "^2.14"
     }
 }
 ```
@@ -23,6 +23,7 @@ jest
 - [Format](#format)
 - [To](#to)
 - [Structures](#structures)
+- [Utilities](#utilities)
 
 ## Core
 Function | Return | Description
@@ -125,6 +126,14 @@ fileSize | string | Форматирование числа как размер 
 intWord | string | | `intWord(21323) // '21.32K'`
 padNumber | string | | `padNumber(2,3) // '002'`
 padDateTime | string | | `padDateTime(1) // '01'`
+
+## Utilities
+Function | Return | Description
+:--- | :--- | :---
+utf8ToB64 | string | Кодирует Unicode-строку в base-64 представление
+b64ToUtf8 | string | Декодирует строку из base-64 представления в Unicode-строку
+times | string | Invokes the iteratee `n` times, returning an array of the results of each invocation
+
 
 ## Structures
 
