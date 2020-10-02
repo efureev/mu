@@ -1,4 +1,5 @@
 import { isArray, isNumeric } from '../is'
+import isNil from '../is/isNil'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
@@ -34,13 +35,16 @@ const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
  *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
  *     }
  *
- * @param {String} queryString The query string to decode
+ * @param {String|null} queryString The query string to decode
  * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
  * PHP / Ruby on Rails servers and similar.
  * @return {Object}
  * @todo write tests
  */
 export default function fromQueryString(queryString, recursive = false) {
+  if (isNil(queryString)) {
+    return {}
+  }
   let parts = queryString.replace(queryRe, '').split('&'),
     object = {},
     temporary,

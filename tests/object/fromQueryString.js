@@ -1,6 +1,13 @@
 import { fromQueryString } from './../../src/object'
 
 describe('fromQueryString', () => {
+  it('should return empty object from empty', () => {
+    expect(fromQueryString('')).toMatchObject({})
+    expect(fromQueryString(null)).toMatchObject({})
+    expect(fromQueryString(undefined)).toMatchObject({})
+    // expect(fromQueryString(null)).toMatchObject({})
+  })
+
   it('should return object from string', () => {
     expect(fromQueryString('foo=1&bar=2')).toMatchObject({ foo: '1', bar: '2' })
     expect(fromQueryString('foo=&bar=2')).toMatchObject({ foo: '', bar: '2' })
