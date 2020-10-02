@@ -1,6 +1,7 @@
-import { isDate, isEmpty } from '../is'
+import { isBoolean, isDate, isEmpty } from '../is'
 import toQueryObjects from './toQueryObjects'
 import { toString } from '../date'
+import { toNumber } from '../to'
 
 /**
  * Takes an object and converts it to an encoded query string.
@@ -53,7 +54,9 @@ export default function toQueryString(object, recursive = false) {
     parameterObject = parameterObjects[j]
     value = parameterObject.value
 
-    if (isEmpty(value)) {
+    if (isBoolean(value)) {
+      value = toNumber(value)
+    } else if (isEmpty(value)) {
       value = ''
     } else if (isDate(value)) {
       value = toString(value)
