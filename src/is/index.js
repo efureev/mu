@@ -10,6 +10,7 @@ import isArrayLike from './isArrayLike'
 import isBasicType from './isBasicType'
 import isBuffer from './isBuffer'
 import isArguments from './isArguments'
+import isBlob from './isBlob'
 import isNil, { isNils, isNull, isNulls } from './isNil'
 
 /**
@@ -94,5 +95,6 @@ export {
   isArrayLike,
   isBasicType,
   isBuffer,
+  isBlob,
   isArguments,
 }

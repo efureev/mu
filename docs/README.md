@@ -39,6 +39,7 @@ Function | Return | Example
 isArguments | bool | `isArguments([1,2]]); // false`
 isArray | bool | `isArray([1,2]]); // true`
 isArrayLike | bool | `isArrayLike('abc'); // true`
+isBlob | bool | `isBlob(new Blob([]])); // true`
 isBoolean | bool | `isBoolean(true, true); // true`
 isBuffer | bool | `isBuffer(new Buffer(2)); // true`
 isDate | bool | `isDate(new Date); // true`
@@ -47,16 +48,16 @@ isEmptyObject | bool | `isEmptyObject({}}); // true`
 isEven | bool | `isEven(2, 4, '8'); // true`
 isFunction | bool | `isFunction(()=>{})); // true`
 isInteger | bool | `isInteger(12,-21); // true`
-isObject | bool | `isObject([], '12', 4, new Function()); // false`
-isObjectLike | bool | `isObjectLike([]); // true`
 isLength | bool | `isLength(3); // true`
-isNumeric | bool | `isNumeric(12,-2.3); // true`
-isString | bool | `isString('test'); // true`
-isSymbol | bool | `isSymbol(Symbol('a')); // true`
 isNil | bool | `isNil(undefined); // true`
 isNils | bool | `isNulls(null, undefined, void 0); // true`
 isNull | bool | `isNull(null); // true`
 isNulls | bool | `isNulls(null, undefined); // false`
+isNumeric | bool | `isNumeric(12,-2.3); // true`
+isObject | bool | `isObject([], '12', 4, new Function()); // false`
+isObjectLike | bool | `isObjectLike([]); // true`
+isString | bool | `isString('test'); // true`
+isSymbol | bool | `isSymbol(Symbol('a')); // true`
 isTypedArray | bool | `isTypedArray(new Uint8Array); // true`
 
 ## Array
