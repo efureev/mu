@@ -37,11 +37,14 @@ const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
  *
  * @param {String|null} queryString The query string to decode
  * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
+ * @param {Object} options = {
+ *   - decodeName {Boolean} Decode KeyNames in the queryString
+ * }
  * PHP / Ruby on Rails servers and similar.
  * @return {Object}
  * @todo write tests
  */
-export default function fromQueryString(queryString, recursive = false) {
+export default function fromQueryString(queryString, recursive = false, options = { decodeName: true }) {
   if (isNil(queryString)) {
     return {}
   }
@@ -69,7 +72,7 @@ export default function fromQueryString(queryString, recursive = false) {
       components = part.split('=')
       name = components[0]
       name = name.replace(plusRe, '%20')
-      name = decodeURIComponent(name)
+      name = options.decodeName ? decodeURIComponent(name) : name
 
       value = components[1]
 

@@ -31,11 +31,14 @@ import { toNumber } from '../to'
  *
  * @param {Object} object The object to encode
  * @param {Boolean} [recursive=false] Whether or not to interpret the object in recursive format.
+ * @param {Object} options = {
+ *   - encodeName {Boolean} Encode each KeyName in the object
+ * }
  * (PHP / Ruby on Rails servers and similar).
  * @return {String} queryString
  * @todo write tests
  */
-export default function toQueryString(object, recursive = false) {
+export default function toQueryString(object, recursive = false, options = { encodeName: true }) {
   let parameterObjects = [],
     parameters = [],
     i,
@@ -62,7 +65,8 @@ export default function toQueryString(object, recursive = false) {
       value = toString(value)
     }
 
-    parameters.push(encodeURIComponent(parameterObject.name) + '=' + encodeURIComponent(String(value)))
+    const name = options.encodeName ? encodeURIComponent(parameterObject.name) : parameterObject.name
+    parameters.push(name + '=' + encodeURIComponent(String(value)))
   }
 
   return parameters.join('&')

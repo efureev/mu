@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.16.1] - 2020-11-12
+
+### Added
+
+- In methods in Object space `toQueryString` and `fromQueryString` added params `options`
+
+### Fixed
+
+- Fix method base64-functions for Node
+
 ## [2.15.0] - 2020-10-14
 
 ### Added
