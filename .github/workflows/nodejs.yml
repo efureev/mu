@@ -16,9 +16,9 @@ jobs:
           config: '/lint/config/changelog.yml'
           args: './CHANGELOG.md'
 
-  testing on Node:
+  testing-on-node:
     runs-on: ubuntu-latest
-
+    name: testing on Node
     strategy:
       matrix:
         node-version: [12.x, 13.x, 14.x, 15.x]
@@ -51,7 +51,7 @@ jobs:
 
   npm-publish:
     name: npm-publish
-    needs: [lint-changelog, testing on Node]
+    needs: [lint-changelog, testing-on-node]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
