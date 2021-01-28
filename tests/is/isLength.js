@@ -1,9 +1,27 @@
-import {isLength} from './../../src/is'
+import { isLength } from './../../src/is'
 
 describe('isLength', () => {
   it('It should return FALSE', () => {
-    const list = ['', 'test', [], true, false, [], {}, [12], {a: 2}, () => {
-    }, new Date(), -12, Number.MIN_VALUE, '12', '2', Number.MAX_VALUE, Number.NaN, Infinity]
+    const list = [
+      '',
+      'test',
+      [],
+      true,
+      false,
+      [],
+      {},
+      [12],
+      { a: 2 },
+      () => {},
+      new Date(),
+      -12,
+      Number.MIN_VALUE,
+      '12',
+      '2',
+      Number.MAX_VALUE,
+      Number.NaN,
+      Infinity,
+    ]
 
     list.forEach((value) => {
       expect(isLength(value)).toEqual(false)

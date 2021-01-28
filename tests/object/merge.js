@@ -1,26 +1,25 @@
-import {merge} from '../../src/object'
+import { merge } from '../../src/object'
 
 describe('merge', () => {
-
   const first = {
-    key  : 0,
+    key: 0,
     label: 'Root',
     items: {
       one: {
-        key  : 1,
+        key: 1,
         label: 'One',
-        val  : 111,
+        val: 111,
         items: {
-          two  : {
-            key  : 2,
+          two: {
+            key: 2,
             label: 'Two',
-            val  : 111,
+            val: 111,
             items: {},
           },
           three: {
-            key  : 3,
+            key: 3,
             label: 'Three',
-            val  : 111,
+            val: 111,
             items: {},
           },
         },
@@ -29,18 +28,18 @@ describe('merge', () => {
   }
 
   const second = {
-    key  : 0,
+    key: 0,
     label: 'Root',
     items: {
       one: {
-        key  : 1,
+        key: 1,
         label: 'One',
-        val  : 222,
+        val: 222,
         items: {
           two: {
-            key  : 2,
+            key: 2,
             label: 'Two',
-            val  : 222,
+            val: 222,
             items: {},
           },
         },
@@ -49,24 +48,24 @@ describe('merge', () => {
   }
 
   const result = {
-    key  : 0,
+    key: 0,
     label: 'Root',
     items: {
       one: {
-        key  : 1,
+        key: 1,
         label: 'One',
-        val  : 222,
+        val: 222,
         items: {
-          two  : {
-            key  : 2,
+          two: {
+            key: 2,
             label: 'Two',
-            val  : 222,
+            val: 222,
             items: {},
           },
           three: {
-            key  : 3,
+            key: 3,
             label: 'Three',
-            val  : 111,
+            val: 111,
             items: {},
           },
         },
@@ -82,23 +81,22 @@ describe('merge', () => {
     expect(merge(first, 1, NaN, {}, [])).toEqual(first)
   })
 
-
   const js = {
     companyName: 'JS',
-    products   : ['JS', 'GWT', 'Designer'],
+    products: ['JS', 'GWT', 'Designer'],
     isSuperCool: true,
-    office     : {
-      size    : 2000,
+    office: {
+      size: 2000,
       location: 'Palo Alto',
-      isFun   : true,
+      isFun: true,
     },
   }
 
   const newStuff = {
     companyName: 'Jacksonville',
-    products   : ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
-    office     : {
-      size    : 40000,
+    products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
+    office: {
+      size: 40000,
       location: 'Redwood City',
     },
   }
@@ -106,12 +104,12 @@ describe('merge', () => {
   it('should return RESULT 2', () => {
     expect(merge(js, newStuff)).toEqual({
       companyName: 'Jacksonville',
-      products   : ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
+      products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
       isSuperCool: true,
-      office     : {
-        size    : 40000,
+      office: {
+        size: 40000,
         location: 'Redwood City',
-        isFun   : true,
+        isFun: true,
       },
     })
   })

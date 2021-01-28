@@ -1,4 +1,4 @@
-import {PriorityQueue, Queue} from '../../src/structures'
+import { PriorityQueue, Queue } from '../../src/structures'
 
 describe('Queue', () => {
   it('should create empty queue', () => {
@@ -41,14 +41,13 @@ describe('Queue', () => {
     expect(queue.size()).toBe(1)
   })
 
-
   it('should be possible to enqueue/dequeue objects', () => {
     const queue = new Queue()
 
-    queue.push({value: 'test1', key: 'key1'})
-    queue.push({value: 'test2', key: 'key2'})
+    queue.push({ value: 'test1', key: 'key1' })
+    queue.push({ value: 'test2', key: 'key2' })
 
-    const stringifier = value => `${value.key}:${value.value}`
+    const stringifier = (value) => `${value.key}:${value.value}`
 
     expect(queue.toString(stringifier)).toBe('key1:test1,key2:test2')
     expect(queue.pull().value).toBe('test1')

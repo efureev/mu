@@ -1,4 +1,4 @@
-import {isBoolean, isNumeric, isString} from './../../src/is'
+import { isBoolean, isNumeric, isString } from './../../src/is'
 
 describe('isString', () => {
   it('should return true if any parameters provided are string', () => {
@@ -13,7 +13,6 @@ describe('isString', () => {
     expect(isString(2, 2.5)).toBe(false)
   })
 })
-
 
 describe('isNumeric', () => {
   it('should return true if any parameters provided are Numeric', () => {
@@ -37,7 +36,7 @@ describe('isNumeric', () => {
     expect(isNumeric([])).toBe(false)
     expect(isNumeric([12])).toBe(false)
     expect(isNumeric({})).toBe(false)
-    expect(isNumeric({a: 2})).toBe(false)
+    expect(isNumeric({ a: 2 })).toBe(false)
     expect(isNumeric(true)).toBe(false)
     expect(isNumeric(new Date())).toBe(false)
   })

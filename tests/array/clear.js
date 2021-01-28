@@ -1,4 +1,4 @@
-import {clear} from '../../src/array'
+import { clear } from '../../src/array'
 
 describe('clear', () => {
   it('Array', () => {

@@ -1,4 +1,4 @@
-import {isSymbol} from './../../src/is'
+import { isSymbol } from './../../src/is'
 
 describe('isSymbol', () => {
   it('should return `true` for symbols', () => {
@@ -14,7 +14,7 @@ describe('isSymbol', () => {
       expect(isSymbol([])).toBeFalsy()
       expect(isSymbol([1, 3])).toBeFalsy()
       expect(isSymbol({})).toBeFalsy()
-      expect(isSymbol({k: 1})).toBeFalsy()
+      expect(isSymbol({ k: 1 })).toBeFalsy()
       expect(isSymbol(null)).toBeFalsy()
       expect(isSymbol(undefined)).toBeFalsy()
       expect(isSymbol(1)).toBeFalsy()

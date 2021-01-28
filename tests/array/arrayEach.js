@@ -1,4 +1,4 @@
-import {arrayEach} from '../../src/array'
+import { arrayEach } from '../../src/array'
 
 describe('arrayEach', () => {
   it('Basic', () => {

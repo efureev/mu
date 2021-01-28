@@ -1,33 +1,35 @@
-import {select} from '../../src/object'
+import { select } from '../../src/object'
 
 describe('select', () => {
-
   const obj = {
-    key  : 0,
+    key: 0,
     label: 'Root',
     items: {
       one: {
-        key     : 1,
-        label   : 'One',
-        val     : 111,
-        items   : {
+        key: 1,
+        label: 'One',
+        val: 111,
+        items: {
           two: {
-            key  : 2,
+            key: 2,
             label: 'Two',
-            val  : 111,
+            val: 111,
             items: {},
           },
         },
-        children: [{
-          key  : 2,
-          label: 'Two',
-          val  : 111,
-          items: {},
-        }, {
-          key  : 4,
-          label: 'Four',
-          val  : 444,
-        }],
+        children: [
+          {
+            key: 2,
+            label: 'Two',
+            val: 111,
+            items: {},
+          },
+          {
+            key: 4,
+            label: 'Four',
+            val: 444,
+          },
+        ],
       },
     },
   }

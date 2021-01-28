@@ -1,4 +1,4 @@
-import {isEven} from './../../src/is'
+import { isEven } from './../../src/is'
 
 describe('IsEven', () => {
   it('should return true when all parameters are even numbers', () => {

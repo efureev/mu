@@ -22,5 +22,4 @@ describe('isArray', () => {
     expect(isArray([], [-1212, 3, 'dasdas'])).toBe(true)
     expect(isArray([[], [], []], [{}, {}, {}])).toBe(true)
   })
-
 })

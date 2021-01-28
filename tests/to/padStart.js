@@ -1,4 +1,4 @@
-import {padStart} from './../../src/string'
+import { padStart } from './../../src/string'
 
 describe('padStart', () => {
   it('should return val if parameter provided are numbers', () => {

@@ -1,8 +1,7 @@
 import forEach from '../../src/core/forEach'
-import {isArray} from '../../src/is'
+import { isArray } from '../../src/is'
 
 describe('forEach', () => {
-
   it('array', () => {
     const data = [1, 2, 3, 4]
     let result = 0
@@ -14,16 +13,14 @@ describe('forEach', () => {
     expect(result).toEqual(10)
   })
 
-
   it('object', () => {
-
     const result = {}
 
     const data = {
-      id    : 1,
-      name  : 'Name',
-      list  : [1, 2, 3],
-      params: {k1: 'v1', k2: 'v2'},
+      id: 1,
+      name: 'Name',
+      list: [1, 2, 3],
+      params: { k1: 'v1', k2: 'v2' },
     }
 
     forEach(data, (item, propertyName) => {
@@ -36,11 +33,9 @@ describe('forEach', () => {
     })
 
     expect(result).toEqual({
-      name  : 'Name',
-      list  : [1, 2, 3],
-      params: {k1: 'v1', k2: 'v2'},
+      name: 'Name',
+      list: [1, 2, 3],
+      params: { k1: 'v1', k2: 'v2' },
     })
   })
-
-
 })

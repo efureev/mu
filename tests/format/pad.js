@@ -1,4 +1,4 @@
-import {padDateTime, padNumber} from '../../src/format'
+import { padDateTime, padNumber } from '../../src/format'
 
 describe('padNumber', () => {
   it('should return val', () => {

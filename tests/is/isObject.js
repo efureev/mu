@@ -1,5 +1,5 @@
-import {isEmptyObject, isObject, isObjectLike} from './../../src/is'
-import {args, realm, slice, strictArgs, symbol} from './../utils'
+import { isEmptyObject, isObject, isObjectLike } from './../../src/is'
+import { args, realm, slice, strictArgs, symbol } from './../utils'
 
 describe('isObject', () => {
   it('should throw an error if no parameters are provided', () => {
@@ -16,10 +16,8 @@ describe('isObject', () => {
     expect(isObject('')).toBe(false)
     expect(isObject('')).toBe(false)
     expect(isObject(new Function())).toBe(false)
-    expect(isObject(function () {
-    })).toBe(false)
-    expect(isObject(() => {
-    })).toBe(false)
+    expect(isObject(function () {})).toBe(false)
+    expect(isObject(() => {})).toBe(false)
     expect(isObject(new Number(2))).toBe(false)
     expect(isObject(Symbol())).toBe(false)
     expect(isObject(Symbol('dfo'))).toBe(false)
@@ -31,9 +29,9 @@ describe('isObject', () => {
   it('should return true if all parameters are objects', () => {
     expect(isObject({})).toBe(true)
     expect(isObject({}, {})).toBe(true)
-    expect(isObject({'re': 1, 'test': 2})).toBe(true)
-    expect(isObject({}, {'re': 1, 'test': null})).toBe(true)
-    expect(isObject({'re': 1, 'test': {'re': 1, 'test': {'re': 1, 'test': 2}}})).toBe(true)
+    expect(isObject({ re: 1, test: 2 })).toBe(true)
+    expect(isObject({}, { re: 1, test: null })).toBe(true)
+    expect(isObject({ re: 1, test: { re: 1, test: { re: 1, test: 2 } } })).toBe(true)
   })
 })
 
@@ -52,10 +50,8 @@ describe('isEmptyObject', () => {
     expect(isEmptyObject('')).toBe(false)
     expect(isEmptyObject('')).toBe(false)
     expect(isEmptyObject(new Function())).toBe(false)
-    expect(isEmptyObject(function () {
-    })).toBe(false)
-    expect(isEmptyObject(() => {
-    })).toBe(false)
+    expect(isEmptyObject(function () {})).toBe(false)
+    expect(isEmptyObject(() => {})).toBe(false)
     expect(isEmptyObject(new Number(2))).toBe(false)
     expect(isEmptyObject(Symbol())).toBe(false)
     expect(isEmptyObject(Symbol('dfo'))).toBe(false)
@@ -67,9 +63,9 @@ describe('isEmptyObject', () => {
   it('should return true if all parameters are objects', () => {
     expect(isEmptyObject({})).toBe(true)
     expect(isEmptyObject({}, {})).toBe(true)
-    expect(isEmptyObject({'re': 1, 'test': 2})).toBe(false)
-    expect(isEmptyObject({}, {'re': 1, 'test': null})).toBe(false)
-    expect(isEmptyObject({'re': 1, 'test': {'re': 1, 'test': {'re': 1, 'test': 2}}})).toBe(false)
+    expect(isEmptyObject({ re: 1, test: 2 })).toBe(false)
+    expect(isEmptyObject({}, { re: 1, test: null })).toBe(false)
+    expect(isEmptyObject({ re: 1, test: { re: 1, test: { re: 1, test: 2 } } })).toBe(false)
   })
 })
 
@@ -79,11 +75,11 @@ describe('isObjectLike', () => {
     expect(isObjectLike([1, 2, 3, 4])).toBeTruthy()
     expect(isObjectLike([null])).toBeTruthy()
     expect(isObjectLike({})).toBeTruthy()
-    expect(isObjectLike({k: 1})).toBeTruthy()
-    expect(isObjectLike({k: 1, v: null})).toBeTruthy()
+    expect(isObjectLike({ k: 1 })).toBeTruthy()
+    expect(isObjectLike({ k: 1, v: null })).toBeTruthy()
     expect(isObjectLike(Object(false))).toBeTruthy()
-    expect(isObjectLike(new Date)).toBeTruthy()
-    expect(isObjectLike(new Error)).toBeTruthy()
+    expect(isObjectLike(new Date())).toBeTruthy()
+    expect(isObjectLike(new Error())).toBeTruthy()
     expect(isObjectLike(Object(0))).toBeTruthy()
     expect(isObjectLike(Object('a'))).toBeTruthy()
     expect(isObjectLike(/x/)).toBeTruthy()
@@ -91,9 +87,13 @@ describe('isObjectLike', () => {
     expect(isObjectLike(args)).toBe(true)
     expect(isObjectLike(args)).toBe(true)
     expect(isObjectLike(strictArgs)).toBe(true)
-    expect(isObjectLike(function () {
-      return arguments
-    }())).toBe(true)
+    expect(
+      isObjectLike(
+        (function () {
+          return arguments
+        })()
+      )
+    ).toBe(true)
   })
 
   it('should return `false`', () => {
@@ -106,7 +106,6 @@ describe('isObjectLike', () => {
     expect(isObjectLike('3')).toBeFalsy()
     expect(isObjectLike(Symbol.iterator)).toBeFalsy()
     expect(isObjectLike(new Function())).toBeFalsy()
-
 
     expect(isObjectLike(slice)).toBeFalsy()
     expect(isObjectLike(symbol)).toBeFalsy()

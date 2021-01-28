@@ -1,4 +1,4 @@
-import {intersect, intersectAll} from '../../src/array'
+import { intersect, intersectAll } from '../../src/array'
 
 describe('intersect', () => {
   it('Array', () => {
@@ -25,6 +25,6 @@ describe('intersectAll', () => {
     expect(intersect([1, 2, 3, 4, 5], [], [1, 2])).toEqual([])
     expect(intersect([], [])).toEqual([])
     expect(intersect([], [1, 2, 3, 4])).toEqual([])
-    expect(intersect([5, 6, 7, 8], [9], [10], [12, 1, 2, 1][1, 2, 3, 4])).toEqual([])
+    expect(intersect([5, 6, 7, 8], [9], [10], [12, 1, 2, 1][(1, 2, 3, 4)])).toEqual([])
   })
 })

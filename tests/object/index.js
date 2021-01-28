@@ -1,16 +1,15 @@
-import {getSize} from './../../src/object'
+import { getSize } from './../../src/object'
 
 describe('getSize', () => {
-
   it('should throw an error if no parameters are provided', () => {
     expect(() => getSize()).toThrow()
   })
 
   it('should return size of val if parameter provided are objects', () => {
-    expect(getSize({1: 0, 2: 2, 3: 4})).toBe(3)
-    expect(getSize({'1': 0, '2': 2, '3': 4})).toBe(3)
-    expect(getSize({'test': 0, 'te': 2})).toBe(2)
-    expect(getSize({'test': 0, 'te': 2})).toBe(2)
+    expect(getSize({ 1: 0, 2: 2, 3: 4 })).toBe(3)
+    expect(getSize({ 1: 0, 2: 2, 3: 4 })).toBe(3)
+    expect(getSize({ test: 0, te: 2 })).toBe(2)
+    expect(getSize({ test: 0, te: 2 })).toBe(2)
   })
 
   test('should return size of val if parameter provided are not objects', () => {

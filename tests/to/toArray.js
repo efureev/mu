@@ -1,7 +1,6 @@
-import {toArray} from '../../src/to'
+import { toArray } from '../../src/to'
 
 describe('toArray', () => {
-
   it('empty', () => {
     expect(toArray()).toEqual([])
     expect(toArray(null)).toEqual([])

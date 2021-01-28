@@ -2,7 +2,6 @@ import FormData from 'formdata-node'
 import tap from '../../src/core/tap'
 
 describe('tap', () => {
-
   it('basic', () => {
     expect(tap(12)).toEqual(12)
     expect(tap('tes')).toEqual('tes')
@@ -11,7 +10,7 @@ describe('tap', () => {
 
   it('advanced', () => {
     expect(tap([1, 2, 3], (value) => value.pop())).toEqual([1, 2])
-    expect(tap({b: 2, a: 'test'}, (value) => delete value.a)).toEqual({b: 2})
+    expect(tap({ b: 2, a: 'test' }, (value) => delete value.a)).toEqual({ b: 2 })
   })
 
   it('function', () => {
@@ -32,6 +31,6 @@ describe('tap', () => {
     for (let key of iter) {
       expectedData[key] = fd.get(key)
     }
-    expect(expectedData).toEqual({test: 'foo', n: '1'})
+    expect(expectedData).toEqual({ test: 'foo', n: '1' })
   })
 })

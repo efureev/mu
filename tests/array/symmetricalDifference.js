@@ -1,4 +1,4 @@
-import {symmetricalDifference} from '../../src/array'
+import { symmetricalDifference } from '../../src/array'
 
 describe('symmetricalDifference', () => {
   it('Base', () => {

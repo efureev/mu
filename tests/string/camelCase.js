@@ -1,8 +1,6 @@
-import {camelCase, pascalCase} from '../../src/string'
-
+import { camelCase, pascalCase } from '../../src/string'
 
 describe('camelCase', () => {
-
   it('camelCase', () => {
     expect(camelCase('foo')).toEqual('foo')
     expect(camelCase('foo-bar')).toEqual('fooBar')
@@ -121,6 +119,5 @@ describe('camelCase', () => {
     expect(pascalCase('1Hello1')).toEqual('1Hello1')
     expect(pascalCase('1hello1')).toEqual('1Hello1')
     expect(pascalCase('h2w')).toEqual('H2W')
-
   })
 })

@@ -1,4 +1,4 @@
-import {isEmpty} from './../../src/is'
+import { isEmpty } from './../../src/is'
 
 describe('IsEmpty', () => {
   it('should return true when you pass an empty string', () => {
@@ -18,8 +18,8 @@ describe('IsEmpty', () => {
 
   it('should return true when you pass an empty object', () => {
     expect(isEmpty({})).toBeTruthy()
-    expect(isEmpty({sa: 1})).toBeFalsy()
-    expect(isEmpty({null: null})).toBeFalsy()
+    expect(isEmpty({ sa: 1 })).toBeFalsy()
+    expect(isEmpty({ null: null })).toBeFalsy()
   })
 
   it('should return true when you pass an empty array', () => {

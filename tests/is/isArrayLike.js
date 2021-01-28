@@ -1,10 +1,8 @@
 import isArrayLike from './../../src/is/isArrayLike'
 
 describe('isArrayLike', () => {
-
   it('should return false', () => {
-    const list = [123, 0, null, undefined, {}, () => {
-    }, new Date(), false, true, 12.4]
+    const list = [123, 0, null, undefined, {}, () => {}, new Date(), false, true, 12.4]
 
     list.forEach((value) => {
       expect(isArrayLike(value)).toEqual(false)
@@ -18,5 +16,4 @@ describe('isArrayLike', () => {
       expect(isArrayLike(value)).toEqual(true)
     })
   })
-
 })

@@ -1,4 +1,4 @@
-import {fileSize} from './../../src/format'
+import { fileSize } from './../../src/format'
 
 describe('intWord', () => {
   it('should return val if parameter provided are numbers', () => {

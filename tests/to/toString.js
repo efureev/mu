@@ -1,8 +1,7 @@
-import {toString} from '../../src/to'
-import {emojiVar, realm, symbol} from '../utils'
+import { toString } from '../../src/to'
+import { emojiVar, realm, symbol } from '../utils'
 
 describe('toString', () => {
-
   it('should return string if parameter provided are numbers', () => {
     expect(toString(1)).toBe('1')
     expect(toString(0)).toBe('0')
@@ -21,8 +20,8 @@ describe('toString', () => {
 
   it('should return string if parameter provided are object', () => {
     expect(toString({})).toBe('{}')
-    expect(toString({key: 'value'})).toBe('{"key":"value"}')
-    expect(toString({key: 'value', dig: 12})).toBe('{"key":"value","dig":12}')
+    expect(toString({ key: 'value' })).toBe('{"key":"value"}')
+    expect(toString({ key: 'value', dig: 12 })).toBe('{"key":"value","dig":12}')
   })
 
   it('should return string if parameter provided are array', () => {

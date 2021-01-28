@@ -1,8 +1,7 @@
-import {clone} from '../../src'
-import {isArray, isEmpty, isFunction} from '../../src/is'
+import { clone } from '../../src'
+import { isArray, isEmpty, isFunction } from '../../src/is'
 
 describe('clone', () => {
-
   it('should return number if parameter provided are numbers', () => {
     expect(clone(1)).toBe(1)
     expect(clone(0)).toBe(0)
@@ -21,9 +20,9 @@ describe('clone', () => {
 
   it('should return object if parameter provided are object', () => {
     expect(clone({})).toEqual({})
-    expect(clone({key: 'value'})).toEqual({key: 'value'})
-    expect(clone({key: 'value', dig: 12})).toEqual({key: 'value', dig: 12})
-    expect(clone({key: 'value', dig: {key: 'value'}})).toEqual({key: 'value', dig: {key: 'value'}})
+    expect(clone({ key: 'value' })).toEqual({ key: 'value' })
+    expect(clone({ key: 'value', dig: 12 })).toEqual({ key: 'value', dig: 12 })
+    expect(clone({ key: 'value', dig: { key: 'value' } })).toEqual({ key: 'value', dig: { key: 'value' } })
   })
 
   it('should return object if parameter provided are date', () => {
@@ -51,13 +50,12 @@ describe('clone', () => {
     expect(fn(4, 2)).toBe(clone(fn)(4, 2))
   })
 
-
   it('should return true', () => {
     const obj = {
       firstName: 'John',
-      lastName : 'Doe',
-      id       : 5566,
-      fullName : function () {
+      lastName: 'Doe',
+      id: 5566,
+      fullName: function () {
         return this.firstName + ' ' + this.lastName
       },
     }

@@ -1,7 +1,6 @@
-import {startsWith} from './../../src/string'
+import { startsWith } from './../../src/string'
 
 describe('startsWith', () => {
-
   it('', () => {
     const string = 'abc'
     expect(startsWith(string, 'a')).toBeTruthy()

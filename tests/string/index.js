@@ -1,7 +1,6 @@
-import {clearSpaces, titleCase, trim, upperFirst} from './../../src/string'
+import { clearSpaces, titleCase, trim, upperFirst } from './../../src/string'
 
 describe('trim', () => {
-
   it('should return val if parameter provided are numbers', () => {
     expect(trim('1')).toBe('1')
     expect(trim(1)).toBe('1')
@@ -33,7 +32,6 @@ describe('trim', () => {
     expect(trim(-0)).toBe('0')
   })
 })
-
 
 describe('upperFirst', () => {
   it('one world', () => {

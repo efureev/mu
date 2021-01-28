@@ -1,7 +1,6 @@
-import {endsWith} from './../../src/string'
+import { endsWith } from './../../src/string'
 
 describe('endsWith', () => {
-
   it('', () => {
     const string = 'abc'
     expect(endsWith(string, 'c')).toBeTruthy()
