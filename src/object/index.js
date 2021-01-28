@@ -10,12 +10,14 @@ import pick from './pick'
 import remove from './remove'
 import values from './values'
 import pathToObject from './pathToObject'
+import filter from './filter'
 
 export {
   getSize,
   fromQueryString,
   toQueryString,
   toQueryObjects,
+  filter,
   equals,
   merge,
   select,

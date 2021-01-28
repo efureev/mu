@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.14"
+      "@feugene/mu": "^2.17"
     }
 }
 ```
@@ -78,6 +78,7 @@ Function | Return | Description | Example | Result
 :--- | :--- | :--- | :--- | :--- 
 equals | bool | Deep comparing the contents of 2 or more object using strict equality | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})` |
 getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})` |
+filter | object | Filter props in Object | `filter({key1:1, key:4}, ([key, value])=>value > 1)` | `{key:4}`
 fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')` |
 defaults | object | Add to source object missing properties from other sources |  `defaults({ a: { b:2 }}, { a: { b:1, c:3 }})` | `{a:{ b:2, c:3 }}`
 merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test'}, {k: 2})` |

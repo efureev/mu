@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.17.0] - 2021-12-28
+
+### Added
+
+- Add new function `filter` to Object space
+
 ## [2.16.1] - 2020-11-12
 
 ### Added
