@@ -11,3 +11,6 @@ export const reIsBadHex = /^[+-]0x[\da-f]+$/i
 
 /** Used to detect unsigned integer values. */
 export const reIsUint = /^(?:0|[1-9]\d*)$/
+
+/** Used to detect float values. */
+export const reIsFloat = /^[+|-]?\d+\.\d+$/

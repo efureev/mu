@@ -7,7 +7,14 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
-## [2.17.0] - 2021-12-28
+## [2.18.0] - 2021-02-02
+
+### Added
+
+- Add new functions: `isFloat`,`isFloats`,`isFloatCanonical` to `is` space
+
+
+## [2.17.0] - 2021-01-28
 
 ### Added
 

@@ -4,6 +4,7 @@ import isEmpty from './isEmpty'
 import isEven from './isEven'
 import isFunction from './isFunction'
 import isInteger from './isInteger'
+import isFloats, { isFloat, isFloatCanonical } from './isFloat'
 import isSymbol from './isSymbol'
 import isLength from './isLength'
 import isArrayLike from './isArrayLike'
@@ -78,23 +79,26 @@ export function isDate(...parameters) {
 }
 
 export {
-  isObject,
-  isObjectLike,
+  isArguments,
   isArray,
-  isEmpty,
-  isEven,
-  isFunction,
-  isInteger,
-  isSymbol,
-  isNil,
-  isNull,
-  isNulls,
-  isNils,
-  isEmptyObject,
-  isLength,
   isArrayLike,
   isBasicType,
-  isBuffer,
   isBlob,
-  isArguments,
+  isBuffer,
+  isEmpty,
+  isEmptyObject,
+  isEven,
+  isFloat,
+  isFloatCanonical,
+  isFloats,
+  isFunction,
+  isInteger,
+  isLength,
+  isNil,
+  isNils,
+  isNull,
+  isNulls,
+  isObject,
+  isObjectLike,
+  isSymbol,
 }

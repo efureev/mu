@@ -47,6 +47,9 @@ isEmpty | bool  | `isEmpty(null, undefined, ''); // true`
 isEmptyObject | bool | `isEmptyObject({}}); // true`
 isEven | bool | `isEven(2, 4, '8'); // true`
 isFunction | bool | `isFunction(()=>{})); // true`
+isFloats | bool | `isFloat('2.2','+2.1')); // true`
+isFloat | bool | `isFloat('2.0')); // false`
+isFloatCanonical | bool | `isFloat('2.0')); // true`
 isInteger | bool | `isInteger(12,-21); // true`
 isLength | bool | `isLength(3); // true`
 isNil | bool | `isNil(undefined); // true`
