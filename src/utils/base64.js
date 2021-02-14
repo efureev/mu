@@ -4,7 +4,7 @@ const utf8ToB64Node = (string) => {
   return Buffer.from(string).toString('base64')
 }
 
-const utf8ToB64Fn = (string) => {
+const utf8ToB64Function = (string) => {
   return utf8ToB64Node(string)
 }
 
@@ -12,7 +12,7 @@ const b64ToUtf8Node = (string) => {
   return Buffer.from(string, 'base64').toString()
 }
 
-const b64ToUtf8Fn = (string) => {
+const b64ToUtf8Function = (string) => {
   return b64ToUtf8Node(string)
 }
 
@@ -23,7 +23,7 @@ const b64ToUtf8Fn = (string) => {
  * @returns {string}
  */
 export function utf8ToB64(string) {
-  return utf8ToB64Fn(unescape(encodeURIComponent(string)))
+  return utf8ToB64Function(unescape(encodeURIComponent(string)))
 }
 
 /**
@@ -33,7 +33,7 @@ export function utf8ToB64(string) {
  * @returns {string}
  */
 export function b64ToUtf8(string) {
-  return decodeURIComponent(escape(b64ToUtf8Fn(string)))
+  return decodeURIComponent(escape(b64ToUtf8Function(string)))
 }
 
 const SYMBOLS_STANDARD = '+/='
@@ -46,7 +46,7 @@ const SYMBOLS_URL_SAFE = '-_~'
  * @return {string}
  */
 export function b64ToUtf8Safe(string) {
-  return strtr(b64ToUtf8Fn(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE)
+  return strtr(b64ToUtf8Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE)
 }
 
 /**
@@ -56,5 +56,5 @@ export function b64ToUtf8Safe(string) {
  * @return {string}
  */
 export function utf8Tob64Safe(string) {
-  return strtr(utf8ToB64Fn(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE)
+  return strtr(utf8ToB64Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE)
 }
