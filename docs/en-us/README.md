@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.17"
+      "@feugene/mu": "^2.19"
     }
 }
 ```
@@ -46,10 +46,10 @@ isDate | bool | `isDate(new Date); // true`
 isEmpty | bool  | `isEmpty(null, undefined, ''); // true`
 isEmptyObject | bool | `isEmptyObject({}}); // true`
 isEven | bool | `isEven(2, 4, '8'); // true`
-isFunction | bool | `isFunction(()=>{})); // true`
-isFloats | bool | `isFloat('2.2','+2.1')); // true`
 isFloat | bool | `isFloat('2.0')); // false`
 isFloatCanonical | bool | `isFloat('2.0')); // true`
+isFloats | bool | `isFloat('2.2','+2.1')); // true`
+isFunction | bool | `isFunction(()=>{})); // true`
 isInteger | bool | `isInteger(12,-21); // true`
 isLength | bool | `isLength(3); // true`
 isNil | bool | `isNil(undefined); // true`
@@ -66,54 +66,57 @@ isTypedArray | bool | `isTypedArray(new Uint8Array); // true`
 ## Array
 Function | Return | Description | Example
 :--- | :---| :---| :---
-equals | bool | Deep comparing the contents of 2 arrays using strict equality| `equals([1, '2', {}, []], [1, '2', {}, []])`
 arrayEach | array |  A specialized version of `forEach` for arrays| `arrayEach([1, '2', {}, []], (el)=>{...})`
 clear | void |  Clear array | 
 difference | array |  The difference will output the elements from array A that are not in the array B | `difference([2], [1, 4, 8])); // [2]` 
+equals | bool | Deep comparing the contents of 2 arrays using strict equality| `equals([1, '2', {}, []], [1, '2', {}, []])`
 intersect | array |  Return common items for two arrays | `intersect([1, 2, 3, 4, 5], [1, 4, 8]); // [1,4]`
 intersectAll | array |  Return common items for all arrays | `intersectAll([1, 2, 3, 4, 5], [1, 4, 8],[1])); // [1]`
-symmetricalDifference | array |  will output anti-intersection | `symmetricalDifference([1, 2, 3, 4, 5], [1, 4, 8]); // [2, 3, 5, 8]`
 random | array |  Random function returns random item from array | `random([1,2,3,4,5]]);`
+symmetricalDifference | array |  will output anti-intersection | `symmetricalDifference([1, 2, 3, 4, 5], [1, 4, 8]); // [2, 3, 5, 8]`
 
 
 ## Object
 Function | Return | Description | Example | Result
 :--- | :--- | :--- | :---  | :--- 
-equals | bool | Deep comparing the contents of 2 or more object using strict equality | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})`
-getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})`
-filter | object | Filter props in Object | `filter({key1:1, key:4}, ([key, value])=>value > 1)` | `{key:4}`
-fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')`
 defaults | object | Add to source object missing properties from other sources |  `defaults({ a: { b:2 }}, { a: { b:1, c:3 }})` | `{a:{ b:2, c:3 }}`
-merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test'}, {k: 2})`
-select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')`
+equals | bool | Deep comparing the contents of 2 or more object using strict equality | `equals({k: 1, v: [1,2,{}]}, {k: 1, v: [1,2,{}]})` |
+filter | object | Filter props in Object | `filter({key1:1, key:4}, ([key, value])=>value > 1)` | `{key:4}`
+flip | object | Swap key with value | `swap({a:1, b:'test', c:3})` | `{1:'a', 'test':'b', 3:'c'}`
+fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')` |
+getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})` |
+merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test'}, {k: 2})` |
 pathToObject | object | Return Object from sting path | `pathToObject('key.sub', 1)` | {key:{sub:1}}
-pick | object | Creates an object composed of the picked object properties. | `pick({a:1, b:2, c:3}, ['a', 'b'])`
-remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')`
+pick | object | Creates an object composed of the picked object properties. | `pick({a:1, b:2, c:3}, ['a', 'b'])` |
+remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')` |
+select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')` |
+toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])` |
+toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}` |
 values | array | Creates an array of the own enumerable string keyed property values of `object` | `values('hi')` | `['h','i']`
-toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}`
-toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
       
 ## To
 Function | Return | Description | Example
 :--- | :--- | :---| :---
-toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
 toArray | array | Converts `value` to a array | `toArray('test') // ['t','e','s','t']`
 toFinite | int | Converts `value` to a finite integer | `toFinite('-3.2') // 3`
 toInteger | int | Converts `value` to a integer | `toInteger('3.2') // 3`
+toNumber | int|float | Converts `value` to a number | `toNumber('3.2') // 3.2`
 toString | string | Converts `value` to a string | `toString(1234) // '1234'`
 
 ## String
 Function | Return | Description
 :--- | :---  | :--- 
 trim | string |
+camelCase | string | Convert a dash/dot/underscore/space separated string to camelCase
 clearSpaces | string | Remove extra spaces from string
+endsWith | string | Checks if string ends with the given target string
+hasUnicode | bool | Checks if `string` contains Unicode symbols
+pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
+replaceByTemplate | string | Translate characters or replace substrings in string by map
+startsWith | string | Checks if string starts with the given target string
+strtr | string | Translate characters or replace substrings in string
 titleCase | string | Converts the first character of every word into string to upper case
 upperFirst | string | Converts the first character of string to upper case
-startsWith | string | Checks if string starts with the given target string
-endsWith | string | Checks if string ends with the given target string
-camelCase | string | Convert a dash/dot/underscore/space separated string to camelCase
-pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
-hasUnicode | bool | Checks if `string` contains Unicode symbols
 
 ## Date
 Function | Return | Description | Example
@@ -125,20 +128,21 @@ toString | string | Date as string
 ## Format
 Function | Return | Description | Example
 :--- | :--- | :--- | :---
-num | string | Formatting number | `num('10000') // '10,000.00'`
-numRus | string | Formatting number for Russian | `numRus(1001.20) // '1 001.20'`
 fileSize | string | Display number as file size | `fileSize(7900221323) // '7.36 Gb'`
 intWord | string | | `intWord(21323) // '21.32K'`
-padNumber | string | | `padNumber(2,3) // '002'`
+num | string | Formatting number | `num('10000') // '10,000.00'`
+numRus | string | Formatting number for Russian | `numRus(1001.20) // '1 001.20'`
 padDateTime | string | | `padDateTime(1) // '01'`
+padNumber | string | | `padNumber(2,3) // '002'`
 
 ## Utilities
 Function | Return | Description
 :--- | :--- | :---
-utf8ToB64 | string | Encode string from Unicode to base-64
 b64ToUtf8 | string | Decode string from base-64 to Unicode
+b64ToUtf8Safe | string | Decode from safe base-64 to Unicode string
 times | string | Invokes the iteratee `n` times, returning an array of the results of each invocation
-
+utf8ToB64 | string | Encode string from Unicode to base-64
+utf8Tob64Safe | string | Encode from Unicode string to safe base-64
 
 ## Structures
 

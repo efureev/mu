@@ -11,6 +11,7 @@ import remove from './remove'
 import values from './values'
 import pathToObject from './pathToObject'
 import filter from './filter'
+import flip from './flip'
 
 export {
   getSize,
@@ -26,4 +27,5 @@ export {
   pathToObject,
   defaults,
   values,
+  flip,
 }

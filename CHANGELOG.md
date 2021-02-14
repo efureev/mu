@@ -7,6 +7,14 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.19.0] - 2021-02-14
+
+### Added
+
+- Add function: `flip` to `object` space
+- Add new functions: `replaceByTemplate`,`strtr` to `string` space
+- Add new functions: `utf8Tob64Safe`,`b64ToUtf8Safe` to `utils` space
+
 ## [2.18.0] - 2021-02-02
 
 ### Added

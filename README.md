@@ -17,6 +17,10 @@
 # µ
 JS Utilities Framework without dependencies.
 
+## Install
+
+`yarn add @feugene/mu`
+
 ## Links
 
 - [Documentation](https://efureev.github.io/mu)
