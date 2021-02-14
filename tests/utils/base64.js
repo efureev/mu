@@ -24,6 +24,8 @@ const list = {
   'Привет!': '0J_RgNC40LLQtdGCIQ~~',
   'Hello world': 'SGVsbG8gd29ybGQ~',
   '{"message:{"text":"сообщение !"}"}': 'eyJtZXNzYWdlOnsidGV4dCI6ItGB0L7QvtCx0YnQtdC90LjQtSAhIn0ifQ~~',
+  '{"message":"fa003ea3-2027-4b4e-aebe-50a7accbff5d"}':
+    'eyJtZXNzYWdlIjoiZmEwMDNlYTMtMjAyNy00YjRlLWFlYmUtNTBhN2FjY2JmZjVkIn0~',
 }
 
 describe('Utf8Tob64Safe', () => {
