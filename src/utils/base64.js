@@ -1,4 +1,3 @@
-import root from '../internal/root'
 import strtr from '../string/strtr'
 
 const utf8ToB64Node = (string) => {
@@ -6,7 +5,7 @@ const utf8ToB64Node = (string) => {
 }
 
 const utf8ToB64Fn = (string) => {
-  return root.btoa ? root.btoa(string) : utf8ToB64Node(string)
+  return utf8ToB64Node(string)
 }
 
 const b64ToUtf8Node = (string) => {
@@ -14,7 +13,7 @@ const b64ToUtf8Node = (string) => {
 }
 
 const b64ToUtf8Fn = (string) => {
-  return root.atob ? root.atob(string) : b64ToUtf8Node(string)
+  return b64ToUtf8Node(string)
 }
 
 /**
