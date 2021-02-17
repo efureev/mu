@@ -89,6 +89,7 @@ merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test
 pathToObject | object | Return Object from sting path | `pathToObject('key.sub', 1)` | {key:{sub:1}}
 pick | object | Creates an object composed of the picked object properties. | `pick({a:1, b:2, c:3}, ['a', 'b'])` |
 remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')` |
+removeEmpty | object | Removes all empty values in a `object` recursively | `removeEmpty({val:'hi', val2:null, val3:{}})` | `{val:'hi'}`
 select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')` |
 toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])` |
 toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}` |

@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.20.0] - 2021-02-17
+
+### Added
+
+- Add function: `removeEmpty` to `object` space
+
 ## [2.19.0] - 2021-02-14
 
 ### Added
@@ -131,7 +137,8 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `difference` to Array
 - A function `symmetricalDifference` to Array
 
-[unreleased]: https://github.com/efureev/mu/compare/v2.14.0...HEAD
+[unreleased]: https://github.com/efureev/mu/compare/v2.20.0...HEAD
+[2.20.0]: https://github.com/efureev/mu/compare/v2.20.0...HEAD
 [2.15.0]: https://github.com/efureev/mu/compare/v2.15.0...HEAD
 [2.14.0]: https://github.com/efureev/mu/compare/v2.14.0...v2.15.0
 [2.13.0]: https://github.com/efureev/mu/compare/v2.13.0...v2.14.0
