@@ -62,4 +62,11 @@ describe('select', () => {
     expect(select(obj, 'items::one::items::two::items::ket', undefined, '::')).toBeUndefined()
     expect(select(obj, 'items::one::children::1::key', undefined, '::')).toEqual(4)
   })
+
+  it('key with empty value', () => {
+    expect(select({ key: null }, 'key')).toBe(null)
+    expect(select({ key: undefined }, 'key')).toBe(undefined)
+    expect(select({ key: undefined }, 'key', 111)).toBe(undefined)
+    expect(select({ key: '' }, 'key')).toBe('')
+  })
 })

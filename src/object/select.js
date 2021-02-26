@@ -35,6 +35,9 @@
  * select(obj, 'items.one.children.1.key') // 4
  * select(obj, 'items.one.children.3.key', 0) // 0
  * select(obj, 'items/one/items/two/items',undefined,'/') // {}
+ * select({key:null}, 'key') // null
+ * select({key:''}, 'key') // ''
+ * select({key:undefined}, 'key', '111') // undefined
  *
  * @param {object} from
  * @param {string} selector
@@ -43,7 +46,11 @@
  * @returns {*}
  */
 export default function select(from, selector, defaultValue = undefined, divider = '.') {
+  // eslint-disable-next-line unicorn/no-array-reduce
   return selector.split(divider).reduce(function (previous, current) {
-    return (previous && previous[current]) || defaultValue
+    if (previous && current in previous) {
+      return previous[current]
+    }
+    return defaultValue
   }, from)
 }

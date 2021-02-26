@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.20.1] - 2021-02-26
+
+### Fixed
+
+- Fixed function `Object.select`: now it can return all empty values (`null`,`undefined`,`''`) if key defined
+
 ## [2.20.0] - 2021-02-17
 
 ### Added
