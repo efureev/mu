@@ -68,5 +68,8 @@ describe('select', () => {
     expect(select({ key: undefined }, 'key')).toBe(undefined)
     expect(select({ key: undefined }, 'key', 111)).toBe(undefined)
     expect(select({ key: '' }, 'key')).toBe('')
+    const object = { datas: { data: '', extra: null } }
+    expect(select(object, 'datas.data')).toBe('')
+    expect(select(object.datas, 'data')).toBe('')
   })
 })
