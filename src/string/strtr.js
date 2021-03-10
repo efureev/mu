@@ -1,4 +1,4 @@
-import { pregQuote } from '../utils'
+import pregQuote from '../utils/pregQuote'
 
 /**
  * Replace all entries in string according by map
