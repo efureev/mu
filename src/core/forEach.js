@@ -1,5 +1,5 @@
-import { isArray } from '../is'
-import { arrayEach } from '../array'
+import isArray from '../is/isArray'
+import arrayEach from '../array/arrayEach'
 import createBaseEach from '../internal/createBaseEach'
 import createBaseFor from '../internal/createBaseFor'
 import keys from './keys'

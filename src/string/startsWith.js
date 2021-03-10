@@ -1,4 +1,4 @@
-import { toString } from '..'
+import toString from '../to/toString'
 
 /**
  * Checks if string starts with the given target string

@@ -1,7 +1,9 @@
-import { isBoolean, isDate, isEmpty } from '../is'
+import isBoolean from '../is/isBoolean'
+import isDate from '../is/isDate'
+import isEmpty from '../is/isEmpty'
 import toQueryObjects from './toQueryObjects'
 import { toString } from '../date'
-import { toNumber } from '../to'
+import toNumber from '../to/toNumber'
 
 /**
  * Takes an object and converts it to an encoded query string.

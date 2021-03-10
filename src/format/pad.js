@@ -1,5 +1,5 @@
-import { padStart } from '../string'
-import { isNil } from '../is'
+import padStart from '../string/padStart'
+import isNil from '../is/isNil'
 
 /**
  * @param {String|Number} string

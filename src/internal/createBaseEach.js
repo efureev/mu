@@ -1,4 +1,4 @@
-import { isArrayLike } from '../is'
+import isArrayLike from '../is/isArrayLike'
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.

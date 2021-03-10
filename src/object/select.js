@@ -46,7 +46,6 @@
  * @returns {*}
  */
 export default function select(from, selector, defaultValue = undefined, divider = '.') {
-  // eslint-disable-next-line unicorn/no-array-reduce
   return selector.split(divider).reduce(function (previous, current) {
     if (previous && current in previous) {
       return previous[current]

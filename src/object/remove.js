@@ -1,4 +1,6 @@
-import { isArray, isObject, isString } from '../is'
+import isArray from '../is/isArray'
+import isObject from '../is/isObject'
+import isString from '../is/isString'
 
 /**
  * Get value by deep key in object(array)

@@ -1,5 +1,5 @@
-import { clone } from '..'
-import { isObject } from '../is'
+import clone from '../core/clone'
+import isObject from '../is/isObject'
 
 /**
  * Assigns own and inherited enumerable string keyed properties of source

@@ -1,5 +1,7 @@
-import { isArguments, isArray, isBuffer } from '../is'
-import { times } from '../utils'
+import isArguments from '../is/isArguments'
+import isArray from '../is/isArray'
+import isBuffer from '../is/isBuffer'
+import times from '../utils/times'
 import isIndex from './isIndex'
 import isTypedArray from '../is/isTypedArray'
 

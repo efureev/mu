@@ -1,5 +1,6 @@
-import { isArray, isObject } from '../is'
-import { equals as equalsObject } from '../object'
+import isArray from '../is/isArray'
+import isObject from '../is/isObject'
+import equalsObject from '../object/equals'
 
 /**
  * Deep comparing the contents of 2 arrays using strict equality

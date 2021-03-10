@@ -1,6 +1,11 @@
-import { equals as equalsObject } from './../object'
-import { equals as equalsArray } from './../array'
-import { isArray, isBoolean, isFunction, isNumeric, isObject, isString } from '../is'
+import equalsObject from './../object/equals'
+import equalsArray from './../array/equals'
+import isArray from '../is/isArray'
+import isBoolean from '../is/isBoolean'
+import isNumeric from '../is/isNumeric'
+import isFunction from '../is/isFunction'
+import isObject from '../is/isObject'
+import isString from '../is/isString'
 
 /**
  * @param {*} first

@@ -1,82 +1,23 @@
-import isObject, { isEmptyObject, isObjectLike } from './isObject'
+import isArguments from './isArguments'
 import isArray from './isArray'
-import isEmpty from './isEmpty'
-import isEven from './isEven'
-import isFunction from './isFunction'
-import isInteger from './isInteger'
-import isFloats, { isFloat, isFloatCanonical } from './isFloat'
-import isSymbol from './isSymbol'
-import isLength from './isLength'
 import isArrayLike from './isArrayLike'
 import isBasicType from './isBasicType'
-import isBuffer from './isBuffer'
-import isArguments from './isArguments'
 import isBlob from './isBlob'
+import isBoolean from './isBoolean'
+import isBuffer from './isBuffer'
+import isPrototype from './isPrototype'
+import isDate from './isDate'
+import isEmpty from './isEmpty'
+import isEven from './isEven'
+import isFloats, { isFloat, isFloatCanonical } from './isFloat'
+import isFunction from './isFunction'
+import isInteger from './isInteger'
+import isLength from './isLength'
 import isNil, { isNils, isNull, isNulls } from './isNil'
-
-/**
- * This function evaluates if all the parameters are strings
- *
- * @memberof µ.is
- * @author efureev
- * {...*} params - One or more parameters.
- */
-export function isString(...parameters) {
-  const invalid = parameters.some((parameter) => {
-    return typeof parameter !== 'string'
-  })
-
-  return !invalid
-}
-
-/**
- * This function evaluates if all the parameters are Numeric
- *
- * @memberof mu
- * @author efureev
- * @param {...*} parameters - One or more parameters.
- */
-export function isNumeric(...parameters) {
-  const invalid = parameters.some((parameter) => {
-    return isArray(parameter) || isNaN(parseFloat(parameter)) || !isFinite(parameter)
-  })
-
-  return !invalid
-}
-
-/**
- * This function evaluates if all the parameters are boolean
- *
- * @memberof mu
- * @author efureev
- * @param {...*} parameters - One or more parameters.
- */
-export function isBoolean(...parameters) {
-  const invalid = parameters.some((parameter) => {
-    return !(
-      parameter === true ||
-      parameter === false ||
-      Object.prototype.toString.call(parameter) === '[object Boolean]'
-    )
-  })
-
-  return !invalid
-}
-
-/**
- * This function evaluates if all the parameters are dates
- *
- * @memberof mu
- * @author efureev
- * @param {...*} parameters - One or more parameters.
- */
-export function isDate(...parameters) {
-  const invalid = parameters.some((parameter) => {
-    return Object.prototype.toString.call(parameter) !== '[object Date]'
-  })
-
-  return !invalid
-}
+import isNumeric from './isNumeric'
+import isObject, { isEmptyObject, isObjectLike } from './isObject'
+import isString from './isString'
+import isSymbol from './isSymbol'
 
 export {
   isArguments,
@@ -84,7 +25,9 @@ export {
   isArrayLike,
   isBasicType,
   isBlob,
+  isBoolean,
   isBuffer,
+  isDate,
   isEmpty,
   isEmptyObject,
   isEven,
@@ -93,12 +36,15 @@ export {
   isFloats,
   isFunction,
   isInteger,
+  isPrototype,
   isLength,
   isNil,
   isNils,
   isNull,
   isNulls,
+  isNumeric,
   isObject,
   isObjectLike,
+  isString,
   isSymbol,
 }

@@ -1,4 +1,8 @@
-import { isBoolean, isNil, isNumeric, isString, isSymbol } from '.'
+import isBoolean from './isBoolean'
+import isNil from './isNil'
+import isNumeric from './isNumeric'
+import isString from './isString'
+import isSymbol from './isSymbol'
 
 /**
  * Возвращает TRUE, если тип `value` передается копированием по значению

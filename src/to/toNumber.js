@@ -1,4 +1,5 @@
-import { isObject, isSymbol } from '../is'
+import isObject from '../is/isObject'
+import isSymbol from '../is/isSymbol'
 import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars'
 
 /**

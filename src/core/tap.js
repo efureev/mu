@@ -16,7 +16,8 @@
  * tap(()=>100), (value) => value / 2) // 50
  *
  */
-import { isBasicType, isFunction } from '../is'
+import isBasicType from '../is/isBasicType'
+import isFunction from '../is/isFunction'
 
 export default function tap(value, interceptor) {
   if (isFunction(value)) {

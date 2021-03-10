@@ -1,4 +1,5 @@
-import { isArray, isNumeric } from '../is'
+import isArray from '../is/isArray'
+import isNumeric from '../is/isNumeric'
 import isNil from '../is/isNil'
 
 const queryRe = /^\?/

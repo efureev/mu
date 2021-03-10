@@ -1,4 +1,5 @@
-import { isFunction, isLength } from '../is'
+import isFunction from '../is/isFunction'
+import isLength from '../is/isLength'
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's

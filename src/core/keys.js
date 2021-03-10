@@ -1,4 +1,4 @@
-import { isArrayLike } from '../is'
+import isArrayLike from '../is/isArrayLike'
 import arrayLikeKeys from '../internal/arrayLikeKeys'
 import baseKeys from '../internal/base/baseKeys'
 

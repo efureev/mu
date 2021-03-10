@@ -1,4 +1,5 @@
-import { isArray, isSymbol } from '../is'
+import isArray from '../is/isArray'
+import isSymbol from '../is/isSymbol'
 import { reTrim } from '../core/vars'
 
 const symbolProto = Symbol ? Symbol.prototype : undefined,

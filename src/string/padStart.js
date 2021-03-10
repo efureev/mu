@@ -1,4 +1,4 @@
-import { isNil } from '../is'
+import isNil from '../is/isNil'
 
 /**
  * This function add leading zero

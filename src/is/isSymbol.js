@@ -1,4 +1,4 @@
-import { isObjectLike } from '.'
+import { isObjectLike } from './isObject'
 
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.

@@ -1,5 +1,6 @@
 /** `Object#toString` result references. */
-import { isLength, isObjectLike } from '../../is'
+import isLength from '../../is/isLength'
+import { isObjectLike } from '../../is'
 import baseGetTag from './baseGetTag'
 
 const argumentsTag = '[object Arguments]',
