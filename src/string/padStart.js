@@ -9,7 +9,7 @@ import { isNil } from '../is'
  * @returns {string}
  */
 export default function padStart(string, targetLength, padString = ' ') {
-  targetLength = targetLength >> 0 //floor if number or convert non-number to 0;
+  targetLength = Math.trunc(targetLength) //floor if number or convert non-number to 0;
   if (isNil(string)) {
     return ''
   }
@@ -24,8 +24,4 @@ export default function padStart(string, targetLength, padString = ' ') {
     }
     return padString.slice(0, targetLength) + String(string)
   }
-}
-
-if (!String.prototype.padStart) {
-  String.prototype.padStart = padStart.call(this)
 }

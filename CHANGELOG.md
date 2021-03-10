@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.20.2] - 2021-03-10
+
+### Fixed
+
+- Fixed function `String.padStart`
+
 ## [2.20.1] - 2021-02-26
 
 ### Fixed

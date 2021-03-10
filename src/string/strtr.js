@@ -1,4 +1,4 @@
-import {pregQuote} from '../utils'
+import { pregQuote } from '../utils'
 
 /**
  * Replace all entries in string according by map
@@ -9,9 +9,9 @@ import {pregQuote} from '../utils'
  */
 export function replaceByTemplate(string, map) {
   let cmpString = '',
-      offset    = 0,
-      find      = -1,
-      addString = ''
+    offset = 0,
+    find = -1,
+    addString = ''
   for (let index = 0; index < string.length; index++) {
     cmpString += '0'
   }
