@@ -113,6 +113,8 @@ clearSpaces | string | Удаляет лишние пробельные симв
 endsWith | string | Проверяет, если строка заканчивается на `string`
 hasUnicode | bool | Проверяет, содержится ли в `string` Unicode символы
 pascalCase | string | Конвертирует {dash/dot/underscore/space}разделенную строку в PascalCase
+padStart | string | Добавляет лидирующие символы в строку
+padEnd | string | Добавляет завершающие символы в строку
 replaceByTemplate | string | Преобразует символы и заменяет подстроки в строке по карте
 startsWith | string | Проверяет, если строка начинается со `string`
 strtr | string | Преобразует символы и заменяет подстроки в строке

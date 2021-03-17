@@ -2,7 +2,7 @@ import trim from './trim'
 import endsWith from './endsWith'
 import { hasUnicode } from './unicode'
 import startsWith from './startsWith'
-import padStart from '../string/padStart'
+import padStart, { pad, padEnd } from '../string/padStart'
 import strtr, { replaceByTemplate } from '../string/strtr'
 import camelCase, { pascalCase } from '../string/camelCase'
 
@@ -37,4 +37,16 @@ export function clearSpaces(string) {
   return string.toString().replace(/\s+/g, ' ').trim()
 }
 
-export { trim, endsWith, startsWith, padStart, camelCase, pascalCase, hasUnicode, strtr, replaceByTemplate }
+export {
+  trim,
+  endsWith,
+  startsWith,
+  pad,
+  padStart,
+  padEnd,
+  camelCase,
+  pascalCase,
+  hasUnicode,
+  strtr,
+  replaceByTemplate,
+}

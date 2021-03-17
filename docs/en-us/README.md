@@ -113,6 +113,8 @@ clearSpaces | string | Remove extra spaces from string
 endsWith | string | Checks if string ends with the given target string
 hasUnicode | bool | Checks if `string` contains Unicode symbols
 pascalCase | string | Convert a dash/dot/underscore/space separated string to PascalCase
+padStart | string | add leading symbols
+padEnd | string | add ending symbols
 replaceByTemplate | string | Translate characters or replace substrings in string by map
 startsWith | string | Checks if string starts with the given target string
 strtr | string | Translate characters or replace substrings in string
