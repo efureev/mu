@@ -1,5 +1,6 @@
 import isEmpty from '../is/isEmpty'
 import isObject from '../is/isObject'
+import isString from '../is/isString'
 import isArray from '../is/isArray'
 
 /**
@@ -27,9 +28,13 @@ export default function removeEmpty(object) {
       if (isArray(object[key])) {
         const a = []
         object[key].forEach((v) => {
-          const r = removeEmpty(v)
-          if (!isEmpty(r)) {
-            a.push(r)
+          if (isString(v)) {
+            a.push(v)
+          } else {
+            const r = removeEmpty(v)
+            if (!isEmpty(r)) {
+              a.push(r)
+            }
           }
         })
         if (!isEmpty(a)) {
