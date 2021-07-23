@@ -1,11 +1,15 @@
 const isO =
-  toString.call(null) === '[object Object]'
+  Object.prototype.toString.call(null) === '[object Object]'
     ? function (value) {
         // check ownerDocument here as well to exclude DOM nodes
-        return value != null && toString.call(value) === '[object Object]' && value.ownerDocument === undefined
+        return (
+          value != null &&
+          Object.prototype.toString.call(value) === '[object Object]' &&
+          value.ownerDocument === undefined
+        )
       }
     : function (value) {
-        return toString.call(value) === '[object Object]'
+        return Object.prototype.toString.call(value) === '[object Object]'
       }
 
 /**

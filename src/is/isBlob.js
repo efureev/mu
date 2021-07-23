@@ -7,5 +7,5 @@
 export default function isBlob(...parameters) {
   if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isBlob.')
 
-  return !parameters.some((parameter) => toString.call(parameter) !== '[object Blob]')
+  return !parameters.some((parameter) => Object.prototype.toString.call(parameter) !== '[object Blob]')
 }
