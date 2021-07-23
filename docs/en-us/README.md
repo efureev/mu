@@ -2,7 +2,7 @@
 ```json
 {
     "dependencies": {
-      "@feugene/mu": "^2.19"
+      "@feugene/mu": "^2.21"
     }
 }
 ```
