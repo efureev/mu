@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.22.0] - 2021-03-17
+
+### Added
+
+- Add function: `logicalAnd`, `sum` to `object` space
+
 ## [2.21.0] - 2021-03-17
 
 ### Added
@@ -156,6 +162,7 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `symmetricalDifference` to Array
 
 [unreleased]: https://github.com/efureev/mu/compare/v2.21.0...HEAD
+[2.22.0]: https://github.com/efureev/mu/compare/v2.21.0...v2.22.0
 [2.21.0]: https://github.com/efureev/mu/compare/v2.20.0...v2.21.0
 [2.20.0]: https://github.com/efureev/mu/compare/v2.15.0...v2.20.0
 [2.15.0]: https://github.com/efureev/mu/compare/v2.14.0...v2.15.0

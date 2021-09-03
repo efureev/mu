@@ -85,15 +85,17 @@ filter | object | Фильтрует объект по заданным крит
 flip | object | Переворачивает ключ значение в объекте | `swap({a:1, b:'test', c:3})` | `{1:'a', 'test':'b', 3:'c'}`
 fromQueryString | object | Преобразует строку запроса в объект | `fromQueryString('foo=1&bar=2')`
 getSize | int | Возвращает количество свойств объекта | `getSize({k: 1, v: []})`
+logicalAnd | boolean | Логическое `AND` по значениям ключей объекта | `logicalAnd('hi')` | `['h','i']`
 merge | object | Объединяет рекурсивно 2 и более объектов |  `merge({k: 1}, {v: 'test'}, {k: 2})`
 pathToObject | object | Возвращает объект из строчного пути (ключа) | `pathToObject('key.sub', 1)` | {key:{sub:1}}
 pick | object | Создает новый объект из "выдернутых" ключей объекта-цели. | `pick({a:1, b:2, c:3}, ['a', 'b'])`
 remove | object | Удаляет значения по ключу (даже вложенные) в объекте или массиве | `remove(obj, 'key.sub.items.1')`
+removeEmpty | object | Рекурсивно удаляет все пустые значения из объекта | `removeEmpty({val:'hi', val2:null, val3:{}})` | `{val:'hi'}`
 select | mixed | Выбирает значения по ключу (даже вложенные) в объекте(массиве) | `select(obj, 'key.sub.items.1')`
+sum | Number | Суммирует значения ключей объекта | `sum({ a: 1, b: 2, c: 3 })` | `6`
 toQueryObjects | object | Преобразует `name` - `value` пары в массив объектов с поддержкой вложенных структур | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])`
 toQueryString | string | Преобразует объект в закодированную строку запроса | `toQueryString({colors: ['red', 'green', 'blue']}`
 values | array | Создает массив из значений перечисляемых свойств `object` | `values('hi')` | `['h','i']`
-removeEmpty | object | Рекурсивно удаляет все пустые значения из объекта | `removeEmpty({val:'hi', val2:null, val3:{}})` | `{val:'hi'}`
 
 ## To
 Function | Return | Description | Example

@@ -85,12 +85,14 @@ filter | object | Filter props in Object | `filter({key1:1, key:4}, ([key, value
 flip | object | Swap key with value | `swap({a:1, b:'test', c:3})` | `{1:'a', 'test':'b', 3:'c'}`
 fromQueryString | object | Converts a query string back into an object | `fromQueryString('foo=1&bar=2')` |
 getSize | int | Returns count of properties of the object | `getSize({k: 1, v: []})` |
+logicalAnd | boolean | Logical `AND` by object's values | `logicalAnd({ a: true, b: true, c: false })` | `false`
 merge | object | Merge 2 or more objects recursively |  `merge({k: 1}, {v: 'test'}, {k: 2})` |
 pathToObject | object | Return Object from sting path | `pathToObject('key.sub', 1)` | {key:{sub:1}}
 pick | object | Creates an object composed of the picked object properties. | `pick({a:1, b:2, c:3}, ['a', 'b'])` |
 remove | object | Remove value by deep key in object(array) | `remove(obj, 'key.sub.items.1')` |
 removeEmpty | object | Removes all empty values in a `object` recursively | `removeEmpty({val:'hi', val2:null, val3:{}})` | `{val:'hi'}`
 select | mixed | Get value by deep key in object(array) | `select(obj, 'key.sub.items.1')` |
+sum | Number | Sum of object's values | `sum({ a: 1, b: 2, c: 3 })` | `6`
 toQueryObjects | object | Converts a `name` - `value` pair to an array of objects with support for nested structure | `toQueryObjects('hobbies', ['reading', 'cooking', 'swimming'])` |
 toQueryString | string | Takes an object and converts it to an encoded query string | `toQueryString({colors: ['red', 'green', 'blue']}` |
 values | array | Creates an array of the own enumerable string keyed property values of `object` | `values('hi')` | `['h','i']`
