@@ -1,4 +1,5 @@
 import { fromQueryString } from './../../src/object'
+import root from './../../src/internal/root'
 
 describe('fromQueryString', () => {
   it('should return empty object from empty', () => {
@@ -35,22 +36,37 @@ describe('fromQueryString', () => {
   })
 
   it('should return deep object from string', () => {
+    root.fn = root.fn || function fn(e) {}
+
     expect(
       fromQueryString(
         'username=Jacky&' +
+          'empty=&' +
           'dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911&' +
           'hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&' +
-          'hobbies[3][0]=nested&hobbies[3][1]=stuff',
+          'hobbies[3][0]=nested&hobbies[3][1]=stuff&' +
+          'test[t][]=undefined&' +
+          'test[t][]=fn(e)',
         true
       )
     ).toMatchObject({
       username: 'Jacky',
+      empty: '',
       dateOfBirth: {
         day: '1',
         month: '2',
         year: '1911',
       },
       hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']],
+      test: { t: ['undefined', 'fn(e)'] },
     })
+  })
+
+  it('prototype pollution', () => {
+    const input = '__proto__[ontransitionend][]=alert(document.domain)'
+
+    const obj = fromQueryString(input, true)
+    expect(fromQueryString(input, true)).toMatchObject({})
+    expect(obj.ontransitionend).toBeUndefined()
   })
 })

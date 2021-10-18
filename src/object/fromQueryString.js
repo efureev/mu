@@ -50,7 +50,7 @@ export default function fromQueryString(queryString, recursive = false, options 
     return {}
   }
   let parts = queryString.replace(queryRe, '').split('&'),
-    object = {},
+    object = Object.create(null),
     temporary,
     components,
     name,
