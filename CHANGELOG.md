@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [2.23.0] - 2022-04-11
+
+### Added
+
+- Add function: `sort.sortDescObjectsInArrayByProperty` to `sort` space. It allows to sort an array into an objects by
+  key
+
 ## [2.22.0] - 2021-03-17
 
 ### Added
@@ -96,7 +103,7 @@ and this project adheres to [Semantic Versioning][semver].
 
 ### Fixed
 
-- A function `isNumeric` from `Is`. Before `[..]` had been equal `true`  
+- A function `isNumeric` from `Is`. Before `[..]` had been equal `true`
 
 ## [2.11.0] - 2020-04-05
 
@@ -162,20 +169,35 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `symmetricalDifference` to Array
 
 [unreleased]: https://github.com/efureev/mu/compare/v2.21.0...HEAD
+
 [2.22.0]: https://github.com/efureev/mu/compare/v2.21.0...v2.22.0
+
 [2.21.0]: https://github.com/efureev/mu/compare/v2.20.0...v2.21.0
+
 [2.20.0]: https://github.com/efureev/mu/compare/v2.15.0...v2.20.0
+
 [2.15.0]: https://github.com/efureev/mu/compare/v2.14.0...v2.15.0
+
 [2.14.0]: https://github.com/efureev/mu/compare/v2.13.0...v2.14.0
+
 [2.13.0]: https://github.com/efureev/mu/compare/v2.12.0...v2.13.0
+
 [2.12.0]: https://github.com/efureev/mu/compare/v2.11.0...v2.12.0
+
 [2.11.0]: https://github.com/efureev/mu/compare/v2.10.0...v2.11.0
+
 [2.10.0]: https://github.com/efureev/mu/compare/v2.9.0...v2.10.0
+
 [2.9.0]: https://github.com/efureev/mu/compare/v2.7.0...v2.9.0
+
 [2.7.0]: https://github.com/efureev/mu/compare/v2.6.0...v2.7.0
+
 [2.6.0]: https://github.com/efureev/mu/compare/v2.5.0...v2.6.0
+
 [2.5.0]: https://github.com/efureev/mu/compare/v2.4.0...v2.5.0
+
 [2.4.0]: https://github.com/efureev/mu/releases/tag/v2.4.0
 
 [keepachangelog]:https://keepachangelog.com/en/1.1.0/
+
 [semver]:https://semver.org/spec/v2.0.0.html
