@@ -1,6 +1,6 @@
 /* Node.js helper references. */
-import node from '../internal/node'
-import baseIsTypedArray from '../internal/base/baseIsTypedArray'
+import node from '../internal/node.js'
+import baseIsTypedArray from '../internal/base/baseIsTypedArray.js'
 
 const nodeIsTypedArray = node && node.isTypedArray
 

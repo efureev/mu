@@ -1,4 +1,4 @@
-import { now } from '.'
+import { now } from './index.js'
 
 /**
  * Returns difference in milliseconds between dates

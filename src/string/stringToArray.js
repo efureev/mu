@@ -1,4 +1,4 @@
-import { hasUnicode, reUnicode } from './unicode'
+import { hasUnicode, reUnicode } from './unicode.js'
 
 /**
  * Converts a Unicode `string` to an array.

@@ -1,5 +1,5 @@
-import clone from '../core/clone'
-import isObject from '../is/isObject'
+import clone from '../core/clone.js'
+import isObject from '../is/isObject.js'
 
 /**
  * Merge objects recursively

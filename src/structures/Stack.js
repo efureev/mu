@@ -1,4 +1,4 @@
-import isFunction from '../is/isFunction'
+import isFunction from '../is/isFunction.js'
 
 export class Stack {
   constructor() {

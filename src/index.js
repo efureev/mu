@@ -1,7 +1,7 @@
-import clone from './core/clone'
-import tap from './core/tap'
-import toString from './to/toString'
-import equals from './core/equals'
-import forEach from './core/forEach'
+import clone from './core/clone.js'
+import tap from './core/tap.js'
+import toString from './to/toString.js'
+import equals from './core/equals.js'
+import forEach from './core/forEach.js'
 
 export {clone, toString, equals, tap, forEach}

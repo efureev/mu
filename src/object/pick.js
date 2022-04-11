@@ -1,6 +1,6 @@
-import isEmpty from '../is/isEmpty'
-import forEach from '../core/forEach'
-import select from './select'
+import isEmpty from '../is/isEmpty.js'
+import forEach from '../core/forEach.js'
+import select from './select.js'
 
 /**
  *

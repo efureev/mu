@@ -1,9 +1,10 @@
 {
   "name": "@feugene/mu",
-  "description": "JS Utilities",
+  "description": "Helpful JS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "2.23.0",
+  "version": "3.0.0",
+  "type": "module",
   "author": {
     "name": "Eugene Fureev"
   },
@@ -15,26 +16,29 @@
     "url": "https://github.com/efureev/mu/issues"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.4",
+    "@babel/core": "^7.17.9",
     "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.15.4",
-    "@types/jest": "^27.0.1",
-    "babel-jest": "^27.1.0",
+    "@babel/preset-env": "^7.16.11",
+    "@types/jest": "^27.4.1",
+    "babel-jest": "^27.5.1",
     "blob-polyfill": "^5.0.20210201",
-    "docsify-cli": "^4.4.3",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-prettier": "^3.4.1",
-    "eslint-plugin-sonarjs": "^0.10.0",
-    "formdata-node": "^2.5.0",
-    "jest": "^27.1.0",
-    "prettier": "^2.3.2",
+    "docsify-cli": "^4.4.4",
+    "eslint": "^8.13.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-sonarjs": "^0.13.0",
+    "formdata-node": "^4.3.2",
+    "jest": "^27.5.1",
+    "prettier": "^2.6.2",
     "prettier-eslint": "^13.0.0"
   },
   "keywords": [
     "javascript",
-    "utilities"
+    "js",
+    "utilities",
+    "ems",
+    "js-modules"
   ],
   "scripts": {
     "lint": "eslint src/**/*",
@@ -42,5 +46,7 @@
     "test": "jest",
     "docsify": "docsify serve ./docs"
   },
-  "dependencies": {}
+  "engines": {
+    "node": "^16|| >=17.0"
+  }
 }

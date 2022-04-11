@@ -1,6 +1,6 @@
 /** Detect free variable `exports`. */
-import freeGlobal from './free/freeGlobal'
-import freeExports from './free/freeExports'
+import freeGlobal from './free/freeGlobal.js'
+import freeExports from './free/freeExports.js'
 
 /** Detect free variable `module`. */
 const freeModule = freeExports && typeof module == 'object' && module && !module.nodeType && module

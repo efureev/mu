@@ -1,7 +1,7 @@
 /** `Object#toString` result references. */
-import isLength from '../../is/isLength'
-import { isObjectLike } from '../../is'
-import baseGetTag from './baseGetTag'
+import isLength from '../../is/isLength.js'
+import { isObjectLike } from '../../is/isObject.js'
+import baseGetTag from './baseGetTag.js'
 
 const argumentsTag = '[object Arguments]',
   arrayTag = '[object Array]',
@@ -32,19 +32,33 @@ const arrayBufferTag = '[object ArrayBuffer]',
 /** Used to identify `toStringTag` values of typed arrays. */
 const typedArrayTags = {}
 
-typedArrayTags[float32Tag] = typedArrayTags[float64Tag] = typedArrayTags[int8Tag] = typedArrayTags[
-  int16Tag
-] = typedArrayTags[int32Tag] = typedArrayTags[uint8Tag] = typedArrayTags[uint8ClampedTag] = typedArrayTags[
-  uint16Tag
-] = typedArrayTags[uint32Tag] = true
+typedArrayTags[float32Tag] =
+  typedArrayTags[float64Tag] =
+  typedArrayTags[int8Tag] =
+  typedArrayTags[int16Tag] =
+  typedArrayTags[int32Tag] =
+  typedArrayTags[uint8Tag] =
+  typedArrayTags[uint8ClampedTag] =
+  typedArrayTags[uint16Tag] =
+  typedArrayTags[uint32Tag] =
+    true
 
-typedArrayTags[argumentsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBufferTag] = typedArrayTags[
-  boolTag
-] = typedArrayTags[dataViewTag] = typedArrayTags[dateTag] = typedArrayTags[errorTag] = typedArrayTags[
-  funcTag
-] = typedArrayTags[mapTag] = typedArrayTags[numberTag] = typedArrayTags[objectTag] = typedArrayTags[
-  regexpTag
-] = typedArrayTags[setTag] = typedArrayTags[stringTag] = typedArrayTags[weakMapTag] = false
+typedArrayTags[argumentsTag] =
+  typedArrayTags[arrayTag] =
+  typedArrayTags[arrayBufferTag] =
+  typedArrayTags[boolTag] =
+  typedArrayTags[dataViewTag] =
+  typedArrayTags[dateTag] =
+  typedArrayTags[errorTag] =
+  typedArrayTags[funcTag] =
+  typedArrayTags[mapTag] =
+  typedArrayTags[numberTag] =
+  typedArrayTags[objectTag] =
+  typedArrayTags[regexpTag] =
+  typedArrayTags[setTag] =
+  typedArrayTags[stringTag] =
+  typedArrayTags[weakMapTag] =
+    false
 
 /**
  * The base implementation of `isTypedArray` without Node.js optimizations.

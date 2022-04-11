@@ -1,7 +1,7 @@
-import toNumber from './toNumber'
-import toFinite from './toFinite'
-import toInteger from './toInteger'
-import toString from './toString'
-import toArray from './toArray'
+import toNumber from './toNumber.js'
+import toFinite from './toFinite.js'
+import toInteger from './toInteger.js'
+import toString from './toString.js'
+import toArray from './toArray.js'
 
 export { toNumber, toFinite, toInteger, toString, toArray }

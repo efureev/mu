@@ -1,7 +1,7 @@
-import isEmpty from '../is/isEmpty'
-import isObject from '../is/isObject'
-import isString from '../is/isString'
-import isArray from '../is/isArray'
+import isEmpty from '../is/isEmpty.js'
+import isObject from '../is/isObject.js'
+import isString from '../is/isString.js'
+import isArray from '../is/isArray.js'
 
 /**
  * Remove all empty values in object
@@ -17,7 +17,6 @@ export default function removeEmpty(object) {
     if (object.hasOwnProperty(key) && !isEmpty(object[key])) {
       if (isObject(object[key])) {
         const r = removeEmpty(object[key])
-        // result[key] = removeEmpty(object[key])
         if (!isEmpty(r)) {
           result[key] = r
         }

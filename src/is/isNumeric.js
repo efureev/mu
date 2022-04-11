@@ -1,4 +1,4 @@
-import isArray from './isArray'
+import isArray from './isArray.js'
 
 /**
  * This function evaluates if all the parameters are Numeric

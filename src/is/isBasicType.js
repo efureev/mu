@@ -1,8 +1,8 @@
-import isBoolean from './isBoolean'
-import isNil from './isNil'
-import isNumeric from './isNumeric'
-import isString from './isString'
-import isSymbol from './isSymbol'
+import isBoolean from './isBoolean.js'
+import isNil from './isNil.js'
+import isNumeric from './isNumeric.js'
+import isString from './isString.js'
+import isSymbol from './isSymbol.js'
 
 /**
  * Возвращает TRUE, если тип `value` передается копированием по значению

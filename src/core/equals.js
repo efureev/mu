@@ -1,11 +1,11 @@
-import equalsObject from './../object/equals'
-import equalsArray from './../array/equals'
-import isArray from '../is/isArray'
-import isBoolean from '../is/isBoolean'
-import isNumeric from '../is/isNumeric'
-import isFunction from '../is/isFunction'
-import isObject from '../is/isObject'
-import isString from '../is/isString'
+import equalsObject from './../object/equals.js'
+import equalsArray from './../array/equals.js'
+import isArray from '../is/isArray.js'
+import isBoolean from '../is/isBoolean.js'
+import isNumeric from '../is/isNumeric.js'
+import isFunction from '../is/isFunction.js'
+import isObject from '../is/isObject.js'
+import isString from '../is/isString.js'
 
 /**
  * @param {*} first

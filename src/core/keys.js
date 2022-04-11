@@ -1,6 +1,6 @@
-import isArrayLike from '../is/isArrayLike'
-import arrayLikeKeys from '../internal/arrayLikeKeys'
-import baseKeys from '../internal/base/baseKeys'
+import isArrayLike from '../is/isArrayLike.js'
+import arrayLikeKeys from '../internal/arrayLikeKeys.js'
+import baseKeys from '../internal/base/baseKeys.js'
 
 /**
  * Creates an array of the own enumerable property names of `object`.

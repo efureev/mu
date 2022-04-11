@@ -1,5 +1,5 @@
-import isFunction from '../is/isFunction'
-import isLength from '../is/isLength'
+import isFunction from '../is/isFunction.js'
+import isLength from '../is/isLength.js'
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's

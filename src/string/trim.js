@@ -1,5 +1,5 @@
-import { toString } from '../to'
-import { reTrim } from '../core/vars'
+import toString from '../to/toString.js'
+import { reTrim } from '../core/vars.js'
 
 /**
  * This function trim string

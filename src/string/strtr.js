@@ -1,4 +1,4 @@
-import pregQuote from '../utils/pregQuote'
+import pregQuote from '../utils/pregQuote.js'
 
 /**
  * Replace all entries in string according by map

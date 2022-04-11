@@ -1,4 +1,4 @@
-import FormData from 'formdata-node'
+import { FormData } from 'formdata-node'
 import tap from '../../src/core/tap'
 
 describe('tap', () => {

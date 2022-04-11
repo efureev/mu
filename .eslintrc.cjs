@@ -1,37 +1,37 @@
 module.exports = {
-  root: true,
-  env: {
+  root         : true,
+  env          : {
     browser: true,
-    node: true,
-    es6: true,
+    node   : true,
+    es6    : true,
   },
-  globals: {
-    app: 'readonly',
+  globals      : {
+    app  : 'readonly',
     Alice: 'readonly',
   },
-  extends: [
+  extends      : [
     //https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb-base/rules
     // 'airbnb-base',
     'plugin:sonarjs/recommended',
     'prettier',
   ],
-  plugins: ['prettier', 'sonarjs'],
+  plugins      : ['prettier', 'sonarjs'],
   parserOptions: {
-    parser: 'babel-eslint',
+    parser    : 'babel-eslint',
     sourceType: 'module',
   },
-  rules: {
+  rules        : {
     'global-require': 0,
     // Only allow debugger in development
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     // Only allow `console.log` in development
-    'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-    'import/no-unresolved': 0,
-    'no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: false }],
-    'no-underscore-dangle': 'warn',
+    'no-console'                      : process.env.NODE_ENV === 'production' ? 'error' : 'off',
+    'import/no-unresolved'            : 0,
+    'no-unused-vars'                  : ['error', {vars: 'all', args: 'none', ignoreRestSiblings: false}],
+    'no-underscore-dangle'            : 'warn',
     'sonarjs/no-identical-expressions': 'error',
-    'sonarjs/no-identical-functions': 'warn',
-    'sonarjs/cognitive-complexity': ['warn', 15],
+    'sonarjs/no-identical-functions'  : 'warn',
+    'sonarjs/cognitive-complexity'    : ['warn', 19],
     /*'unicorn/filename-case': [
       'error',
       {

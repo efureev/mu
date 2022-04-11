@@ -1,5 +1,5 @@
-import root from '../root'
-import getRawTag from '../getRawTag'
+import root from '../root.js'
+import getRawTag from '../getRawTag.js'
 
 const nullTag = '[object Null]',
   undefinedTag = '[object Undefined]',

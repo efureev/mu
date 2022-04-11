@@ -1,10 +1,10 @@
-import trim from './trim'
-import endsWith from './endsWith'
-import { hasUnicode } from './unicode'
-import startsWith from './startsWith'
-import padStart, { pad, padEnd } from '../string/padStart'
-import strtr, { replaceByTemplate } from '../string/strtr'
-import camelCase, { pascalCase } from '../string/camelCase'
+import trim from './trim.js'
+import endsWith from './endsWith.js'
+import { hasUnicode } from './unicode.js'
+import startsWith from './startsWith.js'
+import padStart, { pad, padEnd } from '../string/padStart.js'
+import strtr, { replaceByTemplate } from '../string/strtr.js'
+import camelCase, { pascalCase } from '../string/camelCase.js'
 
 /**
  * Converts the first character of string to upper case

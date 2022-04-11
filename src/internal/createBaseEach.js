@@ -1,4 +1,4 @@
-import isArrayLike from '../is/isArrayLike'
+import isArrayLike from '../is/isArrayLike.js'
 
 /**
  * Creates a `baseEach` or `baseEachRight` function.

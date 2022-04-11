@@ -1,5 +1,5 @@
-import isObject from './../is/isObject'
-import isArray from '../is/isArray'
+import isObject from './../is/isObject.js'
+import isArray from '../is/isArray.js'
 
 /**
  * Converts a `name` - `value` pair to an array of objects with support for nested structures.

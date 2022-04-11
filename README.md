@@ -13,9 +13,9 @@
 ![](https://badgen.net/badge/ES6%20modules/yes/orange)
 ![](https://badgen.net/npm/dt/@feugene/mu)
 
-
 # µ
-JS Utilities Framework without dependencies.
+
+`Helpful JS utilities without dependencies.`
 
 ## Install
 

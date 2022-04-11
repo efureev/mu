@@ -1,8 +1,8 @@
-import isArray from '../is/isArray'
-import arrayEach from '../array/arrayEach'
-import createBaseEach from '../internal/createBaseEach'
-import createBaseFor from '../internal/createBaseFor'
-import keys from './keys'
+import isArray from '../is/isArray.js'
+import arrayEach from '../array/arrayEach.js'
+import createBaseEach from '../internal/createBaseEach.js'
+import createBaseFor from '../internal/createBaseFor.js'
+import keys from './keys.js'
 
 export default function forEach(collection, iteratee) {
   const func = isArray(collection)

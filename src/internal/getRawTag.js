@@ -1,4 +1,4 @@
-import root from './root'
+import root from './root.js'
 
 /** Built-in value references. */
 const symToStringTag = root.Symbol ? root.Symbol.toStringTag : undefined

@@ -1,5 +1,5 @@
-import isObject from '../is/isObject'
-import isSymbol from '../is/isSymbol'
+import isObject from '../is/isObject.js'
+import isSymbol from '../is/isSymbol.js'
 import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars'
 
 /**

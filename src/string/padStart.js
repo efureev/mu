@@ -1,4 +1,4 @@
-import isNil from '../is/isNil'
+import isNil from '../is/isNil.js'
 
 /**
  * This function add symbols to string in start or end

@@ -1,4 +1,4 @@
-import { padDateTime } from '../format'
+import { padDateTime } from '../format/pad.js'
 
 const nowFn =
   Date.now ||

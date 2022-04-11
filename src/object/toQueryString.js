@@ -1,9 +1,9 @@
-import isBoolean from '../is/isBoolean'
-import isDate from '../is/isDate'
-import isEmpty from '../is/isEmpty'
-import toQueryObjects from './toQueryObjects'
-import { toString } from '../date'
-import toNumber from '../to/toNumber'
+import isBoolean from '../is/isBoolean.js'
+import isDate from '../is/isDate.js'
+import isEmpty from '../is/isEmpty.js'
+import toQueryObjects from './toQueryObjects.js'
+import { toString } from '../date/index.js'
+import toNumber from '../to/toNumber.js'
 
 /**
  * Takes an object and converts it to an encoded query string.

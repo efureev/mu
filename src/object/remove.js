@@ -1,6 +1,6 @@
-import isArray from '../is/isArray'
-import isObject from '../is/isObject'
-import isString from '../is/isString'
+import isArray from '../is/isArray.js'
+import isObject from '../is/isObject.js'
+import isString from '../is/isString.js'
 
 /**
  * Get value by deep key in object(array)

@@ -1,5 +1,5 @@
 /** Used for built-in method references. */
-import isPrototype from '../../is/isPrototype'
+import isPrototype from '../../is/isPrototype.js'
 
 const objectProto = Object.prototype
 

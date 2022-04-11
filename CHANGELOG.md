@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [3.0.0] - 2022-04-11
+
+### Changed
+
+- Transform this Package to JS-modules package
+
 ## [2.23.0] - 2022-04-11
 
 ### Added
@@ -168,7 +174,11 @@ and this project adheres to [Semantic Versioning][semver].
 - A function `difference` to Array
 - A function `symmetricalDifference` to Array
 
-[unreleased]: https://github.com/efureev/mu/compare/v2.21.0...HEAD
+[unreleased]: https://github.com/efureev/mu/compare/v3.0.0...HEAD
+
+[3.0.0]: https://github.com/efureev/mu/compare/v2.23.0...v3.0.0
+
+[2.23.0]: https://github.com/efureev/mu/compare/v2.22.0...v2.23.0
 
 [2.22.0]: https://github.com/efureev/mu/compare/v2.21.0...v2.22.0
 

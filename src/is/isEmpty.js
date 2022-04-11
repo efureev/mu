@@ -1,4 +1,4 @@
-import { isEmptyObject } from './isObject'
+import { isEmptyObject } from './isObject.js'
 
 /**
  * This function evaluates if all the parameters are empty

@@ -1,4 +1,4 @@
-import intWord from './intWord'
+import intWord from './intWord.js'
 
 /**
  * Display

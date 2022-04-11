@@ -1,4 +1,4 @@
-import toString from '../to/toString'
+import toString from '../to/toString.js'
 
 /**
  * Checks if string ends with the given target string

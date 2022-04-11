@@ -1,6 +1,6 @@
-import isArray from '../is/isArray'
-import isNumeric from '../is/isNumeric'
-import isNil from '../is/isNil'
+import isArray from '../is/isArray.js'
+import isNumeric from '../is/isNumeric.js'
+import isNil from '../is/isNil.js'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
