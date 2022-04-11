@@ -12,7 +12,7 @@ jobs:
       - name: Lint changelog file
         uses: avto-dev/markdown-lint@v1
         with:
-          rules: './.github/workflows/lint/rules/changelog.js'
+          rules: './.github/workflows/lint/rules/changelog.cjs'
           config: '/lint/config/changelog.yml'
           args: './CHANGELOG.md'
 
