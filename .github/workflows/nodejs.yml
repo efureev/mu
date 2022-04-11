@@ -22,7 +22,7 @@ jobs:
     needs: lint-changelog
     strategy:
       matrix:
-        node-version: [14.x, 15.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -59,7 +59,7 @@ jobs:
       # Setup .npmrc file to publish to npm
       - uses: actions/setup-node@v1
         with:
-          node-version: '14.x'
+          node-version: '16.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install
       # Publish to npm
