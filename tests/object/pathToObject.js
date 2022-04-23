@@ -1,4 +1,4 @@
-import { pathToObject } from '../../src/object'
+import pathToObject from '../../src/object/pathToObject.js'
 
 describe('pathToObject', () => {
   it('basic', () => {

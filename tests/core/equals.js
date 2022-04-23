@@ -1,4 +1,4 @@
-import { equals } from '../../src'
+import equals from '../../src/object/equals.js'
 
 describe('equals', () => {
   it('compare string', () => {

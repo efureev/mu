@@ -1,4 +1,4 @@
-import { clone } from '../../src'
+import clone from '../../src/core/clone.js'
 import { isArray, isEmpty, isFunction } from '../../src/is'
 
 describe('clone', () => {

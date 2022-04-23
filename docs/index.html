@@ -7,26 +7,29 @@
     <meta name="description" content="JS Utilities">
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple-dark.css"/>
 </head>
 <body>
 <div id="app">Loading ...</div>
 <script>
-    window.$docsify = {
-        name       : '@feugene/mu',
-        repo       : 'git://github.com/efureev/mu',
-        search     : 'auto',
-        loadNavbar : true,
-        plugins: [
-            //EditOnGithubPlugin.create('https://github.com/efureev/mu/blob/master/docs/')
-        ],
-        alias      : {
-            '/.*/_navbar.md': '/_navbar.md',
-            '/ru/(.*)'      : 'https://raw.githubusercontent.com/efureev/mu/docs-ru/master/$1',
-        },
-    }
+  window.$docsify = {
+    name      : '@feugene/mu',
+    logo      : '/media/mu.png',
+    repo      : 'git://github.com/efureev/mu',
+    search    : 'auto',
+    loadNavbar: true,
+    autoHeader: true,
+    auto2top  : true,
+    coverpage : true,
+    // executeScript: true,
+    nameLink  : '/',
+    routerMode: 'history',
+  }
 </script>
-<script src="//unpkg.com/docsify/lib/docsify.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-bash.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-js.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/docsify-tabs@1"></script>
 <script src="//unpkg.com/docsify/lib/plugins/search.min.js"></script>
 </body>
 </html>

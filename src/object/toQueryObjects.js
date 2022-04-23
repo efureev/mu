@@ -5,7 +5,7 @@ import isArray from '../is/isArray.js'
  * Converts a `name` - `value` pair to an array of objects with support for nested structures.
  * Useful to construct query strings. For example:
  *
- *     var objects = toQueryObjects('hobbies', ['reading', 'cooking', 'swimming']);
+ *     const objects = toQueryObjects('hobbies', ['reading', 'cooking', 'swimming']);
  *
  *     // objects then equals:
  *     [
@@ -14,7 +14,7 @@ import isArray from '../is/isArray.js'
  *         { name: 'hobbies', value: 'swimming' },
  *     ];
  *
- *     var objects = toQueryObjects('dateOfBirth', {
+ *     const objects = toQueryObjects('dateOfBirth', {
  *         day: 3,
  *         month: 8,
  *         year: 1987,

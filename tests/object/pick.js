@@ -1,4 +1,4 @@
-import { pick } from '../../src/object'
+import pick from '../../src/object/pick.js'
 
 describe('pick', () => {
   const object = { a: 1, b: '2', c: 3 }
