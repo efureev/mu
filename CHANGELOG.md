@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [3.1.0] - 2022-04-23
+
+### Added
+
+- Add `Core` function `match`. It replaces such constructions as `if-else` and `switch`.
+
 ## [3.0.0] - 2022-04-11
 
 ### Changed

@@ -3,7 +3,7 @@
 ```json
 {
   "dependencies": {
-    "@feugene/mu": "^2.23"
+    "@feugene/mu": "^3.1"
   }
 }
 ```
@@ -30,12 +30,13 @@ jest
 
 ## Core
 
-| Function | Return        | Description                                                                                                   |
-|:---------|:--------------|:--------------------------------------------------------------------------------------------------------------|
-| clone    | mixed         | Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference |
-| equals   | bool          | Deep comparing the contents of 2 elements using strict equality                                               |
-| forEach  | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element                                |
-| key      | array         | Creates an array of the own enumerable property names of `object`                                             |
+| Function  | Return        | Description                                                                                                   |
+|:----------|:--------------|:--------------------------------------------------------------------------------------------------------------|
+| clone     | mixed         | Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference |
+| equals    | bool          | Deep comparing the contents of 2 elements using strict equality                                               |
+| forEach   | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element                                |
+| key       | array         | Creates an array of the own enumerable property names of `object`                                             |
+| match     | mixed         | It replaces such constructions as `if-else` and `switch`                                                      |
 
 ## Is
 
