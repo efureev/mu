@@ -15,7 +15,7 @@
 
 # µ
 
-`Helpful JS utilities without dependencies.`
+> A modern JavaScript collection of utilities designed for modularity & performance without dependencies.
 
 ## Install
 
@@ -40,3 +40,4 @@
 - Date helpers
 - Format helpers
 - Structures
+- Etc
