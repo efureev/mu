@@ -26,7 +26,6 @@ import isObject from '../is/isObject.js'
  *
  *     const result = merge(js, newStuff);
  *
- *     // extjs and sencha then equals to
  *     {
  *         companyName: 'Jacksonville',
  *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
