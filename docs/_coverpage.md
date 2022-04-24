@@ -1,6 +1,6 @@
 ![logo](media/mu.png)
 
-# µ <small>3.1.0</small>
+# µ <small>3.1.1</small>
 
 > A modern JavaScript collection of utilities designed for modularity & performance without dependencies.
 
