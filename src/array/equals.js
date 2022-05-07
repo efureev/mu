@@ -1,6 +1,6 @@
-import isArray from '../is/isArray'
-import isObject from '../is/isObject'
-import equalsObject from '../object/equals'
+import isArray from '../is/isArray.js'
+import isObject from '../is/isObject.js'
+import equalsObject from '../object/equals.js'
 
 /**
  * Deep comparing the contents of 2 arrays using strict equality

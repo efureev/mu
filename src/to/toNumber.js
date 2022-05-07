@@ -1,6 +1,6 @@
 import isObject from '../is/isObject.js'
 import isSymbol from '../is/isSymbol.js'
-import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars'
+import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars.js'
 
 /**
  * Converts `value` to a number.
