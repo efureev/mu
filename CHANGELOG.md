@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [3.2.0] - 2022-05-07
+
+### Added
+
+- Add functions `trimSuffix` and `trimPrefix` to `String`
+
 ## [3.1.0] - 2022-04-23
 
 ### Added

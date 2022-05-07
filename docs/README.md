@@ -9,7 +9,7 @@ Add to `package.json` file the lib as dependency.
 ```json
 {
   "dependencies": {
-    "@feugene/mu": "^3.1"
+    "@feugene/mu": "^3.2"
   }
 }
 ```
@@ -152,6 +152,8 @@ npm install @feugene/mu
 | startsWith                                       | string | Checks if string starts with the given target string                 |
 | [strtr](string/strtr.md)                         | string | Translate characters or replace substrings in string                 |
 | titleCase                                        | string | Converts the first character of every word into string to upper case |
+| [trimPrefix](string/trimPrefix.md)               | string | Remove a prefix from a target string                                 |
+| [trimSuffix](string/trimSuffix.md)               | string | Remove a suffix from a target string                                 |
 | upperFirst                                       | string | Converts the first character of string to upper case                 |
 
 ### Date
