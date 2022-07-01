@@ -9,7 +9,7 @@ It replaces such constructions as `if-else` and `switch`.
 ## Use
 
 ```js
-import match from '@feugene/mu/src/src/core/match.js'
+import match from '@feugene/mu/src/core/match.js'
 ```
 
 ## Examples

@@ -9,7 +9,7 @@ Remove a prefix from a String
 ## Use
 
 ```js
-import trimPrefix from '@feugene/mu/src/src/string/trimPrefix.js'
+import trimPrefix from '@feugene/mu/src/string/trimPrefix.js'
 ```
 
 ## Examples

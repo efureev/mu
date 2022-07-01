@@ -9,7 +9,7 @@ Creates an array of the own enumerable property names of `object`.
 ## Use
 
 ```js
-import keys from '@feugene/mu/src/src/core/keys.js'
+import keys from '@feugene/mu/src/core/keys.js'
 ```
 
 ## Examples

@@ -9,7 +9,7 @@ Convert a string to camel case.
 ## Use
 
 ```js
-import camelCase from '@feugene/mu/src/src/string/camelCase.js'
+import camelCase from '@feugene/mu/src/string/camelCase.js'
 ```
 
 ## Examples

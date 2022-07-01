@@ -9,7 +9,7 @@ Creates an object composed of the picked object properties.
 ## Use
 
 ```js
-import pick from '@feugene/mu/src/src/object/pick.js'
+import pick from '@feugene/mu/src/object/pick.js'
 ```
 
 ## Examples

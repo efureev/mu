@@ -9,7 +9,7 @@ Takes an object and converts it to an encoded query string.
 ## Use
 
 ```js
-import toQueryString from '@feugene/mu/src/src/object/toQueryString.js'
+import toQueryString from '@feugene/mu/src/object/toQueryString.js'
 ```
 
 ## Examples

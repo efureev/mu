@@ -9,7 +9,7 @@ Add leading symbols.
 ## Use
 
 ```js
-import padStart from '@feugene/mu/src/src/string/padStart.js'
+import padStart from '@feugene/mu/src/string/padStart.js'
 ```
 
 ## Examples

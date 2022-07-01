@@ -9,7 +9,7 @@ Removes all empty values in an `object` recursively.
 ## Use
 
 ```js
-import removeEmpty from '@feugene/mu/src/src/object/removeEmpty.js'
+import removeEmpty from '@feugene/mu/src/object/removeEmpty.js'
 ```
 
 ## Examples

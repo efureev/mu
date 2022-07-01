@@ -9,7 +9,7 @@ Iterates over elements of `collection` and invokes `iteratee` for each element.
 ## Use
 
 ```js
-import forEach from '@feugene/mu/src/src/core/forEach.js'
+import forEach from '@feugene/mu/src/core/forEach.js'
 ```
 
 ## Examples

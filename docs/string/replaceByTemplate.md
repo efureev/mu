@@ -9,7 +9,7 @@ Translate characters or replace substrings in string by map.
 ## Use
 
 ```js
-import replaceByTemplate from '@feugene/mu/src/src/string/replaceByTemplate.js'
+import replaceByTemplate from '@feugene/mu/src/string/replaceByTemplate.js'
 ```
 
 ## Examples

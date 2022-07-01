@@ -9,7 +9,7 @@ Translate characters or replace substrings in string.
 ## Use
 
 ```js
-import strtr from '@feugene/mu/src/src/string/strtr.js'
+import strtr from '@feugene/mu/src/string/strtr.js'
 ```
 
 ## Examples
