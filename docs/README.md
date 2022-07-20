@@ -36,6 +36,7 @@ jest
 | equals   | bool          | Deep comparing the contents of 2 elements using strict equality                                               |
 | forEach  | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element                                |
 | key      | array         | Creates an array of the own enumerable property names of `object`                                             |
+| match    | mixed         | It replaces such constructions as `if-else` and `switch`                                                      |
 
 ## Is
 
@@ -137,6 +138,8 @@ jest
 | strtr             | string | Translate characters or replace substrings in string                 |
 | titleCase         | string | Converts the first character of every word into string to upper case |
 | upperFirst        | string | Converts the first character of string to upper case                 |
+| trimPrefix        | string | Remove a prefix from a target string                                 |
+| trimSuffix        | string | Remove a suffix from a target string                                 |
 
 ## Date
 

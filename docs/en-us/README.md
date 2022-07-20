@@ -36,6 +36,7 @@ jest
 | equals   | bool          | Deep comparing the contents of 2 elements using strict equality                                               |
 | forEach  | array, object | Iterates over elements of `collection` and invokes `iteratee` for each element                                |
 | key      | array         | Creates an array of the own enumerable property names of `object`                                             |
+| match    | mixed         | It replaces such constructions as `if-else` and `switch`                                                      |
 
 ## Is
 
