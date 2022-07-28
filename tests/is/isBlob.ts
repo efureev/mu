@@ -1,3 +1,4 @@
+import { Blob } from 'buffer'
 import { isBlob, isBlobs } from './../../src/is'
 
 describe('isBlob', () => {
