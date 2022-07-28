@@ -16,6 +16,39 @@ jobs:
           config: '/lint/config/changelog.yml'
           args: './CHANGELOG.md'
 
+  lint-code:
+    runs-on: ubuntu-latest
+    name: testing on Node
+    needs: lint-changelog
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Get npm cache directory
+        id: npm-cache
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - uses: actions/cache@v1
+        with:
+          path: ${{ steps.npm-cache.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+
+      - run: yarn install
+      - run: yarn lint
+        env:
+          CI: true
+
   testing-on-node:
     runs-on: ubuntu-latest
     name: testing on Node
@@ -45,7 +78,6 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: yarn install
-      - run: yarn lint
       - run: yarn test
         env:
           CI: true
