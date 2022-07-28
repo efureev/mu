@@ -27,7 +27,7 @@
 
 ## Features
 
-- ES6 functions
+- TS/ES6 functions
 - Simple and lightweight
 
 ## Contents

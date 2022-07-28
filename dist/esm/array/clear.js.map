@@ -1,0 +1,1 @@
+{"version":3,"file":"clear.js","names":["clear","array","length"],"sources":["../../../src/array/clear.ts"],"sourcesContent":["/**\n * Clear array\n */\nexport default function clear(array: Array<any>): void {\n  array.length = 0\n}\n"],"mappings":"AAAA;AACA;AACA;AACA,eAAe,SAASA,KAAT,CAAeC,KAAf,EAAwC;EACrDA,KAAK,CAACC,MAAN,GAAe,CAAf;AACD"}

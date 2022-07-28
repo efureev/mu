@@ -1,0 +1,1 @@
+{"version":3,"file":"types.js","names":[],"sources":["../../../src/internal/types.ts"],"sourcesContent":["export type TextNumber = string | number\nexport type TextNumberNullable = TextNumber | null | undefined\n\nexport type CollectionType = any[] | Record<PropertyKey, any>\n"],"mappings":""}

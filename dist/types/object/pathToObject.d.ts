@@ -1,0 +1,2 @@
+export default function pathToObject(paths?: string, value?: any, object?: Record<PropertyKey, any>, divider?: string, replaceOnExist?: boolean): Record<PropertyKey, any>;
+//# sourceMappingURL=pathToObject.d.ts.map

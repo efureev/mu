@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":["Stack","Queue"],"sources":["../../../src/structures/index.ts"],"sourcesContent":["import { Stack } from './Stack'\nimport { Queue } from './Queue'\n\nexport { Stack, Queue }\n"],"mappings":"AAAA,SAASA,KAAT,QAAsB,SAAtB;AACA,SAASC,KAAT,QAAsB,SAAtB;AAEA,SAASD,KAAT,EAAgBC,KAAhB"}
