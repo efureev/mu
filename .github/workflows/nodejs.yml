@@ -22,7 +22,7 @@ jobs:
     needs: lint-changelog
     strategy:
       matrix:
-        node-version: [16.x,17.x]
+        node-version: [16.x,17.x,18.x]
 
     steps:
       - uses: actions/checkout@v2
@@ -44,8 +44,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - run: yarn
-
+      - run: yarn install
+      - run: yarn lint
       - run: yarn test
         env:
           CI: true

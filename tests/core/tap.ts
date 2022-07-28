@@ -1,3 +1,4 @@
+import 'formdata-polyfill/FormData'
 import tap from '../../src/core/tap'
 
 describe('tap', () => {
