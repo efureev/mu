@@ -1,4 +1,4 @@
-import 'formdata-polyfill/FormData'
+import { FormData } from 'formdata-node'
 import tap from '../../src/core/tap'
 
 describe('tap', () => {
