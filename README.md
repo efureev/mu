@@ -11,6 +11,7 @@
 ![](https://badgen.net/npm/dependents/@feugene/mu)
 ![](https://badgen.net/github/commits/efureev/mu)
 ![](https://badgen.net/badge/ES6%20modules/yes/orange)
+![](https://badgen.net/badge/TS/yes/blue)
 ![](https://badgen.net/npm/dt/@feugene/mu)
 
 # µ
@@ -27,17 +28,25 @@
 
 ## Features
 
-- TS/ES6 functions
+- TypeScript
+- Bundles for
+  - ES
+  - CommonJS
+  - UMD
 - Simple and lightweight
 
 ## Contents
 
-- Is-like helpers
+- Common helpers
 - Array helpers
-- Object helpers
-- Number helpers
-- String helpers
 - Date helpers
 - Format helpers
+- Is-like helpers
+- Number helpers
+- Object helpers
+- String helpers
 - Structures
+- Transform To
+- Other Utils
+  - Base64
 - Etc
