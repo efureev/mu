@@ -1,4 +1,3 @@
-import isArray from '../is/isArray'
 import arrayEach from '../array/arrayEach'
 import keys from './keys'
 
@@ -6,7 +5,7 @@ import { CollectionType } from '../internal/types'
 import isArrayLike from '../is/isArrayLike'
 
 export default function forEach(collection: CollectionType, iterateFn: ObjectEachCallback) {
-  if (isArray(collection)) {
+  if (Array.isArray(collection)) {
     return arrayEach(<any[]>collection, iterateFn)
   }
 

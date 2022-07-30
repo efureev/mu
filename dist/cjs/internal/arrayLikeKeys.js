@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = arrayLikeKeys;
 
-var _is = require("../is");
+var _isArguments = _interopRequireDefault(require("../is/isArguments"));
+
+var _isBuffer = _interopRequireDefault(require("../is/isBuffer"));
+
+var _isTypedArray = _interopRequireDefault(require("../is/isTypedArray"));
 
 var _times = _interopRequireDefault(require("../utils/times"));
 
@@ -29,10 +33,10 @@ var hasOwnProperty = objectProto.hasOwnProperty;
 
 function arrayLikeKeys(value) {
   var inherited = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var isArray_ = (0, _is.isArray)(value),
-      isArgument = !isArray_ && (0, _is.isArguments)(value),
-      isBuff = !isArray_ && !isArgument && (0, _is.isBuffer)(value),
-      isType = !isArray_ && !isArgument && !isBuff && (0, _is.isTypedArray)(value),
+  var isArray_ = Array.isArray(value),
+      isArgument = !isArray_ && (0, _isArguments.default)(value),
+      isBuff = !isArray_ && !isArgument && (0, _isBuffer.default)(value),
+      isType = !isArray_ && !isArgument && !isBuff && (0, _isTypedArray.default)(value),
       skipIndexes = isArray_ || isArgument || isBuff || isType,
       result = skipIndexes ? (0, _times.default)(value.length, String) : [],
       length = result.length;

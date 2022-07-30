@@ -1,4 +1,6 @@
-import { isArguments, isArray, isBuffer, isTypedArray } from '../is';
+import isArguments from '../is/isArguments';
+import isBuffer from '../is/isBuffer';
+import isTypedArray from '../is/isTypedArray';
 import times from '../utils/times';
 import isIndex from './isIndex';
 /** Used for built-in method references. */
@@ -17,7 +19,7 @@ const hasOwnProperty = objectProto.hasOwnProperty;
  */
 
 export default function arrayLikeKeys(value, inherited = false) {
-  const isArray_ = isArray(value),
+  const isArray_ = Array.isArray(value),
         isArgument = !isArray_ && isArguments(value),
         isBuff = !isArray_ && !isArgument && isBuffer(value),
         isType = !isArray_ && !isArgument && !isBuff && isTypedArray(value),

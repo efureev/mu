@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = isArrayLike;
 
-var _is = require("../is");
+var _isFunction = _interopRequireDefault(require("../is/isFunction"));
+
+var _isLength = _interopRequireDefault(require("../is/isLength"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
@@ -27,6 +31,6 @@ var _is = require("../is");
  * // => false
  */
 function isArrayLike(value) {
-  return value != null && (0, _is.isLength)(value.length) && !(0, _is.isFunction)(value);
+  return value != null && (0, _isLength.default)(value.length) && !(0, _isFunction.default)(value);
 }
 //# sourceMappingURL=isArrayLike.js.map

@@ -1,4 +1,6 @@
-import { isEmpty, isString, isArray, isObject } from '../is';
+import isObject from '../is/isObject';
+import isString from '../is/isString';
+import isEmpty from '../is/isEmpty';
 /**
  * Remove all empty values in object
  *
@@ -22,7 +24,7 @@ export default function removeEmpty(object) {
         continue;
       }
 
-      if (isArray(object[key])) {
+      if (Array.isArray(object[key])) {
         const a = [];
         object[key].forEach(v => {
           if (isString(v)) {

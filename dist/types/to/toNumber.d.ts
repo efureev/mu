@@ -16,4 +16,6 @@
  * // => 3.2
  */
 export default function toNumber(value: any): number;
+export declare function stringToNumber(value: string): number;
+export declare function booleanToNumber(value: boolean): number;
 //# sourceMappingURL=toNumber.d.ts.map

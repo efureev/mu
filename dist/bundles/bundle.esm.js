@@ -74,6 +74,168 @@ function clone(item) {
   return newClone || item;
 }
 
+var symToStringTag$2 = Symbol.toStringTag;
+var asyncTag = '[object AsyncFunction]',
+    funcTag$1 = '[object Function]',
+    genTag = '[object GeneratorFunction]',
+    nullTag$1 = '[object Null]',
+    proxyTag = '[object Proxy]',
+    undefinedTag$1 = '[object Undefined]';
+/**
+ * This function evaluates whether all parameters are function
+ */
+
+function isFunctions() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  if (parameters.length === 0) {
+    throw new Error('Please provide at least one number to evaluate isInteger.');
+  }
+
+  var invalid = parameters.some(function (parameter) {
+    return !isFunction(parameter);
+  });
+  return !invalid;
+}
+function isFunction(parameter) {
+  var tag = baseGetTag$1(parameter);
+  return tag === funcTag$1 || tag === genTag || tag === asyncTag || tag === proxyTag;
+}
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ */
+
+function baseGetTag$1(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag$1 : nullTag$1;
+  }
+
+  return symToStringTag$2 in new Object(value) ? getRawTag$1(value) : objectToString(value);
+}
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ */
+
+
+function getRawTag$1(value) {
+  var isOwn = Object.prototype.hasOwnProperty.call(value, symToStringTag$2);
+  var tag = value[symToStringTag$2];
+  var unmasked = false;
+
+  try {
+    value[symToStringTag$2] = undefined;
+    unmasked = true;
+  } catch (error) {}
+
+  var result = objectToString(value);
+
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$2] = tag;
+    } else {
+      delete value[symToStringTag$2];
+    }
+  }
+
+  return result;
+}
+/**
+ * @private
+ */
+
+
+function objectToString(value) {
+  return Object.prototype.toString.call(value);
+}
+
+function isBoolean(value) {
+  return value === true || value === false || Object.prototype.toString.call(value) === '[object Boolean]';
+}
+function isBooleans() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isBoolean(parameter);
+  });
+}
+
+/**
+ * This function evaluates whether all parameters are null
+ */
+function isNulls() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  if (parameters.length === 0) {
+    throw new Error('Please provide at least one param to evaluate isNull.');
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isNull(parameter);
+  });
+}
+function isNils() {
+  for (var _len2 = arguments.length, parameters = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    parameters[_key2] = arguments[_key2];
+  }
+
+  if (parameters.length === 0) {
+    throw new Error('Please provide at least one param to evaluate isNull.');
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isNil(parameter);
+  });
+}
+function isNil(value) {
+  return value == null;
+}
+function isNull(value) {
+  return value === null;
+}
+
+/**
+ * This function evaluates if all the parameters are Numeric
+ */
+function isNumeric(value) {
+  return !(Array.isArray(value) || isNaN(parseFloat(value)) || !isFinite(value));
+}
+function isNumerics() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  var invalid = parameters.some(function (parameter) {
+    return !isNumeric(parameter);
+  });
+  return !invalid;
+}
+
+/**
+ * This function evaluates if all the parameters are strings
+ */
+function isStrings() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isString(parameter);
+  });
+}
+function isString(value) {
+  return typeof value === 'string';
+}
+
 function ownKeys(object, enumerableOnly) {
   var keys = Object.keys(object);
 
@@ -282,246 +444,6 @@ function _createForOfIteratorHelper(o, allowArrayLike) {
   };
 }
 
-/** Detect free variable `global` from Node.js. */
-var freeGlobal = (typeof global === "undefined" ? "undefined" : _typeof(global)) === 'object' && global && global.Object === Object && global;
-
-/** Detect free variable `self`. */
-var freeSelf = (typeof self === "undefined" ? "undefined" : _typeof(self)) === 'object' && self && self.Object === Object && self;
-
-/** Used as a reference to the global object. */
-var root = freeGlobal || freeSelf || new Function('return this')();
-
-/** Built-in value references. */
-
-var symToStringTag$2 = root.Symbol ? root.Symbol.toStringTag : undefined;
-/** Used for built-in method references. */
-
-var objectProto$4 = Object.prototype;
-/** Used to check objects for own properties. */
-
-var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-
-var nativeObjectToString = objectProto$4.toString;
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {string} Returns the raw `toStringTag`.
- */
-
-function getRawTag$1(value) {
-  var isOwn = hasOwnProperty$3.call(value, symToStringTag$2),
-      tag = value[symToStringTag$2];
-  var unmasked = false;
-
-  try {
-    value[symToStringTag$2] = undefined;
-    unmasked = true;
-  } catch (error) {}
-
-  var result = nativeObjectToString.call(value);
-
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag$2] = tag;
-    } else {
-      delete value[symToStringTag$2];
-    }
-  }
-
-  return result;
-}
-
-var nullTag$1 = '[object Null]';
-var undefinedTag$1 = '[object Undefined]';
-var symToStringTag$1 = root.Symbol ? root.Symbol.toStringTag : undefined;
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- * @param {*} value The value to query.
- * @returns {TagTypeNullable|string} Returns the `toStringTag`.
- */
-
-function baseGetTag$1(value) {
-  if (value == null) {
-    return value === undefined ? undefinedTag$1 : nullTag$1;
-  }
-
-  return symToStringTag$1 && symToStringTag$1 in new Object(value) ? getRawTag$1(value) : Object.prototype.toString.call(value);
-}
-
-var objectProto$3 = Object.prototype;
-/** Used to check objects for own properties. */
-
-var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
-/** Built-in value references. */
-
-var propertyIsEnumerable = objectProto$3.propertyIsEnumerable;
-/** `Object#toString` result references. */
-
-var argumentsTag$1 = '[object Arguments]';
-/**
- * The base implementation of `isArguments`.
- *
- * @private
- */
-
-var baseIsArguments = function baseIsArguments(value) {
-  return value !== null && _typeof(value) === 'object' && baseGetTag$1(value) === argumentsTag$1;
-};
-/**
- * Checks if `value` is likely an `arguments` object.
- *
- * @example
- *
- * isArguments(function() { return arguments; }());
- * // => true
- *
- * isArguments([1, 2, 3]);
- * // => false
- */
-
-
-var isArguments = baseIsArguments(function () {
-  return arguments;
-}()) ? baseIsArguments : function (value) {
-  return value !== null && _typeof(value) === 'object' && hasOwnProperty$2.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
-};
-
-/**
- * This function evaluates whether all parameters are arrays
- */
-function isArray(value) {
-  return Array.isArray(value);
-}
-function isArrays() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  if (parameters.length === 0) {
-    throw new Error('Please provide at least one param to evaluate isArray.');
-  }
-
-  return !parameters.some(function (parameter) {
-    return !isArray(parameter);
-  });
-}
-
-/**
- * Checks if `value` is array-like. A value is considered array-like if it's
- * not a function and has a `value.length` that's an integer greater than or
- * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
- *
- * @example
- *
- * isArrayLike([1, 2, 3]);
- * // => true
- *
- * isArrayLike(document.body.children);
- * // => true
- *
- * isArrayLike('abc');
- * // => true
- *
- * isArrayLike(()=>{}));
- * // => false
- */
-
-function isArrayLike(value) {
-  return value != null && isLength(value.length) && !isFunction(value);
-}
-
-function isBoolean(value) {
-  return value === true || value === false || Object.prototype.toString.call(value) === '[object Boolean]';
-}
-function isBooleans() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  return !parameters.some(function (parameter) {
-    return !isBoolean(parameter);
-  });
-}
-
-/**
- * This function evaluates whether all parameters are null
- */
-function isNulls() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  if (parameters.length === 0) {
-    throw new Error('Please provide at least one param to evaluate isNull.');
-  }
-
-  return !parameters.some(function (parameter) {
-    return !isNull(parameter);
-  });
-}
-function isNils() {
-  for (var _len2 = arguments.length, parameters = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-    parameters[_key2] = arguments[_key2];
-  }
-
-  if (parameters.length === 0) {
-    throw new Error('Please provide at least one param to evaluate isNull.');
-  }
-
-  return !parameters.some(function (parameter) {
-    return !isNil(parameter);
-  });
-}
-function isNil(value) {
-  return value == null;
-}
-function isNull(value) {
-  return value === null;
-}
-
-/**
- * This function evaluates if all the parameters are Numeric
- */
-
-function isNumeric(value) {
-  return !(isArray(value) || isNaN(parseFloat(value)) || !isFinite(value));
-}
-function isNumerics() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  var invalid = parameters.some(function (parameter) {
-    return !isNumeric(parameter);
-  });
-  return !invalid;
-}
-
-/**
- * This function evaluates if all the parameters are strings
- */
-function isStrings() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  return !parameters.some(function (parameter) {
-    return !isString(parameter);
-  });
-}
-function isString(value) {
-  return typeof value === 'string';
-}
-
 var isO = Object.prototype.toString.call(null) === '[object Object]' ? function (value) {
   // check ownerDocument here as well to exclude DOM nodes
   return value != null && Object.prototype.toString.call(value) === '[object Object]' && value.ownerDocument === undefined;
@@ -624,24 +546,197 @@ function isAdvancedType(value) {
 }
 
 /**
- * This function evaluates whether all parameters are blobs
+ * This method invokes `interceptor` and returns `value`. The interceptor
+ * is invoked with one argument; (value). The purpose of this method is to
+ * "tap into" a method chain sequence in order to modify intermediate results.
+ *
+ * @static
+ * @param {*} value The value to provide to `interceptor`.
+ * @param {Function} interceptor The function to invoke.
+ * @returns {*} Returns `value`.
+ * @example
+ *
+ * tap('test') // 'test'
+ * tap([1, 2, 3], (value) => value.pop()) // [1,2]
+ * tap({b: 2, a: 'test'}, (value) => delete value.a) // {b: 2}
+ * tap(()=>100)) // 100
+ * tap(()=>100), (value) => value / 2) // 50
+ *
  */
-function isBlobs() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
+function tap(value, interceptor) {
+  if (isFunction(value)) {
+    value = value();
   }
 
-  if (parameters.length === 0) {
-    throw new Error('Please provide at least one number to evaluate isBlob.');
+  if (interceptor && isFunction(interceptor)) {
+    if (isBasicType(value)) {
+      return interceptor(value);
+    }
+
+    interceptor(value);
   }
 
-  return !parameters.some(function (parameter) {
-    return !isBlob(parameter);
-  });
+  return value;
 }
-function isBlob(value) {
-  return Object.prototype.toString.call(value) === '[object Blob]';
+
+/**
+ * Checks if `value` is a valid array-like length.
+ *
+ *
+ * @example
+ *
+ * isLength(3);
+ * // => true
+ *
+ * isLength(Number.MIN_VALUE);
+ * // => false
+ *
+ * isLength(Infinity);
+ * // => false
+ *
+ * isLength('3');
+ * // => false
+ */
+function isLength(value) {
+  return typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER;
 }
+
+/**
+ * Checks if `value` is array-like. A value is considered array-like if it's
+ * not a function and has a `value.length` that's an integer greater than or
+ * equal to `0` and less than or equal to `Number.MAX_SAFE_INTEGER`.
+ *
+ * @example
+ *
+ * isArrayLike([1, 2, 3]);
+ * // => true
+ *
+ * isArrayLike(document.body.children);
+ * // => true
+ *
+ * isArrayLike('abc');
+ * // => true
+ *
+ * isArrayLike(()=>{}));
+ * // => false
+ */
+
+function isArrayLike(value) {
+  return value != null && isLength(value.length) && !isFunction(value);
+}
+
+/** Detect free variable `global` from Node.js. */
+var freeGlobal = (typeof global === "undefined" ? "undefined" : _typeof(global)) === 'object' && global && global.Object === Object && global;
+
+/** Detect free variable `self`. */
+var freeSelf = (typeof self === "undefined" ? "undefined" : _typeof(self)) === 'object' && self && self.Object === Object && self;
+
+/** Used as a reference to the global object. */
+var root = freeGlobal || freeSelf || new Function('return this')();
+
+/** Built-in value references. */
+
+var symToStringTag$1 = root.Symbol ? root.Symbol.toStringTag : undefined;
+/** Used for built-in method references. */
+
+var objectProto$4 = Object.prototype;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty$3 = objectProto$4.hasOwnProperty;
+/**
+ * Used to resolve the
+ * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
+ * of values.
+ */
+
+var nativeObjectToString = objectProto$4.toString;
+/**
+ * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {string} Returns the raw `toStringTag`.
+ */
+
+function getRawTag(value) {
+  var isOwn = hasOwnProperty$3.call(value, symToStringTag$1),
+      tag = value[symToStringTag$1];
+  var unmasked = false;
+
+  try {
+    value[symToStringTag$1] = undefined;
+    unmasked = true;
+  } catch (error) {}
+
+  var result = nativeObjectToString.call(value);
+
+  if (unmasked) {
+    if (isOwn) {
+      value[symToStringTag$1] = tag;
+    } else {
+      delete value[symToStringTag$1];
+    }
+  }
+
+  return result;
+}
+
+var nullTag = '[object Null]';
+var undefinedTag = '[object Undefined]';
+var symToStringTag = root.Symbol ? root.Symbol.toStringTag : undefined;
+/**
+ * The base implementation of `getTag` without fallbacks for buggy environments.
+ *
+ * @private
+ * @param {*} value The value to query.
+ * @returns {TagTypeNullable|string} Returns the `toStringTag`.
+ */
+
+function baseGetTag(value) {
+  if (value == null) {
+    return value === undefined ? undefinedTag : nullTag;
+  }
+
+  return symToStringTag && symToStringTag in new Object(value) ? getRawTag(value) : Object.prototype.toString.call(value);
+}
+
+var objectProto$3 = Object.prototype;
+/** Used to check objects for own properties. */
+
+var hasOwnProperty$2 = objectProto$3.hasOwnProperty;
+/** Built-in value references. */
+
+var propertyIsEnumerable = objectProto$3.propertyIsEnumerable;
+/** `Object#toString` result references. */
+
+var argumentsTag$1 = '[object Arguments]';
+/**
+ * The base implementation of `isArguments`.
+ *
+ * @private
+ */
+
+var baseIsArguments = function baseIsArguments(value) {
+  return value !== null && _typeof(value) === 'object' && baseGetTag(value) === argumentsTag$1;
+};
+/**
+ * Checks if `value` is likely an `arguments` object.
+ *
+ * @example
+ *
+ * isArguments(function() { return arguments; }());
+ * // => true
+ *
+ * isArguments([1, 2, 3]);
+ * // => false
+ */
+
+
+var isArguments = baseIsArguments(function () {
+  return arguments;
+}()) ? baseIsArguments : function (value) {
+  return value !== null && _typeof(value) === 'object' && hasOwnProperty$2.call(value, 'callee') && !propertyIsEnumerable.call(value, 'callee');
+};
 
 /** Detect free variable `exports`. */
 
@@ -673,6 +768,61 @@ var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
 var isBuffer = nativeIsBuffer || function () {
   return false;
 };
+
+/** Detect free variable `exports`. */
+var freeExports = (typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && exports && !exports.nodeType && exports;
+
+/** Detect free variable `module`. */
+
+var freeModule = freeExports && (typeof module === "undefined" ? "undefined" : _typeof(module)) == 'object' && module && !('nodeType' in module) && module;
+/** Used to access faster Node.js helpers. */
+
+var node = (function () {
+  try {
+    // Use `util.types` for Node.js 10+.
+    return freeModule && freeModule.require && freeModule.require('util').types;
+  } catch (error) {}
+})();
+
+/**
+ * This function evaluates whether all parameters are arrays
+ */
+function isArray(value) {
+  return Array.isArray(value);
+}
+function isArrays() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  if (parameters.length === 0) {
+    throw new Error('Please provide at least one param to evaluate isArray.');
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isArray(parameter);
+  });
+}
+
+/**
+ * This function evaluates whether all parameters are blobs
+ */
+function isBlobs() {
+  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+    parameters[_key] = arguments[_key];
+  }
+
+  if (parameters.length === 0) {
+    throw new Error('Please provide at least one number to evaluate isBlob.');
+  }
+
+  return !parameters.some(function (parameter) {
+    return !isBlob(parameter);
+  });
+}
+function isBlob(value) {
+  return Object.prototype.toString.call(value) === '[object Blob]';
+}
 
 /**
  * This function evaluates if all the parameters are dates
@@ -805,86 +955,6 @@ function isFloatCanonical(number) {
   return reIsFloat.test(String(number));
 }
 
-var symToStringTag = Symbol.toStringTag;
-var asyncTag = '[object AsyncFunction]',
-    funcTag$1 = '[object Function]',
-    genTag = '[object GeneratorFunction]',
-    nullTag = '[object Null]',
-    proxyTag = '[object Proxy]',
-    undefinedTag = '[object Undefined]';
-/**
- * This function evaluates whether all parameters are function
- */
-
-function isFunctions() {
-  for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-    parameters[_key] = arguments[_key];
-  }
-
-  if (parameters.length === 0) {
-    throw new Error('Please provide at least one number to evaluate isInteger.');
-  }
-
-  var invalid = parameters.some(function (parameter) {
-    return !isFunction(parameter);
-  });
-  return !invalid;
-}
-function isFunction(parameter) {
-  var tag = baseGetTag(parameter);
-  return tag === funcTag$1 || tag === genTag || tag === asyncTag || tag === proxyTag;
-}
-/**
- * The base implementation of `getTag` without fallbacks for buggy environments.
- *
- * @private
- */
-
-function baseGetTag(value) {
-  if (value == null) {
-    return value === undefined ? undefinedTag : nullTag;
-  }
-
-  return symToStringTag in new Object(value) ? getRawTag(value) : objectToString(value);
-}
-/**
- * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
- *
- * @private
- */
-
-
-function getRawTag(value) {
-  var isOwn = Object.prototype.hasOwnProperty.call(value, symToStringTag);
-  var tag = value[symToStringTag];
-  var unmasked = false;
-
-  try {
-    value[symToStringTag] = undefined;
-    unmasked = true;
-  } catch (error) {}
-
-  var result = objectToString(value);
-
-  if (unmasked) {
-    if (isOwn) {
-      value[symToStringTag] = tag;
-    } else {
-      delete value[symToStringTag];
-    }
-  }
-
-  return result;
-}
-/**
- * @private
- */
-
-
-function objectToString(value) {
-  return Object.prototype.toString.call(value);
-}
-
 /**
  * This function evaluates whether all parameters are integers
  */
@@ -911,28 +981,6 @@ function isIntegers() {
   });
 }
 
-/**
- * Checks if `value` is a valid array-like length.
- *
- *
- * @example
- *
- * isLength(3);
- * // => true
- *
- * isLength(Number.MIN_VALUE);
- * // => false
- *
- * isLength(Infinity);
- * // => false
- *
- * isLength('3');
- * // => false
- */
-function isLength(value) {
-  return typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER;
-}
-
 /** Used for built-in method references. */
 var objectProto$2 = Object.prototype;
 /**
@@ -946,21 +994,6 @@ function isPrototype(value) {
       proto = isFunction(Ctor) && Ctor.prototype || objectProto$2;
   return value === proto;
 }
-
-/** Detect free variable `exports`. */
-var freeExports = (typeof exports === "undefined" ? "undefined" : _typeof(exports)) === 'object' && exports && !exports.nodeType && exports;
-
-/** Detect free variable `module`. */
-
-var freeModule = freeExports && (typeof module === "undefined" ? "undefined" : _typeof(module)) == 'object' && module && !('nodeType' in module) && module;
-/** Used to access faster Node.js helpers. */
-
-var node = (function () {
-  try {
-    // Use `util.types` for Node.js 10+.
-    return freeModule && freeModule.require && freeModule.require('util').types;
-  } catch (error) {}
-})();
 
 /** `Object#toString` result references. */
 var argumentsTag = '[object Arguments]',
@@ -999,7 +1032,7 @@ typedArrayTags[argumentsTag] = typedArrayTags[arrayTag] = typedArrayTags[arrayBu
  */
 
 function baseIsTypedArray(value) {
-  return isObjectLike(value) && isLength(value.length) && typedArrayTags[baseGetTag$1(value)];
+  return isObjectLike(value) && isLength(value.length) && typedArrayTags[baseGetTag(value)];
 }
 
 var nodeIsTypedArray = node && node.isTypedArray;
@@ -1020,40 +1053,6 @@ var nodeIsTypedArray = node && node.isTypedArray;
 var isTypedArray = nodeIsTypedArray ? function (value) {
   return nodeIsTypedArray(value);
 } : baseIsTypedArray;
-
-/**
- * This method invokes `interceptor` and returns `value`. The interceptor
- * is invoked with one argument; (value). The purpose of this method is to
- * "tap into" a method chain sequence in order to modify intermediate results.
- *
- * @static
- * @param {*} value The value to provide to `interceptor`.
- * @param {Function} interceptor The function to invoke.
- * @returns {*} Returns `value`.
- * @example
- *
- * tap('test') // 'test'
- * tap([1, 2, 3], (value) => value.pop()) // [1,2]
- * tap({b: 2, a: 'test'}, (value) => delete value.a) // {b: 2}
- * tap(()=>100)) // 100
- * tap(()=>100), (value) => value / 2) // 50
- *
- */
-function tap(value, interceptor) {
-  if (isFunction(value)) {
-    value = value();
-  }
-
-  if (interceptor && isFunction(interceptor)) {
-    if (isBasicType(value)) {
-      return interceptor(value);
-    }
-
-    interceptor(value);
-  }
-
-  return value;
-}
 
 function times() {
   var n = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
@@ -1103,7 +1102,7 @@ var hasOwnProperty$1 = objectProto$1.hasOwnProperty;
 
 function arrayLikeKeys(value) {
   var inherited = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var isArray_ = isArray(value),
+  var isArray_ = Array.isArray(value),
       isArgument = !isArray_ && isArguments(value),
       isBuff = !isArray_ && !isArgument && isBuffer(value),
       isType = !isArray_ && !isArgument && !isBuff && isTypedArray(value),
@@ -1187,57 +1186,6 @@ function baseKeys(object) {
 
 function keys(object) {
   return isArrayLike(object) ? arrayLikeKeys(object) : baseKeys(object);
-}
-
-/**
- * Assigns own and inherited enumerable string keyed properties of source
- * objects to the destination object for all destination properties that
- * resolve to `undefined`. Source objects are applied from left to right.
- * Once a property is set, additional values of the same property are ignored.
- *
- * **Note:** This method mutates `object`.
- *
- * @example
- *
- * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
- * // => { 'a': 1, 'b': 2 }
- */
-
-function defaults(origin) {
-  var ln = arguments.length <= 1 ? 0 : arguments.length - 1;
-  var i = 0,
-      object,
-      key,
-      value,
-      sourceKey;
-
-  for (; i < ln; i++) {
-    object = i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1];
-
-    if (!isObject(object)) {
-      continue;
-    }
-
-    for (key in object) {
-      value = object[key];
-
-      if (value && value.constructor === Object) {
-        sourceKey = origin[key];
-
-        if (sourceKey && sourceKey.constructor === Object) {
-          defaults(sourceKey, value);
-        } else {
-          origin[key] = clone(value);
-        }
-      } else {
-        if (!Object.prototype.hasOwnProperty.call(origin, key)) {
-          origin[key] = value;
-        }
-      }
-    }
-  }
-
-  return origin;
 }
 
 function equal(origin) {
@@ -1350,6 +1298,505 @@ function equal(origin) {
   }
 
   return true;
+}
+
+/**
+ * Deep comparing the contents of 2 arrays using strict equality
+ *
+ * @param {Array} array1
+ * @param {Array} array2
+ * @return {Boolean} `true` if the arrays are equal.
+ */
+
+function equals$1(array1, array2) {
+  var length1 = array1.length;
+  var length2 = array2.length;
+  var i; // Short circuit if the same array is passed twice
+
+  if (array1 === array2) {
+    return true;
+  }
+
+  if (length1 !== length2) {
+    return false;
+  }
+
+  for (i = 0; i < length1; ++i) {
+    if (array1[i] && array2[i]) {
+      if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
+        if (!equals$1(array1[i], array2[i])) {
+          return false;
+        }
+
+        continue;
+      }
+
+      if (isObject(array1[i]) && isObject(array2[i])) {
+        if (!equal(array1[i], array2[i])) {
+          return false;
+        }
+
+        continue;
+      }
+    }
+
+    if (array1[i] !== array2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+/**
+ * @param {*} first
+ * @param {*} second
+ * @returns {boolean}
+ */
+
+function equals(first, second) {
+  if (first === second) {
+    return true;
+  }
+
+  if (isString(first) || isNumeric(first) || isBoolean(first)) {
+    return first === second;
+  }
+
+  if (first instanceof Date && second instanceof Date || first instanceof RegExp && second instanceof RegExp) {
+    return first.toString() === second.toString();
+  }
+
+  if (Array.isArray(first) && Array.isArray(second)) {
+    return equals$1(first, second);
+  }
+
+  if (isObject(first) && isObject(second)) {
+    return equal(first, second);
+  }
+
+  if (isFunction(first) && isFunction(second)) {
+    return ('' + first).valueOf() === ('' + second).valueOf();
+  }
+
+  return false;
+}
+
+/**
+ * A specialized version of `forEach` for arrays.
+ *
+ * @private
+ * @param {Array} [array] The array to iterate over.
+ * @param {Function} callback The function invoked per iteration.
+ * @returns {Array} Returns `bool`.
+ */
+function arrayEach(array, callback) {
+  var length = array.length;
+  var index = -1;
+
+  while (++index < length) {
+    if (callback(array[index], index, array) === false) {
+      break;
+    }
+  }
+
+  return array;
+}
+
+function forEach(collection, iterateFn) {
+  if (Array.isArray(collection)) {
+    return arrayEach(collection, iterateFn);
+  }
+
+  var baseEach = function baseEach(object, iterateFn) {
+    return object && createBaseFor()(object, iterateFn, keys);
+  };
+
+  var func = createBaseEach(baseEach);
+  return func(collection, iterateFn);
+}
+
+function createBaseFor() {
+  var fromRight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+  return function (object, iterateFn, keysFunc) {
+    var index = -1,
+        iterable = new Object(object),
+        properties = keysFunc(object),
+        length = properties.length,
+        key;
+
+    while (length--) {
+      key = properties[fromRight ? length : ++index];
+
+      if (iterateFn(iterable[key], key, iterable) === false) {
+        break;
+      }
+    }
+
+    return object;
+  };
+}
+
+function createBaseEach(eachFunc) {
+  var fromRight = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  return function (collection, iterateFn) {
+    if (collection == null) {
+      return collection;
+    }
+
+    if (!isArrayLike(collection)) {
+      return eachFunc(collection, iterateFn);
+    }
+
+    var length = collection.length;
+    var iterable = new Object(collection);
+    var index = fromRight ? length : -1;
+
+    while (fromRight ? index-- : ++index < length) {
+      if (iterateFn(iterable[index], index, iterable) === false) {
+        break;
+      }
+    }
+
+    return collection;
+  };
+}
+
+/**
+ * @param {*} expr
+ * @param {object|array} cases
+ * @param {boolean} strict Strict comparison (===) or (==). For example, it should be used for digit case-keys.
+ * @return {*}
+ */
+function match(expr, cases) {
+  var strict = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+
+  var _iterator = _createForOfIteratorHelper(Array.isArray(cases) ? cases : Object.entries(cases)),
+      _step;
+
+  try {
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      var _step$value = _slicedToArray(_step.value, 2),
+          pattern = _step$value[0],
+          action = _step$value[1];
+
+      var prn = typeof pattern === 'function' ? pattern() : pattern;
+
+      if (strict ? expr === prn : expr == prn) {
+        return typeof action === 'function' ? action() : action;
+      }
+    }
+  } catch (err) {
+    _iterator.e(err);
+  } finally {
+    _iterator.f();
+  }
+
+  return Array.isArray(cases) ? undefined : cases.default;
+}
+
+/**
+ * Clear array
+ */
+function clear(array) {
+  array.length = 0;
+}
+
+/**
+ * The difference will output the elements from array A that are not in the array B.
+ *
+ * @param {Array} array
+ * @param {Array} array2
+ * @returns {any[]}
+ */
+function difference(array, array2) {
+  return _toConsumableArray(new Set(array.filter(function (x) {
+    return !array2.includes(x);
+  })));
+}
+
+/**
+ * Random function returns random item from array
+ *
+ * @param {Array} array
+ * @returns {unknown}
+ */
+function random(array) {
+  return array[Math.floor(Math.random() * array.length)];
+}
+
+/**
+ * The symmetricalDifference will output anti-intersection.
+ *
+ * @param {Array} array
+ * @param {Array} array2
+ * @returns {any[]}
+ */
+function symmetricalDifference(array, array2) {
+  return _toConsumableArray(new Set(array)).filter(function (x) {
+    return !array2.includes(x);
+  }).concat(array2.filter(function (x) {
+    return !array.includes(x);
+  }));
+}
+
+/**
+ * Return common items for two arrays
+ *
+ * @param {Array} array
+ * @param {Array} array2
+ * @returns {any[]}
+ */
+function intersect(array, array2) {
+  var set = new Set(array);
+  return _toConsumableArray(new Set(array2.filter(function (item) {
+    return set.has(item);
+  })));
+}
+/**
+ * Return common items for all arrays
+ *
+ * @param array
+ * @param arrays
+ * @returns {*|any[]}
+ */
+
+function intersectAll(array) {
+  for (var _len = arguments.length, arrays = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+    arrays[_key - 1] = arguments[_key];
+  }
+
+  return arrays.reduce(function (previous, next) {
+    return intersect(previous, next);
+  }, array);
+}
+
+var nowFn = Date.now || function () {
+  return new Date().getTime();
+};
+/**
+ * This function return Date now
+ */
+
+
+function now() {
+  return nowFn();
+}
+
+/**
+ * This function add symbols to string in start or end
+ *
+ * @param {string | number | undefined} value
+ * @param {int} targetLength
+ * @param {string} padString
+ * @param {boolean} leading If TRUE add symbols before string, else - after
+ * @returns {string}
+ */
+function pad(value, targetLength) {
+  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
+  var leading = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  targetLength = Math.trunc(targetLength); //floor if number or convert non-number to 0;
+
+  if (isNil(value)) {
+    return '';
+  }
+
+  value = String(value);
+
+  if (value.length > targetLength) {
+    return value;
+  }
+
+  targetLength = targetLength - value.length;
+
+  if (targetLength > padString.length) {
+    padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
+  }
+
+  return leading ? padString.slice(0, targetLength) + value : value + padString.slice(0, targetLength);
+}
+/**
+ * This function add leading symbols
+ */
+
+function padStart(value, targetLength) {
+  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
+  return pad(value, targetLength, padString);
+}
+/**
+ * This function add ending symbols
+ */
+
+function padEnd(value, targetLength) {
+  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
+  return pad(value, targetLength, padString, false);
+}
+
+function padNumber(value, targetLength) {
+  if (isNil(value)) {
+    return '0';
+  }
+
+  return padStart(value, targetLength, '0');
+}
+function padDateTime(value) {
+  if (isNil(value)) {
+    return '00';
+  }
+
+  return padStart(value, 2, '0');
+}
+
+/**
+ * Date to string
+ * @param {Date|null} date
+ * @returns {string}
+ */
+
+function toString$1() {
+  var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
+  return date.getFullYear() + '-' + padDateTime(date.getMonth() + 1) + '-' + padDateTime(date.getDate()) + 'T' + padDateTime(date.getHours()) + ':' + padDateTime(date.getMinutes()) + ':' + padDateTime(date.getSeconds());
+}
+
+/**
+ * Formatting number
+ * @param {String|Number} value
+ * @param {Number} decimals
+ * @param {String} decPoint
+ * @param {String} thousandsSeparator
+ * @param {Boolean} clearDecimals
+ * @returns {string}
+ */
+function number(value) {
+  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  var decPoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
+  var thousandsSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ',';
+  var clearDecimals = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
+  decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
+  var sign = value < 0 ? '-' : '';
+  value = Math.abs(+value || 0);
+  var intPart = parseInt(value.toFixed(decimals), 10) + ''; // const intPartStr = intPart + ''
+
+  var j = intPart.length > 3 ? intPart.length % 3 : 0;
+  return sign + (j ? intPart.slice(0, j) + thousandsSeparator : '') + intPart.slice(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSeparator) + (decimals ? clearDecimals && isInteger(value) ? '' : decPoint + Math.abs(value - +intPart).toFixed(decimals).slice(2) : '');
+}
+function numberRus(value) {
+  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+  return number(value, decimals, '.', ' ', true);
+}
+
+var UnitsDefault = ['', 'K', 'M', 'B', 'T'];
+/**
+ * Format
+ * @param {Number|String} value
+ * @param {Array} units
+ * @param {Number} kilo
+ * @param {Number} decimals
+ * @param {String} decPoint
+ * @param {String} thousandsSeparator
+ * @param {String} suffixSeparator
+ * @returns {string}
+ */
+
+function intWord(value) {
+  var units = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UnitsDefault;
+  var kilo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
+  var decimals = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
+  var decPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '.';
+  var thousandsSeparator = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : ',';
+  var suffixSeparator = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
+  var unit = units.length - 1;
+  decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
+
+  for (var i = 0; i < units.length; i++) {
+    if (value < Math.pow(kilo, i + 1)) {
+      unit = i;
+      break;
+    }
+  }
+
+  var humanized = +value / Math.pow(kilo, unit);
+  var suffix = units[unit] ? suffixSeparator + units[unit] : '';
+  return number(humanized, decimals, decPoint, thousandsSeparator) + suffix;
+}
+
+/**
+ * Display
+ * @param {Number|String} size
+ * @param {Number} kilo
+ * @param {Number} decimals
+ * @param {String} decPoint
+ * @param {String} thousandsSeparator
+ * @param {String} suffixSeparator
+ * @returns {string}
+ */
+function fileSize(size) {
+  var kilo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1024;
+  var decimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
+  var decPoint = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
+  var thousandsSeparator = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : ',';
+  var suffixSeparator = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : ' ';
+
+  if (size <= 0) {
+    return '0 bytes';
+  }
+
+  if (size < kilo) {
+    decimals = 0;
+  }
+
+  return intWord(size, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSeparator, suffixSeparator);
+}
+
+/**
+ * Assigns own and inherited enumerable string keyed properties of source
+ * objects to the destination object for all destination properties that
+ * resolve to `undefined`. Source objects are applied from left to right.
+ * Once a property is set, additional values of the same property are ignored.
+ *
+ * **Note:** This method mutates `object`.
+ *
+ * @example
+ *
+ * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
+ * // => { 'a': 1, 'b': 2 }
+ */
+
+function defaults(origin) {
+  var ln = arguments.length <= 1 ? 0 : arguments.length - 1;
+  var i = 0,
+      object,
+      key,
+      value,
+      sourceKey;
+
+  for (; i < ln; i++) {
+    object = i + 1 < 1 || arguments.length <= i + 1 ? undefined : arguments[i + 1];
+
+    if (!isObject(object)) {
+      continue;
+    }
+
+    for (key in object) {
+      value = object[key];
+
+      if (value && value.constructor === Object) {
+        sourceKey = origin[key];
+
+        if (sourceKey && sourceKey.constructor === Object) {
+          defaults(sourceKey, value);
+        } else {
+          origin[key] = clone(value);
+        }
+      } else {
+        if (!Object.prototype.hasOwnProperty.call(origin, key)) {
+          origin[key] = value;
+        }
+      }
+    }
+  }
+
+  return origin;
 }
 
 /**
@@ -1478,7 +1925,7 @@ function fromQueryString(queryString) {
 
       if (!recursive) {
         if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!isArray(object[name])) {
+          if (!Array.isArray(object[name])) {
             object[name] = [object[name]];
           }
 
@@ -1516,7 +1963,7 @@ function fromQueryString(queryString) {
           key = keys[j];
 
           if (j === subLn - 1) {
-            if (isArray(temporary) && key === '') {
+            if (Array.isArray(temporary) && key === '') {
               temporary.push(value);
             } else {
               temporary[key] = value;
@@ -1680,86 +2127,6 @@ function pathToObject() {
 }
 
 /**
- * A specialized version of `forEach` for arrays.
- *
- * @private
- * @param {Array} [array] The array to iterate over.
- * @param {Function} callback The function invoked per iteration.
- * @returns {Array} Returns `bool`.
- */
-function arrayEach(array, callback) {
-  var length = array.length;
-  var index = -1;
-
-  while (++index < length) {
-    if (callback(array[index], index, array) === false) {
-      break;
-    }
-  }
-
-  return array;
-}
-
-function forEach(collection, iterateFn) {
-  if (isArray(collection)) {
-    return arrayEach(collection, iterateFn);
-  }
-
-  var baseEach = function baseEach(object, iterateFn) {
-    return object && createBaseFor()(object, iterateFn, keys);
-  };
-
-  var func = createBaseEach(baseEach);
-  return func(collection, iterateFn);
-}
-
-function createBaseFor() {
-  var fromRight = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-  return function (object, iterateFn, keysFunc) {
-    var index = -1,
-        iterable = new Object(object),
-        properties = keysFunc(object),
-        length = properties.length,
-        key;
-
-    while (length--) {
-      key = properties[fromRight ? length : ++index];
-
-      if (iterateFn(iterable[key], key, iterable) === false) {
-        break;
-      }
-    }
-
-    return object;
-  };
-}
-
-function createBaseEach(eachFunc) {
-  var fromRight = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  return function (collection, iterateFn) {
-    if (collection == null) {
-      return collection;
-    }
-
-    if (!isArrayLike(collection)) {
-      return eachFunc(collection, iterateFn);
-    }
-
-    var length = collection.length;
-    var iterable = new Object(collection);
-    var index = fromRight ? length : -1;
-
-    while (fromRight ? index-- : ++index < length) {
-      if (iterateFn(iterable[index], index, iterable) === false) {
-        break;
-      }
-    }
-
-    return collection;
-  };
-}
-
-/**
  * Get value by deep key in object(array)
  *
  * @example
@@ -1854,6 +2221,53 @@ function pick(object, paths) {
 }
 
 /**
+ * Converts `value` to a number.
+
+ * @example
+ *
+ * toNumber(3.2);
+ * // => 3.2
+ *
+ * toNumber(Number.MIN_VALUE);
+ * // => 5e-324
+ *
+ * toNumber(Infinity);
+ * // => Infinity
+ *
+ * toNumber('3.2');
+ * // => 3.2
+ */
+
+function toNumber(value) {
+  if (typeof value === 'number') {
+    return value;
+  }
+
+  if (isSymbol(value)) {
+    return NaN;
+  }
+
+  if (isObject(value)) {
+    var other = typeof value.valueOf === 'function' ? value.valueOf() : value;
+    value = isObject(other) ? other + '' : other;
+  }
+
+  if (typeof value !== 'string') {
+    return value === 0 ? value : +value;
+  }
+
+  return stringToNumber(value);
+}
+function stringToNumber(value) {
+  value = value.replace(reTrim, '');
+  var isBinary = reIsBinary.test(value);
+  return isBinary || reIsOctal.test(value) ? parseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
+}
+function booleanToNumber(value) {
+  return +value;
+}
+
+/**
  * Get value by deep key in object(array)
  *
  * @example
@@ -1908,13 +2322,13 @@ function remove(object, selector) {
   var removeFromObject = function removeFromObject(from, keys) {
     if (keys.length > 1) {
       if (from[keys[0]] !== undefined) {
-        if (isArray(from[keys[0]]) || isObject(from[keys[0]])) {
+        if (Array.isArray(from[keys[0]]) || isObject(from[keys[0]])) {
           removeFromObject(from[keys[0]], keys.slice(1));
         }
       }
     } else {
-      if (isArray(from)) {
-        from.splice(keys[0], 1);
+      if (Array.isArray(from)) {
+        from.splice(stringToNumber(keys[0]), 1);
       } else if (isObject(from)) {
         delete from[keys[0]];
       }
@@ -1953,7 +2367,7 @@ function removeEmpty(object) {
         continue;
       }
 
-      if (isArray(object[key])) {
+      if (Array.isArray(object[key])) {
         var _ret = function () {
           var a = [];
           object[key].forEach(function (v) {
@@ -2053,7 +2467,7 @@ function toQueryObjects(name, value) {
   var objects = [];
   var i, ln;
 
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     var valueArray = value;
 
     for (i = 0, ln = valueArray.length; i < ln; i++) {
@@ -2096,65 +2510,232 @@ function toQueryObjects(name, value) {
   return objects;
 }
 
-var nowFn = Date.now || function () {
-  return new Date().getTime();
-};
 /**
- * This function return Date now
- */
-
-
-function now() {
-  return nowFn();
-}
-
-/**
- * This function add symbols to string in start or end
+ * Takes an object and converts it to an encoded query string.
  *
- * @param {string | number | undefined} value
- * @param {int} targetLength
- * @param {string} padString
- * @param {boolean} leading If TRUE add symbols before string, else - after
- * @returns {string}
+ * Non-recursive:
+ *
+ *     toQueryString({foo: 1, bar: 2}); // returns "foo=1&bar=2"
+ *     toQueryString({foo: null, bar: 2}); // returns "foo=&bar=2"
+ *     toQueryString({'some price': '$300'}); // returns "some%20price=%24300"
+ *     toQueryString({date: new Date(2011, 0, 1)}); // returns "date=%222011-01-01T00%3A00%3A00%22"
+ *     toQueryString({colors: ['red', 'green', 'blue']}); // returns "colors=red&colors=green&colors=blue"
+ *
+ * Recursive:
+ *
+ *     toQueryString({
+ *         username: 'Jacky',
+ *         dateOfBirth: {
+ *             day: 1,
+ *             month: 2,
+ *             year: 1911,
+ *         },
+ *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
+ *     }, true); // returns the following string (broken down and url-decoded for ease of reading purpose):
+ *     // username=Jacky
+ *     //    &dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911
+ *     //    &hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&hobbies[3][0]=nested&hobbies[3][1]=stuff
+ *
+ * @param {Object} object The object to encode
+ * @param {Boolean} [recursive=false] Whether or not to interpret the object in recursive format.
+ * @param {Object} options = {
+ *   - encodeName {Boolean} Encode each KeyName in the object
+ * }
+ * (PHP / Ruby on Rails servers and similar).
+ * @return {String} queryString
  */
-function pad(value, targetLength) {
-  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
-  var leading = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  targetLength = Math.trunc(targetLength); //floor if number or convert non-number to 0;
+function toQueryString(object) {
+  var recursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
+    encodeName: true
+  };
+  var parameterObjects = [];
+  var i, j, ln, parameterObject, value;
 
-  if (isNil(value)) {
-    return '';
+  for (i in object) {
+    if (Object.prototype.hasOwnProperty.call(object, i)) {
+      parameterObjects = parameterObjects.concat(toQueryObjects(i, object[i], recursive));
+    }
   }
 
-  value = String(value);
+  var parameters = [];
 
-  if (value.length > targetLength) {
-    return value;
+  for (j = 0, ln = parameterObjects.length; j < ln; j++) {
+    parameterObject = parameterObjects[j];
+    value = parameterObject.value;
+
+    if (isBoolean(value)) {
+      value = booleanToNumber(value);
+    } else if (isEmpty(value)) {
+      value = '';
+    } else if (isDate(value)) {
+      value = toString$1(value);
+    }
+
+    var name = options.encodeName ? encodeURIComponent(parameterObject.name) : parameterObject.name;
+    parameters.push(name + '=' + encodeURIComponent(String(value)));
   }
 
-  targetLength = targetLength - value.length;
+  return parameters.join('&');
+}
 
-  if (targetLength > padString.length) {
-    padString += padString.repeat(targetLength / padString.length); //append to original to ensure we are longer than needed
-  }
+/**
+ * The base implementation of `values`
+ *
+ * @private
+ * @param {Object} object The object to query.
+ * @param {Array} properties The property names to get values for.
+ * @returns {Object} Returns the array of property values.
+ */
 
-  return leading ? padString.slice(0, targetLength) + value : value + padString.slice(0, targetLength);
+function baseValues(object, properties) {
+  return properties.map(function (key) {
+    return object[key];
+  });
 }
 /**
- * This function add leading symbols
+ * Creates an array of the own enumerable string keyed property values of `object`.
+ *
+ * **Note:** Non-object values are coerced to objects.
+ *
+ * @param {Object} object The object to query.
+ * @returns {Array} Returns the array of property values.
+ * @example
+ *
+ * function Foo() {
+ *   this.a = 1;
+ *   this.b = 2;
+ * }
+ *
+ * Foo.prototype.c = 3;
+ *
+ * values(new Foo);
+ * // => [1, 2] (iteration order is not guaranteed)
+ *
+ * values('hi');
+ * // => ['h', 'i']
  */
 
-function padStart(value, targetLength) {
-  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
-  return pad(value, targetLength, padString);
+
+function values(object) {
+  return object == null ? [] : baseValues(object, keys(object));
 }
+
 /**
- * This function add ending symbols
+ *
+ * @param {string} property
+ * @param {boolean} asc
+ * @param {boolean} ignoreCase
+ * @return {(function(*, *): (number))|*}
+ */
+function sortByProperty(property) {
+  var asc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var ignoreCase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  return function (a, b) {
+    var aProp = a[property];
+
+    if (ignoreCase && isString(aProp)) {
+      aProp = aProp.toUpperCase();
+    }
+
+    var bProp = b[property];
+
+    if (ignoreCase && isString(bProp)) {
+      bProp = bProp.toUpperCase();
+    }
+
+    if (aProp > bProp) {
+      return asc ? 1 : -1;
+    }
+
+    if (aProp < bProp) {
+      return asc ? -1 : 1;
+    }
+
+    return 0;
+  };
+}
+
+/**
+ * Sort object-like items into array
+ *
+ * @param {object|array} obj
+ * @param {string} property
+ * @param {boolean} asc
+ * @param {boolean} ignoreCase
+ * @return {(function(*, *): number)|*}
+ *
+ * @example 1 array-sorting with digit keys
+ *  const items = [
+ *       { id: 2, title: '...', pId: 62 },
+ *       { id: 1, title: '...', pId: 43 }
+ *  ]
+ *  sortObjectsInArrayByProperty(items, `id`)
+ *  sortObjectsInArrayByProperty(items, `pId`, false) // is equal `sortDescObjectsInArrayByProperty(items, `pId`)`
+ *  sortObjectsInArrayByProperty(items, `pId`, false, false) is equal `sortDescObjectsInArrayByProperty(items, `pId`, false)`
+ *
+ * @example 2: array-sorting with string keys
+ *  const items = [
+ *      { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Mo/symbols.git' },
+ *      { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Zoo.git' },
+ *  ]
+ *  sortObjectsInArrayByProperty(items, `url`)
+ *
+ * @example 3: object-like-sorting with string keys
+ *  const items = {
+ *    name: 'list',
+ *    sub1: {
+ *       sub2: {
+ *        sub3: {
+ *          repositories: [
+ *            { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Mo/symbols.git' },
+ *            { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Zoo.git' },
+ *          ]
+ *        }
+ *      }
+ *    }
+ *  };
+ *
+ *  sortObjectsInArrayByProperty(items, `sub1.sub2.sub3.repositories.url`)
+ *
  */
 
-function padEnd(value, targetLength) {
-  var padString = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : ' ';
-  return pad(value, targetLength, padString, false);
+function sortObjectsInArrayByProperty(obj, property) {
+  var asc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  var ignoreCase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+  if (!isString(property)) {
+    throw new Error("key should be a String");
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.sort(sortByProperty(property, asc, ignoreCase));
+  }
+
+  if (!isObject(obj)) {
+    throw new Error("obj should be an Object or an Array");
+  }
+
+  if (!property.includes('.')) {
+    throw new Error("key's path should divided by dot (.): key1.inner-key.localKey");
+  }
+
+  var cloneObj = clone(obj);
+  var keys = property.split(".");
+  var sortKey = keys.pop();
+
+  if (!sortKey) {
+    throw new Error("Not found a key");
+  }
+
+  var aPath = keys.join(".");
+  var a = select(cloneObj, aPath);
+  var aSorted = sortObjectsInArrayByProperty(a, sortKey, asc, ignoreCase);
+  return pathToObject(aPath, aSorted, cloneObj);
+}
+function sortDescObjectsInArrayByProperty(obj, property) {
+  var ignoreCase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
+  return sortObjectsInArrayByProperty(obj, property, false, ignoreCase);
 }
 
 /** Used to compose unicode character classes. */
@@ -2239,8 +2820,8 @@ var symbolProto = Symbol ? Symbol.prototype : undefined,
  * for `null` and `undefined` values. The sign of `-0` is preserved.
  */
 
-function toString$1(value) {
-  if (isArray(value)) {
+function toString(value) {
+  if (Array.isArray(value)) {
     return value.toString();
   }
 
@@ -2278,7 +2859,7 @@ function toString$1(value) {
  */
 
 function trim(string) {
-  string = toString$1(string);
+  string = toString(string);
 
   if (!string) {
     return string;
@@ -2314,6 +2895,7 @@ function clearSpaces(str) {
  * @param {string} string
  * @returns {string}
  */
+
 function titleCase(string) {
   return clearSpaces(string).replace(/\w\S*/g, function (txt) {
     return upperFirst(txt);
@@ -2329,8 +2911,8 @@ function titleCase(string) {
  */
 
 function endsWith(str, target) {
-  str = toString$1(str);
-  target = toString$1(target);
+  str = toString(str);
+  target = toString(target);
   var position = str.length;
   var end = position;
   position -= target.length;
@@ -2346,8 +2928,8 @@ function endsWith(str, target) {
  */
 
 function startsWith(str, target) {
-  target = toString$1(target);
-  return toString$1(str).slice(0, target.length) === target;
+  target = toString(target);
+  return toString(str).slice(0, target.length) === target;
 }
 
 /**
@@ -2514,582 +3096,6 @@ function strtr(str, from, to) {
   }
 
   return str;
-}
-
-function padNumber(value, targetLength) {
-  if (isNil(value)) {
-    return '0';
-  }
-
-  return padStart(value, targetLength, '0');
-}
-function padDateTime(value) {
-  if (isNil(value)) {
-    return '00';
-  }
-
-  return padStart(value, 2, '0');
-}
-
-/**
- * Formatting number
- * @param {String|Number} value
- * @param {Number} decimals
- * @param {String} decPoint
- * @param {String} thousandsSeparator
- * @param {Boolean} clearDecimals
- * @returns {string}
- */
-function number(value) {
-  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-  var decPoint = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '.';
-  var thousandsSeparator = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : ',';
-  var clearDecimals = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-  decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
-  var sign = value < 0 ? '-' : '';
-  value = Math.abs(+value || 0);
-  var intPart = parseInt(value.toFixed(decimals), 10) + ''; // const intPartStr = intPart + ''
-
-  var j = intPart.length > 3 ? intPart.length % 3 : 0;
-  return sign + (j ? intPart.slice(0, j) + thousandsSeparator : '') + intPart.slice(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSeparator) + (decimals ? clearDecimals && isInteger(value) ? '' : decPoint + Math.abs(value - +intPart).toFixed(decimals).slice(2) : '');
-}
-function numberRus(value) {
-  var decimals = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
-  return number(value, decimals, '.', ' ', true);
-}
-
-var UnitsDefault = ['', 'K', 'M', 'B', 'T'];
-/**
- * Format
- * @param {Number|String} value
- * @param {Array} units
- * @param {Number} kilo
- * @param {Number} decimals
- * @param {String} decPoint
- * @param {String} thousandsSeparator
- * @param {String} suffixSeparator
- * @returns {string}
- */
-
-function intWord(value) {
-  var units = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : UnitsDefault;
-  var kilo = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000;
-  var decimals = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
-  var decPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '.';
-  var thousandsSeparator = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : ',';
-  var suffixSeparator = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : '';
-  var unit = units.length - 1;
-  decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
-
-  for (var i = 0; i < units.length; i++) {
-    if (value < Math.pow(kilo, i + 1)) {
-      unit = i;
-      break;
-    }
-  }
-
-  var humanized = +value / Math.pow(kilo, unit);
-  var suffix = units[unit] ? suffixSeparator + units[unit] : '';
-  return number(humanized, decimals, decPoint, thousandsSeparator) + suffix;
-}
-
-/**
- * Display
- * @param {Number|String} size
- * @param {Number} kilo
- * @param {Number} decimals
- * @param {String} decPoint
- * @param {String} thousandsSeparator
- * @param {String} suffixSeparator
- * @returns {string}
- */
-function fileSize(size) {
-  var kilo = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1024;
-  var decimals = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 2;
-  var decPoint = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '.';
-  var thousandsSeparator = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : ',';
-  var suffixSeparator = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : ' ';
-
-  if (size <= 0) {
-    return '0 bytes';
-  }
-
-  if (size < kilo) {
-    decimals = 0;
-  }
-
-  return intWord(size, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSeparator, suffixSeparator);
-}
-
-/**
- * Date to string
- * @param {Date|null} date
- * @returns {string}
- */
-
-function toString() {
-  var date = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new Date();
-  return date.getFullYear() + '-' + padDateTime(date.getMonth() + 1) + '-' + padDateTime(date.getDate()) + 'T' + padDateTime(date.getHours()) + ':' + padDateTime(date.getMinutes()) + ':' + padDateTime(date.getSeconds());
-}
-
-/**
- * Converts `value` to a number.
-
- * @example
- *
- * toNumber(3.2);
- * // => 3.2
- *
- * toNumber(Number.MIN_VALUE);
- * // => 5e-324
- *
- * toNumber(Infinity);
- * // => Infinity
- *
- * toNumber('3.2');
- * // => 3.2
- */
-
-function toNumber(value) {
-  if (typeof value === 'number') {
-    return value;
-  }
-
-  if (isSymbol(value)) {
-    return NaN;
-  }
-
-  if (isObject(value)) {
-    var other = typeof value.valueOf === 'function' ? value.valueOf() : value;
-    value = isObject(other) ? other + '' : other;
-  }
-
-  if (typeof value !== 'string') {
-    return value === 0 ? value : +value;
-  }
-
-  value = value.replace(reTrim, '');
-  var isBinary = reIsBinary.test(value);
-  return isBinary || reIsOctal.test(value) ? parseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
-}
-
-/**
- * Takes an object and converts it to an encoded query string.
- *
- * Non-recursive:
- *
- *     toQueryString({foo: 1, bar: 2}); // returns "foo=1&bar=2"
- *     toQueryString({foo: null, bar: 2}); // returns "foo=&bar=2"
- *     toQueryString({'some price': '$300'}); // returns "some%20price=%24300"
- *     toQueryString({date: new Date(2011, 0, 1)}); // returns "date=%222011-01-01T00%3A00%3A00%22"
- *     toQueryString({colors: ['red', 'green', 'blue']}); // returns "colors=red&colors=green&colors=blue"
- *
- * Recursive:
- *
- *     toQueryString({
- *         username: 'Jacky',
- *         dateOfBirth: {
- *             day: 1,
- *             month: 2,
- *             year: 1911,
- *         },
- *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
- *     }, true); // returns the following string (broken down and url-decoded for ease of reading purpose):
- *     // username=Jacky
- *     //    &dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911
- *     //    &hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&hobbies[3][0]=nested&hobbies[3][1]=stuff
- *
- * @param {Object} object The object to encode
- * @param {Boolean} [recursive=false] Whether or not to interpret the object in recursive format.
- * @param {Object} options = {
- *   - encodeName {Boolean} Encode each KeyName in the object
- * }
- * (PHP / Ruby on Rails servers and similar).
- * @return {String} queryString
- */
-function toQueryString(object) {
-  var recursive = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {
-    encodeName: true
-  };
-  var parameterObjects = [];
-  var i, j, ln, parameterObject, value;
-
-  for (i in object) {
-    if (Object.prototype.hasOwnProperty.call(object, i)) {
-      parameterObjects = parameterObjects.concat(toQueryObjects(i, object[i], recursive));
-    }
-  }
-
-  var parameters = [];
-
-  for (j = 0, ln = parameterObjects.length; j < ln; j++) {
-    parameterObject = parameterObjects[j];
-    value = parameterObject.value;
-
-    if (isBoolean(value)) {
-      value = toNumber(value);
-    } else if (isEmpty(value)) {
-      value = '';
-    } else if (isDate(value)) {
-      value = toString(value);
-    }
-
-    var name = options.encodeName ? encodeURIComponent(parameterObject.name) : parameterObject.name;
-    parameters.push(name + '=' + encodeURIComponent(String(value)));
-  }
-
-  return parameters.join('&');
-}
-
-/**
- * The base implementation of `values`
- *
- * @private
- * @param {Object} object The object to query.
- * @param {Array} properties The property names to get values for.
- * @returns {Object} Returns the array of property values.
- */
-
-function baseValues(object, properties) {
-  return properties.map(function (key) {
-    return object[key];
-  });
-}
-/**
- * Creates an array of the own enumerable string keyed property values of `object`.
- *
- * **Note:** Non-object values are coerced to objects.
- *
- * @param {Object} object The object to query.
- * @returns {Array} Returns the array of property values.
- * @example
- *
- * function Foo() {
- *   this.a = 1;
- *   this.b = 2;
- * }
- *
- * Foo.prototype.c = 3;
- *
- * values(new Foo);
- * // => [1, 2] (iteration order is not guaranteed)
- *
- * values('hi');
- * // => ['h', 'i']
- */
-
-
-function values(object) {
-  return object == null ? [] : baseValues(object, keys(object));
-}
-
-/**
- * Clear array
- */
-function clear(array) {
-  array.length = 0;
-}
-
-/**
- * The difference will output the elements from array A that are not in the array B.
- *
- * @param {Array} array
- * @param {Array} array2
- * @returns {any[]}
- */
-function difference(array, array2) {
-  return _toConsumableArray(new Set(array.filter(function (x) {
-    return !array2.includes(x);
-  })));
-}
-
-/**
- * Deep comparing the contents of 2 arrays using strict equality
- *
- * @param {Array} array1
- * @param {Array} array2
- * @return {Boolean} `true` if the arrays are equal.
- */
-
-function equals$1(array1, array2) {
-  var length1 = array1.length;
-  var length2 = array2.length;
-  var i; // Short circuit if the same array is passed twice
-
-  if (array1 === array2) {
-    return true;
-  }
-
-  if (length1 !== length2) {
-    return false;
-  }
-
-  for (i = 0; i < length1; ++i) {
-    if (array1[i] && array2[i]) {
-      if (isArray(array1[i]) && isArray(array2[i])) {
-        if (!equals$1(array1[i], array2[i])) {
-          return false;
-        }
-
-        continue;
-      }
-
-      if (isObject(array1[i]) && isObject(array2[i])) {
-        if (!equal(array1[i], array2[i])) {
-          return false;
-        }
-
-        continue;
-      }
-    }
-
-    if (array1[i] !== array2[i]) {
-      return false;
-    }
-  }
-
-  return true;
-}
-
-/**
- * Random function returns random item from array
- *
- * @param {Array} array
- * @returns {unknown}
- */
-function random(array) {
-  return array[Math.floor(Math.random() * array.length)];
-}
-
-/**
- * The symmetricalDifference will output anti-intersection.
- *
- * @param {Array} array
- * @param {Array} array2
- * @returns {any[]}
- */
-function symmetricalDifference(array, array2) {
-  return _toConsumableArray(new Set(array)).filter(function (x) {
-    return !array2.includes(x);
-  }).concat(array2.filter(function (x) {
-    return !array.includes(x);
-  }));
-}
-
-/**
- * Return common items for two arrays
- *
- * @param {Array} array
- * @param {Array} array2
- * @returns {any[]}
- */
-function intersect(array, array2) {
-  var set = new Set(array);
-  return _toConsumableArray(new Set(array2.filter(function (item) {
-    return set.has(item);
-  })));
-}
-/**
- * Return common items for all arrays
- *
- * @param array
- * @param arrays
- * @returns {*|any[]}
- */
-
-function intersectAll(array) {
-  for (var _len = arguments.length, arrays = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-    arrays[_key - 1] = arguments[_key];
-  }
-
-  return arrays.reduce(function (previous, next) {
-    return intersect(previous, next);
-  }, array);
-}
-
-/**
- * @param {*} first
- * @param {*} second
- * @returns {boolean}
- */
-
-function equals(first, second) {
-  if (first === second) {
-    return true;
-  }
-
-  if (isString(first) || isNumeric(first) || isBoolean(first)) {
-    return first === second;
-  }
-
-  if (first instanceof Date && second instanceof Date || first instanceof RegExp && second instanceof RegExp) {
-    return first.toString() === second.toString();
-  }
-
-  if (isArray(first) && isArray(second)) {
-    return equals$1(first, second);
-  }
-
-  if (isObject(first) && isObject(second)) {
-    return equal(first, second);
-  }
-
-  if (isFunction(first) && isFunction(second)) {
-    return ('' + first).valueOf() === ('' + second).valueOf();
-  }
-
-  return false;
-}
-
-/**
- * @param {*} expr
- * @param {object|array} cases
- * @param {boolean} strict Strict comparison (===) or (==). For example, it should be used for digit case-keys.
- * @return {*}
- */
-function match(expr, cases) {
-  var strict = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-
-  var _iterator = _createForOfIteratorHelper(Array.isArray(cases) ? cases : Object.entries(cases)),
-      _step;
-
-  try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
-      var _step$value = _slicedToArray(_step.value, 2),
-          pattern = _step$value[0],
-          action = _step$value[1];
-
-      var prn = typeof pattern === 'function' ? pattern() : pattern;
-
-      if (strict ? expr === prn : expr == prn) {
-        return typeof action === 'function' ? action() : action;
-      }
-    }
-  } catch (err) {
-    _iterator.e(err);
-  } finally {
-    _iterator.f();
-  }
-
-  return Array.isArray(cases) ? undefined : cases.default;
-}
-
-/**
- *
- * @param {string} property
- * @param {boolean} asc
- * @param {boolean} ignoreCase
- * @return {(function(*, *): (number))|*}
- */
-function sortByProperty(property) {
-  var asc = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-  var ignoreCase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  return function (a, b) {
-    var aProp = a[property];
-
-    if (ignoreCase && isString(aProp)) {
-      aProp = aProp.toUpperCase();
-    }
-
-    var bProp = b[property];
-
-    if (ignoreCase && isString(bProp)) {
-      bProp = bProp.toUpperCase();
-    }
-
-    if (aProp > bProp) {
-      return asc ? 1 : -1;
-    }
-
-    if (aProp < bProp) {
-      return asc ? -1 : 1;
-    }
-
-    return 0;
-  };
-}
-
-/**
- * Sort object-like items into array
- *
- * @param {object|array} obj
- * @param {string} property
- * @param {boolean} asc
- * @param {boolean} ignoreCase
- * @return {(function(*, *): number)|*}
- *
- * @example 1 array-sorting with digit keys
- *  const items = [
- *       { id: 2, title: '...', pId: 62 },
- *       { id: 1, title: '...', pId: 43 }
- *  ]
- *  sortObjectsInArrayByProperty(items, `id`)
- *  sortObjectsInArrayByProperty(items, `pId`, false) // is equal `sortDescObjectsInArrayByProperty(items, `pId`)`
- *  sortObjectsInArrayByProperty(items, `pId`, false, false) is equal `sortDescObjectsInArrayByProperty(items, `pId`, false)`
- *
- * @example 2: array-sorting with string keys
- *  const items = [
- *      { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Mo/symbols.git' },
- *      { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Zoo.git' },
- *  ]
- *  sortObjectsInArrayByProperty(items, `url`)
- *
- * @example 3: object-like-sorting with string keys
- *  const items = {
- *    name: 'list',
- *    sub1: {
- *       sub2: {
- *        sub3: {
- *          repositories: [
- *            { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Mo/symbols.git' },
- *            { type: 'vcs', url: 'ssh://git@example.com:2225/modules/Zoo.git' },
- *          ]
- *        }
- *      }
- *    }
- *  };
- *
- *  sortObjectsInArrayByProperty(items, `sub1.sub2.sub3.repositories.url`)
- *
- */
-
-function sortObjectsInArrayByProperty(obj, property) {
-  var asc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  var ignoreCase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-
-  if (!isString(property)) {
-    throw new Error("key should be a String");
-  }
-
-  if (isArray(obj)) {
-    return obj.sort(sortByProperty(property, asc, ignoreCase));
-  }
-
-  if (!isObject(obj)) {
-    throw new Error("obj should be an Object or an Array");
-  }
-
-  if (!property.includes('.')) {
-    throw new Error("key's path should divided by dot (.): key1.inner-key.localKey");
-  }
-
-  var cloneObj = clone(obj);
-  var keys = property.split(".");
-  var sortKey = keys.pop();
-
-  if (!sortKey) {
-    throw new Error("Not found a key");
-  }
-
-  var aPath = keys.join(".");
-  var a = select(cloneObj, aPath);
-  var aSorted = sortObjectsInArrayByProperty(a, sortKey, asc, ignoreCase);
-  return pathToObject(aPath, aSorted, cloneObj);
-}
-function sortDescObjectsInArrayByProperty(obj, property) {
-  var ignoreCase = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
-  return sortObjectsInArrayByProperty(obj, property, false, ignoreCase);
 }
 
 var Stack = /*#__PURE__*/function () {
@@ -3356,5 +3362,5 @@ function toArray() {
   return values(value);
 }
 
-export { Queue, Stack, arrayEach, equals$1 as arraysEquals, bind, camelCase, clear, clearSpaces, clone, toString as dateToString, defaults, difference, endsWith, equals, fileSize, filter, flip, forEach, fromQueryString, getSize, intWord, intersect, intersectAll, isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, keys, logicalAnd, match, merge, now, number, numberRus, equal as objectsEqual, pad, padDateTime, padEnd, padNumber, padStart, pascalCase, pathToObject, pick, pregQuote, random, remove, removeEmpty, replaceByTemplate, select, sortByProperty, sortDescObjectsInArrayByProperty, sortObjectsInArrayByProperty, startsWith, stringToArray, strtr, sum, symmetricalDifference, tap, times, titleCase, toArray, toFinite, toInteger, toNumber, toQueryObjects, toQueryString, toString$1 as toString, trim, trimPrefix, trimSuffix, upperFirst, values };
+export { Queue, Stack, arrayEach, equals$1 as arraysEquals, bind, camelCase, clear, clearSpaces, clone, toString$1 as dateToString, defaults, difference, endsWith, equals, fileSize, filter, flip, forEach, fromQueryString, getSize, intWord, intersect, intersectAll, isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, keys, logicalAnd, match, merge, now, number, numberRus, equal as objectsEqual, pad, padDateTime, padEnd, padNumber, padStart, pascalCase, pathToObject, pick, pregQuote, random, remove, removeEmpty, replaceByTemplate, select, sortByProperty, sortDescObjectsInArrayByProperty, sortObjectsInArrayByProperty, startsWith, stringToArray, strtr, sum, symmetricalDifference, tap, times, titleCase, toArray, toFinite, toInteger, toNumber, toQueryObjects, toQueryString, toString, trim, trimPrefix, trimSuffix, upperFirst, values };
 //# sourceMappingURL=bundle.esm.js.map

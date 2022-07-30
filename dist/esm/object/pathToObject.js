@@ -1,4 +1,5 @@
-import { isEmpty, isObject } from '../is';
+import isEmpty from '../is/isEmpty';
+import isObject from '../is/isObject';
 export default function pathToObject(paths = '', value = null, object = {}, divider = '.', replaceOnExist = true) {
   if (isEmpty(paths)) {
     return object;

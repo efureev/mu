@@ -8,7 +8,9 @@ exports.sortDescObjectsInArrayByProperty = sortDescObjectsInArrayByProperty;
 
 var _sortByProperty = _interopRequireDefault(require("./sortByProperty"));
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
+
+var _isString = _interopRequireDefault(require("../is/isString"));
 
 var _select = _interopRequireDefault(require("../object/select"));
 
@@ -65,15 +67,15 @@ function sortObjectsInArrayByProperty(obj, property) {
   var asc = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
   var ignoreCase = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
 
-  if (!(0, _is.isString)(property)) {
+  if (!(0, _isString.default)(property)) {
     throw new Error("key should be a String");
   }
 
-  if ((0, _is.isArray)(obj)) {
+  if (Array.isArray(obj)) {
     return obj.sort((0, _sortByProperty.default)(property, asc, ignoreCase));
   }
 
-  if (!(0, _is.isObject)(obj)) {
+  if (!(0, _isObject.default)(obj)) {
     throw new Error("obj should be an Object or an Array");
   }
 

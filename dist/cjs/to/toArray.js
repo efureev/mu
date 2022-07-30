@@ -5,7 +5,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toArray;
 
-var _is = require("../is");
+var _isArrayLike = _interopRequireDefault(require("../is/isArrayLike"));
+
+var _isBoolean = _interopRequireDefault(require("../is/isBoolean"));
+
+var _isNumeric = _interopRequireDefault(require("../is/isNumeric"));
+
+var _isNil = _interopRequireDefault(require("../is/isNil"));
+
+var _isString = _interopRequireDefault(require("../is/isString"));
 
 var _copyArray = _interopRequireDefault(require("../internal/copyArray"));
 
@@ -63,15 +71,15 @@ function iteratorToArray(iterator) {
 function toArray() {
   var value = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 
-  if ((0, _is.isNil)(value)) {
+  if ((0, _isNil.default)(value)) {
     return [];
   }
 
-  if ((0, _is.isArrayLike)(value)) {
-    return (0, _is.isString)(value) ? (0, _stringToArray.default)(value) : (0, _copyArray.default)(value);
+  if ((0, _isArrayLike.default)(value)) {
+    return (0, _isString.default)(value) ? (0, _stringToArray.default)(value) : (0, _copyArray.default)(value);
   }
 
-  if ((0, _is.isNumeric)(value) || (0, _is.isBoolean)(value)) {
+  if ((0, _isNumeric.default)(value) || (0, _isBoolean.default)(value)) {
     return [value];
   }
 

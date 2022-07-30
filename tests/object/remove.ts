@@ -251,3 +251,13 @@ describe('remove by array keys', () => {
     ).toEqual({ label: 'Root', items: { k: 1, v: 2, items: [] } })
   })
 })
+
+describe('remove from array by string key', () => {
+  it('array', () => {
+    expect(remove([{ label: 'Root' }, { label: 'child' }, { label: 'three' }], '1.label')).toEqual([
+      { label: 'Root' },
+      {},
+      { label: 'three' },
+    ])
+  })
+})

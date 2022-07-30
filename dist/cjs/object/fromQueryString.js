@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = fromQueryString;
 
-var _is = require("../is");
+var _isNil = _interopRequireDefault(require("../is/isNil"));
+
+var _isNumeric = _interopRequireDefault(require("../is/isNumeric"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var queryRe = /^\?/;
 var plusRe = /\+/g;
@@ -56,7 +60,7 @@ function fromQueryString(queryString) {
     decodeName: true
   };
 
-  if ((0, _is.isNil)(queryString)) {
+  if ((0, _isNil.default)(queryString)) {
     return {};
   }
 
@@ -96,7 +100,7 @@ function fromQueryString(queryString) {
 
       if (!recursive) {
         if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!(0, _is.isArray)(object[name])) {
+          if (!Array.isArray(object[name])) {
             object[name] = [object[name]];
           }
 
@@ -134,7 +138,7 @@ function fromQueryString(queryString) {
           key = keys[j];
 
           if (j === subLn - 1) {
-            if ((0, _is.isArray)(temporary) && key === '') {
+            if (Array.isArray(temporary) && key === '') {
               temporary.push(value);
             } else {
               temporary[key] = value;
@@ -142,7 +146,7 @@ function fromQueryString(queryString) {
           } else {
             if (temporary[key] === undefined || typeof temporary[key] === 'string') {
               nextKey = keys[j + 1];
-              temporary[key] = (0, _is.isNumeric)(nextKey) || nextKey === '' ? [] : {};
+              temporary[key] = (0, _isNumeric.default)(nextKey) || nextKey === '' ? [] : {};
             }
 
             temporary = temporary[key];

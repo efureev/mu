@@ -1,4 +1,4 @@
-import { isFunction } from '../is';
+import isFunction from '../is/isFunction';
 export default function times(n = 1, iteratee) {
   const result = new Array(n);
   let index = -1;

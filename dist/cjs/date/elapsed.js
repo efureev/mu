@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.elapsed = elapsed;
 
-var _index = require("./index");
+var _now = _interopRequireDefault(require("./now"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Returns difference in milliseconds between dates
@@ -18,6 +20,6 @@ var _index = require("./index");
  * @author efureev
  */
 function elapsed(dateA, dateB) {
-  return Math.abs(+dateA - (+dateB || (0, _index.now)()));
+  return Math.abs(+dateA - (+dateB || (0, _now.default)()));
 }
 //# sourceMappingURL=elapsed.js.map

@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = remove;
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
+
+var _toNumber = require("../to/toNumber");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Get value by deep key in object(array)
@@ -61,14 +65,14 @@ function remove(object, selector) {
   var removeFromObject = function removeFromObject(from, keys) {
     if (keys.length > 1) {
       if (from[keys[0]] !== undefined) {
-        if ((0, _is.isArray)(from[keys[0]]) || (0, _is.isObject)(from[keys[0]])) {
+        if (Array.isArray(from[keys[0]]) || (0, _isObject.default)(from[keys[0]])) {
           removeFromObject(from[keys[0]], keys.slice(1));
         }
       }
     } else {
-      if ((0, _is.isArray)(from)) {
-        from.splice(keys[0], 1);
-      } else if ((0, _is.isObject)(from)) {
+      if (Array.isArray(from)) {
+        from.splice((0, _toNumber.stringToNumber)(keys[0]), 1);
+      } else if ((0, _isObject.default)(from)) {
         delete from[keys[0]];
       }
     }

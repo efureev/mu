@@ -1,4 +1,4 @@
-import { isFunction } from '../is'
+import isFunction from '../is/isFunction'
 import { TextNumber } from '../internal/types'
 
 /**

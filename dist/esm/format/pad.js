@@ -1,4 +1,4 @@
-import { padStart } from '../string';
+import { padStart } from '../string/pad';
 import isNil from '../is/isNil';
 export function padNumber(value, targetLength) {
   if (isNil(value)) {

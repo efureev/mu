@@ -1,4 +1,4 @@
-import { isArray, isSymbol } from '../is'
+import isSymbol from '../is/isSymbol'
 import { reTrim } from '../core/vars'
 
 const symbolProto = Symbol ? Symbol.prototype : undefined,
@@ -8,7 +8,7 @@ const symbolProto = Symbol ? Symbol.prototype : undefined,
  * for `null` and `undefined` values. The sign of `-0` is preserved.
  */
 export default function toString(value: any): string {
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     return value.toString()
   }
 

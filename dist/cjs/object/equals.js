@@ -5,7 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = equal;
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
 
@@ -16,7 +18,7 @@ function equal(origin) {
     list[_key - 1] = arguments[_key];
   }
 
-  if (!(0, _is.isObject)(origin) || list.length === 0) {
+  if (!(0, _isObject.default)(origin) || list.length === 0) {
     throw new Error('Need two or more arguments to compare');
   }
 

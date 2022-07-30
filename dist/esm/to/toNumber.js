@@ -1,4 +1,5 @@
-import { isObject, isSymbol } from '../is';
+import isObject from '../is/isObject';
+import isSymbol from '../is/isSymbol';
 import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars';
 /**
  * Converts `value` to a number.
@@ -36,8 +37,14 @@ export default function toNumber(value) {
     return value === 0 ? value : +value;
   }
 
+  return stringToNumber(value);
+}
+export function stringToNumber(value) {
   value = value.replace(reTrim, '');
   const isBinary = reIsBinary.test(value);
   return isBinary || reIsOctal.test(value) ? parseInt(value.slice(2), isBinary ? 2 : 8) : reIsBadHex.test(value) ? NaN : +value;
+}
+export function booleanToNumber(value) {
+  return +value;
 }
 //# sourceMappingURL=toNumber.js.map

@@ -1,7 +1,7 @@
 /**
  * Compares the contents of 2 or more objects using strict equality.
  */
-import { isObject } from '../is';
+import isObject from '../is/isObject';
 export default function equal(origin, ...list) {
   let i, l, leftChain, rightChain;
 

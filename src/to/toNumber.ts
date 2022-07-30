@@ -1,4 +1,5 @@
-import { isObject, isSymbol } from '../is'
+import isObject from '../is/isObject'
+import isSymbol from '../is/isSymbol'
 import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars'
 
 /**
@@ -36,8 +37,11 @@ export default function toNumber(value: any): number {
     return value === 0 ? value : +value
   }
 
-  value = value.replace(reTrim, '')
+  return stringToNumber(value)
+}
 
+export function stringToNumber(value: string): number {
+  value = value.replace(reTrim, '')
   const isBinary = reIsBinary.test(value)
 
   return isBinary || reIsOctal.test(value)
@@ -45,4 +49,8 @@ export default function toNumber(value: any): number {
     : reIsBadHex.test(value)
     ? NaN
     : +value
+}
+
+export function booleanToNumber(value: boolean): number {
+  return +value
 }

@@ -1,4 +1,5 @@
-import { isNil, isArray, isNumeric } from '../is'
+import isNil from '../is/isNil'
+import isNumeric from '../is/isNumeric'
 import { TextNumber } from '../internal/types'
 
 const queryRe = /^\?/
@@ -94,7 +95,7 @@ export default function fromQueryString(
 
       if (!recursive) {
         if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!isArray(object[name])) {
+          if (!Array.isArray(object[name])) {
             object[name] = [object[name]]
           }
 
@@ -134,7 +135,7 @@ export default function fromQueryString(
           key = keys[j]
 
           if (j === subLn - 1) {
-            if (isArray(temporary) && key === '') {
+            if (Array.isArray(temporary) && key === '') {
               temporary.push(value)
             } else {
               temporary[key] = value

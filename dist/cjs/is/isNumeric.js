@@ -6,15 +6,11 @@ Object.defineProperty(exports, "__esModule", {
 exports.default = isNumeric;
 exports.isNumerics = isNumerics;
 
-var _isArray = _interopRequireDefault(require("./isArray"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
 /**
  * This function evaluates if all the parameters are Numeric
  */
 function isNumeric(value) {
-  return !((0, _isArray.default)(value) || isNaN(parseFloat(value)) || !isFinite(value));
+  return !(Array.isArray(value) || isNaN(parseFloat(value)) || !isFinite(value));
 }
 
 function isNumerics() {

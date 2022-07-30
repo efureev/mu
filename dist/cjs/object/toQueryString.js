@@ -5,13 +5,17 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toQueryString;
 
-var _is = require("../is");
+var _isBoolean = _interopRequireDefault(require("../is/isBoolean"));
+
+var _isDate = _interopRequireDefault(require("../is/isDate"));
+
+var _isEmpty = _interopRequireDefault(require("../is/isEmpty"));
 
 var _toQueryObjects = _interopRequireDefault(require("./toQueryObjects"));
 
-var _date = require("../date");
+var _toString = _interopRequireDefault(require("../date/toString"));
 
-var _toNumber = _interopRequireDefault(require("../to/toNumber"));
+var _toNumber = require("../to/toNumber");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -69,12 +73,12 @@ function toQueryString(object) {
     parameterObject = parameterObjects[j];
     value = parameterObject.value;
 
-    if ((0, _is.isBoolean)(value)) {
-      value = (0, _toNumber.default)(value);
-    } else if ((0, _is.isEmpty)(value)) {
+    if ((0, _isBoolean.default)(value)) {
+      value = (0, _toNumber.booleanToNumber)(value);
+    } else if ((0, _isEmpty.default)(value)) {
       value = '';
-    } else if ((0, _is.isDate)(value)) {
-      value = (0, _date.dateToString)(value);
+    } else if ((0, _isDate.default)(value)) {
+      value = (0, _toString.default)(value);
     }
 
     var name = options.encodeName ? encodeURIComponent(parameterObject.name) : parameterObject.name;

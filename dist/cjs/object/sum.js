@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = sum;
 
-var _is = require("../is");
+var _isNil = _interopRequireDefault(require("../is/isNil"));
+
+var _isNumeric = _interopRequireDefault(require("../is/isNumeric"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function sum(object) {
   var result = 0;
@@ -17,11 +21,11 @@ function sum(object) {
       value = value();
     }
 
-    if ((0, _is.isNil)(value) || value === false) {
+    if ((0, _isNil.default)(value) || value === false) {
       value = 0;
     }
 
-    if (!(0, _is.isNumeric)(value)) {
+    if (!(0, _isNumeric.default)(value)) {
       value = 1;
     }
 

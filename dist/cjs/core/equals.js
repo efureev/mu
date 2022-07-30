@@ -5,11 +5,21 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = equals;
 
-var _object = require("./../object");
+var _equals = _interopRequireDefault(require("./../object/equals"));
 
-var _array = require("./../array");
+var _equals2 = _interopRequireDefault(require("./../array/equals"));
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
+
+var _isString = _interopRequireDefault(require("../is/isString"));
+
+var _isBoolean = _interopRequireDefault(require("../is/isBoolean"));
+
+var _isNumeric = _interopRequireDefault(require("../is/isNumeric"));
+
+var _isFunction = _interopRequireDefault(require("../is/isFunction"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * @param {*} first
@@ -21,7 +31,7 @@ function equals(first, second) {
     return true;
   }
 
-  if ((0, _is.isString)(first) || (0, _is.isNumeric)(first) || (0, _is.isBoolean)(first)) {
+  if ((0, _isString.default)(first) || (0, _isNumeric.default)(first) || (0, _isBoolean.default)(first)) {
     return first === second;
   }
 
@@ -29,15 +39,15 @@ function equals(first, second) {
     return first.toString() === second.toString();
   }
 
-  if ((0, _is.isArray)(first) && (0, _is.isArray)(second)) {
-    return (0, _array.arraysEquals)(first, second);
+  if (Array.isArray(first) && Array.isArray(second)) {
+    return (0, _equals2.default)(first, second);
   }
 
-  if ((0, _is.isObject)(first) && (0, _is.isObject)(second)) {
-    return (0, _object.objectsEqual)(first, second);
+  if ((0, _isObject.default)(first) && (0, _isObject.default)(second)) {
+    return (0, _equals.default)(first, second);
   }
 
-  if ((0, _is.isFunction)(first) && (0, _is.isFunction)(second)) {
+  if ((0, _isFunction.default)(first) && (0, _isFunction.default)(second)) {
     return ('' + first).valueOf() === ('' + second).valueOf();
   }
 

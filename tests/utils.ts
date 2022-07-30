@@ -70,3 +70,5 @@ export const slice = arrayProto.slice,
   noop = () => {}
 
 export const symbol = Symbol ? Symbol('a') : undefined
+export const Inf = 1.7976931348623157e308
+export const NegInf = -1.7976931348623157e308

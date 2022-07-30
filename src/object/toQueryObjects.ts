@@ -1,4 +1,4 @@
-import { isObject, isArray } from './../is'
+import isObject from './../is/isObject'
 
 /**
  * Converts a `name` - `value` pair to an array of objects with support for nested structures.
@@ -50,7 +50,7 @@ export default function toQueryObjects(
   let objects: oTypeArray = []
   let i, ln
 
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     const valueArray = value as oTypeArray
     for (i = 0, ln = valueArray.length; i < ln; i++) {
       if (recursive) {

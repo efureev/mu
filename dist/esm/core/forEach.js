@@ -1,9 +1,8 @@
-import isArray from '../is/isArray';
 import arrayEach from '../array/arrayEach';
 import keys from './keys';
 import isArrayLike from '../is/isArrayLike';
 export default function forEach(collection, iterateFn) {
-  if (isArray(collection)) {
+  if (Array.isArray(collection)) {
     return arrayEach(collection, iterateFn);
   }
 

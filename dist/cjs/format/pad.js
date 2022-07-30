@@ -6,7 +6,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.padDateTime = padDateTime;
 exports.padNumber = padNumber;
 
-var _string = require("../string");
+var _pad = require("../string/pad");
 
 var _isNil = _interopRequireDefault(require("../is/isNil"));
 
@@ -17,7 +17,7 @@ function padNumber(value, targetLength) {
     return '0';
   }
 
-  return (0, _string.padStart)(value, targetLength, '0');
+  return (0, _pad.padStart)(value, targetLength, '0');
 }
 
 function padDateTime(value) {
@@ -25,6 +25,6 @@ function padDateTime(value) {
     return '00';
   }
 
-  return (0, _string.padStart)(value, 2, '0');
+  return (0, _pad.padStart)(value, 2, '0');
 }
 //# sourceMappingURL=pad.js.map

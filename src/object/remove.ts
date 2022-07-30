@@ -1,4 +1,5 @@
-import { isObject, isArray } from '../is'
+import isObject from '../is/isObject'
+import { stringToNumber } from '../to/toNumber'
 
 /**
  * Get value by deep key in object(array)
@@ -56,13 +57,13 @@ export default function remove(
   const removeFromObject = function (from: Record<PropertyKey, any>, keys: string[]): void {
     if (keys.length > 1) {
       if (from[keys[0]] !== undefined) {
-        if (isArray(from[keys[0]]) || isObject(from[keys[0]])) {
+        if (Array.isArray(from[keys[0]]) || isObject(from[keys[0]])) {
           removeFromObject(from[keys[0]], keys.slice(1))
         }
       }
     } else {
-      if (isArray(from)) {
-        from.splice(keys[0], 1)
+      if (Array.isArray(from)) {
+        from.splice(stringToNumber(keys[0]), 1)
       } else if (isObject(from)) {
         delete from[keys[0]]
       }

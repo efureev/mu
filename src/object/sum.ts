@@ -1,5 +1,6 @@
 import { TextNumber } from '../internal/types'
-import { isNil, isNumeric } from '../is'
+import isNil from '../is/isNil'
+import isNumeric from '../is/isNumeric'
 
 export default function sum(object: Record<PropertyKey, TextNumber | boolean | Function>): number {
   let result = 0

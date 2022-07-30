@@ -1,4 +1,5 @@
-import { isNil, isArray, isNumeric } from '../is';
+import isNil from '../is/isNil';
+import isNumeric from '../is/isNumeric';
 const queryRe = /^\?/;
 const plusRe = /\+/g;
 const keyRe = /(\[):?([^\]]*)\]/g;
@@ -85,7 +86,7 @@ export default function fromQueryString(queryString, recursive = false, options 
 
       if (!recursive) {
         if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!isArray(object[name])) {
+          if (!Array.isArray(object[name])) {
             object[name] = [object[name]];
           }
 
@@ -123,7 +124,7 @@ export default function fromQueryString(queryString, recursive = false, options 
           key = keys[j];
 
           if (j === subLn - 1) {
-            if (isArray(temporary) && key === '') {
+            if (Array.isArray(temporary) && key === '') {
               temporary.push(value);
             } else {
               temporary[key] = value;

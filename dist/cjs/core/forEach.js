@@ -5,8 +5,6 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = forEach;
 
-var _isArray = _interopRequireDefault(require("../is/isArray"));
-
 var _arrayEach = _interopRequireDefault(require("../array/arrayEach"));
 
 var _keys = _interopRequireDefault(require("./keys"));
@@ -16,7 +14,7 @@ var _isArrayLike = _interopRequireDefault(require("../is/isArrayLike"));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function forEach(collection, iterateFn) {
-  if ((0, _isArray.default)(collection)) {
+  if (Array.isArray(collection)) {
     return (0, _arrayEach.default)(collection, iterateFn);
   }
 

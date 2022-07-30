@@ -3,7 +3,7 @@
   "description": "Helpful JS/TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "4.0.0",
+  "version": "4.0.1",
   "author": {
     "name": "Eugene Fureev"
   },
@@ -23,8 +23,12 @@
     "dist"
   ],
   "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/esm/index.js"
+    ".": {
+      "types": "dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js"
+    },
+    "./": "./"
   },
   "devDependencies": {
     "@babel/cli": "^7.18.9",
@@ -88,6 +92,17 @@
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/tests/utils.ts"
+    ],
+    "collectCoverageFrom": [
+      "**/src/**/*.{js,ts}",
+      "!**/node_modules/**",
+      "!**/src/config.ts",
+      "!**/src/**/index.ts",
+      "!**/src/i18/ru.ts",
+      "!**/src/i18/var.ts",
+      "!**/src/internal/free/*",
+      "!**/src/internal/root.ts",
+      "!**/src/internal/types.ts"
     ]
   }
 }

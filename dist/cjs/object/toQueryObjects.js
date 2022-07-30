@@ -5,14 +5,16 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = toQueryObjects;
 
-var _is = require("./../is");
+var _isObject = _interopRequireDefault(require("./../is/isObject"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function toQueryObjects(name, value) {
   var recursive = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
   var objects = [];
   var i, ln;
 
-  if ((0, _is.isArray)(value)) {
+  if (Array.isArray(value)) {
     var valueArray = value;
 
     for (i = 0, ln = valueArray.length; i < ln; i++) {
@@ -29,7 +31,7 @@ function toQueryObjects(name, value) {
     return objects;
   }
 
-  if ((0, _is.isObject)(value)) {
+  if ((0, _isObject.default)(value)) {
     var valueObject = value;
 
     for (i in value) {

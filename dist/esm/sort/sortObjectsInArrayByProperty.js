@@ -1,5 +1,6 @@
 import sortByProperty from './sortByProperty';
-import { isArray, isObject, isString } from '../is';
+import isObject from '../is/isObject';
+import isString from '../is/isString';
 import select from '../object/select';
 import clone from '../core/clone';
 import pathToObject from '../object/pathToObject';
@@ -52,7 +53,7 @@ export default function sortObjectsInArrayByProperty(obj, property, asc = true, 
     throw new Error(`key should be a String`);
   }
 
-  if (isArray(obj)) {
+  if (Array.isArray(obj)) {
     return obj.sort(sortByProperty(property, asc, ignoreCase));
   }
 

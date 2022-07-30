@@ -1,4 +1,4 @@
-import { now } from './index';
+import now from './now';
 /**
  * Returns difference in milliseconds between dates
  *

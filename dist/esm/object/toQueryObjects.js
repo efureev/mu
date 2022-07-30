@@ -1,4 +1,4 @@
-import { isObject, isArray } from './../is';
+import isObject from './../is/isObject';
 /**
  * Converts a `name` - `value` pair to an array of objects with support for nested structures.
  * Useful to construct query strings. For example:
@@ -42,7 +42,7 @@ export default function toQueryObjects(name, value, recursive = false) {
   let objects = [];
   let i, ln;
 
-  if (isArray(value)) {
+  if (Array.isArray(value)) {
     const valueArray = value;
 
     for (i = 0, ln = valueArray.length; i < ln; i++) {

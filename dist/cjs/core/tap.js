@@ -5,7 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = tap;
 
-var _is = require("../is");
+var _isFunction = _interopRequireDefault(require("../is/isFunction"));
+
+var _isBasicType = _interopRequireDefault(require("../is/isBasicType"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * This method invokes `interceptor` and returns `value`. The interceptor
@@ -26,12 +30,12 @@ var _is = require("../is");
  *
  */
 function tap(value, interceptor) {
-  if ((0, _is.isFunction)(value)) {
+  if ((0, _isFunction.default)(value)) {
     value = value();
   }
 
-  if (interceptor && (0, _is.isFunction)(interceptor)) {
-    if ((0, _is.isBasicType)(value)) {
+  if (interceptor && (0, _isFunction.default)(interceptor)) {
+    if ((0, _isBasicType.default)(value)) {
       return interceptor(value);
     }
 

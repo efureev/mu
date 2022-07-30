@@ -1,6 +1,10 @@
-import { objectsEqual } from './../object';
-import { arraysEquals } from './../array';
-import { isArray, isObject, isString, isBoolean, isNumeric, isFunction } from '../is';
+import objectsEqual from './../object/equals';
+import arraysEquals from './../array/equals';
+import isObject from '../is/isObject';
+import isString from '../is/isString';
+import isBoolean from '../is/isBoolean';
+import isNumeric from '../is/isNumeric';
+import isFunction from '../is/isFunction';
 /**
  * @param {*} first
  * @param {*} second
@@ -20,7 +24,7 @@ export default function equals(first, second) {
     return first.toString() === second.toString();
   }
 
-  if (isArray(first) && isArray(second)) {
+  if (Array.isArray(first) && Array.isArray(second)) {
     return arraysEquals(first, second);
   }
 

@@ -1,5 +1,5 @@
-import { isArray, isObject } from '../is'
-import { objectsEqual } from '../object'
+import isObject from '../is/isObject'
+import objectsEqual from '../object/equals'
 
 /**
  * Deep comparing the contents of 2 arrays using strict equality
@@ -24,7 +24,7 @@ export default function equals(array1: any[], array2: any[]): boolean {
 
   for (i = 0; i < length1; ++i) {
     if (array1[i] && array2[i]) {
-      if (isArray(array1[i]) && isArray(array2[i])) {
+      if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
         if (!equals(array1[i], array2[i])) {
           return false
         }

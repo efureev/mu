@@ -1,4 +1,5 @@
-import { isNil, isNumeric } from '../is';
+import isNil from '../is/isNil';
+import isNumeric from '../is/isNumeric';
 export default function sum(object) {
   let result = 0;
 

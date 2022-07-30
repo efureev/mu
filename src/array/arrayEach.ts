@@ -1,5 +1,3 @@
-import { CollectionType } from '../internal/types'
-
 /**
  * A specialized version of `forEach` for arrays.
  *

@@ -5,9 +5,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = equals;
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
 
-var _object = require("../object");
+var _equals = _interopRequireDefault(require("../object/equals"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Deep comparing the contents of 2 arrays using strict equality
@@ -31,7 +33,7 @@ function equals(array1, array2) {
 
   for (i = 0; i < length1; ++i) {
     if (array1[i] && array2[i]) {
-      if ((0, _is.isArray)(array1[i]) && (0, _is.isArray)(array2[i])) {
+      if (Array.isArray(array1[i]) && Array.isArray(array2[i])) {
         if (!equals(array1[i], array2[i])) {
           return false;
         }
@@ -39,8 +41,8 @@ function equals(array1, array2) {
         continue;
       }
 
-      if ((0, _is.isObject)(array1[i]) && (0, _is.isObject)(array2[i])) {
-        if (!(0, _object.objectsEqual)(array1[i], array2[i])) {
+      if ((0, _isObject.default)(array1[i]) && (0, _isObject.default)(array2[i])) {
+        if (!(0, _equals.default)(array1[i], array2[i])) {
           return false;
         }
 

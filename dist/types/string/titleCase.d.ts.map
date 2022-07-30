@@ -1,1 +1,1 @@
-{"version":3,"file":"titleCase.d.ts","sourceRoot":"","sources":["../../../src/string/titleCase.ts"],"names":[],"mappings":"AASA,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,MAAM,EAAE,GAAG,GAAG,MAAM,CAErD"}
+{"version":3,"file":"titleCase.d.ts","sourceRoot":"","sources":["../../../src/string/titleCase.ts"],"names":[],"mappings":"AAGA;;;;;GAKG;AACH,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,MAAM,EAAE,GAAG,GAAG,MAAM,CAErD"}

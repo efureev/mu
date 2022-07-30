@@ -5,7 +5,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = removeEmpty;
 
-var _is = require("../is");
+var _isObject = _interopRequireDefault(require("../is/isObject"));
+
+var _isString = _interopRequireDefault(require("../is/isString"));
+
+var _isEmpty = _interopRequireDefault(require("../is/isEmpty"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /**
  * Remove all empty values in object
@@ -18,33 +24,33 @@ function removeEmpty(object) {
       key;
 
   for (key in object) {
-    if (object.hasOwnProperty(key) && !(0, _is.isEmpty)(object[key])) {
-      if ((0, _is.isObject)(object[key])) {
+    if (object.hasOwnProperty(key) && !(0, _isEmpty.default)(object[key])) {
+      if ((0, _isObject.default)(object[key])) {
         var r = removeEmpty(object[key]);
 
-        if (!(0, _is.isEmpty)(r)) {
+        if (!(0, _isEmpty.default)(r)) {
           result[key] = r;
         }
 
         continue;
       }
 
-      if ((0, _is.isArray)(object[key])) {
+      if (Array.isArray(object[key])) {
         var _ret = function () {
           var a = [];
           object[key].forEach(function (v) {
-            if ((0, _is.isString)(v)) {
+            if ((0, _isString.default)(v)) {
               a.push(v);
             } else {
               var _r = removeEmpty(v);
 
-              if (!(0, _is.isEmpty)(_r)) {
+              if (!(0, _isEmpty.default)(_r)) {
                 a.push(_r);
               }
             }
           });
 
-          if (!(0, _is.isEmpty)(a)) {
+          if (!(0, _isEmpty.default)(a)) {
             result[key] = a;
           }
 
