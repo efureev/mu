@@ -9,7 +9,7 @@ Is Object
 ## Use
 
 ```js
-import isObject from '@feugene/mu/src/is/isObject.js'
+import { isObject } from '@feugene/mu'
 ```
 
 ## Examples

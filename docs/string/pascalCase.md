@@ -9,7 +9,7 @@ Convert a string to pascal case (upper camelcase).
 ## Use
 
 ```js
-import pascalCase from '@feugene/mu/src/string/pascalCase.js'
+import { pascalCase } from '@feugene/mu'
 ```
 
 ## Examples

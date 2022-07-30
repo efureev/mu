@@ -9,7 +9,7 @@ Deep comparing the contents of 2 elements using strict equality.
 ## Use
 
 ```js
-import equals from '@feugene/mu/src/core/equals.js'
+import { equals } from '@feugene/mu'
 ```
 
 ## Examples

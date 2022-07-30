@@ -9,7 +9,7 @@ Present an entity as String
 ## Use
 
 ```js
-import toString from '@feugene/mu/src/to/toString.js'
+import { toString } from '@feugene/mu'
 ```
 
 ## Examples

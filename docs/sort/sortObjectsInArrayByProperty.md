@@ -9,7 +9,7 @@ Allows to sort an array into an objects by key.
 ## Use
 
 ```js
-import sortObjectsInArrayByProperty from '@feugene/mu/src/sort/sortObjectsInArrayByProperty.js'
+import { sortObjectsInArrayByProperty } from '@feugene/mu'
 ```
 
 ## Examples

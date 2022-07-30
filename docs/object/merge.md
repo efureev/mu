@@ -9,7 +9,7 @@ Merge 2 or more objects recursively.
 ## Use
 
 ```js
-import merge from '@feugene/mu/src/object/merge.js'
+import { merge } from '@feugene/mu'
 ```
 
 ## Examples

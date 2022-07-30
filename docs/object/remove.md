@@ -9,7 +9,7 @@ Remove value by deep key in object(array).
 ## Use
 
 ```js
-import remove from '@feugene/mu/src/object/remove.js'
+import { remove } from '@feugene/mu'
 ```
 
 ## Examples

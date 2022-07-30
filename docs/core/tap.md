@@ -9,7 +9,7 @@ This method invokes `interceptor` and returns `value`.
 ## Use
 
 ```js
-import tap from '@feugene/mu/src/core/tap.js'
+import { tap } from '@feugene/mu'
 ```
 
 ## Examples

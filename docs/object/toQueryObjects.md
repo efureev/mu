@@ -9,7 +9,7 @@ Converts a `name` - `value` pair to an array of objects with support for nested 
 ## Use
 
 ```js
-import toQueryObjects from '@feugene/mu/src/object/toQueryObjects.js'
+import { toQueryObjects } from '@feugene/mu'
 ```
 
 ## Examples

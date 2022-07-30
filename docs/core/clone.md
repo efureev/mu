@@ -9,7 +9,7 @@ Clone simple variables including array, {}-like objects, DOM nodes and Date with
 ## Use
 
 ```js
-import clone from '@feugene/mu/src/core/clone.js'
+import { clone } from '@feugene/mu'
 ```
 
 ## Examples

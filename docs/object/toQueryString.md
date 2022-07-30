@@ -9,7 +9,7 @@ Takes an object and converts it to an encoded query string.
 ## Use
 
 ```js
-import toQueryString from '@feugene/mu/src/object/toQueryString.js'
+import { toQueryString } from '@feugene/mu'
 ```
 
 ## Examples
@@ -17,11 +17,11 @@ import toQueryString from '@feugene/mu/src/object/toQueryString.js'
 ### Non-recursive
 
 ```js
-toQueryString({foo: 1, bar: 2}); // "foo=1&bar=2"
-toQueryString({foo: null, bar: 2}); // "foo=&bar=2"
-toQueryString({'some price': '$300'}); // "some%20price=%24300"
-toQueryString({date: new Date(2011, 0, 1)}); // "date=%222011-01-01T00%3A00%3A00%22"
-toQueryString({colors: ['red', 'green', 'blue']}); // "colors=red&colors=green&colors=blue"
+toQueryString({ foo: 1, bar: 2 }); // "foo=1&bar=2"
+toQueryString({ foo: null, bar: 2 }); // "foo=&bar=2"
+toQueryString({ 'some price': '$300' }); // "some%20price=%24300"
+toQueryString({ date: new Date(2011, 0, 1) }); // "date=%222011-01-01T00%3A00%3A00%22"
+toQueryString({ colors: ['red', 'green', 'blue'] }); // "colors=red&colors=green&colors=blue"
 ```
 
 ### Recursive

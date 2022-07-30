@@ -9,7 +9,7 @@ Return Object from sting path.
 ## Use
 
 ```js
-import pathToObject from '@feugene/mu/src/object/pathToObject.js'
+import { pathToObject } from '@feugene/mu'
 ```
 
 ## Examples

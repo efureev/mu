@@ -10,7 +10,7 @@ Get value by deep-key in object(array).
 ## Use
 
 ```js
-import select from '@feugene/mu/src/object/select.js'
+import { select } from '@feugene/mu'
 ```
 
 ## Examples

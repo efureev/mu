@@ -8,8 +8,8 @@ Remove a prefix from a String
 
 ## Use
 
-```js
-import trimPrefix from '@feugene/mu/src/string/trimPrefix.js'
+```ts
+import { trimPrefix } from '@feugene/mu'
 ```
 
 ## Examples

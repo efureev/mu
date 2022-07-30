@@ -9,7 +9,7 @@ Remove a suffix from a String
 ## Use
 
 ```js
-import trimSuffix from '@feugene/mu/src/string/trimSuffix.js'
+import { trimSuffix } from '@feugene/mu'
 ```
 
 ## Examples

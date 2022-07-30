@@ -9,7 +9,7 @@ Decode from safe base-64 to Unicode string.
 ## Use
 
 ```js
-import b64ToUtf8Safe from '@feugene/mu/src/utils/b64ToUtf8Safe.js'
+import { b64ToUtf8Safe } from '@feugene/mu'
 ```
 
 ## Examples
