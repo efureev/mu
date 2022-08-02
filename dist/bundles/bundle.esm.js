@@ -749,10 +749,10 @@ var freeModule$1 = freeExports$1 && (typeof module === "undefined" ? "undefined"
 var moduleExports = freeModule$1 && freeModule$1.exports === freeExports$1;
 /** Built-in value references. */
 
-var Buffer = moduleExports ? root.Buffer : undefined;
+var Buffer$1 = moduleExports ? root.Buffer : undefined;
 /* Built-in method references for those with the same name as other `lodash` methods. */
 
-var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : undefined;
 /**
  * Checks if `value` is a buffer.
  *
@@ -3362,5 +3362,64 @@ function toArray() {
   return values(value);
 }
 
-export { Queue, Stack, arrayEach, equals$1 as arraysEquals, bind, camelCase, clear, clearSpaces, clone, toString$1 as dateToString, defaults, difference, endsWith, equals, fileSize, filter, flip, forEach, fromQueryString, getSize, intWord, intersect, intersectAll, isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, keys, logicalAnd, match, merge, now, number, numberRus, equal as objectsEqual, pad, padDateTime, padEnd, padNumber, padStart, pascalCase, pathToObject, pick, pregQuote, random, remove, removeEmpty, replaceByTemplate, root, select, sortByProperty, sortDescObjectsInArrayByProperty, sortObjectsInArrayByProperty, startsWith, stringToArray, strtr, sum, symmetricalDifference, tap, times, titleCase, toArray, toFinite, toInteger, toNumber, toQueryObjects, toQueryString, toString, trim, trimPrefix, trimSuffix, upperFirst, values };
+var utf8ToB64Node = function utf8ToB64Node(str) {
+  return Buffer.from(str).toString('base64');
+};
+
+var utf8ToB64Function = function utf8ToB64Function(string) {
+  return utf8ToB64Node(string);
+};
+
+var b64ToUtf8Node = function b64ToUtf8Node(string) {
+  return Buffer.from(string, 'base64').toString();
+};
+
+var b64ToUtf8Function = function b64ToUtf8Function(string) {
+  return b64ToUtf8Node(string);
+};
+/**
+ * Encode string from Unicode to base-64
+ *
+ * @param {string} string
+ * @returns {string}
+ */
+
+
+function utf8ToB64(string) {
+  return utf8ToB64Function(unescape(encodeURIComponent(string)));
+}
+/**
+ * Decode from base-64 to Unicode string
+ *
+ * @param {string} string
+ * @returns {string}
+ */
+
+function b64ToUtf8(string) {
+  return decodeURIComponent(escape(b64ToUtf8Function(string)));
+}
+var SYMBOLS_STANDARD = '+/=';
+var SYMBOLS_URL_SAFE = '-_~';
+/**
+ * Decode from safe-base-64 to Unicode string
+ *
+ * @param {string} string
+ * @return {string}
+ */
+
+function b64ToUtf8Safe(string) {
+  return strtr(b64ToUtf8Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE);
+}
+/**
+ * Encode from Unicode string to safe-base-64
+ *
+ * @param {string} string
+ * @return {string}
+ */
+
+function utf8Tob64Safe(string) {
+  return strtr(utf8ToB64Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE);
+}
+
+export { Queue, Stack, arrayEach, equals$1 as arraysEquals, b64ToUtf8, b64ToUtf8Safe, bind, camelCase, clear, clearSpaces, clone, toString$1 as dateToString, defaults, difference, endsWith, equals, fileSize, filter, flip, forEach, fromQueryString, getSize, intWord, intersect, intersectAll, isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, keys, logicalAnd, match, merge, now, number, numberRus, equal as objectsEqual, pad, padDateTime, padEnd, padNumber, padStart, pascalCase, pathToObject, pick, pregQuote, random, remove, removeEmpty, replaceByTemplate, root, select, sortByProperty, sortDescObjectsInArrayByProperty, sortObjectsInArrayByProperty, startsWith, stringToArray, strtr, sum, symmetricalDifference, tap, times, titleCase, toArray, toFinite, toInteger, toNumber, toQueryObjects, toQueryString, toString, trim, trimPrefix, trimSuffix, upperFirst, utf8ToB64, utf8Tob64Safe, values };
 //# sourceMappingURL=bundle.esm.js.map

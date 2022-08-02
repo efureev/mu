@@ -755,10 +755,10 @@
   var moduleExports = freeModule$1 && freeModule$1.exports === freeExports$1;
   /** Built-in value references. */
 
-  var Buffer = moduleExports ? root.Buffer : undefined;
+  var Buffer$1 = moduleExports ? root.Buffer : undefined;
   /* Built-in method references for those with the same name as other `lodash` methods. */
 
-  var nativeIsBuffer = Buffer ? Buffer.isBuffer : undefined;
+  var nativeIsBuffer = Buffer$1 ? Buffer$1.isBuffer : undefined;
   /**
    * Checks if `value` is a buffer.
    *
@@ -3368,10 +3368,71 @@
     return values(value);
   }
 
+  var utf8ToB64Node = function utf8ToB64Node(str) {
+    return Buffer.from(str).toString('base64');
+  };
+
+  var utf8ToB64Function = function utf8ToB64Function(string) {
+    return utf8ToB64Node(string);
+  };
+
+  var b64ToUtf8Node = function b64ToUtf8Node(string) {
+    return Buffer.from(string, 'base64').toString();
+  };
+
+  var b64ToUtf8Function = function b64ToUtf8Function(string) {
+    return b64ToUtf8Node(string);
+  };
+  /**
+   * Encode string from Unicode to base-64
+   *
+   * @param {string} string
+   * @returns {string}
+   */
+
+
+  function utf8ToB64(string) {
+    return utf8ToB64Function(unescape(encodeURIComponent(string)));
+  }
+  /**
+   * Decode from base-64 to Unicode string
+   *
+   * @param {string} string
+   * @returns {string}
+   */
+
+  function b64ToUtf8(string) {
+    return decodeURIComponent(escape(b64ToUtf8Function(string)));
+  }
+  var SYMBOLS_STANDARD = '+/=';
+  var SYMBOLS_URL_SAFE = '-_~';
+  /**
+   * Decode from safe-base-64 to Unicode string
+   *
+   * @param {string} string
+   * @return {string}
+   */
+
+  function b64ToUtf8Safe(string) {
+    return strtr(b64ToUtf8Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE);
+  }
+  /**
+   * Encode from Unicode string to safe-base-64
+   *
+   * @param {string} string
+   * @return {string}
+   */
+
+  function utf8Tob64Safe(string) {
+    return strtr(utf8ToB64Function(string), SYMBOLS_STANDARD, SYMBOLS_URL_SAFE);
+  }
+
   exports.Queue = Queue;
   exports.Stack = Stack;
   exports.arrayEach = arrayEach;
   exports.arraysEquals = equals$1;
+  exports.b64ToUtf8 = b64ToUtf8;
+  exports.b64ToUtf8Safe = b64ToUtf8Safe;
   exports.bind = bind;
   exports.camelCase = camelCase;
   exports.clear = clear;
@@ -3474,6 +3535,8 @@
   exports.trimPrefix = trimPrefix;
   exports.trimSuffix = trimSuffix;
   exports.upperFirst = upperFirst;
+  exports.utf8ToB64 = utf8ToB64;
+  exports.utf8Tob64Safe = utf8Tob64Safe;
   exports.values = values;
 
   Object.defineProperty(exports, '__esModule', { value: true });

@@ -4,15 +4,15 @@ const utf8ToB64Node = (str: string): string => {
   return Buffer.from(str).toString('base64')
 }
 
-const utf8ToB64Function = string => {
+const utf8ToB64Function = (string: string): string => {
   return utf8ToB64Node(string)
 }
 
-const b64ToUtf8Node = string => {
+const b64ToUtf8Node = (string: string): string => {
   return Buffer.from(string, 'base64').toString()
 }
 
-const b64ToUtf8Function = string => {
+const b64ToUtf8Function = (string: string): string => {
   return b64ToUtf8Node(string)
 }
 
