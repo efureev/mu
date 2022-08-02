@@ -1,0 +1,1 @@
+{"version":3,"file":"index.js","names":[],"sources":["../../../src/internal/index.ts"],"sourcesContent":["import root from './root'\n\nexport { root }\n"],"mappings":";;;;;;;;;;;;AAAA"}
