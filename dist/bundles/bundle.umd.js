@@ -3450,6 +3450,7 @@
   exports.remove = remove;
   exports.removeEmpty = removeEmpty;
   exports.replaceByTemplate = replaceByTemplate;
+  exports.root = root;
   exports.select = select;
   exports.sortByProperty = sortByProperty;
   exports.sortDescObjectsInArrayByProperty = sortDescObjectsInArrayByProperty;

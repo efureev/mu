@@ -10,4 +10,5 @@ export * from './string';
 export * from './structures';
 export * from './to';
 export * from './utils';
+export * from './internal';
 //# sourceMappingURL=index.js.map
