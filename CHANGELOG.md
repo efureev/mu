@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [4.0.0] - 2022-07-27
 
+### Added
+
+- `isDates` to `is` section
+
+## [4.0.0] - 2022-07-27
+
 ### Changed
 
 - Change codebase to TS

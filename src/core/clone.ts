@@ -1,3 +1,5 @@
+import isDate from '../is/isDate'
+
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
 
 /**
@@ -9,50 +11,58 @@ const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
  * @param {Boolean} [cloneDom=true] `true` to clone DOM nodes.
  * @return {Object} clone
  */
-export default function clone(item: any, cloneDom: boolean = true): any {
+export default function clone<T = NonNullable<any>>(item: T, cloneDom: boolean = true): T {
   if (item === null || item === undefined) {
     return item
   }
 
+  // @ts-ignore
   if (cloneDom && item.nodeType && item.cloneNode) {
+    // @ts-ignore
     return item.cloneNode(true)
   }
 
   const type = Object.prototype.toString.call(item)
-  let i, j, k, newClone, key
 
   // Date
-  if (type === '[object Date]') {
+  if (isDate(item)) {
     return new Date(item.getTime())
   }
 
-  // Array
-  if (type === '[object Array]') {
-    i = item.length
+  let i: number, j: number, k
 
-    newClone = []
+  // Array
+  if (Array.isArray(item)) {
+    i = item.length
+    let newClone: Record<number, any> = []
 
     while (i--) {
-      newClone[i] = clone(item[i], cloneDom)
+      newClone[i] = clone<any>(item[i], cloneDom)
     }
+
+    return <T>newClone
   }
+
   // Object
-  else if (type === '[object Object]' && item.constructor === Object) {
-    newClone = <Record<string, any>>{}
+  if (type === '[object Object]' && (<Object>item).constructor === Object) {
+    let key: PropertyKey
+    let newClone: Record<PropertyKey, any> = {}
 
     for (key in item) {
-      newClone[key] = clone(item[key], cloneDom)
+      newClone[key] = clone<any>((<Record<PropertyKey, any>>item)[key], cloneDom)
     }
 
     if (enumerables) {
       for (j = enumerables.length; j--; ) {
-        k = enumerables[j]
+        let k: string = enumerables[j]
         if (Object.prototype.hasOwnProperty.call(item, k)) {
-          newClone[k] = item[k]
+          newClone[k] = (<Record<string, any>>item)[k]
         }
       }
     }
+
+    return newClone
   }
 
-  return newClone || item
+  return item
 }

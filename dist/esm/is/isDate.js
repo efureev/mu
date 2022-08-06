@@ -5,8 +5,8 @@
  */
 export default function isDate(...parameters) {
   const invalid = parameters.some(parameter => {
-    return Object.prototype.toString.call(parameter) !== '[object Date]';
-  });
-  return !invalid;
+    return Object.prototype.toString.call(parameter) !== '[object Date]'
+  })
+  return !invalid
 }
 //# sourceMappingURL=isDate.js.map

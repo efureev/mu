@@ -37,17 +37,15 @@ import isObject from '../is/isObject'
  *         }
  *     }
  */
+type record = Record<PropertyKey, any>
 
-export default function merge(
-  original: Record<PropertyKey, any>,
-  ...values: Record<PropertyKey, any>[]
-): Record<PropertyKey, any> {
+export default function merge<T extends Partial<record>>(original: T, ...values: T[]): T {
   const ln = values.length
   let i = 0,
-    object,
-    key,
-    value,
-    sourceKey
+    object: T,
+    key: PropertyKey,
+    value: any,
+    sourceKey: any
 
   for (; i < ln; i++) {
     object = values[i]
@@ -59,12 +57,12 @@ export default function merge(
       if (value && value.constructor === Object) {
         sourceKey = original[key]
         if (sourceKey && sourceKey.constructor === Object) {
-          merge(sourceKey, value)
+          merge<T>(sourceKey, value)
         } else {
-          original[key] = clone(value)
+          ;(<T>original[key]) = clone<T>(value)
         }
       } else {
-        original[key] = value
+        ;(<T>original[key]) = value
       }
     }
   }

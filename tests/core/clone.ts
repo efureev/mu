@@ -38,7 +38,7 @@ describe('clone', () => {
     expect(clone([])).toEqual([])
   })
 
-  const fn = (a, b) => a + b
+  const fn = (a: number, b: number) => a + b
 
   it('should return string if parameter provided are mixed', () => {
     expect(clone(null)).toBeNull()

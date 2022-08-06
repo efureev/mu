@@ -3,10 +3,10 @@
  *
  * @param {...*} parameters - One or more parameters.
  */
-export default function isDate(...parameters: any[]): boolean {
-  const invalid = parameters.some(parameter => {
-    return Object.prototype.toString.call(parameter) !== '[object Date]'
-  })
+export function isDates(...parameters: any[]): boolean {
+  return !parameters.some(parameter => !isDate(parameter))
+}
 
-  return !invalid
+export default function isDate(value: any): boolean {
+  return Object.prototype.toString.call(value) === '[object Date]'
 }

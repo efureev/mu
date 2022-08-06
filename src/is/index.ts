@@ -5,16 +5,16 @@ import isBasicType, { isAdvancedType } from './isBasicType'
 import isBlob, { isBlobs } from './isBlob'
 import isBoolean, { isBooleans } from './isBoolean'
 import isBuffer from './isBuffer'
-import isDate from './isDate'
+import isDate, { isDates } from './isDate'
 import isEmpty from './isEmpty'
 import isEven, { isEvens } from './isEven'
-import isFloat, { isFloats, isFloatCanonical } from './isFloat'
+import isFloat, { isFloatCanonical, isFloats } from './isFloat'
 import isFunction, { isFunctions } from './isFunction'
 import isInteger, { isIntegers } from './isInteger'
 import isLength from './isLength'
 import isNil, { isNils, isNull, isNulls } from './isNil'
 import isNumeric, { isNumerics } from './isNumeric'
-import isObject, { isObjects, isObjectLike, isEmptyObject } from './isObject'
+import isObject, { isEmptyObject, isObjectLike, isObjects } from './isObject'
 import isPrototype from './isPrototype'
 import isString, { isStrings } from './isString'
 import isSymbol from './isSymbol'
@@ -24,19 +24,16 @@ export {
   isAdvancedType,
   isArguments,
   isArray,
-  isBooleans,
   isArrayLike,
   isArrays,
   isBasicType,
-  isNils,
-  isNull,
-  isNulls,
   isBlob,
   isBlobs,
   isBoolean,
-  isNumerics,
+  isBooleans,
   isBuffer,
   isDate,
+  isDates,
   isEmpty,
   isEmptyObject,
   isEven,
@@ -50,10 +47,14 @@ export {
   isIntegers,
   isLength,
   isNil,
+  isNils,
+  isNull,
+  isNulls,
   isNumeric,
+  isNumerics,
   isObject,
-  isObjects,
   isObjectLike,
+  isObjects,
   isPrototype,
   isString,
   isStrings,
