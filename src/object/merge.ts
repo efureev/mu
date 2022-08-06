@@ -39,10 +39,10 @@ import isObject from '../is/isObject'
  */
 type record = Record<PropertyKey, any>
 
-export default function merge<T extends Partial<record>>(original: T, ...values: T[]): T {
+export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
   const ln = values.length
   let i = 0,
-    object: T,
+    object: Partial<T>,
     key: PropertyKey,
     value: any,
     sourceKey: any
@@ -67,5 +67,5 @@ export default function merge<T extends Partial<record>>(original: T, ...values:
     }
   }
 
-  return original
+  return <T>original
 }
