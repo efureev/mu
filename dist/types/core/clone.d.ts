@@ -7,5 +7,5 @@
  * @param {Boolean} [cloneDom=true] `true` to clone DOM nodes.
  * @return {Object} clone
  */
-export default function clone(item: any, cloneDom?: boolean): any;
+export default function clone<T = NonNullable<any>>(item: T, cloneDom?: boolean): T;
 //# sourceMappingURL=clone.d.ts.map

@@ -3,10 +3,10 @@
  *
  * @param {...*} parameters - One or more parameters.
  */
-export default function isDate(...parameters) {
-  const invalid = parameters.some(parameter => {
-    return Object.prototype.toString.call(parameter) !== '[object Date]'
-  })
-  return !invalid
+export function isDates(...parameters) {
+  return !parameters.some(parameter => !isDate(parameter));
+}
+export default function isDate(value) {
+  return Object.prototype.toString.call(value) === '[object Date]';
 }
 //# sourceMappingURL=isDate.js.map

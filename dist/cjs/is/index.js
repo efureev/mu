@@ -77,6 +77,12 @@ Object.defineProperty(exports, "isDate", {
     return _isDate.default;
   }
 });
+Object.defineProperty(exports, "isDates", {
+  enumerable: true,
+  get: function get() {
+    return _isDate.isDates;
+  }
+});
 Object.defineProperty(exports, "isEmpty", {
   enumerable: true,
   get: function get() {
@@ -248,7 +254,7 @@ var _isBoolean = _interopRequireWildcard(require("./isBoolean"));
 
 var _isBuffer = _interopRequireDefault(require("./isBuffer"));
 
-var _isDate = _interopRequireDefault(require("./isDate"));
+var _isDate = _interopRequireWildcard(require("./isDate"));
 
 var _isEmpty = _interopRequireDefault(require("./isEmpty"));
 

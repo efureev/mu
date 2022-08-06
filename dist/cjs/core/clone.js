@@ -4,6 +4,11 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.default = clone;
+
+var _isDate = _interopRequireDefault(require("../is/isDate"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
 /**
  * Clone simple variables including array, {}-like objects, DOM nodes and Date without
@@ -20,46 +25,56 @@ function clone(item) {
 
   if (item === null || item === undefined) {
     return item;
-  }
+  } // @ts-ignore
+
 
   if (cloneDom && item.nodeType && item.cloneNode) {
+    // @ts-ignore
     return item.cloneNode(true);
   }
 
-  var type = Object.prototype.toString.call(item);
-  var i, j, k, newClone, key; // Date
+  var type = Object.prototype.toString.call(item); // Date
 
-  if (type === '[object Date]') {
+  if ((0, _isDate.default)(item)) {
+    // @ts-ignore
     return new Date(item.getTime());
-  } // Array
+  }
 
+  var i, j, k; // Array
 
-  if (type === '[object Array]') {
+  if (Array.isArray(item)) {
     i = item.length;
-    newClone = [];
+    var newClone = [];
 
     while (i--) {
       newClone[i] = clone(item[i], cloneDom);
     }
+
+    return newClone;
   } // Object
-  else if (type === '[object Object]' && item.constructor === Object) {
-    newClone = {};
+
+
+  if (type === '[object Object]' && item.constructor === Object) {
+    var key;
+    var _newClone = {};
 
     for (key in item) {
-      newClone[key] = clone(item[key], cloneDom);
+      _newClone[key] = clone(item[key], cloneDom);
     }
 
     if (enumerables) {
       for (j = enumerables.length; j--;) {
-        k = enumerables[j];
+        var _k = enumerables[j];
 
-        if (Object.prototype.hasOwnProperty.call(item, k)) {
-          newClone[k] = item[k];
+        if (Object.prototype.hasOwnProperty.call(item, _k)) {
+          _newClone[_k] = item[_k];
         }
       }
     }
+
+    return _newClone;
   }
 
-  return newClone || item;
+  return item;
 }
 //# sourceMappingURL=clone.js.map

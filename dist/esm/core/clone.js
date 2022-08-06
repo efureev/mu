@@ -1,3 +1,4 @@
+import isDate from '../is/isDate';
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
 /**
  * Clone simple variables including array, {}-like objects, DOM nodes and Date without
@@ -12,30 +13,38 @@ const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
 export default function clone(item, cloneDom = true) {
   if (item === null || item === undefined) {
     return item;
-  }
+  } // @ts-ignore
+
 
   if (cloneDom && item.nodeType && item.cloneNode) {
+    // @ts-ignore
     return item.cloneNode(true);
   }
 
-  const type = Object.prototype.toString.call(item);
-  let i, j, k, newClone, key; // Date
+  const type = Object.prototype.toString.call(item); // Date
 
-  if (type === '[object Date]') {
+  if (isDate(item)) {
+    // @ts-ignore
     return new Date(item.getTime());
-  } // Array
+  }
 
+  let i, j, k; // Array
 
-  if (type === '[object Array]') {
+  if (Array.isArray(item)) {
     i = item.length;
-    newClone = [];
+    let newClone = [];
 
     while (i--) {
       newClone[i] = clone(item[i], cloneDom);
     }
+
+    return newClone;
   } // Object
-  else if (type === '[object Object]' && item.constructor === Object) {
-    newClone = {};
+
+
+  if (type === '[object Object]' && item.constructor === Object) {
+    let key;
+    let newClone = {};
 
     for (key in item) {
       newClone[key] = clone(item[key], cloneDom);
@@ -43,15 +52,17 @@ export default function clone(item, cloneDom = true) {
 
     if (enumerables) {
       for (j = enumerables.length; j--;) {
-        k = enumerables[j];
+        let k = enumerables[j];
 
         if (Object.prototype.hasOwnProperty.call(item, k)) {
           newClone[k] = item[k];
         }
       }
     }
+
+    return newClone;
   }
 
-  return newClone || item;
+  return item;
 }
 //# sourceMappingURL=clone.js.map

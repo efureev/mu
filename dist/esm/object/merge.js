@@ -61,9 +61,11 @@ export default function merge(original, ...values) {
         if (sourceKey && sourceKey.constructor === Object) {
           merge(sourceKey, value);
         } else {
+          ;
           original[key] = clone(value);
         }
       } else {
+        ;
         original[key] = value;
       }
     }

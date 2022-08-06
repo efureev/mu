@@ -21,6 +21,24 @@
     };
   }
 
+  /**
+   * This function evaluates if all the parameters are dates
+   *
+   * @param {...*} parameters - One or more parameters.
+   */
+  function isDates() {
+    for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
+      parameters[_key] = arguments[_key];
+    }
+
+    return !parameters.some(function (parameter) {
+      return !isDate(parameter);
+    });
+  }
+  function isDate(value) {
+    return Object.prototype.toString.call(value) === '[object Date]';
+  }
+
   var enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
   /**
    * Clone simple variables including array, {}-like objects, DOM nodes and Date without
@@ -37,47 +55,57 @@
 
     if (item === null || item === undefined) {
       return item;
-    }
+    } // @ts-ignore
+
 
     if (cloneDom && item.nodeType && item.cloneNode) {
+      // @ts-ignore
       return item.cloneNode(true);
     }
 
-    var type = Object.prototype.toString.call(item);
-    var i, j, k, newClone, key; // Date
+    var type = Object.prototype.toString.call(item); // Date
 
-    if (type === '[object Date]') {
+    if (isDate(item)) {
+      // @ts-ignore
       return new Date(item.getTime());
-    } // Array
+    }
 
+    var i, j; // Array
 
-    if (type === '[object Array]') {
+    if (Array.isArray(item)) {
       i = item.length;
-      newClone = [];
+      var newClone = [];
 
       while (i--) {
         newClone[i] = clone(item[i], cloneDom);
       }
+
+      return newClone;
     } // Object
-    else if (type === '[object Object]' && item.constructor === Object) {
-      newClone = {};
+
+
+    if (type === '[object Object]' && item.constructor === Object) {
+      var key;
+      var _newClone = {};
 
       for (key in item) {
-        newClone[key] = clone(item[key], cloneDom);
+        _newClone[key] = clone(item[key], cloneDom);
       }
 
       if (enumerables) {
         for (j = enumerables.length; j--;) {
-          k = enumerables[j];
+          var _k = enumerables[j];
 
-          if (Object.prototype.hasOwnProperty.call(item, k)) {
-            newClone[k] = item[k];
+          if (Object.prototype.hasOwnProperty.call(item, _k)) {
+            _newClone[_k] = item[_k];
           }
         }
       }
+
+      return _newClone;
     }
 
-    return newClone || item;
+    return item;
   }
 
   var symToStringTag$2 = Symbol.toStringTag;
@@ -828,22 +856,6 @@
   }
   function isBlob(value) {
     return Object.prototype.toString.call(value) === '[object Blob]';
-  }
-
-  /**
-   * This function evaluates if all the parameters are dates
-   *
-   * @param {...*} parameters - One or more parameters.
-   */
-  function isDate() {
-    for (var _len = arguments.length, parameters = new Array(_len), _key = 0; _key < _len; _key++) {
-      parameters[_key] = arguments[_key];
-    }
-
-    var invalid = parameters.some(function (parameter) {
-      return Object.prototype.toString.call(parameter) !== '[object Date]';
-    });
-    return !invalid;
   }
 
   /**
@@ -3464,6 +3476,7 @@
   exports.isBooleans = isBooleans;
   exports.isBuffer = isBuffer;
   exports.isDate = isDate;
+  exports.isDates = isDates;
   exports.isEmpty = isEmpty;
   exports.isEmptyObject = isEmptyObject;
   exports.isEven = isEven;

@@ -26,6 +26,7 @@ export default function clone<T = NonNullable<any>>(item: T, cloneDom: boolean =
 
   // Date
   if (isDate(item)) {
+    // @ts-ignore
     return new Date(item.getTime())
   }
 

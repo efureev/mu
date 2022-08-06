@@ -3,5 +3,6 @@
  *
  * @param {...*} parameters - One or more parameters.
  */
-export default function isDate(...parameters: any[]): boolean;
+export declare function isDates(...parameters: any[]): boolean;
+export default function isDate(value: any): boolean;
 //# sourceMappingURL=isDate.d.ts.map

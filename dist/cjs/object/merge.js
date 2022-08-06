@@ -11,42 +11,6 @@ var _isObject = _interopRequireDefault(require("../is/isObject"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-/**
- * Merge objects recursively
- *
- *     var js = {
- *         companyName: 'JS',
- *         products: ['JS', 'GWT', 'Designer'],
- *         isSuperCool: true,
- *         office: {
- *             size: 2000,
- *             location: 'Palo Alto',
- *             isFun: true
- *         }
- *     };
- *
- *     var newStuff = {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City'
- *         }
- *     };
- *
- *     const result = merge(js, newStuff);
- *
- *     {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         isSuperCool: true,
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City',
- *             isFun: true
- *         }
- *     }
- */
 function merge(original) {
   var ln = arguments.length <= 1 ? 0 : arguments.length - 1;
   var i = 0,
@@ -71,9 +35,11 @@ function merge(original) {
         if (sourceKey && sourceKey.constructor === Object) {
           merge(sourceKey, value);
         } else {
+          ;
           original[key] = (0, _clone.default)(value);
         }
       } else {
+        ;
         original[key] = value;
       }
     }
