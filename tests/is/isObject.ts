@@ -1,5 +1,5 @@
-import { isEmpty, isEmptyObject, isObject, isObjects, isObjectLike } from './../../src/is'
-import { args, realm, slice, strictArgs, symbol } from './../utils'
+import { isEmpty, isEmptyObject, isObject, isObjectLike, isObjects } from './../../src/is'
+import { args, realm, slice, strictArgs, symbol } from '../utils'
 
 describe('isObject', () => {
   it('should throw an error if no parameters are provided', () => {
@@ -28,6 +28,8 @@ describe('isObject', () => {
   })
 
   it('should return true if all parameters are objects', () => {
+    expect(isObject(Object.create({}))).toBe(true)
+    expect(isObject(Object.create(null))).toBe(true)
     expect(isObject({})).toBe(true)
     expect(isObjects({}, {})).toBe(true)
     expect(isObject({ re: 1, test: 2 })).toBe(true)
