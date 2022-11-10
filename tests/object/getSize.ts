@@ -1,4 +1,4 @@
-import { getSize } from './../../src/object'
+import { getSize } from '~/object'
 
 describe('getSize', () => {
   it('should throw an error if no parameters are provided', () => {
@@ -16,9 +16,11 @@ describe('getSize', () => {
   test('should return size of val if parameter provided are not objects', () => {
     // expect(()=>{throw Error('Param is not object')}).toThrow()
     expect(() => {
+      // @ts-ignore
       getSize(null)
     }).toThrow()
     expect(() => {
+      // @ts-ignore
       getSize(undefined)
     }).toThrow()
 

@@ -1,4 +1,4 @@
-import isFunction from '../is/isFunction'
+import isFunction from '~/is/isFunction'
 
 export class Stack<T> {
   protected data: T[] = []

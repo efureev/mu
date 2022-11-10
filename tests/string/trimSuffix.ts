@@ -1,4 +1,4 @@
-import trimSuffix from './../../src/string/trimSuffix'
+import trimSuffix from '~/string/trimSuffix'
 
 describe('trimSuffix', () => {
   it('', () => {
@@ -13,6 +13,7 @@ describe('trimSuffix', () => {
     expect(trimSuffix(string, '//es/test/es/page/es/')).toEqual(string)
     expect(trimSuffix(string, '')).toEqual(string)
     expect(trimSuffix(string, '/es')).toEqual(string)
+    // @ts-ignore
     expect(trimSuffix(string, null)).toEqual(string)
   })
 })

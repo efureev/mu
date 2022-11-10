@@ -1,6 +1,6 @@
-import isObject from '../is/isObject'
-import isSymbol from '../is/isSymbol'
-import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '../core/vars'
+import isObject from '~/is/isObject'
+import isSymbol from '~/is/isSymbol'
+import { reIsBadHex, reIsBinary, reIsOctal, reTrim } from '~/core/vars'
 
 /**
  * Converts `value` to a number.

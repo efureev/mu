@@ -1,4 +1,4 @@
-import { toQueryString } from './../../src/object'
+import { toQueryString } from '~/object'
 
 describe('toQueryString', () => {
   it('should return string from objects', () => {

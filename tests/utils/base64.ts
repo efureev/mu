@@ -1,6 +1,6 @@
-import { b64ToUtf8, b64ToUtf8Safe, utf8ToB64, utf8Tob64Safe } from '../../src/utils/base64'
-import forEach from '../../src/core/forEach'
-import flip from '../../src/object/flip'
+import { b64ToUtf8, b64ToUtf8Safe, utf8ToB64, utf8Tob64Safe } from '~/utils/base64'
+import forEach from '~/core/forEach'
+import flip from '~/object/flip'
 
 describe('utf8ToB64', () => {
   it('should return base64-val', () => {

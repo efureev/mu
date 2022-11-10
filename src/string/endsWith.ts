@@ -1,4 +1,4 @@
-import toString from '../to/toString'
+import toString from '~/to/toString'
 
 /**
  * Checks if string ends with the given target string

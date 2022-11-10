@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.1.0] - 2022-11-10
+
+### Changed
+
+- New package building system
+
 ## [4.0.6] - 2022-07-27
 
 ### Added

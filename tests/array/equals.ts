@@ -1,4 +1,4 @@
-import { arraysEquals as equals } from '../../src/array'
+import { arraysEquals as equals } from '~/array'
 
 describe('equals', () => {
   it('should return true', () => {

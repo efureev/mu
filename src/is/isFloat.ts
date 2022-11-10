@@ -1,8 +1,8 @@
 /**
  * This function evaluates whether all parameters are floats
  */
-import { reIsFloat } from '../core/vars'
-import { TextNumber } from '../internal/types'
+import { reIsFloat } from '~/core/vars'
+import type { TextNumber } from '~/internal/types'
 
 export function isFloats(...parameters: any[]): boolean {
   if (parameters.length === 0) throw new Error('Please provide at least one number to evaluate isFloat.')

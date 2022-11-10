@@ -5,7 +5,7 @@
  * @param {Array} array The array to convert.
  * @returns {Object} Returns the converted `arguments` object.
  */
-function toArgs(array) {
+function toArgs(array: any) {
   return function () {
     return arguments
   }.apply(undefined, array)

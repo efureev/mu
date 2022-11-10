@@ -1,4 +1,4 @@
-import { pregQuote } from '../../src/utils'
+import { pregQuote } from '~/utils'
 
 describe('pregQuote', () => {
   it('should return quoted string', () => {

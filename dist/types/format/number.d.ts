@@ -1,4 +1,4 @@
-import { TextNumber } from '../internal/types';
+import type { TextNumber } from '../internal/types';
 /**
  * Formatting number
  * @param {String|Number} value

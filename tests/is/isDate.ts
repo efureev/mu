@@ -1,4 +1,4 @@
-import { isDate, isDates } from './../../src/is'
+import { isDate, isDates } from '~/is'
 
 describe('isDate', () => {
   it('should return true if any parameters provided are string', () => {

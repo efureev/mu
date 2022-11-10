@@ -1,4 +1,4 @@
-import { flip } from '../../src/object'
+import { flip } from '~/object'
 
 describe('flip', () => {
   it('basic', () => {
@@ -9,6 +9,6 @@ describe('flip', () => {
         date: () => {},
         key: 'value',
       })
-    ).toEqual({ 'function date() {}': 'date', value: 'key' })
+    ).toEqual({ '() => { }': 'date', value: 'key' })
   })
 })

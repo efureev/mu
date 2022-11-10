@@ -1,5 +1,5 @@
-import clone from '../../src/core/clone'
-import { isArray, isEmpty, isFunction } from '../../src/is'
+import clone from '~/core/clone'
+import { isArray, isEmpty, isFunction } from '~/is'
 
 describe('clone', () => {
   it('should return number if parameter provided are numbers', () => {

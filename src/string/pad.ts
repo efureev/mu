@@ -1,5 +1,5 @@
-import isNil from '../is/isNil'
-import { TextNumberNullable } from '../internal/types'
+import isNil from '~/is/isNil'
+import type { TextNumberNullable } from '~/internal/types'
 
 /**
  * This function add symbols to string in start or end

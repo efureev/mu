@@ -1,7 +1,7 @@
 /**
  * Compares the contents of 2 or more objects using strict equality.
  */
-import isObject from '../is/isObject'
+import isObject from '~/is/isObject'
 
 export default function equal(origin: Record<PropertyKey, any>, ...list: Record<PropertyKey, any>[]): boolean {
   let i: number, l: number, leftChain: Array<any>, rightChain: Array<any>

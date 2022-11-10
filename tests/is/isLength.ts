@@ -1,4 +1,4 @@
-import { isLength } from './../../src/is'
+import { isLength } from '~/is'
 
 describe('isLength', () => {
   it('It should return FALSE', () => {

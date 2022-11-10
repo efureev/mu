@@ -1,4 +1,4 @@
-import { filter } from '../../src/object'
+import { filter } from '~/object'
 
 describe('filter', () => {
   const scores = {

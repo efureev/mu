@@ -1,5 +1,5 @@
-import isObject from '../is/isObject'
-import { stringToNumber } from '../to/toNumber'
+import isObject from '~/is/isObject'
+import { stringToNumber } from '~/to/toNumber'
 
 /**
  * Get value by deep key in object(array)

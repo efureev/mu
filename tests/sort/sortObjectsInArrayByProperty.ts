@@ -1,4 +1,4 @@
-import sortObjectsInArrayByProperty from '../../src/sort/sortObjectsInArrayByProperty'
+import sortObjectsInArrayByProperty from '~/sort/sortObjectsInArrayByProperty'
 
 describe('sort an array', () => {
   describe('Number keys', () => {

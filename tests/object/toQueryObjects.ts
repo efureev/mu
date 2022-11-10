@@ -1,4 +1,4 @@
-import toQueryObjects from './../../src/object/toQueryObjects'
+import toQueryObjects from '~/object/toQueryObjects'
 
 describe('toQueryObjects', () => {
   it('should return array of objects', () => {

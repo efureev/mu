@@ -1,9 +1,9 @@
-import isBoolean from '../is/isBoolean'
-import isDate from '../is/isDate'
-import isEmpty from '../is/isEmpty'
+import isBoolean from '~/is/isBoolean'
+import isDate from '~/is/isDate'
+import isEmpty from '~/is/isEmpty'
 import toQueryObjects from './toQueryObjects'
-import dateToString from '../date/toString'
-import { booleanToNumber } from '../to/toNumber'
+import dateToString from '~/date/toString'
+import { booleanToNumber } from '~/to/toNumber'
 
 type ToQueryStringOptions = {
   encodeName: boolean

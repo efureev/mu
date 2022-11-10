@@ -1,4 +1,4 @@
-import { isEmpty } from './../../src/is'
+import { isEmpty } from '~/is'
 
 describe('IsEmpty', () => {
   it('should return true when you pass an nullable values', () => {

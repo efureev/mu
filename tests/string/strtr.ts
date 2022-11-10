@@ -1,4 +1,4 @@
-import { replaceByTemplate, strtr } from './../../src/string'
+import { replaceByTemplate, strtr } from '~/string'
 
 describe('replaceByTemplate', () => {
   it('text', () => {

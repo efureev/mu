@@ -1,4 +1,4 @@
-import { isNil, isNils, isNull, isNulls } from './../../src/is'
+import { isNil, isNils, isNull, isNulls } from '~/is'
 
 describe('isNil', () => {
   it('should return `true`', () => {

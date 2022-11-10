@@ -1,5 +1,5 @@
-import isFunction from '../is/isFunction'
-import { TextNumber } from '../internal/types'
+import isFunction from '~/is/isFunction'
+import type { TextNumber } from '~/internal/types'
 
 /**
  * Invokes the iteratee `n` times, returning an array of the results of

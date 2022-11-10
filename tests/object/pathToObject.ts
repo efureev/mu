@@ -1,4 +1,4 @@
-import pathToObject from '../../src/object/pathToObject'
+import pathToObject from '~/object/pathToObject'
 
 describe('pathToObject', () => {
   it('basic', () => {

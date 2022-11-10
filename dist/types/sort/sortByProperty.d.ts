@@ -1,2 +1,2 @@
-export default function sortByProperty(property: string, asc?: boolean, ignoreCase?: boolean): (a: Record<PropertyKey, any>, b: Record<PropertyKey, any>) => 1 | -1 | 0;
+export default function sortByProperty(property: string, asc?: boolean, ignoreCase?: boolean): (a: Record<PropertyKey, any>, b: Record<PropertyKey, any>) => 0 | 1 | -1;
 //# sourceMappingURL=sortByProperty.d.ts.map

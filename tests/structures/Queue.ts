@@ -1,4 +1,4 @@
-import { Queue } from '../../src/structures'
+import { Queue } from '~/structures'
 
 describe('Queue', () => {
   it('should create empty queue', () => {
@@ -48,7 +48,7 @@ describe('Queue', () => {
     queue.push({ value: 'test1', key: 'key1' })
     queue.push({ value: 'test2', key: 'key2' })
 
-    const stringifier = value => `${value.key}:${value.value}`
+    const stringifier = (value: any) => `${value.key}:${value.value}`
 
     expect(queue.toString(stringifier)).toBe('key1:test1,key2:test2')
     // @ts-ignore

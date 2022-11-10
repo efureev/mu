@@ -1,4 +1,4 @@
-import isArray, { isArrays } from './../../src/is/isArray'
+import isArray, { isArrays } from '~/is/isArray'
 
 describe('isArray', () => {
   it('should return false if any parameters are not an arrays', () => {

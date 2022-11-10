@@ -1,4 +1,4 @@
-import removeEmpty from '../../src/object/removeEmpty'
+import removeEmpty from '~/object/removeEmpty'
 
 describe('filter in basic object', () => {
   const object = {

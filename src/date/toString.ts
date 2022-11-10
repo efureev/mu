@@ -1,4 +1,4 @@
-import { padDateTime } from '../format/pad'
+import { padDateTime } from '~/format/pad'
 
 /**
  * Date to string

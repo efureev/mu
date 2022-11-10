@@ -1,4 +1,4 @@
-import { TextNumber } from '../internal/types';
+import type { TextNumber } from '../internal/types';
 /**
  * Invokes the iteratee `n` times, returning an array of the results of
  * each invocation. The iteratee is invoked with one argument; (index).

@@ -1,8 +1,8 @@
-import isArguments from '../is/isArguments'
-import isBuffer from '../is/isBuffer'
-import isTypedArray from '../is/isTypedArray'
+import isArguments from '~/is/isArguments'
+import isBuffer from '~/is/isBuffer'
+import isTypedArray from '~/is/isTypedArray'
 
-import times from '../utils/times'
+import times from '~/utils/times'
 import isIndex from './isIndex'
 
 /** Used for built-in method references. */

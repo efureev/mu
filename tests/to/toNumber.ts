@@ -1,6 +1,6 @@
-import { toNumber } from './../../src/to'
+import { toNumber } from '~/to'
 import { symbol } from '../utils'
-import { booleanToNumber, stringToNumber } from '../../src/to/toNumber'
+import { booleanToNumber, stringToNumber } from '~/to/toNumber'
 
 describe('toNumber', () => {
   it('should be true', () => {

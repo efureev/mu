@@ -1,5 +1,5 @@
 import number from './number'
-import { TextNumber } from '../internal/types'
+import type { TextNumber } from '~/internal/types'
 
 const UnitsDefault = ['', 'K', 'M', 'B', 'T']
 /**

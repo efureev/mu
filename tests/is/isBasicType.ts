@@ -1,5 +1,5 @@
-import { isBasicType } from './../../src/is'
-import { isAdvancedType } from '../../src'
+import { isBasicType } from '~/is'
+import { isAdvancedType } from '~/is'
 
 describe('isBasicType', () => {
   it('should return TRUE', () => {

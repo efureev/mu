@@ -1,4 +1,4 @@
-import { intersect, random } from '../../src/array'
+import { intersect, random } from '~/array'
 
 describe('random', () => {
   it('base', () => {

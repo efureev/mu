@@ -1,1 +1,0 @@
-{"version":3,"file":"var.js","names":[],"sources":["../../../src/i18/var.ts"],"sourcesContent":["export type dayNamesType = [string, string, string, string, string, string, string]\n\nexport type monthNamesType = [\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string,\n  string\n]\n"],"mappings":""}

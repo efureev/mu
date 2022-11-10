@@ -1,4 +1,4 @@
-import select from '../../src/object/select'
+import select from '~/object/select'
 
 describe('select', () => {
   const obj = {

@@ -1,4 +1,4 @@
-import { difference } from '../../src/array'
+import { difference } from '~/array'
 
 describe('difference', () => {
   it('Base', () => {

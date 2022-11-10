@@ -1,4 +1,4 @@
-import values from './../../src/object/values'
+import values from '~/object/values'
 
 describe('values', () => {
   it('basic', () => {
@@ -10,12 +10,15 @@ describe('values', () => {
 
   it('function', () => {
     function Foo() {
+      // @ts-ignore
       this.a = 1
+      // @ts-ignore
       this.b = 2
     }
 
     Foo.prototype.c = 3
 
+    // @ts-ignore
     expect(values(new Foo())).toEqual([1, 2])
   })
 

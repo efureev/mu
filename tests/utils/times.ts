@@ -1,4 +1,4 @@
-import { times } from '../../src/utils'
+import { times } from '~/utils'
 
 describe('times', () => {
   it('basic', () => {

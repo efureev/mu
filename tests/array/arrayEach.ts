@@ -1,10 +1,10 @@
-import { arrayEach } from '../../src/array'
+import { arrayEach } from '~/array'
 
 describe('arrayEach', () => {
   it('Basic', () => {
     const array = [1, 2, 3]
 
-    const result = []
+    const result: any[] = []
 
     arrayEach(array, item => {
       result.push(item.toString())
@@ -16,7 +16,7 @@ describe('arrayEach', () => {
   it('Break', () => {
     const array = [1, 2, 3]
 
-    const result = []
+    const result: any[] = []
 
     arrayEach(array, item => {
       if (item === 3) return false

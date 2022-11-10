@@ -1,8 +1,9 @@
-import { isSymbol } from './../../src/is'
+import root from '~/internal/root'
+import { isSymbol } from '~/is'
 
 describe('isSymbol', () => {
   it('should return `true` for symbols', () => {
-    if (Symbol) {
+    if (root.Symbol) {
       expect(isSymbol(Symbol())).toBeTruthy()
       expect(isSymbol(Symbol('a'))).toBeTruthy()
       expect(isSymbol(new Object(Symbol('a')))).toBeTruthy()
@@ -10,7 +11,7 @@ describe('isSymbol', () => {
   })
 
   it('should return `false` for symbols', () => {
-    if (Symbol) {
+    if (root.Symbol) {
       expect(isSymbol([])).toBeFalsy()
       expect(isSymbol([1, 3])).toBeFalsy()
       expect(isSymbol({})).toBeFalsy()

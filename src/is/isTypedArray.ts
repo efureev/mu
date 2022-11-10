@@ -1,5 +1,5 @@
-import node from '../internal/node'
-import baseIsTypedArray from '../internal/base/baseIsTypedArray'
+import node from '~/internal/node'
+import baseIsTypedArray from '~/internal/base/baseIsTypedArray'
 
 const nodeIsTypedArray = node && node.isTypedArray
 

@@ -1,6 +1,6 @@
-import { padStart } from '../string/pad'
-import isNil from '../is/isNil'
-import { TextNumberNullable } from '../internal/types'
+import { padStart } from '~/string/pad'
+import isNil from '~/is/isNil'
+import type { TextNumberNullable } from '~/internal/types'
 
 export function padNumber(value: TextNumberNullable, targetLength: number) {
   if (isNil(value)) {

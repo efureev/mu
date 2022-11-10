@@ -1,4 +1,4 @@
-import trimPrefix from './../../src/string/trimPrefix'
+import trimPrefix from '~/string/trimPrefix'
 
 describe('trimPrefix', () => {
   it('', () => {
@@ -12,6 +12,7 @@ describe('trimPrefix', () => {
     expect(trimPrefix(string, '/es/test/es/page/es//')).toEqual(string)
     expect(trimPrefix(string, '')).toEqual(string)
     expect(trimPrefix(string, 'es/')).toEqual(string)
+    // @ts-ignore
     expect(trimPrefix(string, null)).toEqual(string)
   })
 })

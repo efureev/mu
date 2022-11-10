@@ -1,5 +1,6 @@
 /** `Object#toString` result references. */
-import { isLength, isObjectLike } from '../../is'
+import { isObjectLike } from '~/is/isObject'
+import isLength from '~/is/isLength'
 import type { TagType } from './baseGetTag'
 import baseGetTag from './baseGetTag'
 

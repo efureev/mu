@@ -1,4 +1,4 @@
-import { intersect, intersectAll } from '../../src/array'
+import { intersect, intersectAll } from '~/array'
 
 describe('intersect', () => {
   it('Array', () => {

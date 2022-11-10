@@ -1,4 +1,4 @@
-import { isFunction, isFunctions } from './../../src/is'
+import { isFunction, isFunctions } from '~/is'
 
 describe('isFunction', () => {
   it('should throw an error if no parameters are provided', () => {

@@ -1,4 +1,4 @@
-import pick from '../../src/object/pick'
+import pick from '~/object/pick'
 
 describe('pick', () => {
   const object = { a: 1, b: '2', c: 3 }
@@ -27,11 +27,15 @@ describe('pick', () => {
 
   it('empty', () => {
     expect(pick({}, ['a', 'c'])).toEqual({})
+    // @ts-ignore
     expect(pick(null, ['a', 'c'])).toEqual({})
+    // @ts-ignore
     expect(pick(undefined, ['a', 'c'])).toEqual({})
 
     expect(pick(object, [])).toEqual({})
+    // @ts-ignore
     expect(pick(object, null)).toEqual({})
+    // @ts-ignore
     expect(pick(object, undefined)).toEqual({})
     expect(pick(object, ['s', 'z', 'q'])).toEqual({})
 

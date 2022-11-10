@@ -1,4 +1,4 @@
-import logicalAnd from '../../src/object/logicalAnd'
+import logicalAnd from '~/object/logicalAnd'
 
 describe('logicalAnd', () => {
   it('true', () => {

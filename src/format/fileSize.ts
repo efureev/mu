@@ -1,5 +1,5 @@
 import intWord from './intWord'
-import { TextNumber } from '../internal/types'
+import type { TextNumber } from '~/internal/types'
 
 /**
  * Display

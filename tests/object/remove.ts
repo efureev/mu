@@ -1,5 +1,5 @@
-import remove from '../../src/object/remove'
-import { clone } from '../../src'
+import remove from '~/object/remove'
+import { clone } from '~/core'
 
 describe('remove by string key', () => {
   const obj = {

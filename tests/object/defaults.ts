@@ -1,4 +1,4 @@
-import defaults from '../../src/object/defaults'
+import defaults from '~/object/defaults'
 
 describe('defaults', () => {
   it('basic', () => {

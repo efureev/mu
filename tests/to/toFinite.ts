@@ -1,4 +1,4 @@
-import toFinite from '../../src/to/toFinite'
+import toFinite from '~/to/toFinite'
 import { Inf } from '../utils'
 
 describe('toFinite', () => {

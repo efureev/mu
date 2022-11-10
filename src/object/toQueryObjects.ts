@@ -1,4 +1,4 @@
-import isObject from './../is/isObject'
+import isObject from '~/is/isObject'
 
 /**
  * Converts a `name` - `value` pair to an array of objects with support for nested structures.

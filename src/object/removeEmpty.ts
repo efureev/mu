@@ -1,6 +1,6 @@
-import isObject from '../is/isObject'
-import isString from '../is/isString'
-import isEmpty from '../is/isEmpty'
+import isObject from '~/is/isObject'
+import isString from '~/is/isString'
+import isEmpty from '~/is/isEmpty'
 
 /**
  * Remove all empty values in object

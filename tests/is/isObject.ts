@@ -1,4 +1,4 @@
-import { isEmpty, isEmptyObject, isObject, isObjectLike, isObjects } from './../../src/is'
+import { isEmpty, isEmptyObject, isObject, isObjectLike, isObjects } from '~/is'
 import { args, realm, slice, strictArgs, symbol } from '../utils'
 
 describe('isObject', () => {

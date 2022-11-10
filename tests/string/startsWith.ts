@@ -1,4 +1,4 @@
-import { startsWith } from './../../src/string'
+import { startsWith } from '~/string'
 
 describe('startsWith', () => {
   it('', () => {

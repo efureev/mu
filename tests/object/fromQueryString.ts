@@ -1,10 +1,12 @@
-import fromQueryString from './../../src/object/fromQueryString'
-import root from './../../src/internal/root'
+import fromQueryString from '~/object/fromQueryString'
+import root from '~/internal/root'
 
 describe('fromQueryString', () => {
   it('should return empty object from empty', () => {
     expect(fromQueryString('')).toMatchObject({})
+    // @ts-ignore
     expect(fromQueryString(null)).toMatchObject({})
+    // @ts-ignore
     expect(fromQueryString(undefined)).toMatchObject({})
     // expect(fromQueryString(null)).toMatchObject({})
   })
@@ -36,7 +38,7 @@ describe('fromQueryString', () => {
   })
 
   it('should return deep object from string', () => {
-    root.fn = root.fn || function fn(e) {}
+    root.fn = root.fn || function fn(e: any) {}
 
     expect(
       fromQueryString(

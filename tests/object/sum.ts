@@ -1,10 +1,12 @@
-import sum from '../../src/object/sum'
+import sum from '~/object/sum'
 
 describe('sum', () => {
   it('basic', () => {
     expect(sum({ a: 0, b: 0, c: 0 })).toEqual(0)
     expect(sum({ a: 0 })).toEqual(0)
+    // @ts-ignore
     expect(sum({ a: null, b: 0, c: null })).toEqual(0)
+    // @ts-ignore
     expect(sum({ a: null, b: 12, c: null })).toEqual(12)
     expect(sum({ a: 1, b: 12, c: 2 })).toEqual(15)
     expect(sum({ a: 1, b: -12, c: 2 })).toEqual(-9)

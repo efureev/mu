@@ -1,4 +1,4 @@
-import isArguments from './../../src/is/isArguments'
+import isArguments from '~/is/isArguments'
 import { args, falsey, realm, slice, strictArgs, symbol } from './../utils'
 
 describe('isArguments', () => {
@@ -32,7 +32,9 @@ describe('isArguments', () => {
   })
 
   it('should work with an `arguments` object from another realm', function () {
+    // @ts-ignore
     if (realm.arguments) {
+      // @ts-ignore
       expect(isArguments(realm.arguments)).toBe(true)
     }
   })

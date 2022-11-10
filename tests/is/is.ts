@@ -1,4 +1,4 @@
-import { isBoolean, isBooleans, isNumeric, isString, isStrings, isNumerics } from './../../src/is'
+import { isBoolean, isBooleans, isNumeric, isString, isStrings, isNumerics } from '~/is'
 
 describe('isString', () => {
   it('should return true if any parameters provided are string', () => {

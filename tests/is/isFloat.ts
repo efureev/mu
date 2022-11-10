@@ -1,4 +1,4 @@
-import { isFloat, isFloatCanonical, isFloats } from './../../src/is'
+import { isFloat, isFloatCanonical, isFloats } from '~/is'
 
 describe('isFloat', () => {
   it('should return true if any parameters are a float', () => {

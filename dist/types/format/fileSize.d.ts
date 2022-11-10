@@ -1,4 +1,4 @@
-import { TextNumber } from '../internal/types';
+import type { TextNumber } from '../internal/types';
 /**
  * Display
  * @param {Number|String} size

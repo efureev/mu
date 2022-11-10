@@ -1,5 +1,5 @@
-import isSymbol from '../is/isSymbol'
-import { reTrim } from '../core/vars'
+import isSymbol from '~/is/isSymbol'
+import { reTrim } from '~/core/vars'
 
 const symbolProto = Symbol ? Symbol.prototype : undefined,
   symbolToString = symbolProto ? symbolProto.toString : undefined

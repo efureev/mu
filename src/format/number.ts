@@ -1,5 +1,5 @@
-import isInteger from '../is/isInteger'
-import { TextNumber } from '../internal/types'
+import isInteger from '~/is/isInteger'
+import type { TextNumber } from '~/internal/types'
 
 /**
  * Formatting number

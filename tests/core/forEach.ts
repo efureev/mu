@@ -1,5 +1,5 @@
-import forEach from '../../src/core/forEach'
-import { isArray } from '../../src/is'
+import forEach from '~/core/forEach'
+import { isArray } from '~/is'
 
 describe('forEach', () => {
   it('array', () => {
@@ -14,7 +14,7 @@ describe('forEach', () => {
   })
 
   it('object', () => {
-    const result = {}
+    const result: Record<PropertyKey, any> = {}
 
     const data = {
       id: 1,

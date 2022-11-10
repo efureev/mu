@@ -1,4 +1,4 @@
-import equals from '../../src/object/equals'
+import equals from '~/object/equals'
 
 describe('equal', () => {
   const errMsg = 'Need two or more arguments to compare'

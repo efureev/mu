@@ -1,5 +1,5 @@
-import pregQuote from '../utils/pregQuote'
-import { TextNumber } from '../internal/types'
+import pregQuote from '~/utils/pregQuote'
+import type { TextNumber } from '~/internal/types'
 
 /**
  * Replace all entries in string according to map

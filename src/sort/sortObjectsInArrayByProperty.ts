@@ -1,9 +1,9 @@
 import sortByProperty from './sortByProperty'
-import isObject from '../is/isObject'
-import isString from '../is/isString'
-import select from '../object/select'
-import clone from '../core/clone'
-import pathToObject from '../object/pathToObject'
+import isObject from '~/is/isObject'
+import isString from '~/is/isString'
+import select from '~/object/select'
+import clone from '~/core/clone'
+import pathToObject from '~/object/pathToObject'
 
 /**
  * Sort object-like items into array

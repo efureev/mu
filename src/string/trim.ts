@@ -1,5 +1,5 @@
-import toString from '../to/toString'
-import { reTrim } from '../core/vars'
+import toString from '~/to/toString'
+import { reTrim } from '~/core/vars'
 
 /**
  * This function trim string

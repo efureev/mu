@@ -1,4 +1,4 @@
-import { isInteger, isIntegers } from './../../src/is'
+import { isInteger, isIntegers } from '~/is'
 
 describe('isInteger', () => {
   it('should throw an error if no parameters are provided', () => {

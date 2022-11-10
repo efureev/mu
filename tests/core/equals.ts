@@ -1,4 +1,4 @@
-import equals from '../../src/core/equals'
+import equals from '~/core/equals'
 
 describe('equals', () => {
   it('compare string', () => {

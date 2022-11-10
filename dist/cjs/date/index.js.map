@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","names":[],"sources":["../../../src/date/index.ts"],"sourcesContent":["import now from './now'\nimport dateToString from './toString'\n\nexport { now, dateToString }\n"],"mappings":";;;;;;;;;;;;;;;;;;AAAA;;AACA"}

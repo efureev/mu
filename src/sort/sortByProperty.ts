@@ -5,7 +5,7 @@
  * @param {boolean} ignoreCase
  * @return {(function(*, *): (number))|*}
  */
-import isString from '../is/isString'
+import isString from '~/is/isString'
 
 export default function sortByProperty(property: string, asc: boolean = true, ignoreCase: boolean = true) {
   return function (a: Record<PropertyKey, any>, b: Record<PropertyKey, any>) {

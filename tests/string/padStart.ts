@@ -1,4 +1,4 @@
-import { padStart } from './../../src/string'
+import { padStart } from '~/string'
 
 describe('padStart', () => {
   it('basic', () => {

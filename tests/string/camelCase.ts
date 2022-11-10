@@ -1,4 +1,4 @@
-import { camelCase, pascalCase } from '../../src/string'
+import { camelCase, pascalCase } from '~/string'
 
 describe('camelCase', () => {
   it('camelCase', () => {

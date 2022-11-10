@@ -1,6 +1,6 @@
-import isNil from '../is/isNil'
-import isNumeric from '../is/isNumeric'
-import { TextNumber } from '../internal/types'
+import isNil from '~/is/isNil'
+import isNumeric from '~/is/isNumeric'
+import type { TextNumber } from '~/internal/types'
 
 const queryRe = /^\?/
 const plusRe = /\+/g

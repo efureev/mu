@@ -1,4 +1,4 @@
-import { toString } from '../../src/to'
+import { toString } from '~/to'
 import { emojiVar, realm, symbol } from '../utils'
 
 describe('toString', () => {

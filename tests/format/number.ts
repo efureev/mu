@@ -1,4 +1,4 @@
-import { number, numberRus } from './../../src/format'
+import { number, numberRus } from '~/format'
 
 describe('number', () => {
   it('should return string if parameter provided are integer', () => {

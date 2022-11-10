@@ -1,4 +1,4 @@
-import { Stack } from '../../src/structures'
+import { Stack } from '~/structures'
 
 describe('Stack', () => {
   it('should create empty stack', () => {
@@ -82,7 +82,7 @@ describe('Stack', () => {
     stack.push({ value: 'test1', key: 'key1' })
     stack.push({ value: 'test2', key: 'key2' })
 
-    const stringifier = value => `${value.key}:${value.value}`
+    const stringifier = (value: any) => `${value.key}:${value.value}`
 
     expect(stack.toString(stringifier)).toBe('key2:test2,key1:test1')
     // @ts-ignore

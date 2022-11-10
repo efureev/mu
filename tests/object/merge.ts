@@ -1,4 +1,4 @@
-import merge from '../../src/object/merge'
+import merge from '~/object/merge'
 
 describe('merge', () => {
   const first = {

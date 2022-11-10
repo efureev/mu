@@ -1,5 +1,5 @@
 import { Blob } from 'buffer'
-import { isBlob, isBlobs } from './../../src/is'
+import { isBlob, isBlobs } from '~/is'
 
 describe('isBlob', () => {
   it('should return false', () => {

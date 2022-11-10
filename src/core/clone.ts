@@ -1,4 +1,4 @@
-import isDate from '../is/isDate'
+import isDate from '~/is/isDate'
 
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
 

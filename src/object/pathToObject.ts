@@ -1,5 +1,5 @@
-import isEmpty from '../is/isEmpty'
-import isObject from '../is/isObject'
+import isEmpty from '~/is/isEmpty'
+import isObject from '~/is/isObject'
 
 export default function pathToObject(
   paths: string = '',

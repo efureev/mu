@@ -1,4 +1,4 @@
-import { TextNumber } from '../internal/types';
+import type { TextNumber } from '../internal/types';
 export declare function isFloats(...parameters: any[]): boolean;
 export default function isFloat(number: any): boolean;
 /**

@@ -1,4 +1,4 @@
-import { clearSpaces, titleCase, trim, upperFirst } from '../../src/string'
+import { clearSpaces, titleCase, trim, upperFirst } from '~/string'
 
 describe('trim', () => {
   it('should return val if parameter provided are numbers', () => {

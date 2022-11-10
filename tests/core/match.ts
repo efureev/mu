@@ -1,4 +1,4 @@
-import match from '../../src/core/match'
+import match from '~/core/match'
 
 describe('match', () => {
   describe('string', () => {

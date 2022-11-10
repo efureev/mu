@@ -1,4 +1,4 @@
-import { intWord } from './../../src/format'
+import { intWord } from '~/format'
 
 describe('intWord', () => {
   it('should return val if parameter provided are numbers', () => {

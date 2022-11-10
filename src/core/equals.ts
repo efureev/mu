@@ -1,10 +1,10 @@
-import objectsEqual from './../object/equals'
-import arraysEquals from './../array/equals'
-import isObject from '../is/isObject'
-import isString from '../is/isString'
-import isBoolean from '../is/isBoolean'
-import isNumeric from '../is/isNumeric'
-import isFunction from '../is/isFunction'
+import objectsEqual from '~/object/equals'
+import arraysEquals from '~/array/equals'
+import isObject from '~/is/isObject'
+import isString from '~/is/isString'
+import isBoolean from '~/is/isBoolean'
+import isNumeric from '~/is/isNumeric'
+import isFunction from '~/is/isFunction'
 
 /**
  * @param {*} first

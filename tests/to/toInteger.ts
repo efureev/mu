@@ -1,4 +1,4 @@
-import toInteger from '../../src/to/toInteger'
+import toInteger from '~/to/toInteger'
 import { Inf, NegInf } from '../utils'
 
 describe('toInteger', () => {
