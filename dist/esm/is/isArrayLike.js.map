@@ -1,0 +1,1 @@
+{"version":3,"file":"isArrayLike.js","sourceRoot":"","sources":["../../../src/is/isArrayLike.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,iBAAiB,CAAA;AACxC,OAAO,QAAQ,MAAM,eAAe,CAAA;AAEpC;;;;;;;;;;;;;;;;;;GAkBG;AACH,MAAM,CAAC,OAAO,UAAU,WAAW,CAAC,KAAU;IAC5C,OAAO,KAAK,IAAI,IAAI,IAAI,QAAQ,CAAC,KAAK,CAAC,MAAM,CAAC,IAAI,CAAC,UAAU,CAAC,KAAK,CAAC,CAAA;AACtE,CAAC"}

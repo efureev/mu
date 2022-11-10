@@ -1,0 +1,1 @@
+{"version":3,"file":"startsWith.js","sourceRoot":"","sources":["../../../src/string/startsWith.ts"],"names":[],"mappings":"AAAA,OAAO,QAAQ,MAAM,eAAe,CAAA;AAEpC;;;;;;GAMG;AACH,MAAM,CAAC,OAAO,UAAU,UAAU,CAAC,GAAW,EAAE,MAAc;IAC5D,MAAM,GAAG,QAAQ,CAAC,MAAM,CAAC,CAAA;IAEzB,OAAO,QAAQ,CAAC,GAAG,CAAC,CAAC,KAAK,CAAC,CAAC,EAAE,MAAM,CAAC,MAAM,CAAC,KAAK,MAAM,CAAA;AACzD,CAAC"}

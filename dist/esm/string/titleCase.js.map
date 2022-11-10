@@ -1,0 +1,1 @@
+{"version":3,"file":"titleCase.js","sourceRoot":"","sources":["../../../src/string/titleCase.ts"],"names":[],"mappings":"AAAA,OAAO,UAAU,MAAM,cAAc,CAAA;AACrC,OAAO,WAAW,MAAM,eAAe,CAAA;AAEvC;;;;;GAKG;AACH,MAAM,CAAC,OAAO,UAAU,SAAS,CAAC,MAAW;IAC3C,OAAO,WAAW,CAAC,MAAM,CAAC,CAAC,OAAO,CAAC,QAAQ,EAAE,GAAG,CAAC,EAAE,CAAC,UAAU,CAAC,GAAG,CAAC,CAAC,CAAA;AACtE,CAAC"}
