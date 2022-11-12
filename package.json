@@ -20,90 +20,80 @@
     "tsconfig.json",
     "package.json"
   ],
+  "module": "./dist/esm/index.mjs",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
+      "import": "./dist/esm/index.mjs",
       "require": "./dist/cjs/index.js",
-      "import": "./dist/esm/index.js",
-      "default": "./dist/esm/index.js"
+      "default": "./dist/esm/mjs"
     },
     "./*": {
       "types": "./dist/types/*.d.ts",
+      "import": "./dist/esm/*.mjs",
       "require": "./dist/cjs/*.js",
-      "import": "./dist/esm/*.js",
-      "default": "./dist/esm/*.js"
+      "default": "./dist/esm/*.mjs"
     },
     "./array": {
       "types": "./dist/types/array/index.d.ts",
-      "require": "./dist/cjs/array/index.js",
-      "import": "./dist/esm/array/index.js",
-      "default": "./dist/esm/array/index.js"
+      "import": "./dist/esm/index.mjs",
+      "require": "./dist/cjs/array/index.js"
     },
     "./core": {
       "types": "./dist/types/core/index.d.ts",
       "require": "./dist/cjs/core/index.js",
-      "import": "./dist/esm/core/index.js",
-      "default": "./dist/esm/core/index.js"
+      "import": "./dist/esm/core/index.mjs"
     },
     "./format": {
       "types": "./dist/types/format/index.d.ts",
       "require": "./dist/cjs/format/index.js",
-      "import": "./dist/esm/format/index.js",
-      "default": "./dist/esm/format/index.js"
+      "import": "./dist/esm/format/index.mjs"
     },
     "./i18": {
       "types": "./dist/types/i18/index.d.ts",
       "require": "./dist/cjs/i18/index.js",
-      "import": "./dist/esm/i18/index.js",
-      "default": "./dist/esm/i18/index.js"
+      "import": "./dist/esm/i18/index.mjs",
     },
     "./is": {
       "types": "./dist/types/is/index.d.ts",
       "require": "./dist/cjs/is/index.js",
-      "import": "./dist/esm/is/index.js",
-      "default": "./dist/esm/is/index.js"
+      "import": "./dist/esm/is/index.mjs",
     },
     "./object": {
       "types": "./dist/types/object/index.d.ts",
       "require": "./dist/cjs/object/index.js",
-      "import": "./dist/esm/object/index.js",
-      "default": "./dist/esm/object/index.js"
+      "import": "./dist/esm/object/index.mjs",
     },
     "./sort": {
       "types": "./dist/types/sort/index.d.ts",
       "require": "./dist/cjs/sort/index.js",
-      "import": "./dist/esm/sort/index.js",
-      "default": "./dist/esm/sort/index.js"
+      "import": "./dist/esm/sort/index.mjs",
     },
     "./string": {
       "types": "./dist/types/string/index.d.ts",
       "require": "./dist/cjs/string/index.js",
-      "import": "./dist/esm/string/index.js",
-      "default": "./dist/esm/string/index.js"
+      "import": "./dist/esm/string/index.mjs",
     },
     "./structures": {
       "types": "./dist/types/structures/index.d.ts",
       "require": "./dist/cjs/structures/index.js",
-      "import": "./dist/esm/structures/index.js",
-      "default": "./dist/esm/structures/index.js"
+      "import": "./dist/esm/structures/index.mjs",
     },
     "./to": {
       "types": "./dist/types/to/index.d.ts",
       "require": "./dist/cjs/to/index.js",
-      "import": "./dist/esm/to/index.js",
-      "default": "./dist/esm/to/index.js"
+      "import": "./dist/esm/to/index.mjs",
     },
     "./utils": {
       "types": "./dist/types/utils/index.d.ts",
       "require": "./dist/cjs/utils/index.js",
-      "import": "./dist/esm/utils/index.js",
-      "default": "./dist/esm/utils/index.js"
+      "import": "./dist/esm/utils/index.mjs",
     },
     "./internal/*": {
       "types": "./dist/types/internal/*.d.ts",
       "require": "./dist/cjs/internal/*.js",
-      "import": "./dist/esm/internal/*.js",
-      "default": "./dist/esm/internal/*.js"
+      "import": "./dist/esm/internal/*.mjs",
+      "default": "./dist/esm/internal/*.mjs"
     }
   },
   "devDependencies": {
