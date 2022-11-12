@@ -1,1 +1,0 @@
-{"version":3,"file":"isTypedArray.js","sourceRoot":"","sources":["../../../src/is/isTypedArray.ts"],"names":[],"mappings":"AAAA,OAAO,IAAI,MAAM,iBAAiB,CAAA;AAClC,OAAO,gBAAgB,MAAM,kCAAkC,CAAA;AAE/D,MAAM,gBAAgB,GAAG,IAAI,IAAI,IAAI,CAAC,YAAY,CAAA;AAElD;;;;;;;;;;;;GAYG;AACH,eAAe,gBAAgB,CAAC,CAAC,CAAC,CAAC,KAAU,EAAE,EAAE,CAAC,gBAAgB,CAAC,KAAK,CAAC,CAAC,CAAC,CAAC,gBAAgB,CAAA"}

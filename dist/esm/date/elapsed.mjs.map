@@ -1,0 +1,1 @@
+{"version":3,"file":"dist/esm/date/elapsed.mjs","sourceRoot":"","sources":["../../../src/date/elapsed.ts"],"names":[],"mappings":"AAAA,OAAO,GAAG,MAAM,OAAO,CAAA;AAEvB;;;;;;;;;GASG;AACH,MAAM,UAAU,OAAO,CAAC,KAAW,EAAE,KAAW;IAC9C,OAAO,IAAI,CAAC,GAAG,CAAC,CAAC,KAAK,GAAG,CAAC,CAAC,KAAK,IAAI,GAAG,EAAE,CAAC,CAAC,CAAA;AAC7C,CAAC"}
