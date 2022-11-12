@@ -21,6 +21,12 @@
     "package.json"
   ],
   "exports": {
+    ".": {
+      "types": "./dist/types/index.d.ts",
+      "require": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "default": "./dist/esm/index.js"
+    },
     "./*": {
       "types": "./dist/types/*.d.ts",
       "require": "./dist/cjs/*.js",
@@ -33,7 +39,6 @@
       "import": "./dist/esm/array/index.js",
       "default": "./dist/esm/array/index.js"
     },
-
     "./core": {
       "types": "./dist/types/core/index.d.ts",
       "require": "./dist/cjs/core/index.js",
