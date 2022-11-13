@@ -1,5 +1,5 @@
-import root from '../root';
-import getRawTag from '../getRawTag';
+import root from '../../internal/root.mjs';
+import getRawTag from '../../internal/getRawTag.mjs';
 const nullTag = '[object Null]';
 const undefinedTag = '[object Undefined]';
 const symToStringTag = root.Symbol ? root.Symbol.toStringTag : undefined;

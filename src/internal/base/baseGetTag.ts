@@ -1,5 +1,5 @@
-import root from '../root'
-import getRawTag from '../getRawTag'
+import root from '~/internal/root'
+import getRawTag from '~/internal/getRawTag'
 
 export type TagType =
   | '[object ArrayBuffer]'
