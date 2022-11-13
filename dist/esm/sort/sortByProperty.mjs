@@ -5,7 +5,7 @@
  * @param {boolean} ignoreCase
  * @return {(function(*, *): (number))|*}
  */
-import isString from '../is/isString';
+import isString from '../is/isString.mjs';
 export default function sortByProperty(property, asc = true, ignoreCase = true) {
     return function (a, b) {
         let aProp = a[property];

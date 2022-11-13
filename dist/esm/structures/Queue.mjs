@@ -1,4 +1,4 @@
-import isFunction from '../is/isFunction';
+import isFunction from '../is/isFunction.mjs';
 export class Queue {
     constructor() {
         this.data = [];

@@ -1,4 +1,4 @@
-import isDate from '../is/isDate';
+import isDate from '../is/isDate.mjs';
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
 /**
  * Clone simple variables including array, {}-like objects, DOM nodes and Date without

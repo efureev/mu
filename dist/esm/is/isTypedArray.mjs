@@ -1,5 +1,5 @@
-import node from '../internal/node';
-import baseIsTypedArray from '../internal/base/baseIsTypedArray';
+import node from '../internal/node.mjs';
+import baseIsTypedArray from '../internal/base/baseIsTypedArray.mjs';
 const nodeIsTypedArray = node && node.isTypedArray;
 /**
  * Checks if `value` is classified as a typed array.

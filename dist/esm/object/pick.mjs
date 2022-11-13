@@ -1,5 +1,5 @@
-import isEmpty from '../is/isEmpty';
-import forEach from '../core/forEach';
+import isEmpty from '../is/isEmpty.mjs';
+import forEach from '../core/forEach.mjs';
 import select from './select.mjs';
 /**
  *

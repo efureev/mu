@@ -1,5 +1,5 @@
-import isNil from '../is/isNil';
-import isNumeric from '../is/isNumeric';
+import isNil from '../is/isNil.mjs';
+import isNumeric from '../is/isNumeric.mjs';
 export default function sum(object) {
     let result = 0;
     for (const key in object) {

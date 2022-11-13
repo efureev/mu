@@ -1,4 +1,4 @@
-import strtr from '../string/strtr';
+import strtr from '../string/strtr.mjs';
 const utf8ToB64Node = (str) => {
     return Buffer.from(str).toString('base64');
 };

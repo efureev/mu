@@ -1,7 +1,7 @@
 /**
  * This function evaluates whether all parameters are floats
  */
-import { reIsFloat } from '../core/vars';
+import { reIsFloat } from '../core/vars.mjs';
 export function isFloats(...parameters) {
     if (parameters.length === 0)
         throw new Error('Please provide at least one number to evaluate isFloat.');

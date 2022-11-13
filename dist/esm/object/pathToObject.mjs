@@ -1,5 +1,5 @@
-import isEmpty from '../is/isEmpty';
-import isObject from '../is/isObject';
+import isEmpty from '../is/isEmpty.mjs';
+import isObject from '../is/isObject.mjs';
 export default function pathToObject(paths = '', value = null, object = {}, divider = '.', replaceOnExist = true) {
     if (isEmpty(paths)) {
         return object;

@@ -1,6 +1,6 @@
-import isObject from '../is/isObject';
-import isString from '../is/isString';
-import isEmpty from '../is/isEmpty';
+import isObject from '../is/isObject.mjs';
+import isString from '../is/isString.mjs';
+import isEmpty from '../is/isEmpty.mjs';
 /**
  * Remove all empty values in object
  *

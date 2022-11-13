@@ -1,4 +1,4 @@
-import isObject from '../is/isObject';
+import isObject from '../is/isObject.mjs';
 export default function toQueryObjects(name, value, recursive = false) {
     let objects = [];
     let i, ln;

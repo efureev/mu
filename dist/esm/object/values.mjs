@@ -1,4 +1,4 @@
-import keys from '../core/keys';
+import keys from '../core/keys.mjs';
 /**
  * The base implementation of `values`
  *

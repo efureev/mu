@@ -1,5 +1,5 @@
 /** Used for built-in method references. */
-import baseGetTag from '../internal/base/baseGetTag';
+import baseGetTag from '../internal/base/baseGetTag.mjs';
 const objectProto = Object.prototype;
 /** Used to check objects for own properties. */
 const hasOwnProperty = objectProto.hasOwnProperty;

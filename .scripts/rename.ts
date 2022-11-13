@@ -27,7 +27,7 @@ async function main(): Promise<void> {
       data = data.replace(
         /^((import|export)\s+.+from\s+')(.+)('\s*)/gm,
         (_, prefix: string, __, file: string, suffix: string) => {
-          if (file.startsWith('./') && !file.endsWith('.mjs')) {
+          if ((file.startsWith('./') || file.startsWith('~/')) && !file.endsWith('.mjs')) {
             file += '.mjs'
           }
           return `${prefix}${file}${suffix}`

@@ -1,9 +1,9 @@
-import isBoolean from '../is/isBoolean';
-import isDate from '../is/isDate';
-import isEmpty from '../is/isEmpty';
+import isBoolean from '../is/isBoolean.mjs';
+import isDate from '../is/isDate.mjs';
+import isEmpty from '../is/isEmpty.mjs';
 import toQueryObjects from './toQueryObjects.mjs';
-import dateToString from '../date/toString';
-import { booleanToNumber } from '../to/toNumber';
+import dateToString from '../date/toString.mjs';
+import { booleanToNumber } from '../to/toNumber.mjs';
 /**
  * Takes an object and converts it to an encoded query string.
  *

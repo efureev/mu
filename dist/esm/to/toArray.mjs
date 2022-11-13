@@ -1,11 +1,11 @@
-import isArrayLike from '../is/isArrayLike';
-import isBoolean from '../is/isBoolean';
-import isNumeric from '../is/isNumeric';
-import isNil from '../is/isNil';
-import isString from '../is/isString';
-import copyArray from '../internal/copyArray';
-import stringToArray from '../string/stringToArray';
-import values from '../object/values';
+import isArrayLike from '../is/isArrayLike.mjs';
+import isBoolean from '../is/isBoolean.mjs';
+import isNumeric from '../is/isNumeric.mjs';
+import isNil from '../is/isNil.mjs';
+import isString from '../is/isString.mjs';
+import copyArray from '../internal/copyArray.mjs';
+import stringToArray from '../string/stringToArray.mjs';
+import values from '../object/values.mjs';
 /** Built-in value references. */
 const symIterator = Symbol ? Symbol.iterator : undefined;
 /**

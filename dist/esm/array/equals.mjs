@@ -1,5 +1,5 @@
-import isObject from '../is/isObject';
-import objectsEqual from '../object/equals';
+import isObject from '../is/isObject.mjs';
+import objectsEqual from '../object/equals.mjs';
 /**
  * Deep comparing the contents of 2 arrays using strict equality
  *

@@ -1,4 +1,4 @@
-import isFunction from '../is/isFunction';
+import isFunction from '../is/isFunction.mjs';
 export default function times(n = 1, iteratee) {
     const result = new Array(n);
     let index = -1;

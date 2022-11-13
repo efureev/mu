@@ -1,5 +1,5 @@
-import { padStart } from '../string/pad';
-import isNil from '../is/isNil';
+import { padStart } from '../string/pad.mjs';
+import isNil from '../is/isNil.mjs';
 export function padNumber(value, targetLength) {
     if (isNil(value)) {
         return '0';

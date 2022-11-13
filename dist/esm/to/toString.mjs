@@ -1,5 +1,5 @@
-import isSymbol from '../is/isSymbol';
-import { reTrim } from '../core/vars';
+import isSymbol from '../is/isSymbol.mjs';
+import { reTrim } from '../core/vars.mjs';
 const symbolProto = Symbol ? Symbol.prototype : undefined, symbolToString = symbolProto ? symbolProto.toString : undefined;
 /**
  * Converts `value` to a string if it's not one. An empty string is returned

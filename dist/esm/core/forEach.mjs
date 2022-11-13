@@ -1,6 +1,6 @@
-import arrayEach from '../array/arrayEach';
+import arrayEach from '../array/arrayEach.mjs';
 import keys from './keys.mjs';
-import isArrayLike from '../is/isArrayLike';
+import isArrayLike from '../is/isArrayLike.mjs';
 export default function forEach(collection, iterateFn) {
     if (Array.isArray(collection)) {
         return arrayEach(collection, iterateFn);

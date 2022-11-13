@@ -1,9 +1,9 @@
 import sortByProperty from './sortByProperty.mjs';
-import isObject from '../is/isObject';
-import isString from '../is/isString';
-import select from '../object/select';
-import clone from '../core/clone';
-import pathToObject from '../object/pathToObject';
+import isObject from '../is/isObject.mjs';
+import isString from '../is/isString.mjs';
+import select from '../object/select.mjs';
+import clone from '../core/clone.mjs';
+import pathToObject from '../object/pathToObject.mjs';
 /**
  * Sort object-like items into array
  *

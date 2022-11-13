@@ -1,5 +1,5 @@
-import clone from '../core/clone';
-import isObject from '../is/isObject';
+import clone from '../core/clone.mjs';
+import isObject from '../is/isObject.mjs';
 export default function merge(original, ...values) {
     const ln = values.length;
     let i = 0, object, key, value, sourceKey;

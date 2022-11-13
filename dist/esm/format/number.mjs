@@ -1,4 +1,4 @@
-import isInteger from '../is/isInteger';
+import isInteger from '../is/isInteger.mjs';
 /**
  * Formatting number
  * @param {String|Number} value

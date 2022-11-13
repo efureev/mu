@@ -1,7 +1,7 @@
-import isArguments from '../is/isArguments';
-import isBuffer from '../is/isBuffer';
-import isTypedArray from '../is/isTypedArray';
-import times from '../utils/times';
+import isArguments from '../is/isArguments.mjs';
+import isBuffer from '../is/isBuffer.mjs';
+import isTypedArray from '../is/isTypedArray.mjs';
+import times from '../utils/times.mjs';
 import isIndex from './isIndex.mjs';
 /** Used for built-in method references. */
 const objectProto = Object.prototype;

@@ -1,5 +1,5 @@
-import clone from '../core/clone';
-import isObject from '../is/isObject';
+import clone from '../core/clone.mjs';
+import isObject from '../is/isObject.mjs';
 /**
  * Assigns own and inherited enumerable string keyed properties of source
  * objects to the destination object for all destination properties that

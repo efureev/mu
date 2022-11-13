@@ -1,4 +1,4 @@
-import toString from '../to/toString';
+import toString from '../to/toString.mjs';
 /**
  * Checks if string starts with the given target string
  *

@@ -1,7 +1,7 @@
 /**
  * Compares the contents of 2 or more objects using strict equality.
  */
-import isObject from '../is/isObject';
+import isObject from '../is/isObject.mjs';
 export default function equal(origin, ...list) {
     let i, l, leftChain, rightChain;
     if (!isObject(origin) || list.length === 0) {

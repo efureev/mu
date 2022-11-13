@@ -1,5 +1,5 @@
-import toString from '../to/toString';
-import { reTrim } from '../core/vars';
+import toString from '../to/toString.mjs';
+import { reTrim } from '../core/vars.mjs';
 /**
  * This function trim string
  *

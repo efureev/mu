@@ -1,5 +1,5 @@
 /** Used as references for various `Number` constants. */
-import { reIsUint } from '../core/vars';
+import { reIsUint } from '../core/vars.mjs';
 /**
  * Checks if `value` is a valid array-like index.
  *

@@ -1,10 +1,10 @@
-import objectsEqual from '../object/equals';
-import arraysEquals from '../array/equals';
-import isObject from '../is/isObject';
-import isString from '../is/isString';
-import isBoolean from '../is/isBoolean';
-import isNumeric from '../is/isNumeric';
-import isFunction from '../is/isFunction';
+import objectsEqual from '../object/equals.mjs';
+import arraysEquals from '../array/equals.mjs';
+import isObject from '../is/isObject.mjs';
+import isString from '../is/isString.mjs';
+import isBoolean from '../is/isBoolean.mjs';
+import isNumeric from '../is/isNumeric.mjs';
+import isFunction from '../is/isFunction.mjs';
 /**
  * @param {*} first
  * @param {*} second

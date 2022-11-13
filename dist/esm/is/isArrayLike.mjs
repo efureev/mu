@@ -1,5 +1,5 @@
-import isFunction from '../is/isFunction';
-import isLength from '../is/isLength';
+import isFunction from '../is/isFunction.mjs';
+import isLength from '../is/isLength.mjs';
 /**
  * Checks if `value` is array-like. A value is considered array-like if it's
  * not a function and has a `value.length` that's an integer greater than or

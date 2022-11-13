@@ -1,5 +1,5 @@
 /** Used for built-in method references. */
-import isPrototype from '../../is/isPrototype';
+import isPrototype from '../../is/isPrototype.mjs';
 const objectProto = Object.prototype;
 /** Used to check objects for own properties. */
 const hasOwnProperty = objectProto.hasOwnProperty;

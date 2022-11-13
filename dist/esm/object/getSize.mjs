@@ -1,4 +1,4 @@
-import isObject from '../is/isObject';
+import isObject from '../is/isObject.mjs';
 /**
  * Returns count of properties of the object
  *
