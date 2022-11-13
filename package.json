@@ -3,7 +3,7 @@
   "description": "Helpful JS/TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "4.1.5",
+  "version": "4.1.6",
   "author": {
     "name": "Eugene Fureev"
   },
