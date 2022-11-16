@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning][semver].
 
 - [string] Add `normalizeName` && `normalizeCustom`: Replace non-alphanumeric chars to a defined string and remove
   consecutive duplicates.
-- [string] Add `removeConsecutiveDuplicates`: Remove consecutive duplicates.
+- [string] Add `removeConsecutiveDuplicates`: Remove consecutive duplicates
 - [string] Add `trimAny`: Trim any characters
 
 ## [4.1.0] - 2022-11-10
