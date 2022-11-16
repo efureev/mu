@@ -12,7 +12,10 @@ import { removeConsecutiveDuplicates } from './replace.mjs';
  * @returns {string}
  */
 export default function normalizeName(str, replace = '-', round = ['-', '_']) {
-    return normalizeCustom(str.trim(), replace, reNonAlpha, round);
+    return normalizeCustom(str, replace, reNonAlpha, round);
+}
+export function normalizeKebab(str) {
+    return normalizeCustom(str, '-', /[^0-9a-zA-Z\-]/g, '-');
 }
 export function normalizeCustom(str, replace = '-', re, round) {
     return removeConsecutiveDuplicates(trimAny(str.trim().replace(re, replace), round), round);

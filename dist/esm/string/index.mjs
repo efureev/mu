@@ -1,7 +1,7 @@
 import camelCase, { pascalCase } from './camelCase.mjs';
 import clearSpaces from './clearSpaces.mjs';
 import endsWith from './endsWith.mjs';
-import normalizeName, { normalizeCustom } from './normalize.mjs';
+import normalizeName, { normalizeCustom, normalizeKebab } from './normalize.mjs';
 import pad, { padEnd, padStart } from './pad.mjs';
 import startsWith from './startsWith.mjs';
 import stringToArray from './stringToArray.mjs';
@@ -13,5 +13,5 @@ import trimSuffix from './trimSuffix.mjs';
 import upperFirst from './upperFirst.mjs';
 import { hasUnicode } from './unicode.mjs';
 import { removeConsecutiveDuplicates } from './replace.mjs';
-export { camelCase, clearSpaces, endsWith, hasUnicode, normalizeCustom, normalizeName, pad, padEnd, padStart, pascalCase, removeConsecutiveDuplicates, replaceByTemplate, startsWith, stringToArray, strtr, titleCase, trim, trimAny, trimPrefix, trimSuffix, upperFirst, };
+export { camelCase, clearSpaces, endsWith, hasUnicode, normalizeCustom, normalizeKebab, normalizeName, pad, padEnd, padStart, pascalCase, removeConsecutiveDuplicates, replaceByTemplate, startsWith, stringToArray, strtr, titleCase, trim, trimAny, trimPrefix, trimSuffix, upperFirst, };
 //# sourceMappingURL=index.mjs.map

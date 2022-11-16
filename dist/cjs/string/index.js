@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.upperFirst = exports.trimSuffix = exports.trimPrefix = exports.trimAny = exports.trim = exports.titleCase = exports.strtr = exports.stringToArray = exports.startsWith = exports.replaceByTemplate = exports.removeConsecutiveDuplicates = exports.pascalCase = exports.padStart = exports.padEnd = exports.pad = exports.normalizeName = exports.normalizeCustom = exports.hasUnicode = exports.endsWith = exports.clearSpaces = exports.camelCase = void 0;
+exports.upperFirst = exports.trimSuffix = exports.trimPrefix = exports.trimAny = exports.trim = exports.titleCase = exports.strtr = exports.stringToArray = exports.startsWith = exports.replaceByTemplate = exports.removeConsecutiveDuplicates = exports.pascalCase = exports.padStart = exports.padEnd = exports.pad = exports.normalizeName = exports.normalizeKebab = exports.normalizeCustom = exports.hasUnicode = exports.endsWith = exports.clearSpaces = exports.camelCase = void 0;
 const camelCase_1 = __importStar(require("./camelCase"));
 exports.camelCase = camelCase_1.default;
 Object.defineProperty(exports, "pascalCase", { enumerable: true, get: function () { return camelCase_1.pascalCase; } });
@@ -37,6 +37,7 @@ exports.endsWith = endsWith_1.default;
 const normalize_1 = __importStar(require("./normalize"));
 exports.normalizeName = normalize_1.default;
 Object.defineProperty(exports, "normalizeCustom", { enumerable: true, get: function () { return normalize_1.normalizeCustom; } });
+Object.defineProperty(exports, "normalizeKebab", { enumerable: true, get: function () { return normalize_1.normalizeKebab; } });
 const pad_1 = __importStar(require("./pad"));
 exports.pad = pad_1.default;
 Object.defineProperty(exports, "padEnd", { enumerable: true, get: function () { return pad_1.padEnd; } });

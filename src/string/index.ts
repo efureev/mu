@@ -1,7 +1,7 @@
 import camelCase, { pascalCase } from './camelCase'
 import clearSpaces from './clearSpaces'
 import endsWith from './endsWith'
-import normalizeName, { normalizeCustom } from './normalize'
+import normalizeName, { normalizeCustom, normalizeKebab } from './normalize'
 import pad, { padEnd, padStart } from './pad'
 import startsWith from './startsWith'
 import stringToArray from './stringToArray'
@@ -20,6 +20,7 @@ export {
   endsWith,
   hasUnicode,
   normalizeCustom,
+  normalizeKebab,
   normalizeName,
   pad,
   padEnd,

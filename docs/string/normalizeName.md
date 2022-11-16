@@ -4,7 +4,8 @@
 
 ## Description
 
-Normalize string by RegExp `[^0-9a-zA-Z_]`
+Replace non-alphanumeric chars to a defined string and remove
+consecutive duplicates (by RegExp `[^0-9a-zA-Z_]`)
 
 ## Use
 

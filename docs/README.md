@@ -138,28 +138,29 @@ npm install @feugene/mu
 
 ### String
 
-| Function                                                             | Return | Description                                                          |
-|:---------------------------------------------------------------------|:-------|:---------------------------------------------------------------------|
-| [camelCase](string/camelCase.md)                                     | string | Convert a dash/dot/underscore/space separated string to camelCase    |
-| clearSpaces                                                          | string | Remove extra spaces from string                                      |
-| endsWith                                                             | string | Checks if string ends with the given target string                   |
-| [hasUnicode](string/hasUnicode.md)                                   | bool   | Checks if `string` contains Unicode symbols                          |
-| normalizeCustom                                                      | string | Normalize string by custom RegExp                                    |
-| [normalizeName](string/normalizeName.md)                             | string | Normalize string by RegExp `[^0-9a-zA-Z_]`                           |
-| [padStart](string/padStart.md)                                       | string | add leading symbols                                                  |
-| padEnd                                                               | string | add ending symbols                                                   |
-| [pascalCase](string/pascalCase.md)                                   | string | Convert a dash/dot/underscore/space separated string to PascalCase   |
-| [removeConsecutiveDuplicates](string/removeConsecutiveDuplicates.md) | string | Remove consecutive duplicates                                        |
-| [replaceByTemplate](string/replaceByTemplate.md)                     | string | Translate characters or replace substrings in string by map          |
-| startsWith                                                           | string | Checks if string starts with the given target string                 |
-| stringToArray                                                        | string | Converts `string` to an array                                        |
-| [strtr](string/strtr.md)                                             | string | Translate characters or replace substrings in string                 |
-| titleCase                                                            | string | Converts the first character of every word into string to upper case |
-| trim                                                                 | string |                                                                      |
-| [trimAny](string/trimAny.md)                                         | string | Trim any characters                                                  |
-| [trimPrefix](string/trimPrefix.md)                                   | string | Remove a prefix from a target string                                 |
-| [trimSuffix](string/trimSuffix.md)                                   | string | Remove a suffix from a target string                                 |
-| upperFirst                                                           | string | Converts the first character of string to upper case                 |
+| Function                                                              | Return | Description                                                          |
+|:----------------------------------------------------------------------|:-------|:---------------------------------------------------------------------|
+| [camelCase](string/camelCase.md)                                      | string | Convert a dash/dot/underscore/space separated string to camelCase    |
+| clearSpaces                                                           | string | Remove extra spaces from string                                      |
+| endsWith                                                              | string | Checks if string ends with the given target string                   |
+| [hasUnicode](string/hasUnicode.md)                                    | bool   | Checks if `string` contains Unicode symbols                          |
+| normalizeCustom                                                       | string | Normalize string by custom RegExp                                    |
+| [normalizeName](string/normalizeName.md)                              | string | Normalize string by RegExp `[^0-9a-zA-Z_]`                           |
+| [normalizeKebab](string/normalizeKebab.md)                            | string | Normalize string to kebab (by RegExp `[^0-9a-zA-Z\-]`)               |
+| [padStart](string/padStart.md)                                        | string | add leading symbols                                                  |
+| padEnd                                                                | string | add ending symbols                                                   |
+| [pascalCase](string/pascalCase.md)                                    | string | Convert a dash/dot/underscore/space separated string to PascalCase   |
+| [removeConsecutiveDuplicates](string/removeConsecutiveDuplicates.md)  | string | Remove consecutive duplicates                                        |
+| [replaceByTemplate](string/replaceByTemplate.md)                      | string | Translate characters or replace substrings in string by map          |
+| startsWith                                                            | string | Checks if string starts with the given target string                 |
+| stringToArray                                                         | string | Converts `string` to an array                                        |
+| [strtr](string/strtr.md)                                              | string | Translate characters or replace substrings in string                 |
+| titleCase                                                             | string | Converts the first character of every word into string to upper case |
+| trim                                                                  | string |                                                                      |
+| [trimAny](string/trimAny.md)                                          | string | Trim any characters                                                  |
+| [trimPrefix](string/trimPrefix.md)                                    | string | Remove a prefix from a target string                                 |
+| [trimSuffix](string/trimSuffix.md)                                    | string | Remove a suffix from a target string                                 |
+| upperFirst                                                            | string | Converts the first character of string to upper case                 |
 
 ### Date
 

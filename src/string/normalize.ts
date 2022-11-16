@@ -17,7 +17,11 @@ export default function normalizeName(
   replace: string = '-',
   round: string | string[] = ['-', '_']
 ): string {
-  return normalizeCustom(str.trim(), replace, reNonAlpha, round)
+  return normalizeCustom(str, replace, reNonAlpha, round)
+}
+
+export function normalizeKebab(str: string): string {
+  return normalizeCustom(str, '-', /[^0-9a-zA-Z\-]/g, '-')
 }
 
 export function normalizeCustom(str: string, replace: string = '-', re: RegExp, round: string | string[]): string {
