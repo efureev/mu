@@ -1,3 +1,5 @@
+export const reNonAlpha = /[^0-9a-zA-Z_]/g
+
 export const reTrim = /^\s+|\s+$/g
 
 /** Used to detect binary string values. */

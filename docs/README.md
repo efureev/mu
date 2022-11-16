@@ -9,7 +9,7 @@ Add to `package.json` file the lib as dependency.
 ```json
 {
   "dependencies": {
-    "@feugene/mu": "^4.0"
+    "@feugene/mu": "^4.1"
   }
 }
 ```
@@ -108,7 +108,7 @@ npm install @feugene/mu
 | fromQueryString                            | object  | Converts a query string back into an object                                               | `fromQueryString('foo=1&bar=2')`                                |                              |
 | getSize                                    | int     | Returns count of properties of the object                                                 | `getSize({k: 1, v: []})`                                        |                              |
 | logicalAnd                                 | boolean | Logical `AND` by object's values                                                          | `logicalAnd({ a: true, b: true, c: false })`                    | `false`                      |
-| [merge](object/merge.js)                   | object  | Merge 2 or more objects recursively                                                       | `merge({k: 1}, {v: 'test'}, {k: 2})`                            |                              |
+| [merge](object/merge.md)                   | object  | Merge 2 or more objects recursively                                                       | `merge({k: 1}, {v: 'test'}, {k: 2})`                            |                              |
 | [pathToObject](object/pathToObject.md)     | object  | Return Object from sting path                                                             | `pathToObject('key.sub', 1)`                                    | {key:{sub:1}}                |
 | [pick](object/pick.md)                     | object  | Creates an object composed of the picked object properties.                               | `pick({a:1, b:2, c:3}, ['a', 'b'])`                             |                              |
 | [remove](object/remove.md)                 | object  | Remove value by deep key in object(array)                                                 | `remove(obj, 'key.sub.items.1')`                                |                              |
@@ -138,23 +138,28 @@ npm install @feugene/mu
 
 ### String
 
-| Function                                         | Return | Description                                                          |
-|:-------------------------------------------------|:-------|:---------------------------------------------------------------------|
-| trim                                             | string |                                                                      |
-| [camelCase](string/camelCase.md)                 | string | Convert a dash/dot/underscore/space separated string to camelCase    |
-| clearSpaces                                      | string | Remove extra spaces from string                                      |
-| endsWith                                         | string | Checks if string ends with the given target string                   |
-| [hasUnicode](string/hasUnicode.md)               | bool   | Checks if `string` contains Unicode symbols                          |
-| [pascalCase](string/pascalCase.md)               | string | Convert a dash/dot/underscore/space separated string to PascalCase   |
-| [padStart](string/padStart.md)                   | string | add leading symbols                                                  |
-| padEnd                                           | string | add ending symbols                                                   |
-| [replaceByTemplate](string/replaceByTemplate.md) | string | Translate characters or replace substrings in string by map          |
-| startsWith                                       | string | Checks if string starts with the given target string                 |
-| [strtr](string/strtr.md)                         | string | Translate characters or replace substrings in string                 |
-| titleCase                                        | string | Converts the first character of every word into string to upper case |
-| [trimPrefix](string/trimPrefix.md)               | string | Remove a prefix from a target string                                 |
-| [trimSuffix](string/trimSuffix.md)               | string | Remove a suffix from a target string                                 |
-| upperFirst                                       | string | Converts the first character of string to upper case                 |
+| Function                                                             | Return | Description                                                          |
+|:---------------------------------------------------------------------|:-------|:---------------------------------------------------------------------|
+| [camelCase](string/camelCase.md)                                     | string | Convert a dash/dot/underscore/space separated string to camelCase    |
+| clearSpaces                                                          | string | Remove extra spaces from string                                      |
+| endsWith                                                             | string | Checks if string ends with the given target string                   |
+| [hasUnicode](string/hasUnicode.md)                                   | bool   | Checks if `string` contains Unicode symbols                          |
+| normalizeCustom                                                      | string | Normalize string by custom RegExp                                    |
+| [normalizeName](string/normalizeName.md)                             | string | Normalize string by RegExp `[^0-9a-zA-Z_]`                           |
+| [padStart](string/padStart.md)                                       | string | add leading symbols                                                  |
+| padEnd                                                               | string | add ending symbols                                                   |
+| [pascalCase](string/pascalCase.md)                                   | string | Convert a dash/dot/underscore/space separated string to PascalCase   |
+| [removeConsecutiveDuplicates](string/removeConsecutiveDuplicates.md) | string | Remove consecutive duplicates                                        |
+| [replaceByTemplate](string/replaceByTemplate.md)                     | string | Translate characters or replace substrings in string by map          |
+| startsWith                                                           | string | Checks if string starts with the given target string                 |
+| stringToArray                                                        | string | Converts `string` to an array                                        |
+| [strtr](string/strtr.md)                                             | string | Translate characters or replace substrings in string                 |
+| titleCase                                                            | string | Converts the first character of every word into string to upper case |
+| trim                                                                 | string |                                                                      |
+| [trimAny](string/trimAny.md)                                         | string | Trim any characters                                                  |
+| [trimPrefix](string/trimPrefix.md)                                   | string | Remove a prefix from a target string                                 |
+| [trimSuffix](string/trimSuffix.md)                                   | string | Remove a suffix from a target string                                 |
+| upperFirst                                                           | string | Converts the first character of string to upper case                 |
 
 ### Date
 
