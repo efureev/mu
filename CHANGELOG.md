@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning][semver].
 
 ### Added
 
-- [string] Add `normalizeKebab`: Replace non-alphanumeric chars to `-`.
+- [string] Add `normalizeKebab`: Replace non-alphanumeric chars to `-`
 
 ## [4.2.0] - 2022-11-16
 
