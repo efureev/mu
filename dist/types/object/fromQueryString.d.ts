@@ -1,4 +1,4 @@
-declare type FromQueryStringOptions = {
+type FromQueryStringOptions = {
     decodeName: boolean;
 };
 /**

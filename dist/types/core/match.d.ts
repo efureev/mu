@@ -1,7 +1,7 @@
 interface casesObjectType extends Record<PropertyKey, any> {
     default?: any;
 }
-declare type casesType = casesObjectType | [() => PropertyKey, any][];
+type casesType = casesObjectType | [() => PropertyKey, any][];
 /**
  * @param {*} expr
  * @param {object|array} cases

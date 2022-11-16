@@ -36,8 +36,8 @@
  * @return {Object[]}
  * @todo write tests
  */
-declare type oType = Record<string, any>;
-declare type oTypeArray = oType[];
+type oType = Record<string, any>;
+type oTypeArray = oType[];
 export default function toQueryObjects(name: string, value: oType | oTypeArray, recursive?: boolean): Record<string, any>[];
 export {};
 //# sourceMappingURL=toQueryObjects.d.ts.map

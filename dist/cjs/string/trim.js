@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.trimAny = void 0;
 const toString_1 = __importDefault(require("../to/toString"));
 const vars_1 = require("../core/vars");
 /**
@@ -19,4 +20,19 @@ function trim(string) {
     return string.replace(vars_1.reTrim, '');
 }
 exports.default = trim;
+/**
+ * Trim any characters
+ * @param {string} str
+ * @param {string|string[]} chars
+ */
+function trimAny(str, chars) {
+    let start = 0, end = str.length;
+    const charsArray = typeof chars === 'string' ? [chars] : chars;
+    while (start < end && charsArray.indexOf(str[start]) >= 0)
+        ++start;
+    while (end > start && charsArray.indexOf(str[end - 1]) >= 0)
+        --end;
+    return start > 0 || end < str.length ? str.substring(start, end) : str;
+}
+exports.trimAny = trimAny;
 //# sourceMappingURL=trim.js.map

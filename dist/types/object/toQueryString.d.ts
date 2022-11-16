@@ -1,4 +1,4 @@
-declare type ToQueryStringOptions = {
+type ToQueryStringOptions = {
     encodeName: boolean;
 };
 /**

@@ -1,3 +1,4 @@
+export declare const reNonAlpha: RegExp;
 export declare const reTrim: RegExp;
 /** Used to detect binary string values. */
 export declare const reIsBinary: RegExp;

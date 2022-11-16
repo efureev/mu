@@ -124,7 +124,7 @@
     "clean": "rimraf dist",
     "declarations": "tsc -p tsconfig.types.json",
     "build:esm": "tsc -p tsconfig.esm.json && yarn rename",
-    "build:cjs": "tsc -p tsconfig.cjs.json && echo '{\"type\": \"commonjs\"}' > dist/cjs/package.json",
+    "build:cjs": "tsc -p tsconfig.cjs.json",
     "build": "npm-run-all -l clean -p build:esm build:cjs declarations",
     "postbuild": "tsc-alias -v --dir dist/cjs -p tsconfig.cjs.json && tsc-alias -v --dir dist/esm -p tsconfig.esm.json && tsc-alias -v --dir dist/types -p tsconfig.types.json",
     "rename": "ts-node ./.scripts/rename.ts",

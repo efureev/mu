@@ -1,2 +1,2 @@
-export const VERSION = '4.1.0';
+export const VERSION = '4.2.0';
 //# sourceMappingURL=config.mjs.map

@@ -10,7 +10,7 @@ import type { TextNumber } from '../internal/types';
  *
  * times(3); // => ['0', '1', '2']
  */
-declare type F = (idx: number) => TextNumber;
+type F = (idx: number) => TextNumber;
 export default function times(n?: number, iteratee?: TextNumber | F): TextNumber[];
 export {};
 //# sourceMappingURL=times.d.ts.map

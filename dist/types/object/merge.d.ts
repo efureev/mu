@@ -34,7 +34,7 @@
  *         }
  *     }
  */
-declare type record = Record<PropertyKey, any>;
+type record = Record<PropertyKey, any>;
 export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T;
 export {};
 //# sourceMappingURL=merge.d.ts.map
