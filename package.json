@@ -1,9 +1,9 @@
 {
   "name": "@feugene/mu",
-  "description": "Helpful JS/TS utilities without dependencies",
+  "description": "Helpful TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "4.2.2",
+  "version": "4.3.0",
   "author": {
     "name": "Eugene Fureev"
   },
@@ -135,7 +135,7 @@
     "docsify": "docsify serve ./docs"
   },
   "engines": {
-    "node": "^16 || ^17 || ^18 || ^19"
+    "node": "^16 || ^17 || ^18 || ^19 || ^20"
   },
   "nyc": {
     "extension": [

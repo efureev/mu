@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.3.0] - 2023-04-25
+
+### Added
+
+- [chore] Add support Node 20
+
 ## [4.2.2] - 2022-11-16
 
 ### Added
