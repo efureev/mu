@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.4.0] - 2023-05-03
+
+### Added
+
+- [structures] Add `CollectionArray`
+
 ## [4.3.0] - 2023-04-25
 
 ### Added
