@@ -19,6 +19,7 @@ import isPrototype from './isPrototype'
 import isString, { isStrings } from './isString'
 import isSymbol from './isSymbol'
 import isTypedArray from './isTypedArray'
+import isUrl from './isUrl'
 
 export {
   isAdvancedType,
@@ -60,4 +61,5 @@ export {
   isStrings,
   isSymbol,
   isTypedArray,
+  isUrl,
 }

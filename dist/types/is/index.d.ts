@@ -19,5 +19,6 @@ import isPrototype from './isPrototype';
 import isString, { isStrings } from './isString';
 import isSymbol from './isSymbol';
 import isTypedArray from './isTypedArray';
-export { isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isDates, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, };
+import isUrl from './isUrl';
+export { isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isDates, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, isUrl, };
 //# sourceMappingURL=index.d.ts.map

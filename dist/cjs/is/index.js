@@ -26,7 +26,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isTypedArray = exports.isSymbol = exports.isStrings = exports.isString = exports.isPrototype = exports.isObjects = exports.isObjectLike = exports.isObject = exports.isNumerics = exports.isNumeric = exports.isNulls = exports.isNull = exports.isNils = exports.isNil = exports.isLength = exports.isIntegers = exports.isInteger = exports.isFunctions = exports.isFunction = exports.isFloats = exports.isFloatCanonical = exports.isFloat = exports.isEvens = exports.isEven = exports.isEmptyObject = exports.isEmpty = exports.isDates = exports.isDate = exports.isBuffer = exports.isBooleans = exports.isBoolean = exports.isBlobs = exports.isBlob = exports.isBasicType = exports.isArrays = exports.isArrayLike = exports.isArray = exports.isArguments = exports.isAdvancedType = void 0;
+exports.isUrl = exports.isTypedArray = exports.isSymbol = exports.isStrings = exports.isString = exports.isPrototype = exports.isObjects = exports.isObjectLike = exports.isObject = exports.isNumerics = exports.isNumeric = exports.isNulls = exports.isNull = exports.isNils = exports.isNil = exports.isLength = exports.isIntegers = exports.isInteger = exports.isFunctions = exports.isFunction = exports.isFloats = exports.isFloatCanonical = exports.isFloat = exports.isEvens = exports.isEven = exports.isEmptyObject = exports.isEmpty = exports.isDates = exports.isDate = exports.isBuffer = exports.isBooleans = exports.isBoolean = exports.isBlobs = exports.isBlob = exports.isBasicType = exports.isArrays = exports.isArrayLike = exports.isArray = exports.isArguments = exports.isAdvancedType = void 0;
 const isArguments_1 = __importDefault(require("./isArguments"));
 exports.isArguments = isArguments_1.default;
 const isArray_1 = __importStar(require("./isArray"));
@@ -87,4 +87,6 @@ const isSymbol_1 = __importDefault(require("./isSymbol"));
 exports.isSymbol = isSymbol_1.default;
 const isTypedArray_1 = __importDefault(require("./isTypedArray"));
 exports.isTypedArray = isTypedArray_1.default;
+const isUrl_1 = __importDefault(require("./isUrl"));
+exports.isUrl = isUrl_1.default;
 //# sourceMappingURL=index.js.map

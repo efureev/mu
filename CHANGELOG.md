@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.5.0] - 2023-07-27
+
+### Added
+
+- [is] Add `isUrl`
+
 ## [4.4.0] - 2023-05-03
 
 ### Added

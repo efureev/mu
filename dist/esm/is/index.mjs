@@ -19,5 +19,6 @@ import isPrototype from './isPrototype.mjs';
 import isString, { isStrings } from './isString.mjs';
 import isSymbol from './isSymbol.mjs';
 import isTypedArray from './isTypedArray.mjs';
-export { isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isDates, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, };
+import isUrl from './isUrl.mjs';
+export { isAdvancedType, isArguments, isArray, isArrayLike, isArrays, isBasicType, isBlob, isBlobs, isBoolean, isBooleans, isBuffer, isDate, isDates, isEmpty, isEmptyObject, isEven, isEvens, isFloat, isFloatCanonical, isFloats, isFunction, isFunctions, isInteger, isIntegers, isLength, isNil, isNils, isNull, isNulls, isNumeric, isNumerics, isObject, isObjectLike, isObjects, isPrototype, isString, isStrings, isSymbol, isTypedArray, isUrl, };
 //# sourceMappingURL=index.mjs.map

@@ -1,4 +1,5 @@
 import { Stack } from './Stack';
 import { Queue } from './Queue';
-export { Stack, Queue };
+import { CollectionArray } from './CollectionArray';
+export { Stack, Queue, CollectionArray };
 //# sourceMappingURL=index.d.ts.map
