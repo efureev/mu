@@ -3,7 +3,7 @@
   "description": "Helpful TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "4.5.0",
+  "version": "4.5.1",
   "author": {
     "name": "Eugene Fureev"
   },
