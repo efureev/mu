@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.6.0] - 2023-10-21
+
+### Changed
+
+- [core] Changed signature `match`
+
 ## [4.5.0] - 2023-07-27
 
 ### Added

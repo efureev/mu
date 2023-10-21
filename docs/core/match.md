@@ -37,8 +37,7 @@ const matched = match(expr, {
   Oranges: 'Oranges are $0.59 a pound.',
   Mangoes: 'Mangoes and papayas are $2.79 a pound.',
   Papayas: 'Papayas are $1.70 a pound.',
-  default: 'Nothing',
-})
+}, { default: 'Nothing' })
 
 // matched === 'Nothing'
 ```
@@ -47,12 +46,12 @@ const matched = match(expr, {
 
 ```js
 const matched = match(4, {
-  1      : 'One',
-  2      : 'Two',
-  4      : 'Four',
-  3      : `Three`,
-  default: `Unknown Value`,
-}, false)
+  1      : "One",
+  2      : "Two",
+  4      : "Four",
+  3      : `Three`
+}, { default: `Unknown Value`, strict: false });
+
 
 // matched === 'Four'
 ```

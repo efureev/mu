@@ -1,23 +1,33 @@
-interface casesObjectType extends Record<PropertyKey, any> {
-  default?: any
-}
+import { isObject } from '~/is'
+
+interface casesObjectType extends Record<PropertyKey, any> {}
 
 type casesType = casesObjectType | [() => PropertyKey, any][]
+
+type matchOptions = {
+  strict?: boolean
+  default?: any
+}
 
 /**
  * @param {*} expr
  * @param {object|array} cases
- * @param {boolean} strict Strict comparison (===) or (==). For example, it should be used for digit case-keys.
+ * @param {matchOptions} options
  * @return {*}
  */
-export default function match(expr: any, cases: casesType, strict: boolean = true): any {
+export default function match(expr: any, cases: casesType, options?: matchOptions): any {
+  const opt = {
+    strict: true,
+    ...(isObject(options) ? options : {}),
+  }
+
   for (const [pattern, action] of Array.isArray(cases) ? cases : Object.entries(cases)) {
     const prn = typeof pattern === 'function' ? pattern() : pattern
 
-    if (strict ? expr === prn : expr == prn) {
+    if (opt.strict ? expr === prn : expr == prn) {
       return typeof action === 'function' ? action() : action
     }
   }
 
-  return Array.isArray(cases) ? undefined : cases.default
+  return typeof opt.default === 'function' ? opt.default() : opt.default
 }

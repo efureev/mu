@@ -28,12 +28,15 @@ describe('match', () => {
     it('with default with no answer', () => {
       const expr = 'text'
 
-      const matched = match(expr, {
-        Oranges: 'Oranges are $0.59 a pound.',
-        Mangoes: 'Mangoes and papayas are $2.79 a pound.',
-        Papayas: 'Papayas are $1.70 a pound.',
-        default: `Sorry, we are out of ${expr}.`,
-      })
+      const matched = match(
+        expr,
+        {
+          Oranges: 'Oranges are $0.59 a pound.',
+          Mangoes: 'Mangoes and papayas are $2.79 a pound.',
+          Papayas: 'Papayas are $1.70 a pound.',
+        },
+        { default: `Sorry, we are out of ${expr}.` }
+      )
       expect(matched).toEqual(`Sorry, we are out of ${expr}.`)
     })
   })
@@ -42,13 +45,16 @@ describe('match', () => {
     const expr = 4
 
     it('with strict', () => {
-      const matched = match(expr, {
-        1: 'One',
-        2: 'Two',
-        4: 'Four',
-        3: `Three`,
-        default: `Unknown Value`,
-      })
+      const matched = match(
+        expr,
+        {
+          1: 'One',
+          2: 'Two',
+          4: 'Four',
+          3: `Three`,
+        },
+        { default: `Unknown Value` }
+      )
 
       expect(matched).toEqual(`Unknown Value`)
     })
@@ -61,9 +67,8 @@ describe('match', () => {
           2: 'Two',
           4: 'Four',
           3: `Three`,
-          default: `Unknown Value`,
         },
-        false
+        { default: `Four` }
       )
 
       expect(matched).toEqual(`Four`)
@@ -122,6 +127,43 @@ describe('match', () => {
       ])
 
       expect(matched).toEqual(undefined)
+    })
+
+    it('key & value func 2', () => {
+      const matched = match(true, [
+        [() => false, () => `One`],
+        [() => true, () => `Two`],
+        [() => false, () => `Three`],
+        [() => false, () => `Four`],
+      ])
+
+      expect(matched).toEqual(`Two`)
+    })
+
+    it('key & value func 3', () => {
+      const matched = match(true, [
+        [() => false, () => `One`],
+        [() => false, () => `Two`],
+        [() => false, () => `Three`],
+        [() => false, () => `Four`],
+      ])
+
+      expect(matched).toEqual(undefined)
+    })
+
+    it('key & value func 3', () => {
+      const matched = match(
+        true,
+        [
+          [() => false, () => `One`],
+          [() => false, () => `Two`],
+          [() => false, () => `Three`],
+          [() => false, () => `Four`],
+        ],
+        { default: 'Five' }
+      )
+
+      expect(matched).toEqual('Five')
     })
   })
 })
