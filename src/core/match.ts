@@ -1,4 +1,4 @@
-import { isObject } from '~/is'
+import isObject from '~/is/isObject'
 
 interface casesObjectType extends Record<PropertyKey, any> {}
 

@@ -1,6 +1,9 @@
 "use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-const is_1 = require("../is");
+const isObject_1 = __importDefault(require("../is/isObject"));
 /**
  * @param {*} expr
  * @param {object|array} cases
@@ -8,7 +11,7 @@ const is_1 = require("../is");
  * @return {*}
  */
 function match(expr, cases, options) {
-    const opt = Object.assign({ strict: true }, ((0, is_1.isObject)(options) ? options : {}));
+    const opt = Object.assign({ strict: true }, ((0, isObject_1.default)(options) ? options : {}));
     for (const [pattern, action] of Array.isArray(cases) ? cases : Object.entries(cases)) {
         const prn = typeof pattern === 'function' ? pattern() : pattern;
         if (opt.strict ? expr === prn : expr == prn) {

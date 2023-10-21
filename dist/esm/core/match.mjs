@@ -1,4 +1,4 @@
-import { isObject } from '~/is.mjs';
+import isObject from '../is/isObject.mjs';
 /**
  * @param {*} expr
  * @param {object|array} cases
