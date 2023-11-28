@@ -12,5 +12,5 @@ export type monthNamesType = [
   string,
   string,
   string,
-  string
+  string,
 ]

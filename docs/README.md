@@ -9,7 +9,7 @@ Add to `package.json` file the lib as dependency.
 ```json
 {
   "dependencies": {
-    "@feugene/mu": "^4.6"
+    "@feugene/mu": "^4.7"
   }
 }
 ```

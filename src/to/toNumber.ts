@@ -47,8 +47,8 @@ export function stringToNumber(value: string): number {
   return isBinary || reIsOctal.test(value)
     ? parseInt(value.slice(2), isBinary ? 2 : 8)
     : reIsBadHex.test(value)
-    ? NaN
-    : +value
+      ? NaN
+      : +value
 }
 
 export function booleanToNumber(value: boolean): number {

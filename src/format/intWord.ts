@@ -24,15 +24,16 @@ export default function intWord(
 ): string {
   let unit = units.length - 1
   decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
+  const num = +value
 
   for (let i = 0; i < units.length; i++) {
-    if (value < kilo ** (i + 1)) {
+    if (num < kilo ** (i + 1)) {
       unit = i
       break
     }
   }
 
-  const humanized = +value / kilo ** unit
+  const humanized = num / kilo ** unit
   const suffix = units[unit] ? suffixSeparator + units[unit] : ''
 
   return number(humanized, decimals, decPoint, thousandsSeparator) + suffix

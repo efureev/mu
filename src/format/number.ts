@@ -18,11 +18,11 @@ export default function number(
   clearDecimals: boolean = false
 ): string {
   decimals = isNaN(decimals) ? 2 : Math.abs(decimals)
+  const num = Number(value)
+  const sign = num < 0 ? '-' : ''
+  value = Math.abs(+num || 0)
 
-  const sign = value < 0 ? '-' : ''
-  value = Math.abs(+value || 0)
-
-  const intPart = parseInt(value.toFixed(decimals), 10) + ''
+  const intPart = parseInt(num.toFixed(decimals), 10) + ''
   // const intPartStr = intPart + ''
   const j = intPart.length > 3 ? intPart.length % 3 : 0
 
@@ -31,10 +31,10 @@ export default function number(
     (j ? intPart.slice(0, j) + thousandsSeparator : '') +
     intPart.slice(j).replace(/(\d{3})(?=\d)/g, '$1' + thousandsSeparator) +
     (decimals
-      ? clearDecimals && isInteger(value)
+      ? clearDecimals && isInteger(num)
         ? ''
         : decPoint +
-          Math.abs(value - +intPart)
+          Math.abs(num - +intPart)
             .toFixed(decimals)
             .slice(2)
       : '')

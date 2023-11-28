@@ -19,13 +19,14 @@ const UnitsDefault = ['', 'K', 'M', 'B', 'T'];
 function intWord(value, units = UnitsDefault, kilo = 1000, decimals = 2, decPoint = '.', thousandsSeparator = ',', suffixSeparator = '') {
     let unit = units.length - 1;
     decimals = isNaN(decimals) ? 2 : Math.abs(decimals);
+    const num = +value;
     for (let i = 0; i < units.length; i++) {
-        if (value < kilo ** (i + 1)) {
+        if (num < kilo ** (i + 1)) {
             unit = i;
             break;
         }
     }
-    const humanized = +value / kilo ** unit;
+    const humanized = num / kilo ** unit;
     const suffix = units[unit] ? suffixSeparator + units[unit] : '';
     return (0, number_1.default)(humanized, decimals, decPoint, thousandsSeparator) + suffix;
 }

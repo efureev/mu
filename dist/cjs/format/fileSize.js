@@ -15,13 +15,14 @@ const intWord_1 = __importDefault(require("./intWord"));
  * @returns {string}
  */
 function fileSize(size, kilo = 1024, decimals = 2, decPoint = '.', thousandsSeparator = ',', suffixSeparator = ' ') {
-    if (size <= 0) {
+    const num = +size;
+    if (num <= 0) {
         return '0 bytes';
     }
-    if (size < kilo) {
+    if (num < kilo) {
         decimals = 0;
     }
-    return (0, intWord_1.default)(size, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSeparator, suffixSeparator);
+    return (0, intWord_1.default)(num, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSeparator, suffixSeparator);
 }
 exports.default = fileSize;
 //# sourceMappingURL=fileSize.js.map

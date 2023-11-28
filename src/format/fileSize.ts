@@ -19,16 +19,18 @@ export default function fileSize(
   thousandsSeparator: string = ',',
   suffixSeparator: string = ' '
 ): string {
-  if (size <= 0) {
+  const num = +size
+
+  if (num <= 0) {
     return '0 bytes'
   }
 
-  if (size < kilo) {
+  if (num < kilo) {
     decimals = 0
   }
 
   return intWord(
-    size,
+    num,
     ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'],
     kilo,
     decimals,

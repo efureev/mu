@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning][semver].
 
 ## [unreleased]
 
+## [4.7.0] - 2023-11-28
+
+### Added
+
+- [core] Support Node 21
+
+### Removed
+
+- [core] Remove support Node 16|17
+
 ## [4.6.0] - 2023-10-21
 
 ### Changed
