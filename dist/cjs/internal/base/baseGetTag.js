@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = baseGetTag;
 const root_1 = __importDefault(require("../../internal/root"));
 const getRawTag_1 = __importDefault(require("../../internal/getRawTag"));
 const nullTag = '[object Null]';
@@ -23,5 +24,4 @@ function baseGetTag(value) {
         ? (0, getRawTag_1.default)(value)
         : Object.prototype.toString.call(value);
 }
-exports.default = baseGetTag;
 //# sourceMappingURL=baseGetTag.js.map

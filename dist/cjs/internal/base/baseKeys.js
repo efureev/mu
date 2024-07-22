@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = baseKeys;
 /** Used for built-in method references. */
 const isPrototype_1 = __importDefault(require("../../is/isPrototype"));
 const objectProto = Object.prototype;
@@ -29,5 +30,4 @@ function baseKeys(object) {
     }
     return result;
 }
-exports.default = baseKeys;
 //# sourceMappingURL=baseKeys.js.map

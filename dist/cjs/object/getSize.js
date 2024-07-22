@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = getSize;
 const isObject_1 = __importDefault(require("../is/isObject"));
 /**
  * Returns count of properties of the object
@@ -23,5 +24,4 @@ function getSize(object) {
     }
     return size;
 }
-exports.default = getSize;
 //# sourceMappingURL=getSize.js.map

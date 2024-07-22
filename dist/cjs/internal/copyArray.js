@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = copyArray;
 /**
  * Copies the values of `source` to `array`.
  *
@@ -17,5 +18,4 @@ function copyArray(source, array) {
     }
     return array;
 }
-exports.default = copyArray;
 //# sourceMappingURL=copyArray.js.map

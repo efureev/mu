@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = values;
 const keys_1 = __importDefault(require("../core/keys"));
 /**
  * The base implementation of `values`
@@ -40,5 +41,4 @@ function baseValues(object, properties) {
 function values(object) {
     return object == null ? [] : baseValues(object, (0, keys_1.default)(object));
 }
-exports.default = values;
 //# sourceMappingURL=values.js.map

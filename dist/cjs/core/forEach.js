@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = forEach;
 const arrayEach_1 = __importDefault(require("../array/arrayEach"));
 const keys_1 = __importDefault(require("./keys"));
 const isArrayLike_1 = __importDefault(require("../is/isArrayLike"));
@@ -16,7 +17,6 @@ function forEach(collection, iterateFn) {
     const func = createBaseEach(baseEach);
     return func(collection, iterateFn);
 }
-exports.default = forEach;
 function createBaseFor(fromRight = false) {
     return function (object, iterateFn, keysFunc) {
         let index = -1, iterable = new Object(object), properties = keysFunc(object), length = properties.length, key;

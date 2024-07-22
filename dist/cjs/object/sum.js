@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = sum;
 const isNil_1 = __importDefault(require("../is/isNil"));
 const isNumeric_1 = __importDefault(require("../is/isNumeric"));
 function sum(object) {
@@ -22,5 +23,4 @@ function sum(object) {
     }
     return result;
 }
-exports.default = sum;
 //# sourceMappingURL=sum.js.map

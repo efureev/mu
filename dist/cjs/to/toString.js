@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toString;
 const isSymbol_1 = __importDefault(require("../is/isSymbol"));
 const vars_1 = require("../core/vars");
 const symbolProto = Symbol ? Symbol.prototype : undefined, symbolToString = symbolProto ? symbolProto.toString : undefined;
@@ -33,5 +34,4 @@ function toString(value) {
     const result = value + '';
     return result === '0' && 1 / value === -Infinity ? '-0' : result;
 }
-exports.default = toString;
 //# sourceMappingURL=toString.js.map

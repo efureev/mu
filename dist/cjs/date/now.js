@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = now;
 const nowFn = Date.now || (() => new Date().getTime());
 /**
  * This function return Date now
@@ -7,5 +8,4 @@ const nowFn = Date.now || (() => new Date().getTime());
 function now() {
     return nowFn();
 }
-exports.default = now;
 //# sourceMappingURL=now.js.map

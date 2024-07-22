@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.intersectAll = void 0;
+exports.default = intersect;
+exports.intersectAll = intersectAll;
 /**
  * Return common items for two arrays
  *
@@ -12,7 +13,6 @@ function intersect(array, array2) {
     const set = new Set(array);
     return [...new Set(array2.filter(item => set.has(item)))];
 }
-exports.default = intersect;
 /**
  * Return common items for all arrays
  *
@@ -25,5 +25,4 @@ function intersectAll(array, ...arrays) {
         return intersect(previous, next);
     }, array);
 }
-exports.intersectAll = intersectAll;
 //# sourceMappingURL=intersect.js.map

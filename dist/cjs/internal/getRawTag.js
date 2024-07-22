@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = getRawTag;
 const root_1 = __importDefault(require("./root"));
 /** Built-in value references. */
 const symToStringTag = root_1.default.Symbol ? root_1.default.Symbol.toStringTag : undefined;
@@ -42,5 +43,4 @@ function getRawTag(value) {
     }
     return result;
 }
-exports.default = getRawTag;
 //# sourceMappingURL=getRawTag.js.map

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = intWord;
 const number_1 = __importDefault(require("./number"));
 const UnitsDefault = ['', 'K', 'M', 'B', 'T'];
 /**
@@ -30,5 +31,4 @@ function intWord(value, units = UnitsDefault, kilo = 1000, decimals = 2, decPoin
     const suffix = units[unit] ? suffixSeparator + units[unit] : '';
     return (0, number_1.default)(humanized, decimals, decPoint, thousandsSeparator) + suffix;
 }
-exports.default = intWord;
 //# sourceMappingURL=intWord.js.map

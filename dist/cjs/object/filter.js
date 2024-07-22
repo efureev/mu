@@ -16,8 +16,8 @@
  * @returns {object}
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = filter;
 function filter(object, predicate) {
     return Object.fromEntries(Object.entries(object).filter(predicate));
 }
-exports.default = filter;
 //# sourceMappingURL=filter.js.map

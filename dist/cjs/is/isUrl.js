@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = isUrl;
 /**
  * Checks if string can parse as URL
  *
@@ -16,5 +17,4 @@ function isUrl(str) {
     }
     return url.protocol === 'http:' || url.protocol === 'https:';
 }
-exports.default = isUrl;
 //# sourceMappingURL=isUrl.js.map

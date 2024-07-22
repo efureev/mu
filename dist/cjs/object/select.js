@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = select;
 /**
  * Get value by deep key in object(array)
  *
@@ -55,5 +56,4 @@ function select(from, selector, defaultValue = undefined, divider = '.') {
         return defaultValue;
     }, from);
 }
-exports.default = select;
 //# sourceMappingURL=select.js.map

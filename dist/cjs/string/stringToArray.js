@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = stringToArray;
 const unicode_1 = require("./unicode");
 /**
  * Converts a Unicode `string` to an array.
@@ -31,5 +32,4 @@ function asciiToArray(value) {
 function stringToArray(value) {
     return (0, unicode_1.hasUnicode)(value) ? unicodeToArray(value) : asciiToArray(value);
 }
-exports.default = stringToArray;
 //# sourceMappingURL=stringToArray.js.map

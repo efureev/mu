@@ -8,6 +8,7 @@
  * @returns {Array} Returns `bool`.
  */
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = arrayEach;
 function arrayEach(array, callback) {
     const length = array.length;
     let index = -1;
@@ -18,5 +19,4 @@ function arrayEach(array, callback) {
     }
     return array;
 }
-exports.default = arrayEach;
 //# sourceMappingURL=arrayEach.js.map

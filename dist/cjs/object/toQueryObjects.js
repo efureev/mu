@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toQueryObjects;
 const isObject_1 = __importDefault(require("../is/isObject"));
 function toQueryObjects(name, value, recursive = false) {
     let objects = [];
@@ -45,5 +46,4 @@ function toQueryObjects(name, value, recursive = false) {
     });
     return objects;
 }
-exports.default = toQueryObjects;
 //# sourceMappingURL=toQueryObjects.js.map

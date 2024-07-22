@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.booleanToNumber = exports.stringToNumber = void 0;
+exports.default = toNumber;
+exports.stringToNumber = stringToNumber;
+exports.booleanToNumber = booleanToNumber;
 const isObject_1 = __importDefault(require("../is/isObject"));
 const isSymbol_1 = __importDefault(require("../is/isSymbol"));
 const vars_1 = require("../core/vars");
@@ -40,7 +42,6 @@ function toNumber(value) {
     }
     return stringToNumber(value);
 }
-exports.default = toNumber;
 function stringToNumber(value) {
     value = value.replace(vars_1.reTrim, '');
     const isBinary = vars_1.reIsBinary.test(value);
@@ -50,9 +51,7 @@ function stringToNumber(value) {
             ? NaN
             : +value;
 }
-exports.stringToNumber = stringToNumber;
 function booleanToNumber(value) {
     return +value;
 }
-exports.booleanToNumber = booleanToNumber;
 //# sourceMappingURL=toNumber.js.map

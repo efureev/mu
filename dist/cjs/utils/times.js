@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = times;
 const isFunction_1 = __importDefault(require("../is/isFunction"));
 function times(n = 1, iteratee) {
     const result = new Array(n);
@@ -14,5 +15,4 @@ function times(n = 1, iteratee) {
     }
     return result;
 }
-exports.default = times;
 //# sourceMappingURL=times.js.map

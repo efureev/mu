@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isFunctions = void 0;
+exports.isFunctions = isFunctions;
+exports.default = isFunction;
 const symToStringTag = Symbol.toStringTag;
 const asyncTag = '[object AsyncFunction]', funcTag = '[object Function]', genTag = '[object GeneratorFunction]', nullTag = '[object Null]', proxyTag = '[object Proxy]', undefinedTag = '[object Undefined]';
 /**
@@ -13,12 +14,10 @@ function isFunctions(...parameters) {
     const invalid = parameters.some(parameter => !isFunction(parameter));
     return !invalid;
 }
-exports.isFunctions = isFunctions;
 function isFunction(parameter) {
     const tag = baseGetTag(parameter);
     return tag === funcTag || tag === genTag || tag === asyncTag || tag === proxyTag;
 }
-exports.default = isFunction;
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
  *

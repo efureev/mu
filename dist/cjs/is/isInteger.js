@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isIntegers = void 0;
+exports.default = isInteger;
+exports.isIntegers = isIntegers;
 /**
  * This function evaluates whether all parameters are integers
  */
 function isInteger(value) {
     return Number.isInteger(Number.parseFloat(value));
 }
-exports.default = isInteger;
 function isIntegers(...parameters) {
     if (parameters.length === 0) {
         throw new Error('Please provide at least one number to evaluate isInteger.');
@@ -17,5 +17,4 @@ function isIntegers(...parameters) {
     }
     return !parameters.some(parameter => !isInteger(parameter));
 }
-exports.isIntegers = isIntegers;
 //# sourceMappingURL=isInteger.js.map

@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isBlobs = void 0;
+exports.isBlobs = isBlobs;
+exports.default = isBlob;
 /**
  * This function evaluates whether all parameters are blobs
  */
@@ -10,9 +11,7 @@ function isBlobs(...parameters) {
     }
     return !parameters.some(parameter => !isBlob(parameter));
 }
-exports.isBlobs = isBlobs;
 function isBlob(value) {
     return Object.prototype.toString.call(value) === '[object Blob]';
 }
-exports.default = isBlob;
 //# sourceMappingURL=isBlob.js.map

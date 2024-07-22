@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = endsWith;
 const toString_1 = __importDefault(require("../to/toString"));
 /**
  * Checks if string ends with the given target string
@@ -19,5 +20,4 @@ function endsWith(str, target) {
     position -= target.length;
     return position >= 0 && str.slice(position, end) === target;
 }
-exports.default = endsWith;
 //# sourceMappingURL=endsWith.js.map

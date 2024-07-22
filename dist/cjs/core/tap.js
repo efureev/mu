@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = tap;
 /**
  * This method invokes `interceptor` and returns `value`. The interceptor
  * is invoked with one argument; (value). The purpose of this method is to
@@ -35,5 +36,4 @@ function tap(value, interceptor) {
     }
     return value;
 }
-exports.default = tap;
 //# sourceMappingURL=tap.js.map

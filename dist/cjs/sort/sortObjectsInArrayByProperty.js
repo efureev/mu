@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.sortDescObjectsInArrayByProperty = void 0;
+exports.default = sortObjectsInArrayByProperty;
+exports.sortDescObjectsInArrayByProperty = sortDescObjectsInArrayByProperty;
 const sortByProperty_1 = __importDefault(require("./sortByProperty"));
 const isObject_1 = __importDefault(require("../is/isObject"));
 const isString_1 = __importDefault(require("../is/isString"));
@@ -77,9 +78,7 @@ function sortObjectsInArrayByProperty(obj, property, asc = true, ignoreCase = tr
     const aSorted = sortObjectsInArrayByProperty(a, sortKey, asc, ignoreCase);
     return (0, pathToObject_1.default)(aPath, aSorted, cloneObj);
 }
-exports.default = sortObjectsInArrayByProperty;
 function sortDescObjectsInArrayByProperty(obj, property, ignoreCase = true) {
     return sortObjectsInArrayByProperty(obj, property, false, ignoreCase);
 }
-exports.sortDescObjectsInArrayByProperty = sortDescObjectsInArrayByProperty;
 //# sourceMappingURL=sortObjectsInArrayByProperty.js.map

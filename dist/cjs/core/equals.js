@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = equals;
 const equals_1 = __importDefault(require("../object/equals"));
 const equals_2 = __importDefault(require("../array/equals"));
 const isObject_1 = __importDefault(require("../is/isObject"));
@@ -36,5 +37,4 @@ function equals(first, second) {
     }
     return false;
 }
-exports.default = equals;
 //# sourceMappingURL=equals.js.map

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = isPrototype;
 /** Used for built-in method references. */
 const isFunction_1 = __importDefault(require("./isFunction"));
 const objectProto = Object.prototype;
@@ -15,5 +16,4 @@ function isPrototype(value) {
     const Ctor = value && value.constructor, proto = ((0, isFunction_1.default)(Ctor) && Ctor.prototype) || objectProto;
     return value === proto;
 }
-exports.default = isPrototype;
 //# sourceMappingURL=isPrototype.js.map

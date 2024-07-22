@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isObjectLike = exports.isEmptyObject = exports.isObjects = void 0;
+exports.isObjects = isObjects;
+exports.default = isObject;
+exports.isEmptyObject = isEmptyObject;
+exports.isObjectLike = isObjectLike;
 const isO = Object.prototype.toString.call(null) === '[object Object]'
     ? function (value) {
         // check ownerDocument here as well to exclude DOM nodes
@@ -21,11 +24,9 @@ function isObjects(...parameters) {
     const invalid = parameters.some(parameter => !isO(parameter));
     return !invalid;
 }
-exports.isObjects = isObjects;
 function isObject(value) {
     return isO(value);
 }
-exports.default = isObject;
 function isEmptyObject(...parameters) {
     if (parameters.length === 0) {
         throw new Error('Please provide at least one number to evaluate isObject.');
@@ -38,7 +39,6 @@ function isEmptyObject(...parameters) {
     });
     return !invalid;
 }
-exports.isEmptyObject = isEmptyObject;
 /**
  * Checks if `value` is object-like. A value is object-like if it's not `null`
  * and has a `typeof` result of "object".
@@ -58,5 +58,4 @@ exports.isEmptyObject = isEmptyObject;
 function isObjectLike(value) {
     return value !== null && typeof value === 'object';
 }
-exports.isObjectLike = isObjectLike;
 //# sourceMappingURL=isObject.js.map

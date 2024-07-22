@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = equal;
 /**
  * Compares the contents of 2 or more objects using strict equality.
  */
@@ -99,5 +100,4 @@ function equal(origin, ...list) {
     }
     return true;
 }
-exports.default = equal;
 //# sourceMappingURL=equals.js.map

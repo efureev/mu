@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = symmetricalDifference;
 /**
  * The symmetricalDifference will output anti-intersection.
  *
@@ -10,5 +11,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function symmetricalDifference(array, array2) {
     return [...new Set(array)].filter(x => !array2.includes(x)).concat(array2.filter(x => !array.includes(x)));
 }
-exports.default = symmetricalDifference;
 //# sourceMappingURL=symmetricalDifference.js.map

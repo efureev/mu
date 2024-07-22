@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = pick;
 const isEmpty_1 = __importDefault(require("../is/isEmpty"));
 const forEach_1 = __importDefault(require("../core/forEach"));
 const select_1 = __importDefault(require("./select"));
@@ -37,5 +38,4 @@ function pick(object, paths) {
     });
     return res;
 }
-exports.default = pick;
 //# sourceMappingURL=pick.js.map
