@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toInteger;
 const toFinite_1 = __importDefault(require("./toFinite"));
 /**
  * Converts `value` to an integer.
@@ -29,5 +30,4 @@ function toInteger(value) {
     let remainder = result % 1;
     return result === result ? (remainder ? result - remainder : result) : 0;
 }
-exports.default = toInteger;
 //# sourceMappingURL=toInteger.js.map

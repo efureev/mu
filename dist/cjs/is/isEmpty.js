@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = isEmpty;
 const isObject_1 = require("./isObject");
 /**
  * This function evaluates if all the parameters are empty
@@ -32,5 +33,4 @@ function isEmpty(...parameters) {
     });
     return !invalid;
 }
-exports.default = isEmpty;
 //# sourceMappingURL=isEmpty.js.map

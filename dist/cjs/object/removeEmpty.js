@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = removeEmpty;
 const isObject_1 = __importDefault(require("../is/isObject"));
 const isString_1 = __importDefault(require("../is/isString"));
 const isEmpty_1 = __importDefault(require("../is/isEmpty"));
@@ -46,5 +47,4 @@ function removeEmpty(object) {
     }
     return result;
 }
-exports.default = removeEmpty;
 //# sourceMappingURL=removeEmpty.js.map

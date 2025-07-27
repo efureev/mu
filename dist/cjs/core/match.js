@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = match;
 const isObject_1 = __importDefault(require("../is/isObject"));
 /**
  * @param {*} expr
@@ -20,5 +21,4 @@ function match(expr, cases, options) {
     }
     return typeof opt.default === 'function' ? opt.default() : opt.default;
 }
-exports.default = match;
 //# sourceMappingURL=match.js.map

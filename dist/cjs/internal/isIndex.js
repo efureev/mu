@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = isIndex;
 /** Used as references for various `Number` constants. */
 const vars_1 = require("../core/vars");
 /**
@@ -19,5 +20,4 @@ function isIndex(value, length) {
         value % 1 === 0 &&
         value < length);
 }
-exports.default = isIndex;
 //# sourceMappingURL=isIndex.js.map

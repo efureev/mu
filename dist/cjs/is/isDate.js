@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isDates = void 0;
+exports.isDates = isDates;
+exports.default = isDate;
 /**
  * This function evaluates if all the parameters are dates
  *
@@ -9,9 +10,7 @@ exports.isDates = void 0;
 function isDates(...parameters) {
     return !parameters.some(parameter => !isDate(parameter));
 }
-exports.isDates = isDates;
 function isDate(value) {
     return Object.prototype.toString.call(value) === '[object Date]';
 }
-exports.default = isDate;
 //# sourceMappingURL=isDate.js.map

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = clone;
 const isDate_1 = __importDefault(require("../is/isDate"));
 const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor'];
 /**
@@ -58,5 +59,4 @@ function clone(item, cloneDom = true) {
     }
     return item;
 }
-exports.default = clone;
 //# sourceMappingURL=clone.js.map

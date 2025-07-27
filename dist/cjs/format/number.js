@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.numberRus = void 0;
+exports.default = number;
+exports.numberRus = numberRus;
 const isInteger_1 = __importDefault(require("../is/isInteger"));
 /**
  * Formatting number
@@ -34,9 +35,7 @@ function number(value, decimals = 2, decPoint = '.', thousandsSeparator = ',', c
                         .slice(2)
             : ''));
 }
-exports.default = number;
 function numberRus(value, decimals = 2) {
     return number(value, decimals, '.', ' ', true);
 }
-exports.numberRus = numberRus;
 //# sourceMappingURL=number.js.map

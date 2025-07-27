@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = default_1;
 const isObject_1 = require("./isObject");
 /**
  * Checks if `value` is classified as a `Symbol` primitive or object.
@@ -20,5 +21,4 @@ function default_1(...parameters) {
     }
     return parameters.some(value => typeof value === 'symbol' || ((0, isObject_1.isObjectLike)(value) && Object.prototype.toString.call(value) === '[object Symbol]'));
 }
-exports.default = default_1;
 //# sourceMappingURL=isSymbol.js.map

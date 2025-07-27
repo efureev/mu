@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = random;
 /**
  * Random function returns random item from array
  *
@@ -9,5 +10,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function random(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
-exports.default = random;
 //# sourceMappingURL=random.js.map

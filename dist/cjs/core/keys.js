@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = keys;
 const isArrayLike_1 = __importDefault(require("../is/isArrayLike"));
 const arrayLikeKeys_1 = __importDefault(require("../internal/arrayLikeKeys"));
 const baseKeys_1 = __importDefault(require("../internal/base/baseKeys"));
@@ -34,5 +35,4 @@ const baseKeys_1 = __importDefault(require("../internal/base/baseKeys"));
 function keys(object) {
     return (0, isArrayLike_1.default)(object) ? (0, arrayLikeKeys_1.default)(object) : (0, baseKeys_1.default)(object);
 }
-exports.default = keys;
 //# sourceMappingURL=keys.js.map

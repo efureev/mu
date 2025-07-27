@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = fileSize;
 const intWord_1 = __importDefault(require("./intWord"));
 /**
  * Display
@@ -24,5 +25,4 @@ function fileSize(size, kilo = 1024, decimals = 2, decPoint = '.', thousandsSepa
     }
     return (0, intWord_1.default)(num, ['bytes', 'Kb', 'Mb', 'Gb', 'Tb', 'Pb'], kilo, decimals, decPoint, thousandsSeparator, suffixSeparator);
 }
-exports.default = fileSize;
 //# sourceMappingURL=fileSize.js.map

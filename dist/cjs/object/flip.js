@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = flip;
 /**
  *
  * @param {object} object
@@ -13,5 +14,4 @@ function flip(object) {
     }
     return result;
 }
-exports.default = flip;
 //# sourceMappingURL=flip.js.map

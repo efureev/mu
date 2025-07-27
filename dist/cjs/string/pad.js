@@ -3,7 +3,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.padEnd = exports.padStart = void 0;
+exports.default = pad;
+exports.padStart = padStart;
+exports.padEnd = padEnd;
 const isNil_1 = __importDefault(require("../is/isNil"));
 /**
  * This function add symbols to string in start or end
@@ -29,19 +31,16 @@ function pad(value, targetLength, padString = ' ', leading = true) {
     }
     return leading ? padString.slice(0, targetLength) + value : value + padString.slice(0, targetLength);
 }
-exports.default = pad;
 /**
  * This function add leading symbols
  */
 function padStart(value, targetLength, padString = ' ') {
     return pad(value, targetLength, padString);
 }
-exports.padStart = padStart;
 /**
  * This function add ending symbols
  */
 function padEnd(value, targetLength, padString = ' ') {
     return pad(value, targetLength, padString, false);
 }
-exports.padEnd = padEnd;
 //# sourceMappingURL=pad.js.map

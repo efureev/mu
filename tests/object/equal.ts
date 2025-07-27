@@ -57,11 +57,11 @@ describe('equal', () => {
 
   it('should throw an error if no parameters are provided', () => {
     // @ts-ignore
-    expect(() => equals()).toThrowError(errMsg)
+    expect(() => equals()).toThrow(errMsg)
     // @ts-ignore
-    expect(() => equals(NaN, NaN)).toThrowError(errMsg)
+    expect(() => equals(NaN, NaN)).toThrow(errMsg)
     // @ts-ignore
-    expect(() => equals(1, 1)).toThrowError(errMsg)
+    expect(() => equals(1, 1)).toThrow(errMsg)
   })
 
   it('should return true', () => {

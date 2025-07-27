@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = pathToObject;
 const isEmpty_1 = __importDefault(require("../is/isEmpty"));
 const isObject_1 = __importDefault(require("../is/isObject"));
 function pathToObject(paths = '', value = null, object = {}, divider = '.', replaceOnExist = true) {
@@ -29,5 +30,4 @@ function pathToObject(paths = '', value = null, object = {}, divider = '.', repl
     }
     return object;
 }
-exports.default = pathToObject;
 //# sourceMappingURL=pathToObject.js.map

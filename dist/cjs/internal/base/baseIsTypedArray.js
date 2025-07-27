@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = baseIsTypedArray;
 /** `Object#toString` result references. */
 const isObject_1 = require("../../is/isObject");
 const isLength_1 = __importDefault(require("../../is/isLength"));
@@ -45,5 +46,4 @@ typedArrayTags[argumentsTag] =
 function baseIsTypedArray(value) {
     return (0, isObject_1.isObjectLike)(value) && (0, isLength_1.default)(value.length) && typedArrayTags[(0, baseGetTag_1.default)(value)];
 }
-exports.default = baseIsTypedArray;
 //# sourceMappingURL=baseIsTypedArray.js.map

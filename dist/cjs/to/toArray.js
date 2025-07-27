@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toArray;
 const isArrayLike_1 = __importDefault(require("../is/isArrayLike"));
 const isBoolean_1 = __importDefault(require("../is/isBoolean"));
 const isNumeric_1 = __importDefault(require("../is/isNumeric"));
@@ -66,5 +67,4 @@ function toArray(value = []) {
     }
     return (0, values_1.default)(value);
 }
-exports.default = toArray;
 //# sourceMappingURL=toArray.js.map

@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toQueryString;
 const isBoolean_1 = __importDefault(require("../is/isBoolean"));
 const isDate_1 = __importDefault(require("../is/isDate"));
 const isEmpty_1 = __importDefault(require("../is/isEmpty"));
@@ -69,5 +70,4 @@ function toQueryString(object, recursive = false, options = { encodeName: true }
     }
     return parameters.join('&');
 }
-exports.default = toQueryString;
 //# sourceMappingURL=toQueryString.js.map

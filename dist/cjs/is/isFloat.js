@@ -1,6 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.isFloatCanonical = exports.isFloats = void 0;
+exports.isFloats = isFloats;
+exports.default = isFloat;
+exports.isFloatCanonical = isFloatCanonical;
 /**
  * This function evaluates whether all parameters are floats
  */
@@ -12,12 +14,10 @@ function isFloats(...parameters) {
         throw new Error('Please provide all numbers to evaluate isFloat.');
     return !parameters.some(parameter => !isFloat(Number.parseFloat(parameter)));
 }
-exports.isFloats = isFloats;
 function isFloat(number) {
     const n = Number.parseFloat(number);
     return Number(n) === n && n % 1 !== 0;
 }
-exports.default = isFloat;
 /**
  * @example
  * TRUE:
@@ -26,5 +26,4 @@ exports.default = isFloat;
 function isFloatCanonical(number) {
     return vars_1.reIsFloat.test(String(number));
 }
-exports.isFloatCanonical = isFloatCanonical;
 //# sourceMappingURL=isFloat.js.map

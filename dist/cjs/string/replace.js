@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.removeConsecutiveDuplicates = void 0;
+exports.removeConsecutiveDuplicates = removeConsecutiveDuplicates;
 /**
  * Remove consecutive duplicates
  * kelllleeess => keles
@@ -22,5 +22,4 @@ function removeConsecutiveDuplicates(str, els = []) {
     }
     return map.join('');
 }
-exports.removeConsecutiveDuplicates = removeConsecutiveDuplicates;
 //# sourceMappingURL=replace.js.map

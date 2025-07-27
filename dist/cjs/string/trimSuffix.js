@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = trimSuffix;
 const endsWith_1 = __importDefault(require("./endsWith"));
 /**
  * Remove a suffix from a String
@@ -17,5 +18,4 @@ function trimSuffix(str, suffix) {
     }
     return str.substring(0, str.length - suffix.length);
 }
-exports.default = trimSuffix;
 //# sourceMappingURL=trimSuffix.js.map

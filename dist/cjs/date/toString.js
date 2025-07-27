@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toString;
 const pad_1 = require("../format/pad");
 /**
  * Date to string
@@ -19,5 +20,4 @@ function toString(date = new Date()) {
         ':' +
         (0, pad_1.padDateTime)(date.getSeconds()));
 }
-exports.default = toString;
 //# sourceMappingURL=toString.js.map

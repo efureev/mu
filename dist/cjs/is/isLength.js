@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = isLength;
 /**
  * Checks if `value` is a valid array-like length.
  *
@@ -21,5 +22,4 @@ Object.defineProperty(exports, "__esModule", { value: true });
 function isLength(value) {
     return typeof value === 'number' && value > -1 && value % 1 === 0 && value <= Number.MAX_SAFE_INTEGER;
 }
-exports.default = isLength;
 //# sourceMappingURL=isLength.js.map

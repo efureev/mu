@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = trimPrefix;
 const startsWith_1 = __importDefault(require("./startsWith"));
 /**
  * Remove a prefix from a String
@@ -17,5 +18,4 @@ function trimPrefix(str, prefix) {
     }
     return str.substring(prefix.length);
 }
-exports.default = trimPrefix;
 //# sourceMappingURL=trimPrefix.js.map

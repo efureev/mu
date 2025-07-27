@@ -3,7 +3,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.replaceByTemplate = void 0;
+exports.replaceByTemplate = replaceByTemplate;
+exports.default = strtr;
 const pregQuote_1 = __importDefault(require("../utils/pregQuote"));
 /**
  * Replace all entries in string according to map
@@ -36,7 +37,6 @@ function replaceByTemplate(str, map) {
     }
     return str;
 }
-exports.replaceByTemplate = replaceByTemplate;
 function strtr(str, from, to) {
     if (typeof from === 'object') {
         return replaceByTemplate(str, from);
@@ -49,5 +49,4 @@ function strtr(str, from, to) {
     }
     return str;
 }
-exports.default = strtr;
 //# sourceMappingURL=strtr.js.map

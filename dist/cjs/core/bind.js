@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = bind;
 /**
  * Binding Methods to Objects
  *
@@ -16,5 +17,4 @@ function bind(object, method) {
         return method.apply(object, arguments);
     };
 }
-exports.default = bind;
 //# sourceMappingURL=bind.js.map

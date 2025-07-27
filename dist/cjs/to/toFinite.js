@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = toFinite;
 const toNumber_1 = __importDefault(require("./toNumber"));
 /**
  * Converts `value` to a finite number.
@@ -31,5 +32,4 @@ function toFinite(value) {
     }
     return value === value ? value : 0;
 }
-exports.default = toFinite;
 //# sourceMappingURL=toFinite.js.map
