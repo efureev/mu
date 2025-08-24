@@ -1,9 +1,7 @@
 import isFunction from '../is/isFunction.mjs';
 import toString from '../to/toString.mjs';
 export class CollectionArray {
-    constructor() {
-        this.items = [];
-    }
+    items = [];
     push(item) {
         this.items.push(item);
     }
@@ -20,18 +18,16 @@ export class CollectionArray {
         return [...this.items];
     }
     toString(callback) {
-        const data = this.toArray();
         if (callback && isFunction(callback)) {
-            return data.map(item => callback(item)).toString();
+            return this.items.map(item => callback(item)).toString();
         }
-        return data.toString();
+        return this.items.toString();
     }
     map(callback) {
-        const data = this.toArray();
         if (!isFunction(callback)) {
-            throw Error('Invalid map-function: ' + toString(callback));
+            throw Error(`Invalid map-function: ${toString(callback)}`);
         }
-        return data.map(item => callback(item));
+        return this.items.map((item, index, array) => callback(item, index, array));
     }
 }
 export default new CollectionArray();

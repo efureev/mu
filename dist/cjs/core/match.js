@@ -12,7 +12,10 @@ const isObject_1 = __importDefault(require("../is/isObject"));
  * @return {*}
  */
 function match(expr, cases, options) {
-    const opt = Object.assign({ strict: true }, ((0, isObject_1.default)(options) ? options : {}));
+    const opt = {
+        strict: true,
+        ...((0, isObject_1.default)(options) ? options : {}),
+    };
     for (const [pattern, action] of Array.isArray(cases) ? cases : Object.entries(cases)) {
         const prn = typeof pattern === 'function' ? pattern() : pattern;
         if (opt.strict ? expr === prn : expr == prn) {

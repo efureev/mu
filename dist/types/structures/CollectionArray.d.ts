@@ -5,8 +5,8 @@ export declare class CollectionArray<T> {
     size(): number;
     isEmpty(): boolean;
     toArray(): T[];
-    toString(callback?: (i: T) => any): string;
-    map<R extends any>(callback: (i: T) => any): R[];
+    toString(callback?: (i: T) => unknown): string;
+    map<R>(callback: (i: T, index: number, array: readonly T[]) => R): R[];
 }
 declare const _default: CollectionArray<unknown>;
 export default _default;

@@ -31,7 +31,7 @@ type TagTypeNullable = TagType | '[object Null]' | '[object Undefined]'
 
 const nullTag = '[object Null]'
 const undefinedTag = '[object Undefined]'
-const symToStringTag = root.Symbol ? root.Symbol.toStringTag : undefined
+const symToStringTag = root?.Symbol ? root.Symbol.toStringTag : undefined
 
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.

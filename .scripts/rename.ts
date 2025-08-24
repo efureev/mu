@@ -1,10 +1,11 @@
 import * as fs from 'fs/promises'
 import * as path from 'path'
+import { fileURLToPath } from 'url'
 
-async function* readdirP(dir: string): AsyncGenerator<string> {
+async function* walkDir(dir: string): AsyncGenerator<string> {
   for (const entry of await fs.readdir(dir, { withFileTypes: true })) {
     if (entry.isDirectory()) {
-      for await (const sub of readdirP(path.join(dir, entry.name))) {
+      for await (const sub of walkDir(path.join(dir, entry.name))) {
         yield sub
       }
     } else if (entry.isFile()) {
@@ -13,30 +14,42 @@ async function* readdirP(dir: string): AsyncGenerator<string> {
   }
 }
 
+// ESM-safe replacement for __dirname and target directory
+const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url))
+const DIST_DIR = path.resolve(SCRIPT_DIR, '..', 'dist/esm')
+
+// Regex and helper for import/export path rewriting
+const IMPORT_EXPORT_REGEX = /^((import|export)\s+.+from\s+')(.+)('\s*)/gm
+
+function ensureMjsExtension(spec: string): string {
+  if ((spec.startsWith('./') || spec.startsWith('~/')) && !spec.endsWith('.mjs')) {
+    return `${spec}.mjs`
+  }
+  return spec
+}
+
+// ... existing code ...
+
 async function main(): Promise<void> {
-  for await (const entry of readdirP(path.relative(process.cwd(), path.join(__dirname, '..', 'dist/esm')))) {
+  for await (const entry of walkDir(DIST_DIR)) {
     const match = /^(.*)(\.(js|js\.map|d\.ts))$/.exec(entry)
     if (match == null) {
       continue
     }
-    console.log(entry)
+
     const file = match[1]
     const ext = match[2]
     if (ext === '.js') {
       let data = await fs.readFile(entry, 'utf-8')
       data = data.replace(
-        /^((import|export)\s+.+from\s+')(.+)('\s*)/gm,
-        (_, prefix: string, __, file: string, suffix: string) => {
-          if ((file.startsWith('./') || file.startsWith('~/')) && !file.endsWith('.mjs')) {
-            file += '.mjs'
-          }
-          return `${prefix}${file}${suffix}`
+        IMPORT_EXPORT_REGEX,
+        (_: string, prefix: string, _impExp: string, importPath: string, suffix: string) => {
+          const rewritten = ensureMjsExtension(importPath)
+          return `${prefix}${rewritten}${suffix}`
         }
       )
-      data = data.replace(
-        `//# sourceMappingURL=${path.basename(file)}.js.map`,
-        `//# sourceMappingURL=${path.basename(file)}.mjs.map`
-      )
+      const baseName = path.basename(file)
+      data = data.replace(`//# sourceMappingURL=${baseName}.js.map`, `//# sourceMappingURL=${baseName}.mjs.map`)
       await fs.writeFile(entry, data)
       await fs.rename(entry, `${file}.mjs`)
     } else if (ext === '.js.map') {
@@ -49,6 +62,8 @@ async function main(): Promise<void> {
     }
   }
 }
+
+// ... existing code ...
 
 main().catch((e: Error) => {
   console.error(e)

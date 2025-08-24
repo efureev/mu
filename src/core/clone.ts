@@ -22,8 +22,6 @@ export default function clone<T = NonNullable<any>>(item: T, cloneDom: boolean =
     return item.cloneNode(true)
   }
 
-  const type = Object.prototype.toString.call(item)
-
   // Date
   if (isDate(item)) {
     // @ts-ignore
@@ -44,24 +42,26 @@ export default function clone<T = NonNullable<any>>(item: T, cloneDom: boolean =
     return <T>newClone
   }
 
-  // Object
-  if (type === '[object Object]' && (<Object>item).constructor === Object) {
-    let key: PropertyKey
-    let newClone: Record<PropertyKey, any> = {}
+  const type = Object.prototype.toString.call(item)
 
-    for (key in item) {
-      newClone[key] = clone<any>((<Record<PropertyKey, any>>item)[key], cloneDom)
-    }
+  // Plain Object
+  if (type === '[object Object]' && (item as Object).constructor === Object) {
+    const src = item as Record<PropertyKey, any>
+    const newClone: Record<PropertyKey, any> = {}
 
-    if (enumerables) {
-      for (j = enumerables.length; j--; ) {
-        let k: string = enumerables[j]
-        if (Object.prototype.hasOwnProperty.call(item, k)) {
-          newClone[k] = (<Record<string, any>>item)[k]
-        }
+    for (const key in src) {
+      if (Object.prototype.hasOwnProperty.call(src, key)) {
+        newClone[key] = clone<any>(src[key], cloneDom)
       }
     }
 
+    for (const k of enumerables) {
+      if (Object.prototype.hasOwnProperty.call(src, k)) {
+        newClone[k] = (src as Record<string, any>)[k]
+      }
+    }
+
+    // @ts-ignore
     return newClone
   }
 

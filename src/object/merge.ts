@@ -1,71 +1,48 @@
 import clone from '~/core/clone'
 import isObject from '~/is/isObject'
 
-/**
- * Merge objects recursively
- *
- *     var js = {
- *         companyName: 'JS',
- *         products: ['JS', 'GWT', 'Designer'],
- *         isSuperCool: true,
- *         office: {
- *             size: 2000,
- *             location: 'Palo Alto',
- *             isFun: true
- *         }
- *     };
- *
- *     var newStuff = {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City'
- *         }
- *     };
- *
- *     const result = merge(js, newStuff);
- *
- *     {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         isSuperCool: true,
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City',
- *             isFun: true
- *         }
- *     }
- */
 type record = Record<PropertyKey, any>
 
-export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
-  const ln = values.length
-  let i = 0,
-    object: Partial<T>,
-    key: PropertyKey,
-    value: any,
-    sourceKey: any
+// Узкое определение plain object без опоры на constructor
+function isPlainObject(val: any): val is Record<PropertyKey, any> {
+  if (!isObject(val)) return false
+  const proto = Object.getPrototypeOf(val)
+  return proto === Object.prototype || proto === null
+}
 
-  for (; i < ln; i++) {
-    object = values[i]
+/**
+ * Merge objects recursively
+ */
+export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
+  for (let i = 0; i < values.length; i++) {
+    const object = values[i]
     if (!isObject(object)) {
       continue
     }
-    for (key in object) {
-      value = object[key]
-      if (value && value.constructor === Object) {
-        sourceKey = original[key]
-        if (sourceKey && sourceKey.constructor === Object) {
-          merge<T>(sourceKey, value)
+
+    for (const key in object) {
+      if (!Object.prototype.hasOwnProperty.call(object, key)) continue
+
+      const value = (object as any)[key]
+      const target = (original as any)[key]
+
+      // Массивы: перезаписываем клоном (предсказуемее, чем неявные стратегии)
+      if (Array.isArray(value)) {
+        ;(original as any)[key] = clone(value)
+        continue
+      }
+
+      if (isPlainObject(value)) {
+        if (isPlainObject(target)) {
+          merge(target, value)
         } else {
-          ;(<T>original[key]) = clone<T>(value)
+          ;(original as any)[key] = clone(value)
         }
       } else {
-        ;(<T>original[key]) = value
+        ;(original as any)[key] = value
       }
     }
   }
 
-  return <T>original
+  return original as T
 }

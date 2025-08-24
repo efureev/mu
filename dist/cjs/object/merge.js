@@ -6,20 +6,36 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = merge;
 const clone_1 = __importDefault(require("../core/clone"));
 const isObject_1 = __importDefault(require("../is/isObject"));
+// Узкое определение plain object без опоры на constructor
+function isPlainObject(val) {
+    if (!(0, isObject_1.default)(val))
+        return false;
+    const proto = Object.getPrototypeOf(val);
+    return proto === Object.prototype || proto === null;
+}
+/**
+ * Merge objects recursively
+ */
 function merge(original, ...values) {
-    const ln = values.length;
-    let i = 0, object, key, value, sourceKey;
-    for (; i < ln; i++) {
-        object = values[i];
+    for (let i = 0; i < values.length; i++) {
+        const object = values[i];
         if (!(0, isObject_1.default)(object)) {
             continue;
         }
-        for (key in object) {
-            value = object[key];
-            if (value && value.constructor === Object) {
-                sourceKey = original[key];
-                if (sourceKey && sourceKey.constructor === Object) {
-                    merge(sourceKey, value);
+        for (const key in object) {
+            if (!Object.prototype.hasOwnProperty.call(object, key))
+                continue;
+            const value = object[key];
+            const target = original[key];
+            // Массивы: перезаписываем клоном (предсказуемее, чем неявные стратегии)
+            if (Array.isArray(value)) {
+                ;
+                original[key] = (0, clone_1.default)(value);
+                continue;
+            }
+            if (isPlainObject(value)) {
+                if (isPlainObject(target)) {
+                    merge(target, value);
                 }
                 else {
                     ;

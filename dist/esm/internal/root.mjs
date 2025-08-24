@@ -1,5 +1,11 @@
-/** Used as a reference to the global object. */
-import freeGlobal from './free/freeGlobal.mjs';
-import freeSelf from './free/freeSelf.mjs';
-export default freeGlobal || freeSelf || new Function('return this')();
+const root = typeof globalThis === 'object'
+    ? globalThis
+    : typeof self === 'object'
+        ? self
+        : typeof window === 'object'
+            ? window
+            : typeof global === 'object'
+                ? global
+                : undefined;
+export default root;
 //# sourceMappingURL=root.mjs.map

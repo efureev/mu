@@ -13,6 +13,7 @@
     "declarationMap": true,
     "emitDeclarationOnly": true,
 
+    "allowJs": false,
     "stripInternal": true
   },
   "include": ["src"],

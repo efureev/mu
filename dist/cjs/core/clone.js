@@ -24,7 +24,6 @@ function clone(item, cloneDom = true) {
         // @ts-ignore
         return item.cloneNode(true);
     }
-    const type = Object.prototype.toString.call(item);
     // Date
     if ((0, isDate_1.default)(item)) {
         // @ts-ignore
@@ -40,21 +39,22 @@ function clone(item, cloneDom = true) {
         }
         return newClone;
     }
-    // Object
+    const type = Object.prototype.toString.call(item);
+    // Plain Object
     if (type === '[object Object]' && item.constructor === Object) {
-        let key;
-        let newClone = {};
-        for (key in item) {
-            newClone[key] = clone(item[key], cloneDom);
-        }
-        if (enumerables) {
-            for (j = enumerables.length; j--;) {
-                let k = enumerables[j];
-                if (Object.prototype.hasOwnProperty.call(item, k)) {
-                    newClone[k] = item[k];
-                }
+        const src = item;
+        const newClone = {};
+        for (const key in src) {
+            if (Object.prototype.hasOwnProperty.call(src, key)) {
+                newClone[key] = clone(src[key], cloneDom);
             }
         }
+        for (const k of enumerables) {
+            if (Object.prototype.hasOwnProperty.call(src, k)) {
+                newClone[k] = src[k];
+            }
+        }
+        // @ts-ignore
         return newClone;
     }
     return item;
