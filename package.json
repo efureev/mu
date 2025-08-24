@@ -139,8 +139,7 @@
     "lint": "prettier --check \"src/**/*\" \"tests/**/*\"",
     "lint:fix": "prettier --write \"src/**/*\" \"tests/**/*\"",
     "test": "jest",
-    "docsify": "docsify serve ./docs",
-    "prepack": "yarn build"
+    "docsify": "docsify serve ./docs"
   },
   "sideEffects": false,
   "engines": {
