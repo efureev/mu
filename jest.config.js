@@ -4,6 +4,11 @@ module.exports = {
   testEnvironment: 'node',
   testMatch: ['**/tests/**/*.ts'],
   testPathIgnorePatterns: ['/node_modules/', '/tests/utils.ts'],
+
+  transform: {
+    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json', isolatedModules: true }],
+  },
+
   collectCoverageFrom: [
     '**/src/**/*.{js,ts}',
     '!**/node_modules/**',
@@ -18,4 +23,6 @@ module.exports = {
   moduleNameMapper: {
     '^~/(.*)$': '<rootDir>/src/$1',
   },
+  coverageProvider: 'v8',
+  moduleFileExtensions: ['ts', 'js', 'json'],
 }

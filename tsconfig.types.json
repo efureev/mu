@@ -1,12 +1,21 @@
 {
   "extends": "./tsconfig",
   "compilerOptions": {
-    "outDir": "dist/types",
+    "noEmit": false,
+
+    "module": "ES2022",
+    "target": "ES2022",
+
+    "rootDir": "./src",
+    "outDir": "./dist/types",
+
     "declaration": true,
     "declarationMap": true,
-    "isolatedModules": true,
-    "noEmit": false,
-    "allowJs": false,
-    "emitDeclarationOnly": true
-  }
+    "emitDeclarationOnly": true,
+
+    "stripInternal": true
+  },
+  "include": ["src"],
+  "exclude": ["dist", "node_modules", "tests"]
+
 }
