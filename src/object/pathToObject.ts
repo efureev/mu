@@ -37,7 +37,7 @@ export default function pathToObject(
           current[k] = value
         }
       } else {
-        const hasOwn = Object.prototype.hasOwnProperty.call(current, k)
+        const hasOwn = Object.hasOwn(current, k)
         if ((hasOwn && replaceOnExist) || !hasOwn) {
           current[k] = pathsCount - 1 === i ? value : {}
         }

@@ -61,7 +61,7 @@ export default function defaults(origin: RecordAny, ...sources: RecordAny[]): Re
       if (isForbiddenKey(key)) continue
 
       const srcVal = (source as any)[key]
-      const hasOwn = Object.prototype.hasOwnProperty.call(result, key)
+      const hasOwn = Object.hasOwn(result, key)
       const dstVal = hasOwn ? (result as any)[key] : undefined
 
       // Если ключ уже существует в результате

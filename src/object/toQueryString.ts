@@ -49,19 +49,16 @@ export default function toQueryString(
   options: ToQueryStringOptions = { encodeName: true }
 ) {
   let parameterObjects: Record<string, any>[] = []
-  let i, j, ln, parameterObject, value
 
-  for (i in object) {
-    if (Object.prototype.hasOwnProperty.call(object, i)) {
-      parameterObjects = parameterObjects.concat(toQueryObjects(i, object[i], recursive))
-    }
+  for (const [k, v] of Object.entries(object)) {
+    parameterObjects = parameterObjects.concat(toQueryObjects(k, v, recursive))
   }
 
-  const parameters = []
+  const parameters: string[] = []
 
-  for (j = 0, ln = parameterObjects.length; j < ln; j++) {
-    parameterObject = parameterObjects[j]
-    value = parameterObject.value
+  for (let j = 0, ln = parameterObjects.length; j < ln; j++) {
+    const parameterObject = parameterObjects[j]
+    let value = parameterObject.value
 
     if (isBoolean(value)) {
       value = booleanToNumber(value)

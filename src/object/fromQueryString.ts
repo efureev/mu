@@ -4,7 +4,7 @@ import type { TextNumber } from '~/internal/types'
 
 const queryRe = /^\?/
 const plusRe = /\+/g
-const keyRe = /(\[):?([^\]]*)\]/g
+const keyRe = /(\[):?([^\]]*)]/g
 const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
 
 type FromQueryStringOptions = {
@@ -58,22 +58,16 @@ export default function fromQueryString(
     return {}
   }
 
-  let parts = queryString.replace(queryRe, '').split('&'),
-    object = Object.create(null),
-    temporary,
-    components: string[],
-    name: string,
-    value,
-    i,
-    ln,
-    part: string,
-    j,
-    subLn,
-    matchedKeys: RegExpMatchArray | null,
-    matchedName: RegExpMatchArray | null,
-    keys: string[],
-    key: string,
-    nextKey: TextNumber
+  const qs = String(queryString).replace(queryRe, '')
+  const params = new URLSearchParams(qs)
+  const object = Object.create(null) as Record<string, any>
+
+  let temporary: any
+  let matchedKeys: RegExpMatchArray | null
+  let matchedName: RegExpMatchArray | null
+  let keys: string[]
+  let key: string
+  let nextKey: TextNumber
 
   const FORBIDDEN = new Set(['__proto__', 'prototype', 'constructor'])
 
@@ -81,93 +75,71 @@ export default function fromQueryString(
     return FORBIDDEN.has(key)
   }
 
-  for (i = 0, ln = parts.length; i < ln; i++) {
-    part = parts[i]
+  for (const [rawName, rawValue] of params) {
+    const name = options.decodeName ? rawName : rawName // already decoded by URLSearchParams
+    const value = rawValue // already decoded
 
-    if (part.length > 0) {
-      components = part.split('=')
-      name = components[0]
-      name = name.replace(plusRe, '%20')
-      name = options.decodeName ? decodeURIComponent(name) : name
-
-      value = components[1]
-
-      if (value !== undefined) {
-        value = value.replace(plusRe, '%20')
-        value = decodeURIComponent(value)
+    if (!recursive) {
+      if (Object.hasOwn(object, name)) {
+        if (!Array.isArray(object[name])) {
+          object[name] = [object[name]]
+        }
+        object[name].push(value)
       } else {
-        value = ''
+        if (!isForbiddenKey(name)) {
+          object[name] = value
+        }
+      }
+      continue
+    }
+
+    matchedKeys = name.match(keyRe)
+    matchedName = name.match(nameRe)
+
+    if (!matchedName) {
+      // skip malformed entries instead of throwing to be more forgiving
+      continue
+    }
+
+    const top = matchedName[0]
+    if (isForbiddenKey(top)) {
+      continue
+    }
+    keys = []
+
+    if (matchedKeys === null) {
+      object[top] = value
+      continue
+    }
+
+    for (let j = 0, subLn = matchedKeys.length; j < subLn; j++) {
+      key = matchedKeys[j]
+      key = key.length === 2 ? '' : key.substring(1, key.length - 1)
+      keys.push(key)
+    }
+
+    keys.unshift(top)
+
+    temporary = object
+
+    for (let j = 0, subLn = keys.length; j < subLn; j++) {
+      key = keys[j]
+      if (isForbiddenKey(key)) {
+        break
       }
 
-      if (!recursive) {
-        if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!Array.isArray(object[name])) {
-            object[name] = [object[name]]
-          }
-
-          object[name].push(value)
+      if (j === subLn - 1) {
+        if (Array.isArray(temporary) && key === '') {
+          temporary.push(value)
         } else {
-          // Guard against proto-pollution on top-level name
-          if (!isForbiddenKey(name)) {
-            object[name] = value
-          }
+          temporary[key] = value
         }
       } else {
-        matchedKeys = name.match(keyRe)
-        matchedName = name.match(nameRe)
-
-        //<debug>
-        if (!matchedName) {
-          throw new Error('[fromQueryString] Malformed query string given, failed parsing name from "' + part + '"')
+        if (temporary[key] === undefined || typeof temporary[key] === 'string') {
+          nextKey = keys[j + 1]
+          temporary[key] = isNumeric(nextKey) || nextKey === '' ? [] : {}
         }
-        //</debug>
-
-        name = matchedName[0]
-        if (isForbiddenKey(name)) {
-          // Skip this part entirely if top-level name is forbidden
-          continue
-        }
-        keys = []
-
-        if (matchedKeys === null) {
-          object[name] = value
-          continue
-        }
-
-        for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
-          key = matchedKeys[j]
-          key = key.length === 2 ? '' : key.substring(1, key.length - 1)
-          keys.push(key)
-        }
-
-        keys.unshift(name)
-
-        temporary = object
-
-        for (j = 0, subLn = keys.length; j < subLn; j++) {
-          key = keys[j]
-
-          if (isForbiddenKey(key)) {
-            // Skip building forbidden segments
-            break
-          }
-
-          if (j === subLn - 1) {
-            if (Array.isArray(temporary) && key === '') {
-              temporary.push(value)
-            } else {
-              temporary[key] = value
-            }
-          } else {
-            if (temporary[key] === undefined || typeof temporary[key] === 'string') {
-              nextKey = keys[j + 1]
-
-              temporary[key] = isNumeric(nextKey) || nextKey === '' ? [] : {}
-            }
-
-            temporary = temporary[key]
-          }
-        }
+        temporary = temporary[key]
       }
     }
   }
