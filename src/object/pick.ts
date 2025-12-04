@@ -23,14 +23,17 @@ import select from './select'
  *
  * pick(object, ['d.1.id', b]); // => { 'd.1.id': 2, b: 2 }
  */
-export default function pick(object: Record<PropertyKey, any>, paths: string[]): Record<PropertyKey, any> {
+export default function pick(object: Record<PropertyKey, any>, paths: string[] | null | undefined): Record<PropertyKey, any> {
   const res: Record<PropertyKey, any> = {}
-  if (isEmpty(object)) {
+  if (isEmpty(object) || !Array.isArray(paths) || paths.length === 0) {
     return res
   }
 
   forEach(paths, v => {
-    res[v] = select(object, v)
+    const val = select(object, v)
+    if (val !== undefined) {
+      res[v] = val
+    }
   })
 
   return res

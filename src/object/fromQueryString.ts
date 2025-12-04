@@ -75,6 +75,12 @@ export default function fromQueryString(
     key: string,
     nextKey: TextNumber
 
+  const FORBIDDEN = new Set(['__proto__', 'prototype', 'constructor'])
+
+  function isForbiddenKey(key: string): boolean {
+    return FORBIDDEN.has(key)
+  }
+
   for (i = 0, ln = parts.length; i < ln; i++) {
     part = parts[i]
 
@@ -101,7 +107,10 @@ export default function fromQueryString(
 
           object[name].push(value)
         } else {
-          object[name] = value
+          // Guard against proto-pollution on top-level name
+          if (!isForbiddenKey(name)) {
+            object[name] = value
+          }
         }
       } else {
         matchedKeys = name.match(keyRe)
@@ -114,6 +123,10 @@ export default function fromQueryString(
         //</debug>
 
         name = matchedName[0]
+        if (isForbiddenKey(name)) {
+          // Skip this part entirely if top-level name is forbidden
+          continue
+        }
         keys = []
 
         if (matchedKeys === null) {
@@ -133,6 +146,11 @@ export default function fromQueryString(
 
         for (j = 0, subLn = keys.length; j < subLn; j++) {
           key = keys[j]
+
+          if (isForbiddenKey(key)) {
+            // Skip building forbidden segments
+            break
+          }
 
           if (j === subLn - 1) {
             if (Array.isArray(temporary) && key === '') {
