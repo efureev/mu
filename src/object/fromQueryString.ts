@@ -3,7 +3,6 @@ import isNumeric from '~/is/isNumeric'
 import type { TextNumber } from '~/internal/types'
 
 const queryRe = /^\?/
-const plusRe = /\+/g
 const keyRe = /(\[):?([^\]]*)]/g
 const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
 
@@ -14,40 +13,24 @@ type FromQueryStringOptions = {
 /**
  * Converts a query string back into an object.
  *
- * Non-recursive:
+ * Implementation notes (v5):
+ * - Uses native `URLSearchParams` for decoding; input may start with leading `?`.
+ * - When `recursive=false` (default), repeated keys become arrays, otherwise the Rails-style
+ *   bracket syntax is parsed to objects/arrays (e.g., `a[b]=1&a[c]=2`, `arr[0]=x`).
+ * - Security: forbidden keys (`"__proto__"`, `"prototype"`, `"constructor"`) are ignored at all nesting levels
+ *   to prevent prototype pollution.
  *
- *     fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
- *     fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
- *     fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
- *     fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
+ * @example
+ *  fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
+ *  fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
+ *  fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
+ *  fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
  *
- * Recursive:
  *
- *     fromQueryString(
- *         "username=Jacky&"+
- *         "dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911&"+
- *         "hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&"+
- *         "hobbies[3][0]=nested&hobbies[3][1]=stuff", true);
- *
- *     // returns
- *     {
- *         username: 'Jacky',
- *         dateOfBirth: {
- *             day: '1',
- *             month: '2',
- *             year: '1911'
- *         },
- *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
- *     }
- *
- * @param {String|null} queryString The query string to decode
- * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
- * @param {Object} options = {
- *   - decodeName {Boolean} Decode KeyNames in the queryString
- * }
- * PHP / Ruby on Rails servers and similar.
- * @return {Object}
- * @todo write tests
+ * @param queryString The query string to decode.
+ * @param recursive   True to interpret bracket syntax and build nested structures.
+ * @param options     Options bag: `{ decodeName: boolean }` (names are already decoded by URLSearchParams).
+ * @returns A plain object constructed from the query string.
  */
 export default function fromQueryString(
   queryString: string,
@@ -67,7 +50,7 @@ export default function fromQueryString(
   let matchedName: RegExpMatchArray | null
   let keys: string[]
   let key: string
-  let nextKey: TextNumber
+  let nextKey: string
 
   const FORBIDDEN = new Set(['__proto__', 'prototype', 'constructor'])
 

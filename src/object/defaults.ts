@@ -37,19 +37,24 @@ function shallowCopyWithSymbols<T extends RecordAny>(obj: T): T {
 }
 
 /**
- * Assigns own and inherited enumerable string keyed properties of source
- * objects to the destination object for all destination properties that
- * resolve to `undefined`. Source objects are applied from left to right.
- * Once a property is set, additional values of the same property are ignored.
+ * Apply default values from one or more source objects to an origin object without mutation.
  *
- * **Note:** This method mutates `object`.
+ * Semantics (v5, ESM-only, Node 22+):
+ * - Immutability: returns a new object; `origin` and `sources` are not mutated.
+ * - Keys: only own enumerable string and symbol keys from sources are considered; inherited/non-enumerable are ignored.
+ * - Guards: forbidden keys `"__proto__"`, `"prototype"`, `"constructor"` are skipped (proto-pollution safe).
+ * - Deep behavior: if both destination and source values are plain objects, defaults are applied recursively.
+ * - Arrays: when setting a missing key from a source array, the array is cloned (not referenced). Arrays are not deep-merged.
+ * - Presence rule: a key is considered present in destination if it exists as an own property, even if its value is `undefined` or `null` — such keys are not overwritten.
  *
  * @example
+ * defaults({ a: { b: 2 } }, { a: { b: 1, c: 3 } })
+ * // => { a: { b: 2, c: 3 } }
  *
- * defaults({ 'a': 1 }, { 'b': 2 }, { 'a': 3 });
- * // => { 'a': 1, 'b': 2 }
+ * @param origin   The base object to apply defaults onto (not mutated).
+ * @param sources  One or more source objects providing default values (left-to-right).
+ * @returns A new object with defaults applied.
  */
-
 export default function defaults(origin: RecordAny, ...sources: RecordAny[]): RecordAny {
   // Иммутабельность: не мутируем origin
   const result: RecordAny = isPlainObject(origin) ? shallowCopyWithSymbols(origin) : origin

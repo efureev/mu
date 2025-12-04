@@ -11,13 +11,19 @@ export type NumberFormatOptions = Readonly<{
 const GROUPS_RE = /(\d{3})(?=\d)/g
 
 /**
- * Formatting number
- * @param {String|Number} value
- * @param {Number} decimals
- * @param {String} decPoint
- * @param {String} thousandsSeparator
- * @param {Boolean} clearDecimals
- * @returns {string}
+ * Format a number with thousand separators and a decimal point.
+ *
+ * Overloads supported:
+ * - Positional: `number(value, decimals?, decPoint?, thousandsSeparator?, clearDecimals?)`
+ * - Options object: `number(value, { decimals, decPoint, thousandsSeparator, clearDecimals })`
+ *
+ * Notes:
+ * - Returns `'NaN'` for `NaN` inputs; `Infinity`/`-Infinity` are stringified as-is.
+ * - Preserves the sign for negative zero when `decimals = 0` (e.g. `-0`).
+ * - When `clearDecimals = true`, fractional part is omitted for integer absolute values.
+ *
+ * @param value
+ * @param options
  */
 // Overloads support both legacy positional args and an options object for DX
 export default function number(value: TextNumber, options?: NumberFormatOptions): string
@@ -79,8 +85,7 @@ export default function number(
   // Insert thousands separators into integer part
   const j = intStr.length > 3 ? intStr.length % 3 : 0
   const intWithSep =
-    (j ? intStr.slice(0, j) + thousandsSeparator : '') +
-    intStr.slice(j).replace(GROUPS_RE, `$1${thousandsSeparator}`)
+    (j ? intStr.slice(0, j) + thousandsSeparator : '') + intStr.slice(j).replace(GROUPS_RE, `$1${thousandsSeparator}`)
 
   // Decide on fractional part rendering
   const showFraction = decimals > 0 && !(clearDecimals && Number.isInteger(abs))

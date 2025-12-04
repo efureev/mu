@@ -10,7 +10,9 @@ const isO = function (value: any): boolean {
 }
 
 /**
- * This function evaluates whether all parameters are objects
+ * Checks whether all provided arguments are plain objects (and not DOM nodes).
+ * A value is considered an object here if it is `Object`-like (`[object Object]`)
+ * and not a DOM node (duck-typed via `ownerDocument`).
  */
 export function isObjects(...parameters: any[]): boolean {
   if (parameters.length === 0) {
@@ -26,6 +28,9 @@ export default function isObject(value?: any): boolean {
   return isO(value)
 }
 
+/**
+ * Checks that all provided arguments are empty plain objects (no own enumerable keys).
+ */
 export function isEmptyObject(...parameters: any[]): boolean {
   if (parameters.length === 0) {
     throw new Error('Please provide at least one number to evaluate isObject.')

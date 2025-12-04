@@ -26,7 +26,19 @@ function ownEnumerableKeys(obj: object): PropertyKey[] {
 }
 
 /**
- * Merge objects recursively
+ * Merge two or more objects into a new one (immutable deep merge for plain objects).
+ *
+ * Semantics (v5, ESM-only, Node 22+):
+ * - Immutability: returns a new object; inputs are not mutated.
+ * - Keys: only own enumerable string and symbol keys are processed.
+ * - Guards: forbidden keys "__proto__", "prototype", "constructor" are ignored (proto-pollution safe).
+ * - Depth: deep merge only occurs for plain objects (prototype is Object.prototype or null).
+ * - Arrays: arrays from sources replace destination values with a cloned array (no element-wise merge).
+ * - Other types (Date, Map, Set, functions, class instances): copied as values; plain-object rules do not apply.
+ *
+ * @example
+ * merge({ a: 1, o: { x: 1 } }, { b: 2, o: { y: 2 } })
+ * // => { a: 1, b: 2, o: { x: 1, y: 2 } }
  */
 export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
   // Иммутабельность: не мутируем входной объект
