@@ -9,9 +9,9 @@ Remove consecutive duplicates
 ## Use
 
 ```js
+import { removeConsecutiveDuplicates } from '@feugene/mu/string'
+// or import from the root (may include more symbols depending on bundler)
 import { removeConsecutiveDuplicates } from '@feugene/mu'
-// or
-import { removeConsecutiveDuplicates } from '@feugene/mu/string/replace'
 ```
 
 ## Examples
