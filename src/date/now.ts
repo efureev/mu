@@ -1,8 +1,6 @@
-const nowFn = Date.now || (() => new Date().getTime())
-
 /**
- * return Date now
+ * Return current time in milliseconds since the UNIX epoch.
  */
-export default function now() {
-  return nowFn()
+export default function now(): number {
+  return Date.now()
 }

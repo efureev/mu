@@ -1,11 +1,11 @@
 import { padDateTime } from '~/format/pad'
 
 /**
- * Date to string
- * @param {Date|null} date
- * @returns {string}
+ * Date to string in LOCAL time (no timezone suffix).
+ * Example: 2025-12-04T22:58:00
+ * Note: this uses local getters and is affected by the environment timezone and DST rules.
  */
-export default function toString(date: Date = new Date()) {
+export default function toString(date: Date = new Date()): string {
   return (
     date.getFullYear() +
     '-' +
