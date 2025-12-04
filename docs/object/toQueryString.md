@@ -6,6 +6,11 @@
 
 Takes an object and converts it to an encoded query string.
 
+Notes (v5):
+- Uses native `URLSearchParams` for encoding.
+- Values handling: booleans are converted via `0/1`, dates via local `dateToString`, empty values become empty strings.
+- Options: `{ encodeName: boolean }` — when `true` (default), each key name is `encodeURIComponent`'ed.
+
 ## Use
 
 ```js

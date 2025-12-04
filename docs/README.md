@@ -28,6 +28,21 @@ npm install @feugene/mu
 
 <!-- tabs:end -->
 
+## Usage (ESM-only, Node 22+)
+
+```ts
+// Import single helper (preferred for tree-shaking)
+import { number } from '@feugene/mu/format'
+
+// Or import multiple named helpers from a submodule
+import { dateToStringUTC, parseISO } from '@feugene/mu/date'
+
+// Root imports also work (may pull more symbols depending on your bundler)
+import { merge } from '@feugene/mu'
+```
+
+The library is ESM-first and works in modern browsers (after bundling) and Node 22+ CLI.
+
 ## Table of Contents
 
 - [Core](#core)
@@ -55,34 +70,36 @@ npm install @feugene/mu
 
 ### Is
 
-| Function                   | Return | Example                                           |
-|:---------------------------|:-------|:--------------------------------------------------|
-| isArguments                | bool   | `isArguments([1,2]]); // false`                   |
-| isArray                    | bool   | `isArray([1,2]]); // true`                        |
-| isArrayLike                | bool   | `isArrayLike('abc'); // true`                     |
-| isBlob                     | bool   | `isBlob(new Blob([]])); // true`                  |
-| isBoolean                  | bool   | `isBoolean(true, true); // true`                  |
-| isBuffer                   | bool   | `isBuffer(new Buffer(2)); // true`                |
-| isDate                     | bool   | `isDate(new Date); // true`                       |
-| isEmpty                    | bool   | `isEmpty(null, undefined, ''); // true`           |
-| isEmptyObject              | bool   | `isEmptyObject({}}); // true`                     |
-| isEven                     | bool   | `isEven(2, 4, '8'); // true`                      |
-| isFloat                    | bool   | `isFloat('2.0')); // false`                       |
-| isFloatCanonical           | bool   | `isFloat('2.0')); // true`                        |
-| isFloats                   | bool   | `isFloat('2.2','+2.1')); // true`                 |
-| isFunction                 | bool   | `isFunction(()=>{})); // true`                    |
-| isInteger                  | bool   | `isInteger(12,-21); // true`                      |
-| isLength                   | bool   | `isLength(3); // true`                            |
-| isNil                      | bool   | `isNil(undefined); // true`                       |
-| isNils                     | bool   | `isNulls(null, undefined, void 0); // true`       |
-| isNull                     | bool   | `isNull(null); // true`                           |
-| isNulls                    | bool   | `isNulls(null, undefined); // false`              |
-| isNumeric                  | bool   | `isNumeric(12,-2.3); // true`                     |
-| [isObject](is/isObject.md) | bool   | `isObject([], '12', 4, new Function()); // false` |
-| isObjectLike               | bool   | `isObjectLike([]); // true`                       |
-| isString                   | bool   | `isString('test'); // true`                       |
-| isSymbol                   | bool   | `isSymbol(Symbol('a')); // true`                  |
-| isTypedArray               | bool   | `isTypedArray(new Uint8Array); // true`           |
+| Function                   | Return | Example                                                |
+|:---------------------------|:-------|:-------------------------------------------------------|
+| isArguments                | bool   | `isArguments([1,2]); // false`                         |
+| isArray                    | bool   | `isArray([1,2]); // true`                              |
+| isArrayLike                | bool   | `isArrayLike('abc'); // true`                          |
+| isBlob                     | bool   | `isBlob(new Blob([])); // true`                        |
+| isBoolean                  | bool   | `isBoolean(true); // true`                             |
+| isBuffer                   | bool   | `isBuffer(Buffer.alloc(2)); // true`                   |
+| isDate                     | bool   | `isDate(new Date()); // true`                          |
+| isEmpty                    | bool   | `isEmpty(null, undefined, ''); // true`                |
+| isBlank                    | bool   | `isBlank('   '); // true`                              |
+| isEmptyObject              | bool   | `isEmptyObject({}); // true`                           |
+| isEven                     | bool   | `isEven(2); // true`                                   |
+| isEvens                    | bool   | `isEvens(2, 4, '8'); // true`                          |
+| isFloat                    | bool   | `isFloat(2.2); // true`                                |
+| isFloatCanonical           | bool   | `isFloatCanonical('2.0'); // true`                     |
+| isFloats                   | bool   | `isFloats('2.2','+2.1'); // true`                      |
+| isFunction                 | bool   | `isFunction(() => {}); // true`                        |
+| isInteger                  | bool   | `isInteger(12); // true`                               |
+| isLength                   | bool   | `isLength(3); // true`                                 |
+| isNil                      | bool   | `isNil(undefined); // true`                            |
+| isNils                     | bool   | `isNils(null, undefined); // true`                     |
+| isNull                     | bool   | `isNull(null); // true`                                |
+| isNulls                    | bool   | `isNulls(null, undefined); // false`                   |
+| isNumeric                  | bool   | `isNumeric('1e3'); // true`                            |
+| [isObject](is/isObject.md) | bool   | `isObject([], '12', 4, Function); // false`            |
+| isObjectLike               | bool   | `isObjectLike([]); // true`                            |
+| isString                   | bool   | `isString('test'); // true`                            |
+| isSymbol                   | bool   | `isSymbol(Symbol('a')); // true`                       |
+| isTypedArray               | bool   | `isTypedArray(new Uint8Array(2)); // true`             |
 
 ### Array
 
@@ -164,22 +181,24 @@ npm install @feugene/mu
 
 ### Date
 
-| Function | Return | Description                                      | Example |
-|:---------|:-------|:-------------------------------------------------|:--------|
-| elapsed  | int    | Returns difference in milliseconds between dates |         |
-| now      | date   | Now date                                         |         |
-| toString | string | Date as string                                   |         |
+| Function         | Return  | Description                                                     |
+|:-----------------|:--------|:----------------------------------------------------------------|
+| elapsed          | number  | Difference in milliseconds between dates                        |
+| now              | number  | Current time in ms since UNIX epoch                             |
+| dateToString     | string  | Local time `YYYY-MM-DDTHH:mm:SS` (no timezone suffix)           |
+| dateToStringUTC  | string  | UTC time `YYYY-MM-DDTHH:mm:SSZ`                                 |
+| parseISO         | Date\|null | Strict ISO/RFC3339 or epoch ms string → Date; else `null`      |
 
 ### Format
 
-| Function    | Return | Description                   | Example                             |
-|:------------|:-------|:------------------------------|:------------------------------------|
-| fileSize    | string | Display number as file size   | `fileSize(7900221323) // '7.36 Gb'` |
-| intWord     | string |                               | `intWord(21323) // '21.32K'`        |
-| num         | string | Formatting number             | `num('10000') // '10,000.00'`       |
-| numRus      | string | Formatting number for Russian | `numRus(1001.20) // '1 001.20'`     |
-| padDateTime | string |                               | `padDateTime(1) // '01'`            |
-| padNumber   | string |                               | `padNumber(2,3) // '002'`           |
+| Function    | Return | Description                               | Example                                         |
+|:------------|:-------|:------------------------------------------|:------------------------------------------------|
+| fileSize    | string | Display number as file size               | `fileSize(7900221323) // '7.36 Gb'`             |
+| intWord     | string | Compact integer with unit suffix          | `intWord(21323) // '21.32K'`                    |
+| number      | string | Formatting number (options supported)     | `number('10000') // '10,000.00'`                |
+| numberRus   | string | RU format: space group, comma as decimal  | `numberRus(1001.2) // '1 001,20'`               |
+| padDateTime | string | Zero-pad date/time part to 2 chars        | `padDateTime(1) // '01'`                        |
+| padNumber   | string | Left-pad a number with zeros to width N   | `padNumber(2,3) // '002'`                       |
 
 ### Utilities
 
