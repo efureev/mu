@@ -1,37 +1,18 @@
-import defaults from './defaults'
-import objectsEqual from './equals'
-import filter from './filter'
-import flip from './flip'
-import fromQueryString from './fromQueryString'
-import getSize from './getSize'
-import logicalAnd from './logicalAnd'
-import merge from './merge'
-import pathToObject from './pathToObject'
-import pick from './pick'
-import remove from './remove'
-import removeEmpty from './removeEmpty'
-import select from './select'
-import sum from './sum'
-import toQueryObjects from './toQueryObjects'
-import toQueryString from './toQueryString'
-import values from './values'
-
-export {
-  defaults,
-  objectsEqual,
-  filter,
-  flip,
-  fromQueryString,
-  getSize,
-  logicalAnd,
-  merge,
-  pathToObject,
-  pick,
-  remove,
-  removeEmpty,
-  select,
-  sum,
-  toQueryObjects,
-  toQueryString,
-  values,
-}
+// ESM-first, tree-shaking-friendly direct re-exports
+export { default as defaults } from './defaults'
+export { default as objectsEqual } from './equals'
+export { default as filter } from './filter'
+export { default as flip } from './flip'
+export { default as fromQueryString } from './fromQueryString'
+export { default as getSize } from './getSize'
+export { default as logicalAnd } from './logicalAnd'
+export { default as merge } from './merge'
+export { default as pathToObject } from './pathToObject'
+export { default as pick } from './pick'
+export { default as remove } from './remove'
+export { default as removeEmpty } from './removeEmpty'
+export { default as select } from './select'
+export { default as sum } from './sum'
+export { default as toQueryObjects } from './toQueryObjects'
+export { default as toQueryString } from './toQueryString'
+export { default as values } from './values'

@@ -1,16 +1,13 @@
-const isO =
-  Object.prototype.toString.call(null) === '[object Object]'
-    ? function (value: any): boolean {
-        // check ownerDocument here as well to exclude DOM nodes
-        return (
-          value != null &&
-          Object.prototype.toString.call(value) === '[object Object]' &&
-          value.ownerDocument === undefined
-        )
-      }
-    : function (value: any): boolean {
-        return Object.prototype.toString.call(value) === '[object Object]'
-      }
+// Modern, single-path implementation for Node 22+/modern browsers
+// Excludes DOM nodes by checking ownerDocument
+const isO = function (value: any): boolean {
+  return (
+    value != null &&
+    Object.prototype.toString.call(value) === '[object Object]' &&
+    // ownerDocument exists on DOM nodes; we exclude such objects
+    (value as any).ownerDocument === undefined
+  )
+}
 
 /**
  * This function evaluates whether all parameters are objects

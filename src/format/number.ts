@@ -1,5 +1,8 @@
 import type { TextNumber } from '~/internal/types'
 
+// Hoisted constant regex to avoid re-allocating per call
+const GROUPS_RE = /(\d{3})(?=\d)/g
+
 /**
  * Formatting number
  * @param {String|Number} value
@@ -37,7 +40,7 @@ export default function number(
   const j = intStr.length > 3 ? intStr.length % 3 : 0
   const intWithSep =
     (j ? intStr.slice(0, j) + thousandsSeparator : '') +
-    intStr.slice(j).replace(/(\d{3})(?=\d)/g, `$1${thousandsSeparator}`)
+    intStr.slice(j).replace(GROUPS_RE, `$1${thousandsSeparator}`)
 
   // Decide on fractional part rendering
   const showFraction = decimals > 0 && !(clearDecimals && Number.isInteger(abs))
