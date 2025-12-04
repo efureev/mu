@@ -20,6 +20,7 @@ import isString, { isStrings } from './isString'
 import isSymbol from './isSymbol'
 import isTypedArray from './isTypedArray'
 import isUrl from './isUrl'
+import isBlank, { isBlanks } from './isBlank'
 
 export {
   isAdvancedType,
@@ -32,6 +33,8 @@ export {
   isBlobs,
   isBoolean,
   isBooleans,
+  isBlank,
+  isBlanks,
   isBuffer,
   isDate,
   isDates,
