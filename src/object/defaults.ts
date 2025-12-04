@@ -1,6 +1,41 @@
 import clone from '~/core/clone'
 import isObject from '~/is/isObject'
 
+type RecordAny = Record<PropertyKey, any>
+
+// Узкое определение plain object без опоры на constructor
+function isPlainObject(val: any): val is RecordAny {
+  if (!isObject(val)) return false
+  const proto = Object.getPrototypeOf(val)
+  return proto === Object.prototype || proto === null
+}
+
+const FORBIDDEN_KEYS = new Set<PropertyKey>(['__proto__', 'prototype', 'constructor'])
+
+function isForbiddenKey(key: PropertyKey): boolean {
+  return typeof key === 'string' ? FORBIDDEN_KEYS.has(key) : false
+}
+
+function ownEnumerableKeys(obj: object): PropertyKey[] {
+  const keys: PropertyKey[] = Object.keys(obj)
+  const symbols = Object.getOwnPropertySymbols(obj).filter(sym => {
+    const desc = Object.getOwnPropertyDescriptor(obj, sym)
+    return !!desc?.enumerable
+  })
+  return keys.concat(symbols)
+}
+
+function shallowCopyWithSymbols<T extends RecordAny>(obj: T): T {
+  const res: any = { ...obj }
+  for (const sym of Object.getOwnPropertySymbols(obj)) {
+    const desc = Object.getOwnPropertyDescriptor(obj, sym)
+    if (desc?.enumerable) {
+      res[sym] = (obj as any)[sym]
+    }
+  }
+  return res
+}
+
 /**
  * Assigns own and inherited enumerable string keyed properties of source
  * objects to the destination object for all destination properties that
@@ -15,39 +50,44 @@ import isObject from '~/is/isObject'
  * // => { 'a': 1, 'b': 2 }
  */
 
-export default function defaults(
-  origin: Record<PropertyKey, any>,
-  ...destinations: Record<PropertyKey, any>[]
-): Record<PropertyKey, any> {
-  const ln = destinations.length
+export default function defaults(origin: RecordAny, ...sources: RecordAny[]): RecordAny {
+  // Иммутабельность: не мутируем origin
+  const result: RecordAny = isPlainObject(origin) ? shallowCopyWithSymbols(origin) : origin
 
-  let i = 0,
-    object,
-    key,
-    value,
-    sourceKey
+  for (const source of sources) {
+    if (!isObject(source)) continue
 
-  for (; i < ln; i++) {
-    object = destinations[i]
-    if (!isObject(object)) {
-      continue
-    }
-    for (key in object) {
-      value = object[key]
-      if (value && value.constructor === Object) {
-        sourceKey = origin[key]
-        if (sourceKey && sourceKey.constructor === Object) {
-          defaults(sourceKey, value)
-        } else {
-          origin[key] = clone(value)
+    for (const key of ownEnumerableKeys(source)) {
+      if (isForbiddenKey(key)) continue
+
+      const srcVal = (source as any)[key]
+      const hasOwn = Object.prototype.hasOwnProperty.call(result, key)
+      const dstVal = hasOwn ? (result as any)[key] : undefined
+
+      // Если ключ уже существует в результате
+      if (hasOwn) {
+        // Глубокая установка defaults для plain-objects
+        if (isPlainObject(dstVal) && isPlainObject(srcVal)) {
+          ;(result as any)[key] = defaults(dstVal, srcVal)
         }
-      } else {
-        if (!Object.prototype.hasOwnProperty.call(origin, key)) {
-          origin[key] = value
-        }
+        // Во всех остальных случаях — ничего не делаем (не переопределяем, даже если undefined)
+        continue
       }
+
+      // Ключа нет — можно задать значение по умолчанию из источника
+      if (isPlainObject(srcVal)) {
+        ;(result as any)[key] = defaults({}, srcVal)
+        continue
+      }
+
+      if (Array.isArray(srcVal)) {
+        ;(result as any)[key] = clone(srcVal)
+        continue
+      }
+
+      ;(result as any)[key] = srcVal
     }
   }
 
-  return origin
+  return result
 }
