@@ -54,7 +54,6 @@ jobs:
 
       - run: yarn install
       - run: yarn test-all
-      - run: yarn build
         env:
           CI: true
 
@@ -70,6 +69,7 @@ jobs:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
       - run: yarn install
+      - run: yarn build
       # Publish to npm
       - run: npm publish --access public
         env:
