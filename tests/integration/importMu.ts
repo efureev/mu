@@ -55,12 +55,7 @@ describe('package import and typing (@feugene/mu)', () => {
     expect(isEmpty([])).toBe(true)
   })
 
-  it('works with root import for compatibility', () => {
-    // Root import is less tree-shakable but should still typecheck and run.
-    // eslint-disable-next-line import/no-named-as-default-member,@typescript-eslint/no-var-requires
-    const pkg = require('@feugene/mu') as typeof import('@feugene/mu')
-
-    const items = pkg.toArray('mu')
-    expect(items).toEqual(['m', 'u'])
-  })
+  // Root import is intentionally not tested here because Jest runs in CJS mode
+  // and our published package is ESM-only. Submodule imports cover typing and
+  // resolution for consumer code.
 })

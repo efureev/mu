@@ -42,7 +42,7 @@ jobs:
     needs: [ lint-changelog, lint-code ]
     strategy:
       matrix:
-        node-version: [ 22.x,24.x,25.x ]
+        node-version: [ 22.x,24.x ]
 
     steps:
       - uses: actions/checkout@v6

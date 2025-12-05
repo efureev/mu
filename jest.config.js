@@ -9,6 +9,15 @@ module.exports = {
     '^.+\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
   },
 
+  moduleNameMapper: {
+    '^@feugene/mu$': '<rootDir>/src/index.ts',
+    '^@feugene/mu/format$': '<rootDir>/src/format/index.ts',
+    '^@feugene/mu/object$': '<rootDir>/src/object/index.ts',
+    '^@feugene/mu/is$': '<rootDir>/src/is/index.ts',
+    '^@feugene/mu/to$': '<rootDir>/src/to/index.ts',
+    '^~/(.*)$': '<rootDir>/src/$1',
+  },
+
   collectCoverageFrom: [
     '**/src/**/*.{js,ts}',
     '!**/node_modules/**',
@@ -20,9 +29,6 @@ module.exports = {
     '!**/src/internal/root.ts',
     '!**/src/internal/types.ts',
   ],
-  moduleNameMapper: {
-    '^~/(.*)$': '<rootDir>/src/$1',
-  },
   coverageProvider: 'v8',
   moduleFileExtensions: ['ts', 'js', 'json'],
 }
