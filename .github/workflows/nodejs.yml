@@ -77,7 +77,7 @@ jobs:
             ${{ runner.os }}-node-
 
       - run: yarn install
-      - run: yarn test
+      - run: yarn test-all
         env:
           CI: true
 

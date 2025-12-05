@@ -3,7 +3,7 @@
   "description": "Helpful TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "5.0.0-alpha",
+  "version": "5.0.0-rc1",
   "author": {
     "name": "Eugene Fureev"
   },
@@ -133,13 +133,15 @@
     "build:cjs": "tsc -p tsconfig.cjs.json",
     "build": "npm-run-all -l clean -p build:esm build:cjs declarations",
     "postbuild": "tsc-alias -v --dir dist/cjs -p tsconfig.cjs.json && tsc-alias -v --dir dist/esm -p tsconfig.esm.json && tsc-alias -v --dir dist/types -p tsconfig.types.json",
-    "rename": "ts-node ./.scripts/rename.ts",
+    "rename": "ts-node scripts/rename.ts",
     "coverage": "jest --coverage",
     "prepare": "husky install",
     "lint": "prettier --check \"src/**/*\" \"tests/**/*\"",
     "lint:fix": "prettier --write \"src/**/*\" \"tests/**/*\"",
     "test": "jest",
-    "docsify": "docsify serve ./docs"
+    "test-all": "jest && ts-node scripts/check-doc-links.ts",
+    "docsify": "docsify serve ./docs",
+    "check:docs:links": "ts-node scripts/check-doc-links.ts"
   },
   "sideEffects": false,
   "engines": {
