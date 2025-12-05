@@ -30,18 +30,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Get npm cache directory
-        id: npm-cache
-        run: |
-          echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
-        with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'yarn'
 
       - run: yarn install
       - run: yarn lint
@@ -54,7 +43,7 @@ jobs:
     needs: [ lint-changelog, lint-code ]
     strategy:
       matrix:
-        node-version: [ 22.x,24.x,26.x ]
+        node-version: [ 22.x,24.x,25.x ]
 
     steps:
       - uses: actions/checkout@v4
@@ -63,18 +52,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-
-      - name: Get npm cache directory
-        id: npm-cache
-        run: |
-          echo "dir=$(npm config get cache)" >> $GITHUB_OUTPUT
-
-      - uses: actions/cache@v4
-        with:
-          path: ${{ steps.npm-cache.outputs.dir }}
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
+          cache: 'yarn'
 
       - run: yarn install
       - run: yarn test-all
@@ -92,7 +70,7 @@ jobs:
         with:
           node-version: '22.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm install
+      - run: yarn install
       # Publish to npm
       - run: npm publish --access public
         env:
