@@ -20,13 +20,21 @@ const hasOwnProperty = objectProto.hasOwnProperty
  * @returns {Array|[]} Returns the array of property names.
  */
 export default function arrayLikeKeys(value: any, inherited: boolean = false): string[] {
-  const isArray_ = Array.isArray(value),
-    isArgument = !isArray_ && isArguments(value),
-    isBuff = !isArray_ && !isArgument && isBuffer(value),
-    isType = !isArray_ && !isArgument && !isBuff && isTypedArray(value),
-    skipIndexes = isArray_ || isArgument || isBuff || isType,
-    result = skipIndexes ? (times(value.length, String) as string[]) : [],
-    length = result.length
+  const isArray_ = Array.isArray(value)
+  const isArgument = !isArray_ && isArguments(value)
+  const isBuff = !isArray_ && !isArgument && isBuffer(value)
+  const isType = !isArray_ && !isArgument && !isBuff && isTypedArray(value)
+  const skipIndexes = isArray_ || isArgument || isBuff || isType
+
+  // Pre-populate index keys for array-like values without relying on generic utils.
+  const result: string[] = []
+  if (skipIndexes) {
+    const len = (value?.length ?? 0) >>> 0
+    for (let i = 0; i < len; i++) {
+      result.push(String(i))
+    }
+  }
+  const length = result.length
 
   for (const key in value) {
     if (

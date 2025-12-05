@@ -37,7 +37,6 @@ export default function pick<T extends Record<PropertyKey, any>, K extends strin
   forEach(paths, v => {
     const val = select(object as any, v as unknown as string)
     if (val !== undefined) {
-      // @ts-expect-error index signature by path string
       res[v as K] = val
     }
   })
