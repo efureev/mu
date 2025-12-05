@@ -20,18 +20,18 @@ export default function pad(
   if (isNil(value)) {
     return ''
   }
-  value = String(value)
+  const str = String(value)
 
-  if (value.length > targetLength) {
-    return value
+  if (str.length > targetLength) {
+    return str
   }
 
-  targetLength = targetLength - value.length
+  targetLength = targetLength - str.length
   if (targetLength > padString.length) {
     padString += padString.repeat(targetLength / padString.length) //append to original to ensure we are longer than needed
   }
 
-  return leading ? padString.slice(0, targetLength) + value : value + padString.slice(0, targetLength)
+  return leading ? padString.slice(0, targetLength) + str : str + padString.slice(0, targetLength)
 }
 
 /**

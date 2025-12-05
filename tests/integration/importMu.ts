@@ -1,8 +1,11 @@
-import { number, numberRus } from '@feugene/mu/format'
-import { merge, defaults } from '@feugene/mu/object'
-import { isEmpty, isNumeric, isInteger } from '@feugene/mu/is'
-import { toArray, toNumber } from '@feugene/mu/to'
-
+// NOTE: under Vitest we import from local src via path aliases (~),
+// not from the published package name. This still verifies typings
+// and module structure for consumer-like code.
+import { number, numberRus } from '~/format'
+import { merge, defaults } from '~/object'
+import { isEmpty, isNumeric, isInteger } from '~/is'
+import { toArray, toNumber } from '~/to'
+import { describe, it, expect } from 'vitest'
 type User = {
   id: number
   name: string

@@ -87,25 +87,25 @@
     }
   },
   "devDependencies": {
-    "@types/jest": "^29.5.14",
+    "@types/node": "^24.10.1",
+    "@vitest/coverage-v8": "^2.1.8",
     "docsify-cli": "^4.4.4",
     "formdata-node": "^6.0.3",
     "husky": "^9.1.7",
-    "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
     "prettier": "^3.7.4",
     "rimraf": "^6.1.2",
-    "ts-jest": "^29.4.1",
-    "tsc-alias": "^1.8.16",
     "ts-node": "^10.9.2",
-    "typescript": "^5.9.3"
+    "tsc-alias": "^1.8.16",
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^2.1.8"
   },
   "keywords": [
     "javascript",
     "typescript",
-    "js",
     "ts",
-    "ems",
+    "esm",
     "utilities",
     "helpers",
     "js-modules"
@@ -117,24 +117,17 @@
     "build": "npm-run-all -l clean -p build:esm declarations",
     "postbuild": "tsc-alias -v --dir dist/esm -p tsconfig.esm.json && tsc-alias -v --dir dist/types -p tsconfig.types.json",
     "rename": "ts-node scripts/rename.ts",
-    "coverage": "jest --coverage",
     "prepare": "husky install",
     "lint": "prettier --check \"src/**/*\" \"tests/**/*\"",
     "lint:fix": "prettier --write \"src/**/*\" \"tests/**/*\"",
-    "test": "jest",
-    "test-all": "jest && ts-node scripts/check-doc-links.ts",
+    "coverage": "vitest run --coverage",
+    "test": "vitest",
+    "test-all": "vitest run && ts-node scripts/check-doc-links.ts",
     "docsify": "docsify serve ./docs",
     "check:docs:links": "ts-node scripts/check-doc-links.ts"
   },
   "sideEffects": false,
   "engines": {
-    "node": "^22 || ^24 ||^25 || ^26"
-  },
-  "typesVersions": {
-    ">=4.2": {
-      "*": [
-        "dist/types/*"
-      ]
-    }
+    "node": "^22 || ^24 || ^25 || ^26"
   }
 }
