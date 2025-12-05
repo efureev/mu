@@ -6,6 +6,14 @@
 
 Clone simple variables including array, {}-like objects, DOM nodes and Date without keeping the old reference.
 
+Notes (v5, Node 22+):
+- Plain objects and arrays are deep-cloned over own enumerable string and symbol keys only.
+- `Date` is cloned by value: `new Date(src.getTime())`.
+- DOM nodes are cloned via `node.cloneNode(true)` when `cloneDom = true` (default).
+- Other complex objects (Map, Set, RegExp, TypedArrays, ArrayBuffer, URL, etc.) are cloned via native `structuredClone` when available; if cloning fails, returns the original reference.
+- Functions/classes and instances with custom prototypes are returned by reference.
+- Accessors/descriptors are not preserved; only enumerable data properties are processed for plain objects.
+
 ## Use
 
 ```js

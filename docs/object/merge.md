@@ -6,6 +6,12 @@
 
 Merge 2 or more objects recursively.
 
+Notes (v5, ESM-only, Node 22+):
+- Immutable: input objects are not mutated; a new object is returned.
+- Security: guarded against prototype pollution — keys `"__proto__"`, `"prototype"`, `"constructor"` are ignored.
+- Keys: only own enumerable string and symbol keys are considered.
+- Depth: deep-merge only plain objects (`Object.prototype` or null-proto). Arrays are replaced with a cloned array.
+
 ## Use
 
 ```js

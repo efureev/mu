@@ -6,9 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Queue = void 0;
 const isFunction_1 = __importDefault(require("../is/isFunction"));
 class Queue {
-    constructor() {
-        this.data = [];
-    }
+    data = [];
     push(item) {
         this.data.push(item);
     }

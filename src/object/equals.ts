@@ -4,32 +4,24 @@
 import isObject from '~/is/isObject'
 
 export default function equal(origin: Record<PropertyKey, any>, ...list: Record<PropertyKey, any>[]): boolean {
-  let i: number, l: number, leftChain: Array<any>, rightChain: Array<any>
+  let i: number, l: number
+  let leftVisited: Set<any>, rightVisited: Set<any>
 
   if (!isObject(origin) || list.length === 0) {
     throw new Error('Need two or more arguments to compare')
   }
 
-  function compare2Objects(x: any, y: any) {
-    let p
-
-    // remember that NaN === NaN returns false
-    // and isNaN(undefined) returns true
-    // isNumeric(x,y)
-    if (isNaN(x) && isNaN(y) && typeof x === 'number' && typeof y === 'number') {
+  function compare2Objects(x: any, y: any): boolean {
+    // Быстрая проверка NaN
+    if (typeof x === 'number' && typeof y === 'number' && Number.isNaN(x) && Number.isNaN(y)) {
       return true
     }
 
-    // Compare primitives and functions.
-    // Check if both arguments link to the same object.
-    // Especially useful on the step where we compare prototypes
+    // Базовое строгое равенство и кейсы для встроенных типов
     if (x === y) {
       return true
     }
 
-    // Works in case when functions are created in constructor.
-    // Comparing dates is a common scenario. Another built-ins?
-    // We can even handle functions passed across iframes
     if (
       (typeof x === 'function' && typeof y === 'function') ||
       (x instanceof Date && y instanceof Date) ||
@@ -40,73 +32,71 @@ export default function equal(origin: Record<PropertyKey, any>, ...list: Record<
       return x.toString() === y.toString()
     }
 
-    // At last checking prototypes as good as we can
+    // Должны быть объектами дальше
     if (!(x instanceof Object && y instanceof Object)) {
       return false
     }
 
-    if (Object.prototype.isPrototypeOf.call(x, y) || Object.prototype.isPrototypeOf.call(y, x)) {
+    // Прототипы/конструкторы
+    if (Object.getPrototypeOf(x) !== Object.getPrototypeOf(y)) {
       return false
     }
-
     if (x.constructor !== y.constructor) {
       return false
     }
 
-    if (x.prototype !== y.prototype) {
+    // Проверка на циклические ссылки
+    if (leftVisited.has(x) || rightVisited.has(y)) {
       return false
     }
 
-    // Check for infinitive linking loops
-    if (leftChain.includes(x) || rightChain.includes(y)) {
+    // Быстрая проверка количества ключей (собственных)
+    const xKeys = Object.keys(x)
+    const yKeys = Object.keys(y)
+    if (xKeys.length !== yKeys.length) {
       return false
     }
 
-    // Quick checking of one object being a subset of another.
-    // todo: cache the structure of arguments[0] for performance
-    for (p in y) {
-      if (Object.prototype.isPrototypeOf.call(y, p) !== Object.prototype.isPrototypeOf.call(x, p)) {
+    // Сопоставление ключей по типам значений (дополнительно)
+    for (let k = 0; k < yKeys.length; k++) {
+      const p = yKeys[k]
+      if (!Object.prototype.hasOwnProperty.call(x, p)) {
         return false
-      } else if (typeof y[p] !== typeof x[p]) {
+      }
+      if (typeof y[p] !== typeof x[p]) {
         return false
       }
     }
 
-    for (p in x) {
-      if (Object.prototype.isPrototypeOf.call(y, p) !== Object.prototype.isPrototypeOf.call(x, p)) {
-        return false
-      } else if (typeof y[p] !== typeof x[p]) {
-        return false
-      }
+    // Глубокое сравнение
+    leftVisited.add(x)
+    rightVisited.add(y)
 
-      switch (typeof x[p]) {
-        case 'object':
-        case 'function':
-          leftChain.push(x)
-          rightChain.push(y)
+    for (let k = 0; k < xKeys.length; k++) {
+      const p = xKeys[k]
+      const xv = x[p]
+      const yv = y[p]
 
-          if (!compare2Objects(x[p], y[p])) {
-            return false
-          }
-
-          leftChain.pop()
-          rightChain.pop()
-          break
-
-        default:
-          if (x[p] !== y[p]) {
-            return false
-          }
-          break
+      const t = typeof xv
+      if (t === 'object' || t === 'function') {
+        if (!compare2Objects(xv, yv)) {
+          return false
+        }
+      } else {
+        if (xv !== yv) {
+          return false
+        }
       }
     }
 
+    leftVisited.delete(x)
+    rightVisited.delete(y)
     return true
   }
 
   for (i = 0, l = list.length; i < l; i++) {
-    leftChain = [] // @Todo: this can be cached
-    rightChain = []
+    leftVisited = new Set()
+    rightVisited = new Set()
 
     if (!compare2Objects(origin, list[i])) {
       return false

@@ -1,8 +1,6 @@
 import isFunction from '../is/isFunction.mjs';
 export class Stack {
-    constructor() {
-        this.data = [];
-    }
+    data = [];
     push(item) {
         this.data.push(item);
     }

@@ -1,0 +1,21 @@
+# Folders not needed in the published package
+node_modules
+coverage
+docs
+tests
+scripts
+.github
+.husky
+
+# Local/output artifacts
+*.log
+.output.txt
+.DS_Store
+
+# TypeScript project files (config is whitelisted via package.json "files")
+tsconfig.esm.json
+tsconfig.types.json
+
+# Editor/IDE
+.idea
+.vscode

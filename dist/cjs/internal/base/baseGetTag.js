@@ -8,7 +8,7 @@ const root_1 = __importDefault(require("../../internal/root"));
 const getRawTag_1 = __importDefault(require("../../internal/getRawTag"));
 const nullTag = '[object Null]';
 const undefinedTag = '[object Undefined]';
-const symToStringTag = root_1.default.Symbol ? root_1.default.Symbol.toStringTag : undefined;
+const symToStringTag = root_1.default?.Symbol ? root_1.default.Symbol.toStringTag : undefined;
 /**
  * The base implementation of `getTag` without fallbacks for buggy environments.
  *

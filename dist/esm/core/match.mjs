@@ -6,7 +6,10 @@ import isObject from '../is/isObject.mjs';
  * @return {*}
  */
 export default function match(expr, cases, options) {
-    const opt = Object.assign({ strict: true }, (isObject(options) ? options : {}));
+    const opt = {
+        strict: true,
+        ...(isObject(options) ? options : {}),
+    };
     for (const [pattern, action] of Array.isArray(cases) ? cases : Object.entries(cases)) {
         const prn = typeof pattern === 'function' ? pattern() : pattern;
         if (opt.strict ? expr === prn : expr == prn) {

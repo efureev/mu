@@ -3,7 +3,7 @@
   "description": "Helpful TS utilities without dependencies",
   "homepage": "https://github.com/efureev/mu",
   "license": "MIT",
-  "version": "4.7.2",
+  "version": "5.0.0-rc1",
   "author": {
     "name": "Eugene Fureev"
   },
@@ -15,100 +15,90 @@
     "url": "https://github.com/efureev/mu/issues"
   },
   "files": [
-    "src",
     "dist",
     "tsconfig.json",
     "package.json"
   ],
   "module": "./dist/esm/index.mjs",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
       "types": "./dist/types/index.d.ts",
       "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/index.js",
-      "default": "./dist/esm/mjs"
+      "default": "./dist/esm/index.mjs"
     },
     "./*": {
       "types": "./dist/types/*.d.ts",
       "import": "./dist/esm/*.mjs",
-      "require": "./dist/cjs/*.js",
       "default": "./dist/esm/*.mjs"
     },
     "./array": {
       "types": "./dist/types/array/index.d.ts",
-      "import": "./dist/esm/index.mjs",
-      "require": "./dist/cjs/array/index.js"
+      "import": "./dist/esm/array/index.mjs"
+    },
+    "./date": {
+      "types": "./dist/types/date/index.d.ts",
+      "import": "./dist/esm/date/index.mjs"
     },
     "./core": {
       "types": "./dist/types/core/index.d.ts",
-      "require": "./dist/cjs/core/index.js",
       "import": "./dist/esm/core/index.mjs"
     },
     "./format": {
       "types": "./dist/types/format/index.d.ts",
-      "require": "./dist/cjs/format/index.js",
       "import": "./dist/esm/format/index.mjs"
     },
     "./i18": {
       "types": "./dist/types/i18/index.d.ts",
-      "require": "./dist/cjs/i18/index.js",
       "import": "./dist/esm/i18/index.mjs"
     },
     "./is": {
       "types": "./dist/types/is/index.d.ts",
-      "require": "./dist/cjs/is/index.js",
       "import": "./dist/esm/is/index.mjs"
     },
     "./object": {
       "types": "./dist/types/object/index.d.ts",
-      "require": "./dist/cjs/object/index.js",
       "import": "./dist/esm/object/index.mjs"
     },
     "./sort": {
       "types": "./dist/types/sort/index.d.ts",
-      "require": "./dist/cjs/sort/index.js",
       "import": "./dist/esm/sort/index.mjs"
     },
     "./string": {
       "types": "./dist/types/string/index.d.ts",
-      "require": "./dist/cjs/string/index.js",
       "import": "./dist/esm/string/index.mjs"
     },
     "./structures": {
       "types": "./dist/types/structures/index.d.ts",
-      "require": "./dist/cjs/structures/index.js",
       "import": "./dist/esm/structures/index.mjs"
     },
     "./to": {
       "types": "./dist/types/to/index.d.ts",
-      "require": "./dist/cjs/to/index.js",
       "import": "./dist/esm/to/index.mjs"
     },
     "./utils": {
       "types": "./dist/types/utils/index.d.ts",
-      "require": "./dist/cjs/utils/index.js",
       "import": "./dist/esm/utils/index.mjs"
     },
     "./internal/*": {
       "types": "./dist/types/internal/*.d.ts",
-      "require": "./dist/cjs/internal/*.js",
       "import": "./dist/esm/internal/*.mjs",
       "default": "./dist/esm/internal/*.mjs"
     }
   },
   "devDependencies": {
-    "@types/jest": "^30.0.0",
+    "@types/jest": "^29.5.14",
     "docsify-cli": "^4.4.4",
     "formdata-node": "^6.0.3",
     "husky": "^9.1.7",
-    "jest": "^30.0.5",
+    "jest": "^29.7.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^3.6.2",
-    "rimraf": "^5.0.10",
-    "ts-jest": "^29.4.0",
+    "prettier": "^3.7.4",
+    "rimraf": "^6.1.2",
+    "ts-jest": "^29.4.1",
     "tsc-alias": "^1.8.16",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3"
+    "typescript": "^5.9.3"
   },
   "keywords": [
     "javascript",
@@ -124,29 +114,22 @@
     "clean": "rimraf dist",
     "declarations": "tsc -p tsconfig.types.json",
     "build:esm": "tsc -p tsconfig.esm.json && yarn rename",
-    "build:cjs": "tsc -p tsconfig.cjs.json",
-    "build": "npm-run-all -l clean -p build:esm build:cjs declarations",
-    "postbuild": "tsc-alias -v --dir dist/cjs -p tsconfig.cjs.json && tsc-alias -v --dir dist/esm -p tsconfig.esm.json && tsc-alias -v --dir dist/types -p tsconfig.types.json",
-    "rename": "ts-node ./.scripts/rename.ts",
+    "build": "npm-run-all -l clean -p build:esm declarations",
+    "postbuild": "tsc-alias -v --dir dist/esm -p tsconfig.esm.json && tsc-alias -v --dir dist/types -p tsconfig.types.json",
+    "rename": "ts-node scripts/rename.ts",
     "coverage": "jest --coverage",
     "prepare": "husky install",
-    "lint": "prettier --write src/**/* tests/**/*",
+    "lint": "prettier --check \"src/**/*\" \"tests/**/*\"",
+    "lint:fix": "prettier --write \"src/**/*\" \"tests/**/*\"",
     "test": "jest",
-    "docsify": "docsify serve ./docs"
+    "test-all": "jest && ts-node scripts/check-doc-links.ts",
+    "docsify": "docsify serve ./docs",
+    "check:docs:links": "ts-node scripts/check-doc-links.ts"
   },
+  "sideEffects": false,
   "engines": {
-    "node": "^20 || ^21 || ^22 || ^23 || ^24 || ^25"
+    "node": "^22 || ^24 ||^25 || ^26"
   },
-  "nyc": {
-    "extension": [
-      ".ts"
-    ]
-  },
-  "browserslist": [
-    "last 3 versions",
-    "not ie 11",
-    "not op_mini all"
-  ],
   "typesVersions": {
     ">=4.2": {
       "*": [

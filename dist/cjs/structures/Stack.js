@@ -6,9 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Stack = void 0;
 const isFunction_1 = __importDefault(require("../is/isFunction"));
 class Stack {
-    constructor() {
-        this.data = [];
-    }
+    data = [];
     push(item) {
         this.data.push(item);
     }

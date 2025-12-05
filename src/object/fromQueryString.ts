@@ -3,8 +3,7 @@ import isNumeric from '~/is/isNumeric'
 import type { TextNumber } from '~/internal/types'
 
 const queryRe = /^\?/
-const plusRe = /\+/g
-const keyRe = /(\[):?([^\]]*)\]/g
+const keyRe = /(\[):?([^\]]*)]/g
 const nameRe = /^([^[]+)/ // eslint-disable-line no-useless-escape
 
 type FromQueryStringOptions = {
@@ -14,40 +13,24 @@ type FromQueryStringOptions = {
 /**
  * Converts a query string back into an object.
  *
- * Non-recursive:
+ * Implementation notes (v5):
+ * - Uses native `URLSearchParams` for decoding; input may start with leading `?`.
+ * - When `recursive=false` (default), repeated keys become arrays, otherwise the Rails-style
+ *   bracket syntax is parsed to objects/arrays (e.g., `a[b]=1&a[c]=2`, `arr[0]=x`).
+ * - Security: forbidden keys (`"__proto__"`, `"prototype"`, `"constructor"`) are ignored at all nesting levels
+ *   to prevent prototype pollution.
  *
- *     fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
- *     fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
- *     fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
- *     fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
+ * @example
+ *  fromQueryString("foo=1&bar=2"); // returns {foo: '1', bar: '2'}
+ *  fromQueryString("foo=&bar=2"); // returns {foo: '', bar: '2'}
+ *  fromQueryString("some%20price=%24300"); // returns {'some price': '$300'}
+ *  fromQueryString("colors=red&colors=green&colors=blue"); // returns {colors: ['red', 'green', 'blue']}
  *
- * Recursive:
  *
- *     fromQueryString(
- *         "username=Jacky&"+
- *         "dateOfBirth[day]=1&dateOfBirth[month]=2&dateOfBirth[year]=1911&"+
- *         "hobbies[0]=coding&hobbies[1]=eating&hobbies[2]=sleeping&"+
- *         "hobbies[3][0]=nested&hobbies[3][1]=stuff", true);
- *
- *     // returns
- *     {
- *         username: 'Jacky',
- *         dateOfBirth: {
- *             day: '1',
- *             month: '2',
- *             year: '1911'
- *         },
- *         hobbies: ['coding', 'eating', 'sleeping', ['nested', 'stuff']]
- *     }
- *
- * @param {String|null} queryString The query string to decode
- * @param {Boolean} [recursive=false] Whether or not to recursively decode the string. This format is supported by
- * @param {Object} options = {
- *   - decodeName {Boolean} Decode KeyNames in the queryString
- * }
- * PHP / Ruby on Rails servers and similar.
- * @return {Object}
- * @todo write tests
+ * @param queryString The query string to decode.
+ * @param recursive   True to interpret bracket syntax and build nested structures.
+ * @param options     Options bag: `{ decodeName: boolean }` (names are already decoded by URLSearchParams).
+ * @returns A plain object constructed from the query string.
  */
 export default function fromQueryString(
   queryString: string,
@@ -58,98 +41,88 @@ export default function fromQueryString(
     return {}
   }
 
-  let parts = queryString.replace(queryRe, '').split('&'),
-    object = Object.create(null),
-    temporary,
-    components: string[],
-    name: string,
-    value,
-    i,
-    ln,
-    part: string,
-    j,
-    subLn,
-    matchedKeys: RegExpMatchArray | null,
-    matchedName: RegExpMatchArray | null,
-    keys: string[],
-    key: string,
-    nextKey: TextNumber
+  const qs = String(queryString).replace(queryRe, '')
+  const params = new URLSearchParams(qs)
+  const object = Object.create(null) as Record<string, any>
 
-  for (i = 0, ln = parts.length; i < ln; i++) {
-    part = parts[i]
+  let temporary: any
+  let matchedKeys: RegExpMatchArray | null
+  let matchedName: RegExpMatchArray | null
+  let keys: string[]
+  let key: string
+  let nextKey: string
 
-    if (part.length > 0) {
-      components = part.split('=')
-      name = components[0]
-      name = name.replace(plusRe, '%20')
-      name = options.decodeName ? decodeURIComponent(name) : name
+  const FORBIDDEN = new Set(['__proto__', 'prototype', 'constructor'])
 
-      value = components[1]
+  function isForbiddenKey(key: string): boolean {
+    return FORBIDDEN.has(key)
+  }
 
-      if (value !== undefined) {
-        value = value.replace(plusRe, '%20')
-        value = decodeURIComponent(value)
+  for (const [rawName, rawValue] of params) {
+    const name = options.decodeName ? rawName : rawName // already decoded by URLSearchParams
+    const value = rawValue // already decoded
+
+    if (!recursive) {
+      if (Object.hasOwn(object, name)) {
+        if (!Array.isArray(object[name])) {
+          object[name] = [object[name]]
+        }
+        object[name].push(value)
       } else {
-        value = ''
+        if (!isForbiddenKey(name)) {
+          object[name] = value
+        }
+      }
+      continue
+    }
+
+    matchedKeys = name.match(keyRe)
+    matchedName = name.match(nameRe)
+
+    if (!matchedName) {
+      // skip malformed entries instead of throwing to be more forgiving
+      continue
+    }
+
+    const top = matchedName[0]
+    if (isForbiddenKey(top)) {
+      continue
+    }
+    keys = []
+
+    if (matchedKeys === null) {
+      object[top] = value
+      continue
+    }
+
+    for (let j = 0, subLn = matchedKeys.length; j < subLn; j++) {
+      key = matchedKeys[j]
+      key = key.length === 2 ? '' : key.substring(1, key.length - 1)
+      keys.push(key)
+    }
+
+    keys.unshift(top)
+
+    temporary = object
+
+    for (let j = 0, subLn = keys.length; j < subLn; j++) {
+      key = keys[j]
+      if (isForbiddenKey(key)) {
+        break
       }
 
-      if (!recursive) {
-        if (Object.prototype.hasOwnProperty.call(object, name)) {
-          if (!Array.isArray(object[name])) {
-            object[name] = [object[name]]
-          }
-
-          object[name].push(value)
+      if (j === subLn - 1) {
+        if (Array.isArray(temporary) && key === '') {
+          temporary.push(value)
         } else {
-          object[name] = value
+          temporary[key] = value
         }
       } else {
-        matchedKeys = name.match(keyRe)
-        matchedName = name.match(nameRe)
-
-        //<debug>
-        if (!matchedName) {
-          throw new Error('[fromQueryString] Malformed query string given, failed parsing name from "' + part + '"')
+        if (temporary[key] === undefined || typeof temporary[key] === 'string') {
+          nextKey = keys[j + 1]
+          temporary[key] = isNumeric(nextKey) || nextKey === '' ? [] : {}
         }
-        //</debug>
-
-        name = matchedName[0]
-        keys = []
-
-        if (matchedKeys === null) {
-          object[name] = value
-          continue
-        }
-
-        for (j = 0, subLn = matchedKeys.length; j < subLn; j++) {
-          key = matchedKeys[j]
-          key = key.length === 2 ? '' : key.substring(1, key.length - 1)
-          keys.push(key)
-        }
-
-        keys.unshift(name)
-
-        temporary = object
-
-        for (j = 0, subLn = keys.length; j < subLn; j++) {
-          key = keys[j]
-
-          if (j === subLn - 1) {
-            if (Array.isArray(temporary) && key === '') {
-              temporary.push(value)
-            } else {
-              temporary[key] = value
-            }
-          } else {
-            if (temporary[key] === undefined || typeof temporary[key] === 'string') {
-              nextKey = keys[j + 1]
-
-              temporary[key] = isNumeric(nextKey) || nextKey === '' ? [] : {}
-            }
-
-            temporary = temporary[key]
-          }
-        }
+        temporary = temporary[key]
       }
     }
   }

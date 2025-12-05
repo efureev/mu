@@ -1,5 +1,18 @@
-/** Used as a reference to the global object. */
-import freeGlobal from './free/freeGlobal'
-import freeSelf from './free/freeSelf'
+declare const self: any // безопасно для TS в средах без DOM
+declare const window: any // безопасно для TS в средах без window
+declare const global: any // безопасно для TS в средах без Node
 
-export default freeGlobal || freeSelf || new Function('return this')()
+type Root = typeof globalThis | undefined
+
+const root: Root =
+  typeof globalThis === 'object'
+    ? globalThis
+    : typeof self === 'object'
+      ? self
+      : typeof window === 'object'
+        ? window
+        : typeof global === 'object'
+          ? global
+          : undefined
+
+export default root

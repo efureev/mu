@@ -1,71 +1,79 @@
 import clone from '~/core/clone'
 import isObject from '~/is/isObject'
 
-/**
- * Merge objects recursively
- *
- *     var js = {
- *         companyName: 'JS',
- *         products: ['JS', 'GWT', 'Designer'],
- *         isSuperCool: true,
- *         office: {
- *             size: 2000,
- *             location: 'Palo Alto',
- *             isFun: true
- *         }
- *     };
- *
- *     var newStuff = {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City'
- *         }
- *     };
- *
- *     const result = merge(js, newStuff);
- *
- *     {
- *         companyName: 'Jacksonville',
- *         products: ['JS', 'GWT', 'Designer', 'Touch', 'Animator'],
- *         isSuperCool: true,
- *         office: {
- *             size: 40000,
- *             location: 'Redwood City',
- *             isFun: true
- *         }
- *     }
- */
 type record = Record<PropertyKey, any>
 
-export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
-  const ln = values.length
-  let i = 0,
-    object: Partial<T>,
-    key: PropertyKey,
-    value: any,
-    sourceKey: any
+// Узкое определение plain object без опоры на constructor
+function isPlainObject(val: any): val is Record<PropertyKey, any> {
+  if (!isObject(val)) return false
+  const proto = Object.getPrototypeOf(val)
+  return proto === Object.prototype || proto === null
+}
 
-  for (; i < ln; i++) {
-    object = values[i]
-    if (!isObject(object)) {
-      continue
-    }
-    for (key in object) {
-      value = object[key]
-      if (value && value.constructor === Object) {
-        sourceKey = original[key]
-        if (sourceKey && sourceKey.constructor === Object) {
-          merge<T>(sourceKey, value)
-        } else {
-          ;(<T>original[key]) = clone<T>(value)
-        }
-      } else {
-        ;(<T>original[key]) = value
+const FORBIDDEN_KEYS = new Set<PropertyKey>(['__proto__', 'prototype', 'constructor'])
+
+function isForbiddenKey(key: PropertyKey): boolean {
+  return typeof key === 'string' ? FORBIDDEN_KEYS.has(key) : false
+}
+
+function ownEnumerableKeys(obj: object): PropertyKey[] {
+  const keys: PropertyKey[] = Object.keys(obj)
+  const symbols = Object.getOwnPropertySymbols(obj).filter(sym => {
+    const desc = Object.getOwnPropertyDescriptor(obj, sym)
+    return !!desc?.enumerable
+  })
+  return keys.concat(symbols)
+}
+
+/**
+ * Merge two or more objects into a new one (immutable deep merge for plain objects).
+ *
+ * Semantics (v5, ESM-only, Node 22+):
+ * - Immutability: returns a new object; inputs are not mutated.
+ * - Keys: only own enumerable string and symbol keys are processed.
+ * - Guards: forbidden keys "__proto__", "prototype", "constructor" are ignored (proto-pollution safe).
+ * - Depth: deep merge only occurs for plain objects (prototype is Object.prototype or null).
+ * - Arrays: arrays from sources replace destination values with a cloned array (no element-wise merge).
+ * - Other types (Date, Map, Set, functions, class instances): copied as values; plain-object rules do not apply.
+ *
+ * @example
+ * merge({ a: 1, o: { x: 1 } }, { b: 2, o: { y: 2 } })
+ * // => { a: 1, b: 2, o: { x: 1, y: 2 } }
+ */
+export default function merge<T extends Partial<record>>(original: Partial<T>, ...values: Partial<T>[]): T {
+  // Иммутабельность: не мутируем входной объект
+  const result: any = isPlainObject(original) ? { ...(original as any) } : (original as any)
+
+  for (let i = 0; i < values.length; i++) {
+    const source = values[i]
+    if (!isObject(source)) continue
+
+    for (const key of ownEnumerableKeys(source)) {
+      if (isForbiddenKey(key)) continue
+
+      const value = (source as any)[key]
+      const target = (result as any)[key]
+
+      // Arrays: replace with a cloned array for predictability
+      if (Array.isArray(value)) {
+        ;(result as any)[key] = clone(value)
+        continue
       }
+
+      // Plain objects: deep merge
+      if (isPlainObject(value)) {
+        if (isPlainObject(target)) {
+          ;(result as any)[key] = merge(target, value)
+        } else {
+          ;(result as any)[key] = clone(value)
+        }
+        continue
+      }
+
+      // Primitives and other types: direct assignment
+      ;(result as any)[key] = value
     }
   }
 
-  return <T>original
+  return result as T
 }

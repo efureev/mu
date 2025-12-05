@@ -32,7 +32,10 @@ const preserveCamelCase = (value) => {
     return value;
 };
 const camelCase = (input, options) => {
-    options = Object.assign({ pascalCase: false }, (options ? options : {}));
+    options = {
+        pascalCase: false,
+        ...(options ? options : {}),
+    };
     const postProcess = (x) => options && options.pascalCase ? x.charAt(0).toUpperCase() + x.slice(1) : x;
     let str = typeof input === 'string'
         ? input.trim()

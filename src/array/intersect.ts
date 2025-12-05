@@ -6,8 +6,19 @@
  * @returns {any[]}
  */
 export default function intersect(array: any[], array2: any[]): any[] {
-  const set = new Set(array)
-  return [...new Set(array2.filter(item => set.has(item)))]
+  // Уникальное пересечение за один проход по меньшему множеству
+  const aSet = new Set(array)
+  const bSet = new Set(array2)
+  const result: any[] = []
+
+  // Идём по меньшему набору уникальных значений
+  const [small, big] = aSet.size <= bSet.size ? [aSet, bSet] : [bSet, aSet]
+  for (const v of small) {
+    if (big.has(v)) {
+      result.push(v)
+    }
+  }
+  return result
 }
 
 /**
@@ -18,7 +29,7 @@ export default function intersect(array: any[], array2: any[]): any[] {
  * @returns {*|any[]}
  */
 export function intersectAll(array: any[], ...arrays: any[]) {
-  return arrays.reduce((previous, next) => {
-    return intersect(previous, next)
-  }, array)
+  // Начинаем с самого короткого массива для уменьшения промежуточных наборов
+  const all = [array, ...arrays].sort((a, b) => a.length - b.length)
+  return all.slice(1).reduce((prev, next) => intersect(prev, next), all[0])
 }

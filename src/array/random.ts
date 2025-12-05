@@ -5,5 +5,7 @@
  * @returns {unknown}
  */
 export default function random(array: any[]): any {
-  return array[Math.floor(Math.random() * array.length)]
+  const { length } = array
+  if (length === 0) return undefined
+  return array[Math.floor(Math.random() * length)]
 }

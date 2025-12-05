@@ -7,9 +7,7 @@ exports.CollectionArray = void 0;
 const isFunction_1 = __importDefault(require("../is/isFunction"));
 const toString_1 = __importDefault(require("../to/toString"));
 class CollectionArray {
-    constructor() {
-        this.items = [];
-    }
+    items = [];
     push(item) {
         this.items.push(item);
     }
@@ -26,18 +24,16 @@ class CollectionArray {
         return [...this.items];
     }
     toString(callback) {
-        const data = this.toArray();
         if (callback && (0, isFunction_1.default)(callback)) {
-            return data.map(item => callback(item)).toString();
+            return this.items.map(item => callback(item)).toString();
         }
-        return data.toString();
+        return this.items.toString();
     }
     map(callback) {
-        const data = this.toArray();
         if (!(0, isFunction_1.default)(callback)) {
-            throw Error('Invalid map-function: ' + (0, toString_1.default)(callback));
+            throw Error(`Invalid map-function: ${(0, toString_1.default)(callback)}`);
         }
-        return data.map(item => callback(item));
+        return this.items.map((item, index, array) => callback(item, index, array));
     }
 }
 exports.CollectionArray = CollectionArray;

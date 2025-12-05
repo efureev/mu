@@ -1,69 +1,85 @@
 import isDate from '~/is/isDate'
 
-const enumerables = ['valueOf', 'toLocaleString', 'toString', 'constructor']
+// Helpers
+function isPlainObject(val: any): val is Record<PropertyKey, any> {
+  if (val === null || typeof val !== 'object') return false
+  const proto = Object.getPrototypeOf(val)
+  return proto === Object.prototype || proto === null
+}
+
+function ownEnumerableKeys(obj: object): PropertyKey[] {
+  const keys: PropertyKey[] = Object.keys(obj)
+  const symbols = Object.getOwnPropertySymbols(obj).filter(sym => {
+    const desc = Object.getOwnPropertyDescriptor(obj, sym)
+    return !!desc?.enumerable
+  })
+  return keys.concat(symbols)
+}
 
 /**
- * Clone simple variables including array, {}-like objects, DOM nodes and Date without
- * keeping the old reference. A reference for the object itself is returned if it's not
- * a direct descendant of Object.
+ * Deep clone with Node 22 strategy.
+ * - Plain objects and arrays: recursively clone over own enumerable string and symbol keys only.
+ * - Date: cloned by value via new Date(time).
+ * - DOM nodes (when cloneDom=true): uses node.cloneNode(true).
+ * - Other objects (Map, Set, RegExp, TypedArrays, ArrayBuffer, URL, etc.):
+ *   attempted via structuredClone; on failure, return original reference.
+ * - Functions/classes/instances with custom prototypes: returned as-is (by reference).
  *
- * @param {Object} item The variable to clone
- * @param {Boolean} [cloneDom=true] `true` to clone DOM nodes.
- * @return {Object} clone
+ * Limitations:
+ * - Accessors/descriptors are not preserved; enumerable data properties only for plain objects.
+ * - Prototypes for plain objects are normalized to Object.prototype (or null if origin had null-proto).
  */
 export default function clone<T = NonNullable<any>>(item: T, cloneDom: boolean = true): T {
-  if (item === null || item === undefined) {
-    return item
+  // Nullish or primitive
+  if (item == null || (typeof item !== 'object' && typeof item !== 'function')) {
+    return item as T
   }
 
+  // DOM Node clone (duck-typed)
   // @ts-ignore
-  if (cloneDom && item.nodeType && item.cloneNode) {
+  if (cloneDom && (item as any).nodeType && typeof (item as any).cloneNode === 'function') {
     // @ts-ignore
-    return item.cloneNode(true)
+    return (item as any).cloneNode(true)
   }
-
-  const type = Object.prototype.toString.call(item)
 
   // Date
   if (isDate(item)) {
     // @ts-ignore
-    return new Date(item.getTime())
+    return new Date((item as Date).getTime())
   }
-
-  let i: number, j: number, k
 
   // Array
   if (Array.isArray(item)) {
-    i = item.length
-    let newClone: Record<number, any> = []
-
-    while (i--) {
-      newClone[i] = clone<any>(item[i], cloneDom)
+    const src = item as unknown as any[]
+    const out: any[] = new Array(src.length)
+    for (let i = 0; i < src.length; i++) {
+      out[i] = clone(src[i], cloneDom)
     }
-
-    return <T>newClone
+    return out as unknown as T
   }
 
-  // Object
-  if (type === '[object Object]' && (<Object>item).constructor === Object) {
-    let key: PropertyKey
-    let newClone: Record<PropertyKey, any> = {}
-
-    for (key in item) {
-      newClone[key] = clone<any>((<Record<PropertyKey, any>>item)[key], cloneDom)
+  // Plain Object
+  if (isPlainObject(item)) {
+    const src = item as unknown as Record<PropertyKey, any>
+    const out: Record<PropertyKey, any> = Object.create(Object.getPrototypeOf(src))
+    for (const key of ownEnumerableKeys(src)) {
+      out[key] = clone(src[key], cloneDom)
     }
-
-    if (enumerables) {
-      for (j = enumerables.length; j--; ) {
-        let k: string = enumerables[j]
-        if (Object.prototype.hasOwnProperty.call(item, k)) {
-          newClone[k] = (<Record<string, any>>item)[k]
-        }
-      }
-    }
-
-    return newClone
+    return out as unknown as T
   }
 
+  // For other complex objects (Map, Set, RegExp, TypedArrays, etc.)
+  // try structuredClone if available; fall back to reference if it throws.
+  try {
+    // @ts-ignore Node 22 global
+    if (typeof structuredClone === 'function') {
+      // @ts-ignore
+      return structuredClone(item)
+    }
+  } catch (_) {
+    // fallthrough to return original item
+  }
+
+  // As-is for functions/classes and unsupported cases
   return item
 }

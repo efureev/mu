@@ -68,7 +68,7 @@ export default function toQueryObjects(
   if (isObject(value)) {
     const valueObject = value as oType
     for (i in value) {
-      if (Object.prototype.hasOwnProperty.call(value, i)) {
+      if (Object.hasOwn(value, i)) {
         if (recursive) {
           objects = objects.concat(toQueryObjects(name + '[' + i + ']', valueObject[i], true))
         } else {

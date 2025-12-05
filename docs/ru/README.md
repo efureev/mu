@@ -3,16 +3,25 @@
 ```json
 {
   "dependencies": {
-    "@feugene/mu": "^4.7.1"
+    "@feugene/mu": "^5.0.0"
   }
 }
 ```
 
-## Тесты
+## Использование (только ESM, Node 22+)
 
-```bash
-jest
+```ts
+// Импорт одного хелпера (лучше для tree‑shaking)
+import { number } from '@feugene/mu/format'
+
+// Или несколько именованных хелперов из подпакета
+import { dateToStringUTC, parseISO } from '@feugene/mu/date'
+
+// Корневой импорт тоже работает (возможна подгрузка лишних символов в зависимости от бандлера)
+import { merge } from '@feugene/mu'
 ```
+
+Библиотека ESM‑first, работает в современных браузерах (после сборки) и в Node 22+ (CLI).
 
 ## Содержание
 
@@ -40,34 +49,37 @@ jest
 
 ## Is
 
-| Function         | Return | Example                                           |
-|:-----------------|:-------|:--------------------------------------------------|
-| isArguments      | bool   | `isArguments([1,2]]); // false`                   |
-| isArray          | bool   | `isArray([1,2]]); // true`                        |
-| isArrayLike      | bool   | `isArrayLike('abc'); // true`                     |
-| isBlob           | bool   | `isBlob(new Blob([]])); // true`                  |
-| isBoolean        | bool   | `isBoolean(true, true); // true`                  |
-| isBuffer         | bool   | `isBuffer(new Buffer(2)); // true`                |
-| isDate           | bool   | `isDate(new Date); // true`                       |
-| isEmpty          | bool   | `isEmpty(null, undefined, ''); // true`           |
-| isEmptyObject    | bool   | `isEmptyObject({}}); // true`                     |
-| isEven           | bool   | `isEven(2, 4, '8'); // true`                      |
-| isFloat          | bool   | `isFloat('2.0')); // false`                       |
-| isFloatCanonical | bool   | `isFloat('2.0')); // true`                        |
-| isFloats         | bool   | `isFloat('2.2','+2.1')); // true`                 |
-| isFunction       | bool   | `isFunction(()=>{})); // true`                    |
-| isInteger        | bool   | `isInteger(12,-21); // true`                      |
-| isLength         | bool   | `isLength(3); // true`                            |
-| isNil            | bool   | `isNil(undefined); // true`                       |
-| isNils           | bool   | `isNulls(null, undefined, void 0); // true`       |
-| isNull           | bool   | `isNull(null); // true`                           |
-| isNulls          | bool   | `isNulls(null, undefined); // false`              |
-| isNumeric        | bool   | `isNumeric(12,-2.3); // true`                     |
-| isObject         | bool   | `isObject([], '12', 4, new Function()); // false` |
-| isObjectLike     | bool   | `isObjectLike([]); // true`                       |
-| isString         | bool   | `isString('test'); // true`                       |
-| isSymbol         | bool   | `isSymbol(Symbol('a')); // true`                  |
-| isTypedArray     | bool   | `isTypedArray(new Uint8Array); // true`           |
+| Function         | Return | Example                                              |
+|:-----------------|:-------|:-----------------------------------------------------|
+| isArguments      | bool   | `isArguments([1,2]); // false`                        |
+| isArray          | bool   | `isArray([1,2]); // true`                             |
+| isArrayLike      | bool   | `isArrayLike('abc'); // true`                         |
+| isBlob           | bool   | `isBlob(new Blob([])); // true`                       |
+| isBoolean        | bool   | `isBoolean(true); // true`                            |
+| isBuffer         | bool   | `isBuffer(Buffer.alloc(2)); // true`                  |
+| isDate           | bool   | `isDate(new Date()); // true`                         |
+| isEmpty          | bool   | `isEmpty(null, undefined, ''); // true`               |
+| isBlank          | bool   | `isBlank('   '); // true`                              |
+| isEmptyObject    | bool   | `isEmptyObject({}); // true`                           |
+| isEven           | bool   | `isEven(2); // true`                                   |
+| isEvens          | bool   | `isEvens(2, 4, '8'); // true`                          |
+| isFloat          | bool   | `isFloat(2.2); // true`                                |
+| isFloatCanonical | bool   | `isFloatCanonical('2.0'); // true`                     |
+| isFloats         | bool   | `isFloats('2.2','+2.1'); // true`                      |
+| isFunction       | bool   | `isFunction(() => {}); // true`                        |
+| isInteger        | bool   | `isInteger(12); // true`                               |
+| isLength         | bool   | `isLength(3); // true`                                 |
+| isNil            | bool   | `isNil(undefined); // true`                            |
+| isNils           | bool   | `isNils(null, undefined); // true`                     |
+| isNull           | bool   | `isNull(null); // true`                                |
+| isNulls          | bool   | `isNulls(null, undefined); // false`                   |
+| isNumeric        | bool   | `isNumeric('1e3'); // true`                            |
+| isObject         | bool   | `isObject([], '12', 4, Function); // false`            |
+| isObjectLike     | bool   | `isObjectLike([]); // true`                            |
+| isString         | bool   | `isString('test'); // true`                            |
+| isSymbol         | bool   | `isSymbol(Symbol('a')); // true`                       |
+| isTypedArray     | bool   | `isTypedArray(new Uint8Array(2)); // true`             |
+| isUrl            | bool   | `isUrl('https://example.com'); // true`                |
 
 ## Array
 
@@ -143,22 +155,24 @@ jest
 
 ## Date
 
-| Function | Return | Description                                |
-|:---------|:-------|:-------------------------------------------|
-| elapsed  | int    | Вернет дельту в милисекундах между дататми |
-| now      | date   | Текущая дата                               |
-| toString | string | Преобразование даты в строку               |
+| Function        | Return  | Description                                           |
+|:----------------|:--------|:------------------------------------------------------|
+| elapsed         | number  | Дельта в миллисекундах между датами                   |
+| now             | number  | Текущее время в мс с начала эпохи UNIX                |
+| dateToString    | string  | Локальное время `YYYY-MM-DDTHH:mm:SS` (без суффикса)  |
+| dateToStringUTC | string  | UTC `YYYY-MM-DDTHH:mm:SSZ`                            |
+| parseISO        | Date\|null | Строгий ISO/RFC3339 или epoch ms строка → Date; иначе `null` |
 
 ## Format
 
-| Function    | Return | Description                           | Example                             |
-|:------------|:-------|:--------------------------------------|:------------------------------------|
-| fileSize    | string | Форматирование числа как размер файла | `fileSize(7900221323) // '7.36 Gb'` |
-| intWord     | string | -                                     | `intWord(21323) // '21.32K'`        |
-| num         | string | Форматирование числа                  | `num('10000') // '10,000.00'`       |
-| numRus      | string | Форматирование числа для России       | `numRus(1001.20) // '1 001.20'`     |
-| padDateTime | string | -                                     | `padDateTime(1) // '01'`            |
-| padNumber   | string | -                                     | `padNumber(2,3) // '002'`           |
+| Function    | Return | Description                                   | Example                              |
+|:------------|:-------|:----------------------------------------------|:-------------------------------------|
+| fileSize    | string | Форматирование числа как размер файла         | `fileSize(7900221323) // '7.36 Gb'`  |
+| intWord     | string | Компактная запись целых с суффиксом единиц    | `intWord(21323) // '21.32K'`         |
+| number      | string | Форматирование числа (поддерживает options)   | `number('10000') // '10,000.00'`     |
+| numberRus   | string | RU: пробелы в группах, запятая в дробной части | `numberRus(1001.2) // '1 001,20'`    |
+| padDateTime | string | Дополнение даты/времени нулём до 2 символов   | `padDateTime(1) // '01'`             |
+| padNumber   | string | Дополнение числа нулями слева до N символов   | `padNumber(2,3) // '002'`            |
 
 ## Utilities
 

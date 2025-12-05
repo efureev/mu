@@ -8,36 +8,38 @@ import isEmpty from '../is/isEmpty.mjs';
  * @return {{}}
  */
 export default function removeEmpty(object) {
-    let result = {}, key;
-    for (key in object) {
-        if (object.hasOwnProperty(key) && !isEmpty(object[key])) {
-            if (isObject(object[key])) {
-                const r = removeEmpty(object[key]);
-                if (!isEmpty(r)) {
-                    result[key] = r;
-                }
-                continue;
-            }
-            if (Array.isArray(object[key])) {
-                const a = [];
-                object[key].forEach((v) => {
-                    if (isString(v)) {
-                        a.push(v);
-                    }
-                    else {
-                        const r = removeEmpty(v);
-                        if (!isEmpty(r)) {
-                            a.push(r);
-                        }
-                    }
-                });
-                if (!isEmpty(a)) {
-                    result[key] = a;
-                }
-                continue;
-            }
-            result[key] = object[key];
+    const result = {};
+    for (const [key, value] of Object.entries(object)) {
+        if (isEmpty(value)) {
+            continue;
         }
+        // Сначала массивы, затем plain-объекты
+        if (Array.isArray(value)) {
+            const a = [];
+            for (const v of value) {
+                if (isString(v)) {
+                    a.push(v);
+                }
+                else {
+                    const r = removeEmpty(v);
+                    if (!isEmpty(r)) {
+                        a.push(r);
+                    }
+                }
+            }
+            if (!isEmpty(a)) {
+                result[key] = a;
+            }
+            continue;
+        }
+        if (isObject(value)) {
+            const r = removeEmpty(value);
+            if (!isEmpty(r)) {
+                result[key] = r;
+            }
+            continue;
+        }
+        result[key] = value;
     }
     return result;
 }

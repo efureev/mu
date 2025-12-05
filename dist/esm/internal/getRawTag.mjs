@@ -1,16 +1,13 @@
 import root from './root.mjs';
-/** Built-in value references. */
-const symToStringTag = root.Symbol ? root.Symbol.toStringTag : undefined;
-/** Used for built-in method references. */
-const objectProto = Object.prototype;
-/** Used to check objects for own properties. */
-const hasOwnProperty = objectProto.hasOwnProperty;
-/**
- * Used to resolve the
- * [`toStringTag`](http://ecma-international.org/ecma-262/7.0/#sec-object.prototype.tostring)
- * of values.
- */
-const nativeObjectToString = objectProto.toString;
+// Prefer explicit, descriptive names for built-in references.
+const TO_STRING_TAG = root?.Symbol ? root.Symbol.toStringTag : undefined;
+const objectPrototype = Object.prototype;
+const hasOwn = objectPrototype.hasOwnProperty;
+const objectToString = objectPrototype.toString;
+// Small, focused helper improves readability and reuse.
+function isObjectLike(value) {
+    return value !== null && (typeof value === 'object' || typeof value === 'function');
+}
 /**
  * A specialized version of `baseGetTag` which ignores `Symbol.toStringTag` values.
  *
@@ -19,20 +16,29 @@ const nativeObjectToString = objectProto.toString;
  * @returns {string} Returns the raw `toStringTag`.
  */
 export default function getRawTag(value) {
-    const isOwn = hasOwnProperty.call(value, symToStringTag), tag = value[symToStringTag];
-    let unmasked = false;
-    try {
-        value[symToStringTag] = undefined;
-        unmasked = true;
+    // Fast path: if no Symbol.toStringTag support or non-object, use default toString.
+    if (!TO_STRING_TAG || !isObjectLike(value)) {
+        return objectToString.call(value);
     }
-    catch (error) { }
-    const result = nativeObjectToString.call(value);
-    if (unmasked) {
+    const obj = value;
+    const isOwn = hasOwn.call(obj, TO_STRING_TAG);
+    const previousTag = obj[TO_STRING_TAG];
+    let masked = false;
+    try {
+        obj[TO_STRING_TAG] = undefined;
+        masked = true;
+    }
+    catch {
+        // Swallow errors from non-writable properties; fall through to toString.
+    }
+    const result = objectToString.call(obj);
+    // Restore original state only if we managed to mask it.
+    if (masked) {
         if (isOwn) {
-            value[symToStringTag] = tag;
+            obj[TO_STRING_TAG] = previousTag;
         }
         else {
-            delete value[symToStringTag];
+            delete obj[TO_STRING_TAG];
         }
     }
     return result;

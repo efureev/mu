@@ -2,6 +2,8 @@ import isEmpty from '~/is/isEmpty'
 import forEach from '~/core/forEach'
 import select from './select'
 
+export type PickPaths = readonly string[]
+
 /**
  *
  * @param {object} object
@@ -23,14 +25,21 @@ import select from './select'
  *
  * pick(object, ['d.1.id', b]); // => { 'd.1.id': 2, b: 2 }
  */
-export default function pick(object: Record<PropertyKey, any>, paths: string[]): Record<PropertyKey, any> {
-  const res: Record<PropertyKey, any> = {}
-  if (isEmpty(object)) {
+export default function pick<T extends Record<PropertyKey, any>, K extends string = string>(
+  object: T,
+  paths: ReadonlyArray<K> | null | undefined
+): Partial<Record<K, unknown>> {
+  const res: Partial<Record<K, unknown>> = {}
+  if (isEmpty(object) || !Array.isArray(paths) || paths.length === 0) {
     return res
   }
 
   forEach(paths, v => {
-    res[v] = select(object, v)
+    const val = select(object as any, v as unknown as string)
+    if (val !== undefined) {
+      // @ts-expect-error index signature by path string
+      res[v as K] = val
+    }
   })
 
   return res

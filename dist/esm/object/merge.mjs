@@ -1,19 +1,35 @@
 import clone from '../core/clone.mjs';
 import isObject from '../is/isObject.mjs';
+// Узкое определение plain object без опоры на constructor
+function isPlainObject(val) {
+    if (!isObject(val))
+        return false;
+    const proto = Object.getPrototypeOf(val);
+    return proto === Object.prototype || proto === null;
+}
+/**
+ * Merge objects recursively
+ */
 export default function merge(original, ...values) {
-    const ln = values.length;
-    let i = 0, object, key, value, sourceKey;
-    for (; i < ln; i++) {
-        object = values[i];
+    for (let i = 0; i < values.length; i++) {
+        const object = values[i];
         if (!isObject(object)) {
             continue;
         }
-        for (key in object) {
-            value = object[key];
-            if (value && value.constructor === Object) {
-                sourceKey = original[key];
-                if (sourceKey && sourceKey.constructor === Object) {
-                    merge(sourceKey, value);
+        for (const key in object) {
+            if (!Object.prototype.hasOwnProperty.call(object, key))
+                continue;
+            const value = object[key];
+            const target = original[key];
+            // Массивы: перезаписываем клоном (предсказуемее, чем неявные стратегии)
+            if (Array.isArray(value)) {
+                ;
+                original[key] = clone(value);
+                continue;
+            }
+            if (isPlainObject(value)) {
+                if (isPlainObject(target)) {
+                    merge(target, value);
                 }
                 else {
                     ;

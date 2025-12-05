@@ -9,6 +9,6 @@
  * isBuffer(new Uint8Array(2));
  * // => false
  */
-declare const _default: any;
+declare const _default: ((obj: any) => obj is Buffer) | (() => boolean);
 export default _default;
 //# sourceMappingURL=isBuffer.d.ts.map

@@ -24,24 +24,18 @@ export class CollectionArray<T> {
     return [...this.items]
   }
 
-  public toString(callback?: (i: T) => any): string {
-    const data = this.toArray()
-
+  public toString(callback?: (i: T) => unknown): string {
     if (callback && isFunction(callback)) {
-      return data.map(item => callback(item)).toString()
+      return this.items.map(item => callback(item)).toString()
     }
-
-    return data.toString()
+    return this.items.toString()
   }
 
-  public map<R extends any>(callback: (i: T) => any): R[] {
-    const data = this.toArray()
-
+  public map<R>(callback: (i: T, index: number, array: readonly T[]) => R): R[] {
     if (!isFunction(callback)) {
-      throw Error('Invalid map-function: ' + toString(callback))
+      throw Error(`Invalid map-function: ${toString(callback)}`)
     }
-
-    return data.map(item => callback(item))
+    return this.items.map((item, index, array) => callback(item, index, array))
   }
 }
 

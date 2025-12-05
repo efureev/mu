@@ -60,7 +60,6 @@ describe('equal', () => {
     expect(() => equals()).toThrow(errMsg)
     // @ts-ignore
     expect(() => equals(NaN, NaN)).toThrow(errMsg)
-    // @ts-ignore
     expect(() => equals(1, 1)).toThrow(errMsg)
   })
 
@@ -98,16 +97,27 @@ describe('equal', () => {
   })
 
   it('should return false', () => {
-    expect(equals({}, {})).toBeTruthy()
-    expect(equals({ k: 1 }, { k: 1 })).toBeTruthy()
-    expect(equals({ k: 1, v: 2 }, { k: 1, v: 2 })).toBeTruthy()
-    expect(equals({ k: 1, v: [] }, { k: 1, v: [] })).toBeTruthy()
-    expect(equals({ k: 1, v: { k: 2 } }, { k: 1, v: { k: 2 } })).toBeTruthy()
+    // Различные значения
+    expect(equals({ k: 1 }, { k: 2 })).toBeFalsy()
+    expect(equals({ k: 1, v: 2 }, { k: 1, v: 3 })).toBeFalsy()
+    // Различная структура массива
+    expect(equals({ k: 1, v: [1, 2, 4] }, { k: 1, v: [1, 2, 5] })).toBeFalsy()
+    // Глубокое отличие
     expect(
-      equals({ k: 1, v: { k: 2, v: { k: 3, v: { k: 4 } } } }, { k: 1, v: { k: 2, v: { k: 3, v: { k: 4 } } } })
-    ).toBeTruthy()
-
-    expect(equals(first, second)).toBeTruthy()
+      equals({ k: 1, v: { k: 2, v: { k: 3, v: { k: 4 } } } }, { k: 1, v: { k: 2, v: { k: 3, v: { k: 5 } } } })
+    ).toBeFalsy()
+    // Отличие в исходных структурах
+    const modifiedSecond = {
+      ...second,
+      items: {
+        ...second.items,
+        one: {
+          ...second.items.one,
+          val: 112,
+        },
+      },
+    }
+    expect(equals(first, modifiedSecond)).toBeFalsy()
 
     expect(equals(new Object(), new Object(2))).toBeFalsy()
   })
