@@ -6,7 +6,7 @@ module.exports = {
   testPathIgnorePatterns: ['/node_modules/', '/tests/utils.ts'],
 
   transform: {
-    '^.+\\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json', isolatedModules: true }],
+    '^.+\.ts$': ['ts-jest', { tsconfig: 'tsconfig.json' }],
   },
 
   collectCoverageFrom: [
