@@ -54,6 +54,7 @@ jobs:
 
       - run: yarn install
       - run: yarn test-all
+      - run: yarn build
         env:
           CI: true
 
