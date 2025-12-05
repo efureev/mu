@@ -43,6 +43,22 @@ import { merge } from '@feugene/mu'
 
 The library is ESM-first and works in modern browsers (after bundling) and Node 22+ CLI.
 
+### Import style
+
+Prefer importing from submodules for better tree-shaking:
+
+```ts
+// Preferred: submodule imports
+import { number } from '@feugene/mu/format'
+import { isEmpty } from '@feugene/mu/is'
+import { merge } from '@feugene/mu/object'
+
+// Root import (valid, but may pull more code depending on bundler)
+import { numberRus, defaults } from '@feugene/mu'
+```
+
+All examples in method pages follow this pattern: `import { fn } from '@feugene/mu/<section>'`.
+
 ## Table of Contents
 
 - [Core](#core)
@@ -215,6 +231,46 @@ The library is ESM-first and works in modern browsers (after bundling) and Node 
 
 - Stack
 - Queue
+
+---
+
+## Behavior changes in v5
+
+Compared to earlier major versions, v5 introduces clearer, safer semantics:
+
+- **Object helpers**
+  - `merge` and `defaults` are now **immutable**: they return new objects instead of mutating inputs.
+  - Both ignore dangerous keys (`"__proto__"`, `"prototype"`, `"constructor"`) to prevent prototype pollution.
+  - Deep merge/defaults apply only to plain objects; arrays are cloned but not merged element-wise.
+
+- **Clone**
+  - `clone` uses native `structuredClone` where safe (Node 22+/modern browsers) with a predictable fallback for plain
+    objects/arrays and Dates.
+
+- **Date**
+  - `parseISO` is a **strict** parser: accepts only ISO/RFC3339 or epoch-ms strings, returns `null` for ambiguous
+    formats.
+  - `dateToString` (local) и `dateToStringUTC` (UTC) теперь явно документируют таймзону и формат.
+
+- **Format**
+  - `number` / `numberRus` корректно обрабатывают `NaN`, `Infinity`, `-0`, имеют options-object API и стабильную
+    локальную семантику (`numberRus`: запятая как десятичный разделитель, пробел — тысячный).
+
+See individual method pages for more details and examples.
+
+---
+
+## Documentation quality and checks
+
+To keep documentation in sync with code:
+
+- All helpers listed in the tables above have dedicated pages in `docs/<section>/*.md`.
+- Tables link only to existing files; new helpers should be added to both the table and their own method page.
+
+Recommended future automation (not included in the package, но легко добавить в CI):
+
+- Script that scans `docs/README.md` and `docs/ru/README.md` and verifies that every linked file exists.
+- Optional type-level tests (e.g. via `tsd`) that compile `Use`-examples from docs to ensure signatures stay valid.
 
 ## Test
 
