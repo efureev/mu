@@ -79,6 +79,7 @@ import { merge } from '@feugene/mu'
 | isString         | bool   | `isString('test'); // true`                            |
 | isSymbol         | bool   | `isSymbol(Symbol('a')); // true`                       |
 | isTypedArray     | bool   | `isTypedArray(new Uint8Array(2)); // true`             |
+| isUrl            | bool   | `isUrl('https://example.com'); // true`                |
 
 ## Array
 
